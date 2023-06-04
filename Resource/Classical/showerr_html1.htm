@@ -1,0 +1,40 @@
+<script language="JavaScript" type="text/javascript">
+	var dvajax_request_type = "GET";
+</script>
+<script language="JavaScript" src="inc/ajax_log.js" type="text/javascript"></script>
+<script language="JavaScript" src="inc/dv_ajax.js" type="text/javascript"></script>
+<script language="javascript">createCookie("count",4,1);</script>
+<form method="post" action="login.asp?action=chk" onsubmit="return checkLogin(this);">
+<table cellpadding="3" cellspacing="1" align="center" class="tableborder1" style="width:600">
+	<tr>
+		<th valign="middle" colspan="2" align="center" height="25">您尚未登录，您可以输入您的用户名、密码登录以便进行您的操作。</th></tr><tr>
+		<td valign="middle" style="text-align:right; padding:10px" class="tablebody1" ><b>请输入您的用户名:</b></td>
+		<td valign="middle"  class="tablebody1" ><input type="text" name="username" tabindex="1" /> &nbsp; <a href="reg.asp">没有注册？</a></td></tr>
+	<tr>
+		<td valign="middle"  style="text-align:right; padding:10px" class="tablebody1" ><b>请输入您的论坛密码:</b></td>
+		<td valign="middle" class="tablebody1" ><input type="password" name="password" id="pwd1" tabindex="2" /> &nbsp; <a href="lostpass.asp">忘记论坛密码？</a></td></tr>{$getcode}
+	<tr>
+		<td class="tablebody1" valign="top" width="30%"  style="text-align:right; padding:10px" ><b>Cookie 选项:</b><br /> </td>
+		<td valign="middle" class="tablebody1" >
+		<select name="CookieDate" tabindex="10">
+		<option value="0">不保存</option>
+		<option value="1">保存一天</option>
+		<option value="2" selected="selected">保存一月</option>
+		<option value="3">保存一年</option>
+	</select>
+		</td></tr>
+	<tr>
+		<td valign="top" width="30%" class="tablebody1"  style="text-align:right; padding:10px"  ><b>隐身登录:</b><br/></td>
+		<td valign="middle" class="tablebody1" > 
+			<input type="radio" class="radio" name="userhidden" value="2" tabindex="8" checked="checked"/>正常
+	            <input type="radio" class="radio" name="userhidden" value="1" tabindex="9"/>隐身
+		</td></tr>
+		<input type="hidden" name="comeurl" value="{$comeurl}"/>
+	<tr style="display:none" id="trh">
+		<td class="tablebody1" align="right"><b>登陆提示：</b></td>
+		<td class="tablebody1"><span id="tdh"></span></td>
+	</tr>
+	<tr>
+		<td class="tablebody2" valign="middle" style="text-align:center" colspan="2" ><input name="submit" type="submit" class="input0" tabindex="13" value="立即登录" /></td></tr>
+</table>
+</form>

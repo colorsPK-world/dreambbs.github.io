@@ -1,0 +1,33 @@
+<form name="Login" id="Login" action="login.asp?action=chk" method="post" onSubmit="return CheckForm();" style="margin:0px">
+<div class="fcontent">
+<div id="layer_login">
+<span class="float_ctrl">
+<em id="returnmessage">用户登录</em>
+</span>
+<div class="postbox">
+<div class="loginform nolabelform">
+<div class="float_typeid" id="account">
+<p class="selectinput loginpsw">
+<label for="password3">用户名：</label>
+<input type="type" id="username" name="username" size="36" class="txt" tabindex="1" />
+</p>
+<p class="selectinput loginpsw">
+<label for="password3">密　码：</label>
+<input type="password" id="password" name="password" size="36" class="txt" tabindex="1" />
+</p>
+</div>
+<div class="float_typeid selecttype">
+</div>
+</div>
+<div class="logininfo multinfo">
+<h4>没有帐号？</h4>
+<p><a href="reg.asp" onclick="hideWindow('login');showWindow('register', this.href);return false;" title="注册帐号">注册</a></p>
+<p><a href="javascript:;" onclick="display('layer_login');display('layer_lostpw');" title="找回密码">找回密码</a></p>
+</div>
+<p class="fsubmit s_clear">
+<input id="submit" type="submit" name="submit" value="登录" tabindex="1">
+</p>
+<span id="tdh" style="height:16px;"></span>
+</div>
+</div></div>
+</FORM>

@@ -1,0 +1,18 @@
+<!--friendlist.asp##Friend_List好友信息列表-->
+<tr>
+<td align="center" class="tablebody1">{$FavName}</td>
+<td align="center" class="tablebody1"><a href="dispuser.asp?name={$Friend_UserName}" target="_blank" title="浏览 
+{$Friend_UserName} 的个人资料">{$Friend_UserName}</a></td>
+<td align="left" class="tablebody1"><a href="mailto:{$Friend_Email}" title="给 {$Friend_UserName} 发电子邮件">
+{$Friend_Email}</a></td>
+<td align="center" class="tablebody1">
+<a href="{$Friend_HomePage}" title="{$Friend_UserName} 的主页地址:{$Friend_HomePage}" target="_blank">
+{$Img_HomePage}</a>
+</td>
+<td align="center" class="tablebody1">
+{$Friend_Oicq}
+</td>
+<td align="center" class="tablebody1">
+<a href="javascript:;" onclick="DvWnd.open('给{$Friend_UserName}发送短信','messanger.asp?action=new&amp;touser={$Friend_UserName}',800,600,1,{bgc:'black',opa:0.5});" title="给 {$Friend_UserName}论坛短信">{$Img_Msg}</a>
+</td>
+<td align="center" class="tablebody1"><input name="id" type="checkbox" class="chkbox" value="{$F_id}" /></td></tr>

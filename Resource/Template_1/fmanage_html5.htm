@@ -1,0 +1,139 @@
+<!--跟帖管理-->
+<form action="admin_postings.asp?action=delre" method="post" name="frmAnnounce" id="frmAnnounce">
+<table style="width:97%" cellspacing="1" cellpadding="3" align="center" class="tableborder1">
+<tr>
+<th height="20">论坛帖子管理中心－您要进行的操作是 <b>{$action}</b></th>
+</tr>
+<tr>
+<td class="tablebody1" height="24"><b>
+操作理由</b>：
+<select name="title" size="1">
+<option>自定义</option>
+<option value="灌水">灌水</option>
+<option value="广告">广告</option>
+<option value="奖励">奖励</option>
+<option value="好文章">好文章</option>
+<option value="内容不符">内容不符</option>
+<option value="重复发帖">重复发帖</option>
+</select>
+<input name="content" type="text" size="60" />  *</td>
+</tr>
+<tr>
+<td class="tablebody1" height="24">
+<script language="JavaScript" type="text/javascript">
+<!--
+var seldisable='{$seldisable}';
+var doWealth='{$doWealth}';
+var dousercp='{$dousercp}';
+var douserep='{$douserep}';
+document.write ('<b>用户操作</b>：  金钱');
+document.write ('	<select name="doWealth" size="1 "'+seldisable+'>');
+for (i=-50;i<51 ;i++ )
+{
+	document.write ('<option value="'+i+'" ');
+	if (doWealth==i)
+	{
+		document.write ('selected="selected"');
+	}
+	document.write ('>'+i+'</option>');
+}
+document.write ('	</select>&nbsp;魅力');
+document.write ('	<select name="douserCP" size=1 '+seldisable+'>');
+for (i=-50;i<51 ;i++ )
+{
+	document.write ('<option value="'+i+'" ');
+	if (dousercp==i)
+	{
+		document.write ('selected="selected"');
+	}
+	document.write ('>'+i+'</option>');
+}
+document.write ('	</select>&nbsp;积分');
+document.write ('	<select name="douserEP" size=1 '+seldisable+'>');
+for (i=-50;i<51 ;i++ )
+{
+	document.write ('<option value="'+i+'" ');
+	if (douserep==i)
+	{
+		document.write ('selected="selected"');
+	}
+	document.write ('>'+i+'</option>');
+}
+document.write ('</select>&nbsp;<input type="checkbox" name="checkbox" value="checkbox" onclick="nocent();" '+seldisable+'>不对用户进行分值操作');
+var decrease='{$decrease}';
+if (0<decrease){
+	switch(decrease){
+		case '1':
+			document.write('<select name="decrease" size="1">');
+			document.write('<option value="0" selected="selected">所有人增加“被删帖”数目</option>');
+			document.write('<option value="1">楼主不增加“被删帖”数目</option>');
+			document.write('<option value="2">跟帖不增加“被删帖”数目</option>');
+			document.write('<option value="3">所有人不增加“被删帖”数目</option>');
+			document.write('</select>');
+			break;
+		case '2':
+			document.write('<input type="checkbox" name="decrease" value="2" />不增加“被删帖”数目');
+			break;
+	}
+}
+
+function nocent(){
+	if(document.frmAnnounce.doWealth.disabled==true){
+		document.frmAnnounce.doWealth.disabled=false;
+		document.frmAnnounce.douserCP.disabled=false;
+		document.frmAnnounce.douserEP.disabled=false;
+		if (document.frmAnnounce.decrease){
+			document.frmAnnounce.decrease.disabled=false;
+		}
+	}else{
+		document.frmAnnounce.doWealth.disabled=true;
+		document.frmAnnounce.douserCP.disabled=true;
+		document.frmAnnounce.douserEP.disabled=true;
+		if (document.frmAnnounce.decrease){
+			document.frmAnnounce.decrease.disabled=true;
+		}
+	}
+}
+//-->
+</script>
+</td>
+</tr>
+<script language="JavaScript" type="text/javascript">
+<!--
+var fileconfirm='{$fileconfirm}';
+if (fileconfirm=='1'){
+document.write ('<tr>');
+document.write ('<td height="24" class="tablebody1">');
+document.write ('<b附件操作</b>：<input  type="radio" name="delupfile" value="0" checked="checked" />保留附件　　<input type="radio" name="delupfile" value="1" />删除附件');
+document.write ('（删除清理的附件将不能恢复！）</td>');
+document.write ('</tr>');
+}
+//-->
+</script>
+<tr>
+<td height="24" class="tablebody1">
+<b>短信通知</b>：<input name="msg" type="text" size="70" />&nbsp;<input type="checkbox" name="ismsg" value="1" />使用</td>
+</tr>
+<tr>
+<td height="24" class="tablebody1">
+<b>管理说明</b>：<br />
+①请慎重使用版主的管理职能，版主所有操作将被记录<br />
+②如果选择了短信通知，则会将删帖原因发送给用户，您也可以在短信中附上简短说明
+</td>
+</tr>
+</table>
+<br />
+<input name="boardID" type="hidden" value="{$boardid}" />
+<input name="ID" type="hidden" value="{$id}" />
+<table cellpadding="3" cellspacing="1" align="center" class="tableborder1">
+  <tr> 
+    <th align="left"  id="tabletitlelink" colspan="3" height="20">
+      &nbsp;* 跟帖列表：</th>
+    <th align="right" width="20%" id="tabletitlelink" valign="middle" height="20" >&nbsp;<!--img src="gotop.gif" alt="" width="15" height="15" /--></th>
+  </tr>
+{$treeloop}
+<tr>
+  <td height="27" width="100%" class="tablebody2" colspan="4">
+  <input name="chkall" type="checkbox" onclick="CheckAll(this.form)" value="on" />选中所有显示帖子&nbsp;<input name="submit" type="submit" onclick="{if(confirm('确定删除选定的纪录吗?')){this.document.frmAnnounce.submit();return true;}return false;}" value="删除" /></td></tr>
+</table>
+</form>

@@ -1,0 +1,781 @@
+<?xml version="1.0" encoding="gb2312"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" >
+<xsl:output method="xml" omit-xml-declaration = "yes" indent="yes" version="4.0"/>
+<xsl:variable name="myscript"><![CDATA[
+<script type="text/javascript" language="javascript">
+function CheckAll(form,v)  {
+  for (var i=0;i<form.elements.length;i++)    {
+    var e = form.elements[i];
+    if (e.type == 'radio' && e.value==v && e.name !='chkall')       e.checked =true; 
+   }
+  }
+</script>
+	]]></xsl:variable>
+<xsl:template match="/">
+<xsl:choose>
+<xsl:when test="xml/param/@action='manage'"><xsl:call-template name="manageresult" /></xsl:when>
+<xsl:otherwise>
+<xsl:choose>
+<xsl:when test="xml/param/@action='view'"><xsl:call-template name="view" /></xsl:when>
+<xsl:otherwise>
+<xsl:choose>
+<xsl:when test="xml/param/@action='modify'"><xsl:call-template name="modify" /></xsl:when>
+<xsl:otherwise>
+<xsl:choose>
+<xsl:when test="xml/param/@action='info'"><xsl:call-template name="info" /></xsl:when>
+<xsl:otherwise>
+<xsl:choose>
+<xsl:when test="xml/param/@action='save'"><xsl:call-template name="saveok" /></xsl:when>
+<xsl:otherwise>
+<xsl:choose>
+<xsl:when test="xml/param/@action='addnocheck'"><xsl:call-template name="addnocheckok" /></xsl:when>
+<xsl:otherwise>
+<xsl:choose>
+<xsl:when test="xml/param/@action='unlock'"><xsl:call-template name="unlock" /></xsl:when>
+<xsl:otherwise>
+<xsl:call-template name="readme" />
+<xsl:call-template name="result" />	
+</xsl:otherwise>
+</xsl:choose>
+</xsl:otherwise>
+</xsl:choose>	
+</xsl:otherwise>
+</xsl:choose>
+</xsl:otherwise>
+</xsl:choose>	
+</xsl:otherwise>
+</xsl:choose>	
+</xsl:otherwise>
+</xsl:choose>		
+</xsl:otherwise>
+</xsl:choose>
+</xsl:template>
+<xsl:template name="unlock">
+<div class="mainbox">
+	<ul class="tableborder heightd">
+		<h3>解除固封成功</h3>
+		<div class="mainbar3" style="line-height:28px;height:28px;">
+			<a href="javascript:history.go(-1)">返回上一页</a> 
+		</div>
+	</ul>
+</div>
+</xsl:template>
+<xsl:template name="addnocheckok">
+<div class="mainbox">
+	<ul class="tableborder heightd">
+		<h3>添加免审核用户成功</h3>
+		<div  style="line-height:28px;height:28px;">
+			<a href="AccessTopic.asp">返回审核首页</a> 
+		</div>
+	</ul>
+</div>
+</xsl:template>
+<xsl:template name="saveok">
+<div class="mainbox">
+	<ul class="tableborder heightd">
+		<h3>设置保存成功</h3>
+		<div class="mainbar3" style="line-height:28px;height:28px;">
+			<a href="AccessTopic.asp">返回审核首页</a> | <a href="AccessTopic.asp?action=modify">重新修改设置</a>
+		</div>
+	</ul>
+</div>
+</xsl:template>
+<xsl:template name="modify">
+	<div class="mainbox">
+		<ul class="tableborder heightd">
+		<h3>审核修改技巧</h3>
+		<ol style="margin-top:0px;margin-bottom:0px;list-style-position : inside;">
+		<li style="padding:0px 5px;">您可以创建并保存若干份审核设置。如您需要应用设置，把应用的钩钩上即可，设置和设置之间是独立的，应用的关系是或的关系，您可以根据自己的需要灵活的运用。同时应用的设置越多，审核过滤的速度就越慢，建议您只应用其中之一。</li>
+		<li style="padding:0px 5px;">要创建新的设置请点下面的新建的链接。如要删除某个设置，请在对应的位置点击删除按钮。</li>
+		<li style="padding:0px 5px;">每份设置至少含一份针对某等级的审核设置，如果您需要针对更多的用户等级，可以另外添加，在对应位置点创建新用户等级审核设置即可。</li>
+		<li style="padding:0px 5px;">无论您是修改，添加或新增设置，操作后必须按保存的按钮方可生效。</li>
+		<li style="padding:0px 5px;">特别注意，审核敏感字是支持正则表达式的，如果您不懂得正则表达式，请主要不要在敏感设置中输入特殊的符号，如"*" ，中括号，还有“^”等等符号。否则容易让程序出错。如果出错，可以把敏感字去掉，再向会搞的朋友求教即可。</li>
+		</ol>
+		<li style="text-align:right;"><a href="AccessTopic.asp?boardid={xml/param/@boardid}">审核主页面</a> | <a href="AccessTopic.asp?action=info" target="_blank">查看设置</a> | <a href="AccessTopic.asp?action=modify&amp;addnew=1">新建设置</a></li>
+		</ul>
+	</div>
+	<div class="mainbox"><ul class="tableborder heightd">
+	<form action="AccessTopic.asp?action=save" method="post">
+	<xsl:for-each select="xml/accesspost/setting">
+	<xsl:variable name="position_1" select="position()"/>
+	<input type="hidden" value="{$position_1}" name="id"/>
+	<h3>修改审核设置 <xsl:value-of select="$position_1" /> </h3>
+	<div class="mainbar1" style="line-height:28px;text-align : left; text-indent:12px;height:28px;">
+	<a href="AccessTopic.asp?action=modify&amp;addusergroup=1&amp;position={$position_1}">创建新用户等级审核设置</a> | <a href="AccessTopic.asp?action=modify&amp;delsetting=1&amp;position={$position_1}"> 删除审核设置 <xsl:value-of select="$position_1" /> </a>
+	</div>
+	<div class="mainbar1" style="line-height:28px;text-align : left; text-indent:12px;height:28px;">
+	<div style="float:left;width:100px;text-align : right;"><b>设置名称：</b></div>
+	<div class="li1" style="float:left;"><input type="text" name="setting_{$position_1}_type" value="{@type}" style="margin:3px;"/></div>
+	<div style="float:left;"><input type="checkbox" value="1" name="setting_{$position_1}_use" style="margin:4px 1px ;"><xsl:if test="@use=1"><xsl:attribute name="checked">checked</xsl:attribute></xsl:if></input> </div>
+	<div style="float:left;">应用</div>
+	</div>
+	<div class="mainbar1" style="line-height:28px;text-align : left;height:28px;">
+	<div style="float:left;width:100px;text-align : right;"><b>审核范围：</b></div>
+	<div class="li1" style="float:left;"><input type="checkbox" value="1" name="setting_{$position_1}_check_new" style="margin:4px 1px ;"><xsl:if test="check/@new=1"><xsl:attribute name="checked">checked</xsl:attribute></xsl:if></input> </div>
+	<div style="float:left; padding: 0px 10px;">新主题</div>
+	<div style="float:left;"><input type="checkbox" value="1" name="setting_{$position_1}_check_re" style="margin:4px 1px ;"><xsl:if test="check/@re=1"><xsl:attribute name="checked">checked</xsl:attribute></xsl:if></input> </div>
+	<div style="float:left; padding: 0px 10px;">新回帖</div>
+	<div style="float:left;"><input type="checkbox" value="1" name="setting_{$position_1}_check_edit" style="margin:4px 1px ;"><xsl:if test="check/@edit=1"><xsl:attribute name="checked">checked</xsl:attribute></xsl:if></input> </div>
+	<div style="float:left; padding: 0px 10px;">编辑贴</div>
+	</div>
+	<xsl:for-each select="checkuser">
+	<input type="hidden" name="setting_{$position_1}_checkuser" value="{position()}"/>
+	<xsl:variable name="usergroupid" select="@usergroupid"/>
+	<div class="mainbar1" style="line-height:28px;text-align : left;height:28px;">
+	<div style="float:left;width:100px;text-align : right;"><b>审核等级：</b></div>
+	<div class="li1" style="float:left;"><select name="setting_{$position_1}_checkuser_{position()}_usergroupid" style="margin:3px;">
+	<xsl:for-each select="/xml/grouppic/usergroup">
+	<option value="{@usergroupid}"><xsl:if test="@usergroupid=$usergroupid"><xsl:attribute name="selected">selected</xsl:attribute></xsl:if><xsl:value-of select="@usertitle" /></option>
+	</xsl:for-each>
+	</select></div>
+	<div style="float:left;"><input type="checkbox" value="1" name="setting_{$position_1}_checkuser_{position()}_use" style="margin:4px 1px ;"><xsl:if test="@use=1"><xsl:attribute name="checked">checked</xsl:attribute></xsl:if></input> </div>
+	<div style="float:left; padding: 0px 10px;">启用</div>
+	<div style="float:left; padding: 0px 10px;"><a href="AccessTopic.asp?action=modify&amp;delusergroup=1&amp;position={$position_1}&amp;position1={position()}">删除此等级审核设置</a></div>
+	</div>
+	<div class="mainbar1" style="line-height:28px;text-align : left;height:28px;">
+	<div style="float:left;width:100px;text-align : right;"><b>限制设置：</b></div>
+	<div class="li1" style="float:left;">
+	<div style="float:left;width:80px;text-align : right;">主题少于：</div>
+	<div style="float:left;"><input type="text" name="setting_{$position_1}_checkuser_{position()}_usertopic" value="{usertopic/@value}" style="margin:3px;" size="4"/></div>
+	<div style="float:left; padding: 0px 10px;">审核</div>
+	<div style="float:left;"><input type="checkbox" value="1" name="setting_{$position_1}_checkuser_{position()}_usertopic_use" style="margin:4px 1px ;"><xsl:if test="usertopic/@use=1"><xsl:attribute name="checked">checked</xsl:attribute></xsl:if></input> </div>
+	<div style="float:left; padding: 0px 10px;">启用</div>
+	</div>
+	</div>
+	<div class="mainbar1" style="line-height:28px;text-align : left;height:28px;">
+	<div style="float:left;width:100px;text-align : right;"><xsl:value-of select="'&amp;nbsp;'"  disable-output-escaping="yes"/></div>
+	<div class="li1" style="float:left;">
+	<div style="float:left;width:80px;text-align : right;">发帖少于：</div>
+	<div style="float:left;"><input type="text" name="setting_{$position_1}_checkuser_{position()}_userpost" value="{userpost/@value}" style="margin:3px;" size="4"/></div>
+	<div style="float:left; padding: 0px 10px;">审核</div>
+	<div style="float:left;"><input type="checkbox" value="1" name="setting_{$position_1}_checkuser_{position()}_userpost_use" style="margin:4px 1px ;"><xsl:if test="userpost/@use=1"><xsl:attribute name="checked">checked</xsl:attribute></xsl:if></input> </div>
+	<div style="float:left; padding: 0px 10px;">启用</div>
+	</div>
+	</div>
+	<div class="mainbar1" style="line-height:28px;text-align : left;height:28px;">
+	<div style="float:left;width:100px;text-align : right;"><xsl:value-of select="'&amp;nbsp;'"  disable-output-escaping="yes"/></div>
+	<div class="li1" style="float:left;">
+	<div style="float:left;width:80px;text-align : right;">注册少于：</div>
+	<div style="float:left;"><input type="text" name="setting_{$position_1}_checkuser_{position()}_regdate" value="{regdate/@value}" style="margin:3px;" size="4"/></div>
+	<div style="float:left;padding: 0px 10px;">天，审核</div>
+	<div style="float:left;"><input type="checkbox" value="1" name="setting_{$position_1}_checkuser_{position()}_regdate_use" style="margin:4px 1px ;"><xsl:if test="regdate/@use=1"><xsl:attribute name="checked">checked</xsl:attribute></xsl:if></input> </div>
+	<div style="float:left; padding: 0px 10px;">启用</div>
+	</div>
+	</div>
+	<div class="mainbar1" style="line-height:28px;text-align : left;height:28px;">
+	<div style="float:left;width:100px;text-align : right;"><xsl:value-of select="'&amp;nbsp;'"  disable-output-escaping="yes"/></div>
+	<div class="li1" style="float:left;">
+	<div style="float:left;width:80px;text-align : right;">被删率大于：</div>
+	<div style="float:left;"><input type="text" name="setting_{$position_1}_checkuser_{position()}_userdel" value="{userdel/@value}" style="margin:3px;" size="4"/></div>
+	<div style="float:left; padding: 0px 10px;">审核</div>
+	<div style="float:left;"><input type="checkbox" value="1" name="setting_{$position_1}_checkuser_{position()}_userdel_use" style="margin:4px 1px ;"><xsl:if test="userdel/@use=1"><xsl:attribute name="checked">checked</xsl:attribute></xsl:if></input> </div>
+	<div style="float:left; padding: 0px 10px;">启用</div>
+	</div>
+	</div>
+	<div class="mainbar1" style="line-height:28px;text-align : left;height:28px;">
+	<div style="float:left;width:100px;text-align : right;"><xsl:value-of select="'&amp;nbsp;'"  disable-output-escaping="yes"/></div>
+	<div class="li1" style="float:left;">
+	<div style="float:left;width:120px;text-align : right;">被屏蔽用户审核</div>
+	<div style="float:left;"><input type="checkbox" value="1" name="setting_{$position_1}_checkuser_{position()}_lockuser_use" style="margin:4px 1px ;"><xsl:if test="lockuser/@use=1"><xsl:attribute name="checked">checked</xsl:attribute></xsl:if></input> </div>
+	<div style="float:left; padding: 0px 10px;">启用</div>
+	</div>
+	</div>
+	<div class="mainbar1" style="line-height:28px;text-align : left;height:28px;">
+	<div style="float:left;width:100px;text-align : right;"><xsl:value-of select="'&amp;nbsp;'"  disable-output-escaping="yes"/></div>
+	<div class="li1" style="float:left;">
+	<div style="float:left;width:120px;text-align : right;">对内容进行检查</div>
+	<div style="float:left;"><input type="checkbox" value="1" name="setting_{$position_1}_checkuser_{position()}_checkcontent_use" style="margin:4px 1px ;"><xsl:if test="checkcontent/@use=1"><xsl:attribute name="checked">checked</xsl:attribute></xsl:if></input> </div>
+	<div style="float:left; padding: 0px 10px;">启用</div>
+	</div>
+	</div>
+	</xsl:for-each>
+	<div class="mainbar1" style="line-height:28px;text-align : left;height:28px;">
+	<div style="float:left;width:100px;text-align : right;"><b>内容检查设置：</b></div>
+	<div class="li1" style="float:left;width:80px;text-align : right;">含图片审核：</div>
+	<div style="float:left;"><input type="checkbox" value="1" name="setting_{$position_1}_checkcontent_checkpic_use" style="margin:4px 1px ;"><xsl:if test="checkcontent/checkpic/@use=1"><xsl:attribute name="checked">checked</xsl:attribute></xsl:if></input> </div>
+	<div style="float:left; padding: 0px 10px;">启用</div>
+	</div>
+	<div class="mainbar1" style="line-height:28px;text-align : left;height:28px;">
+	<div style="float:left;width:100px;text-align : right;"><xsl:value-of select="'&amp;nbsp;'"  disable-output-escaping="yes"/></div>
+	<div class="li1" style="float:left;width:80px;text-align : right;">含链接审核：</div>
+	<div style="float:left;"><input type="checkbox" value="1" name="setting_{$position_1}_checkcontent_checklink_use" style="margin:4px 1px ;"><xsl:if test="checkcontent/checklink/@use=1"><xsl:attribute name="checked">checked</xsl:attribute></xsl:if></input> </div>
+	<div style="float:left; padding: 0px 10px;">启用</div>
+	</div>
+	<div class="mainbar1" style="line-height:28px;text-align : left;height:28px;">
+	<div style="float:left;width:100px;text-align : right;"><xsl:value-of select="'&amp;nbsp;'"  disable-output-escaping="yes"/></div>
+	<div class="li1" style="float:left;width:80px;text-align : right;">含flash审核：</div>
+	<div style="float:left;"><input type="checkbox" value="1" name="setting_{$position_1}_checkcontent_checkflash_use" style="margin:4px 1px ;"><xsl:if test="checkcontent/checkflash/@use=1"><xsl:attribute name="checked">checked</xsl:attribute></xsl:if></input> </div>
+	<div style="float:left; padding: 0px 10px;">启用</div>
+	</div>
+	<div class="mainbar1" style="line-height:28px;text-align : left;height:28px;">
+	<div style="float:left;width:100px;text-align : right;"><xsl:value-of select="'&amp;nbsp;'"  disable-output-escaping="yes"/></div>
+	<div class="li1" style="float:left;width:80px;text-align : right;">含媒体审核：</div>
+	<div style="float:left;"><input type="checkbox" value="1" name="setting_{$position_1}_checkcontent_checkmp_use" style="margin:4px 1px ;"><xsl:if test="checkcontent/checkmp/@use=1"><xsl:attribute name="checked">checked</xsl:attribute></xsl:if></input> </div>
+	<div style="float:left; padding: 0px 10px;">启用</div>
+	</div>
+	<div class="mainbar1" style="line-height:28px;text-align : left;height:28px;">
+	<div style="float:left;width:100px;text-align : right;"><xsl:value-of select="'&amp;nbsp;'"  disable-output-escaping="yes"/></div>
+	<div class="li1" style="float:left;width:110px;text-align : right;">含RealPlayer审核：</div>
+	<div style="float:left;"><input type="checkbox" value="1" name="setting_{$position_1}_checkcontent_checkrm_use" style="margin:4px 1px ;"><xsl:if test="checkcontent/checkrm/@use=1"><xsl:attribute name="checked">checked</xsl:attribute></xsl:if></input> </div>
+	<div style="float:left; padding: 0px 10px;">启用</div>
+	</div>
+	<div class="mainbar1" style="line-height:28px;text-align : left;height:310px !important;height:280px;">
+		<div style="float:left;width:100px;text-align : right;"><b>敏感字设置：</b></div>
+	<div class="li1" style="float:left;text-align : right;height:310px !important;height:280px;"><textarea name="setting_{$position_1}_checkcontent_checkword" rows="17" cols="60" style="margin:10px;"><xsl:for-each select="checkcontent/checkword">
+<xsl:value-of select="@content" />
+<xsl:value-of select="'
+'" />
+</xsl:for-each></textarea><font color="#FF0000">*每行一个敏感字</font></div>
+	</div>
+	<div class="mainbar1" style="line-height:28px;text-align:left;height:310px !important;height:280px;">
+		<div style="float:left;width:100px;text-align:right;"><b>豁免审核用户：</b></div>
+		<div class="li1" style="float:left;text-align:right;height:310px !important;height:280px;">
+			<textarea name="setting_{$position_1}_nocheck" rows="17" cols="60" style="margin:10px;"><xsl:for-each select="nocheck/username">
+<xsl:value-of select="." />
+<xsl:value-of select="'
+'" />
+</xsl:for-each></textarea><font color="#FF0000">*每行一个豁免用户</font>
+		</div>
+	</div><br />
+	</xsl:for-each>
+	<div  style="line-height:28px;height:28px;">
+		<input type="submit" name="action" value="保 存" style="margin:3px 10px;" />
+	</div>
+	</form></ul></div>
+</xsl:template>
+<xsl:template name="info">	
+	<!--div_start-->
+	<div class="mainbox">
+		<ul class="tableborder heightd">
+			<xsl:for-each select="xml/accesspost/setting[@use=1]">
+				<h3 style="margin:0px;">
+					启用审核设置 <xsl:value-of select="position()" /> . <xsl:value-of select="@type" />
+				</h3>
+				<div class="mainbar1" style="line-height:28px;text-align : left;height:28px;margin:0px;">
+					<div style="float:left;width:100px;text-align : right;">
+						<b>审核范围：</b>
+					</div>
+					<div class="li1" style="float:left; padding: 0px 10px;">
+						 <xsl:choose>
+							<xsl:when test="check/@new=1">√</xsl:when>
+							<xsl:otherwise>×</xsl:otherwise>
+						</xsl:choose> 新发主题		
+					</div>
+					<div class="li1" style="float:left; padding: 0px 10px;">
+						 <xsl:choose>
+							<xsl:when test="check/@re=1">√</xsl:when>
+							<xsl:otherwise>×</xsl:otherwise>
+						</xsl:choose> 新发回复	
+					</div>
+					<div class="li1" style="float:left; padding: 0px 10px;">
+						<xsl:choose>
+							<xsl:when test="check/@edit=1">√</xsl:when>
+							<xsl:otherwise>×</xsl:otherwise>
+						</xsl:choose> 重新编辑的贴
+					</div>
+					<div class="li1" style="float:left; padding: 0px 10px;"></div>
+				</div>
+				<xsl:for-each select="checkuser[@use=1]">
+					<xsl:variable name="usergroupid" select="@usergroupid"/>
+					<div class="mainbar1" style="line-height:28px;text-align : left;height:28px;">
+						<div style="float:left;width:100px;text-align : right;">
+							<b>审核用户等级：</b>
+						</div>
+						<div class="li1" style="float:left; padding: 0px 10px;">
+							<xsl:value-of select="/xml/grouppic/usergroup[@usergroupid=$usergroupid]/@usertitle" />(ID：<xsl:value-of select="$usergroupid" />)
+						</div>
+					</div>
+					<div class="mainbar1" style="line-height:28px;text-align : left;height:28px;">
+						<div style="float:left;width:100px;text-align : right;">
+							<b>限制设置：</b>
+						</div>
+						<div class="li1" style="float:left; padding: 0px 10px;">
+							<xsl:choose>
+									<xsl:when test="usertopic/@use=1"><font class="redfont">√</font></xsl:when>
+									<xsl:otherwise><font class="bluefont">×</font></xsl:otherwise>
+							</xsl:choose>
+							 主题少于 <b><xsl:value-of select="usertopic/@value" /></b> 要审核
+						</div>
+						<div class="li1" style="float:left; padding: 0px 10px;">
+							<xsl:choose>
+									<xsl:when test="userpost/@use=1"><font class="redfont">√</font></xsl:when>
+									<xsl:otherwise><font class="bluefont">×</font></xsl:otherwise>
+							</xsl:choose>
+							 发帖少于 <b><xsl:value-of select="userpost/@value" /></b> 要审核
+						</div>
+						<div class="li1" style="float:left; padding: 0px 10px;">
+							<xsl:choose>
+									<xsl:when test="regdate/@use=1"><font class="redfont">√</font></xsl:when>
+									<xsl:otherwise><font class="bluefont">×</font></xsl:otherwise>
+							</xsl:choose>
+							 注册不够 <b><xsl:value-of select="regdate/@value" /></b> 天要审核
+						</div>
+					</div>
+					<div class="mainbar1" style="line-height:28px;text-align : left;height:28px;">
+						<div style="float:left;width:100px;text-align : right;">
+							<xsl:value-of select="'&amp;nbsp;'"  disable-output-escaping="yes"/>
+						</div>
+						<div class="li1" style="float:left; padding: 0px 10px;">
+							<xsl:choose>
+									<xsl:when test="userdel/@use=1"><font class="redfont">√</font></xsl:when>
+									<xsl:otherwise><font class="bluefont">×</font></xsl:otherwise>
+							</xsl:choose>
+							 帖子被删率高于 <b><xsl:value-of select="userdel/@value" /></b> 要审核
+						</div>
+						<div class="li1" style="float:left; padding: 0px 10px;">
+							<xsl:choose>
+									<xsl:when test="lockuser/@use=1"><font class="redfont">√</font></xsl:when>
+									<xsl:otherwise><font class="bluefont">×</font></xsl:otherwise>
+							</xsl:choose>
+							 被屏蔽状态下发帖要审核
+						</div>
+						<div class="li1" style="float:left; padding: 0px 10px;">
+							<xsl:choose>
+									<xsl:when test="checkcontent/@use=1"><font class="redfont">√</font></xsl:when>
+									<xsl:otherwise><font class="bluefont">×</font></xsl:otherwise>
+							</xsl:choose>
+							 对其内容进行敏感字检查
+						</div>
+					</div>
+				</xsl:for-each>
+				<div class="mainbar1" style="line-height:28px;text-align : left;height:28px;">
+					<div style="float:left;width:100px;text-align : right;">
+						<b>内容检查设置：</b>
+					</div>
+					<div class="li1" style="float:left; padding: 0px 10px;">
+						<xsl:choose>
+								<xsl:when test="checkcontent/checkpic/@use=1"><font class="redfont">√</font></xsl:when>
+								<xsl:otherwise><font class="bluefont">×</font></xsl:otherwise>
+						</xsl:choose>
+						 含图片要审核
+					</div>
+					<div class="li1" style="float:left; padding: 0px 10px;">
+						<xsl:choose>
+								<xsl:when test="checkcontent/checklink/@use=1"><font class="redfont">√</font></xsl:when>
+								<xsl:otherwise><font class="bluefont">×</font></xsl:otherwise>
+						</xsl:choose>
+						 含链接要审核
+					</div>
+					<div class="li1" style="float:left; padding: 0px 10px;">
+						<xsl:choose>
+								<xsl:when test="checkcontent/checkflash/@use=1"><font class="redfont">√</font></xsl:when>
+								<xsl:otherwise><font class="bluefont">×</font></xsl:otherwise>
+						</xsl:choose>
+						 含flash要审核
+					</div>
+					<div class="li1" style="float:left; padding: 0px 10px;">
+						<xsl:choose>
+								<xsl:when test="checkcontent/checkmp/@use=1"><font class="redfont">√</font></xsl:when>
+								<xsl:otherwise><font class="bluefont">×</font></xsl:otherwise>
+						</xsl:choose>
+						 含媒体要审核
+					</div>
+					<div class="li1" style="float:left; padding: 0px 10px;">
+						<xsl:choose>
+								<xsl:when test="checkcontent/checkrm/@use=1"><font class="redfont">√</font></xsl:when>
+								<xsl:otherwise><font class="bluefont">×</font></xsl:otherwise>
+						</xsl:choose>
+						 含RealPlayer要审核
+					</div>
+				</div>
+				<div class="mainbar1" style="line-height:28px;text-align:left;height:100px;">
+					<div style="float:left;width:100px;text-align:right;">
+						<b>敏感字设置：</b>
+					</div>
+					<div class="li1" style="float:left;padding:0px 10px;height:100px;">
+						<xsl:for-each select="checkcontent/checkword">
+						<xsl:value-of select="concat(' ',@content,' ')" /> 
+						</xsl:for-each>
+					</div>
+				</div>
+				<div class="mainbar1" style="line-height:28px;text-align:left;height:auto;min-height:100px;">
+					<div style="width:100px;float:left;text-align:right;">
+						<b>豁免审核用户：</b>
+					</div>
+					<div class="li1" style="width:90% !important;width:auto;float:left;height:auto;min-height:100px;">
+						<xsl:for-each select="nocheck/username">
+							<a href="dispuser.asp?name={.}" target="_blank" class="bluefont">
+								<xsl:value-of select="." />
+							</a>
+							<xsl:value-of select="' '" />
+						</xsl:for-each>
+					</div>
+				</div>
+			</xsl:for-each>
+			<div style="text-align:right;"><a href="javascript:window.close()"> 关闭窗口 </a> </div>
+		</ul>
+	</div>
+	<!--div_end-->
+</xsl:template>
+<xsl:template name="manageresult">
+	<div class="mainbox">
+		<ul class="tableborder heightd">
+			<h3>审核结果</h3>
+			<ol style="margin-top:0px;margin-bottom:0px;list-style-position : inside;">
+			<xsl:for-each select="xml/result">
+			<xsl:sort select="@boardid" order="descending" data-type="number"/>
+			<li style="padding:5px;"><div> <xsl:if test="not(@boardid)"><xsl:attribute name="style">color:red;</xsl:attribute></xsl:if>帖子编号：<xsl:value-of select="@rootid" />，跟贴编号：<xsl:value-of select="@announceid" />，操作状态：<xsl:value-of select="@stats" /></div></li>
+			</xsl:for-each>
+			</ol>
+			<div>本窗口于10秒后自动关闭</div>	
+			<div><a href="javascript:window.close()"> 马上关闭窗口 </a> </div>
+			<script type="text/javascript" language="javascript">
+				setTimeout("window.close()",10000)
+			</script>
+		</ul>
+	</div>
+</xsl:template>
+<xsl:template name="view">
+	<div class="mainbox">
+		<ul class="tableborder heightd">
+			<h3>审核帖子</h3>
+			<div class="mainbar1" style="text-align : left;text-indent:24px;line-height:28px;height : 28px;">
+				<div style="float:right;margin-right:5px;"><a href="javascript:window.close()"> 关闭窗口 </a> </div>
+				<xsl:if test="xml/row/@parentid!=0">
+					<div style="text-indent:10px;">
+						<a href="dispbbs.asp?boardid={xml/row/@locktopic}&amp;id={xml/row/@rootid}" target="_blank" >
+							相关主题
+						</a>
+					</div>
+				</xsl:if>
+			</div>
+			<div  style="line-height:25px;text-indent:10px;ord-wrap : break-word ;word-break : break-all ;">
+				<fieldset style="border : 1px dotted #ccc;text-align : left;line-height:22px;text-align : left;padding:10px;margin:10px;">
+					<legend> <b><xsl:value-of select="xml/row/@topic" /></b></legend>
+					<div style="text-align : center;">----作者：
+						<a href="dispuser.asp?id={xml/row/@postuserid}" target="_blank" >
+							<xsl:value-of select="xml/row/@username" />
+						</a> 版面：
+						<xsl:variable name="bid" select="xml/row/@locktopic"/>
+						<xsl:value-of select="xml/BoardList/board[@boardid= $bid]/@boardtype"  disable-output-escaping="yes"/> 
+						发表时间：<xsl:value-of select="xml/row/@dateandtime" />  
+						类型：
+						<xsl:choose>
+							<xsl:when test="xml/row/@parentid=0">主题</xsl:when>
+							<xsl:otherwise>跟贴</xsl:otherwise>
+						</xsl:choose> 
+					</div>
+					<div><xsl:value-of select="xml/row/@body" disable-output-escaping="yes" /></div>
+				</fieldset>
+			</div>
+		</ul>
+	</div>
+</xsl:template>
+<xsl:template name="readme">
+<div class="mainbox">
+	<ul class="tableborder heightd">
+		<h3>帖子审核机制，论坛的防火墙</h3>
+		<ol style="margin-top:0px;margin-bottom:0px;list-style-position : inside;">
+			<li style="padding:0px 5px;">为净化论坛信息，保证论坛能正常的运行，我们设立了审核机制。信息审核已经是当前论坛必不可少的环节，请各位管理人员认真做好审核的工作，以确保论坛正常运转。</li>
+			<li style="padding:0px 5px;">为有效控制，过滤各种广告和不良信息，我们需要审核机制，然而，因论坛的信息可能很多，可能审核工作相当繁重，为此，我们制订了一系列的科学的审核方案，务求做到既可有效防止和过滤不良信息，又尽可能以减少审核工作的负担。</li>
+			<li style="padding:0px 5px;">目前我们制订了多套审核机制，以后会陆续添加。审核机制的设置必须由管理员设置。版主和其他的管理员能查看当前设置的详情。</li>
+			<li style="padding:0px 5px;">如果您发现某用户是可以豁免审核(不需要审核他的帖子)可以点其名字后面的豁免，则以后不需要再审核他的帖子了。此情况是在高度相信此人的情况下，为避免审核的麻烦而做的操作，需要审慎。</li>
+		</ol>
+		<li style="text-align:right;">
+			<a href="AccessTopic.asp?boardid={xml/param/@boardid}">论坛审核主页面</a> | <a href="IndivGroup_AccessTopic.asp">圈子审核主页面</a> | <a href="AccessTopic.asp?action=info" target="_blank">查看设置</a>
+			<xsl:if test="xml/param/@master=1"> | <a href="AccessTopic.asp?action=modify" class="redfont" >修改审核设置</a> </xsl:if>
+		</li>
+	</ul>
+</div>
+<!--<div class="th"><xsl:text disable-output-escaping="yes" >&amp;nbsp;</xsl:text>搜索审核贴 </div>-->
+<div class="mainbox">
+	<ul class="tableborder heightd">
+		<h3>搜索审核贴</h3>
+		<form action="AccessTopic.asp" method="post" class="formMgr">
+			<div  style="text-align : left;line-height:25px;height:25px;text-indent:10px;">检索论坛板面：
+				<select name="boardid" id="boardid"></select>数据表-[审核贴数]：
+				<select name="tableid" id="tableid">
+					<option value="0">
+						<xsl:if test="xml/param/@tableid=0">
+							<xsl:attribute name="selected">selected</xsl:attribute>
+						</xsl:if>
+						主题表-[<xsl:value-of select="xml/@count" />]
+					</option>
+					<xsl:for-each select="xml/posttable">
+					<option value="{@id}">
+						<xsl:if test="/xml/param/@tableid = @id">
+							<xsl:attribute name="selected">selected</xsl:attribute>
+						</xsl:if>
+						<xsl:value-of select="@tabletype" />-[<xsl:value-of select="@count" />]
+					</option>
+					</xsl:for-each>
+				</select>
+				关键字：<input type="text" name="keyword" value="{xml/param/@keyword}" />
+				<input type="submit" value="搜 索" />
+			</div>
+		</form>
+	</ul>
+</div>
+<script language="JavaScript" type="text/javascript">
+BoardJumpListSelect('<xsl:value-of select="xml/param/@boardid" />',"boardid","所有论坛","0",0)
+</script>
+</xsl:template>
+<xsl:template name="result">
+<div class="mainbox"><!--div_start-->
+	<ul class="tableborder heightd">
+		<h3>检索结果</h3>
+		<li style="text-indent:24px;">
+			<xsl:choose>
+					<xsl:when test="xml/param/@count=0">没有找到匹配的记录，您可以更改检索条件再试。</xsl:when>
+					<xsl:otherwise>找到 <b><font color="red"><xsl:value-of select="xml/param/@count" /></font></b>  条匹配记录。</xsl:otherwise>
+			</xsl:choose>
+		</li>
+	</ul>
+	<div class="mainbar2">
+		<div class="th" style="width:100%;text-align:center;text-indent:0px;border:0px;line-height:25px;height:25px;background:#f1f7fb"> 
+			<div style="float:left;width:32px;line-height:25px;height:25px;">通过</div>
+			<div class="li1" style="width:32px;float:left;line-height:25px;height:25px;">删除</div>
+			<div class="li1" style="width:32px;float:left;line-height:25px;height:25px;">待审</div>
+			<div class="li1" style="width:32px;float:left;line-height:25px;height:25px;">类型</div>
+			<div class="li1" style="float:left;text-indent:12px;line-height:25px;height:25px;">标题或内容提要(请点击标题查看)</div>
+			<div class="li1" style="float:right;width:120px;line-height:25px;height:25px;">发表时间</div>
+			<div class="li1" style="float:right;width:80px;line-height:25px;height:25px;">操 作</div> 
+			<div class="li1" style="float:right;width:90px;line-height:25px;height:25px;">作 者 </div> 
+			<!--<div class="li1" style="float:right;width:60px;line-height:25px;height : 25px;">数据表</div>  -->
+			<div class="li1" style="float:right;width:120px;line-height:25px;height:25px;">版 面</div> 
+		</div>
+	</div>
+	<form name="recycle" action="AccessTopic.asp?action=manage" method="post" target="_blank" style="margin:0px;padding:0px;">
+		<xsl:for-each select="xml/datarows/row">
+			<xsl:sort select="@username" order="ascending" data-type="text"/>
+			<xsl:sort select="@bid" order="ascending" data-type="number"/>
+			<div class="mainbar3" style="margin:0px;line-height:28px;height:28px;">
+				<div style="float:left;width:32px;"><input type="radio" name="pass_{@id}_{@replyid}" value="1"  style="margin:4px;" /></div>
+				<div class="li2" style="float:left;width:32px;">
+					<input type="radio" name="pass_{@id}_{@replyid}" value="0"  style="margin:4px;"/>
+					<input type="hidden" name="id" value="{@id}"/>
+					<input type="hidden" name="replyid" value="{@replyid}"/>
+				</div>
+				<div class="li1" style="float:left;width:32px;">
+					<input type="radio" name="pass_{@id}_{@replyid}" value="2"  style="margin:4px;" checked="checked" />
+				</div>
+				<div class="li2" style="width:32px;float:left;line-height:28px;height : 28px;">
+					<xsl:choose>
+						<xsl:when test="/xml/param/@tableid=0">主题</xsl:when>
+						<xsl:otherwise>
+							<xsl:choose>
+								<xsl:when test="@parentid=0">主题</xsl:when>
+								<xsl:otherwise>跟贴</xsl:otherwise>
+							</xsl:choose>
+						</xsl:otherwise>
+					</xsl:choose>
+				</div>
+				<div class="li1" style="float:left;text-indent:12px;overflow :hidden;">
+					<a href="AccessTopic.asp?action=view&amp;id={@id}&amp;replyid={@replyid}" target="_blank" >
+						<xsl:value-of select="substring(concat(@topic,' ',@body),0,30)" /> </a>
+				</div>
+				<div class="li1" style="float:right;width:120px;"><xsl:value-of select="@dateandtime" /></div>
+				<div class="li1" style="float:right;width:80px;"> 
+					<a href="AccessTopic.asp?action=addnocheck&amp;username={@username}" target="_blank" title="豁免{@username}" style="color:green;">免</a> | <a href="AccessTopic.asp?boardid={/xml/param/@boardid}&amp;tableid={/xml/param/@tableid}&amp;keyword={@username}" title="搜索用户{@username}所有待审贴">搜</a> | <a href="admin_lockuser.asp?action=lock_1&amp;name={@username}" target="_blank" title="封了这个家伙" style="color:red;">封</a> 
+				</div>
+				<div class="li1" style="float:right;width:90px;">
+					<a href="dispuser.asp?id={@userid}" target="_blank" ><xsl:value-of select="@username" /></a>
+				</div>
+				<!--<div class="li1" style="float:right;width:60px;"><xsl:choose>
+						<xsl:when test="/xml/param/@tableid=0"><xsl:value-of select="@posttable" /></xsl:when>
+						<xsl:otherwise><xsl:value-of select="/xml/param/@posttable" /></xsl:otherwise>
+				</xsl:choose>
+						</div>
+				-->
+				<div class="li1" style="float:right;width:120px;line-height:28px;height : 28px;overflow :hidden;">
+					<xsl:variable name="bid" select="@bid"/>
+					<xsl:value-of select="/xml/BoardList/board[@boardid= $bid]/@boardtype"  disable-output-escaping="yes"/>
+				</div> 
+			</div>
+		</xsl:for-each>
+		<div class="mainbar2" style="line-height:28px;height : 28px;text-align :left;">
+			<div style="float:left;width:32px;text-align :center;">
+				<input type="radio" name="chkall" value="on" onclick="CheckAll(this.form,1);" style="margin:4px;" />
+			</div>
+			<div style="float:left;color:green;">全部通过</div>
+			<div style="float:left;width:32px;text-align :center;">
+				<input type="radio" name="chkall" value="on" onclick="CheckAll(this.form,0);" style="margin:4px;"/>
+			</div>
+			<div style="float:left;color:red;">全部删除</div>
+			<div style="float:left;width:32px;text-align :center;">
+				<input type="radio" name="chkall" value="on" onclick="CheckAll(this.form,2);" style="margin:4px;" checked="checked"/>
+			</div>
+			<div style="float:left;"><b>全部待审</b></div>
+			<div style="float:left;"> <input type="submit" name="action" value="批 量 操 作" style="margin:3px 10px;"/></div>
+		</div>
+	</form>
+	<div class="mainbar3" style="line-height:18px;text-align :left;text-indent:24px;">
+		<div style="padding:10px;"><b>批量操作说明：</b>
+		<div>对列表中的每个帖子可以设置：通过、删除、待审核中的一种处理方法，设置完毕后可以点批量操作按钮执行审核操作。</div>
+		<div>1.如选择 <font color="green">通过</font> 则通过审核 2.选择 <font color="red">删除</font> 则不通过审核，并直接删除 3.选择 <b>待审</b> 则暂不作任何处理，容后再定。</div>
+		<div>操作选择中的:免、搜、封分别代表豁免，搜索该用户所有待审核贴，锁定该用户帐号</div>
+	</div>
+	</div>
+	<xsl:value-of select="$myscript" disable-output-escaping="yes" />
+	<div class="mainbar0" style="line-height:28px;height : 28px;margin-top:2px;">
+		<div style="float:right;">
+			<xsl:call-template name="PageList">
+				<xsl:with-param name="Page" select="xml/param/@page"/>
+				<xsl:with-param name="m" select="10"/>
+				<xsl:with-param name="MaxRows" select="xml/param/@pagesize"/>
+				<xsl:with-param name="CountNum" select="xml/param/@count"/>
+				<xsl:with-param name="PageStr">?boardid=<xsl:value-of select="xml/param/@boardid" />&amp;tableid=<xsl:value-of select="xml/param/@tableid" />&amp;keyword=<xsl:value-of select="xml/param/@keyword" /></xsl:with-param>
+				<xsl:with-param name="v" select="1"/>
+				<xsl:with-param name="pv">page</xsl:with-param>
+				<xsl:with-param name="target"></xsl:with-param>
+				<xsl:with-param name="Forum_AllTopNum" select="0"/>
+			</xsl:call-template>
+		</div>
+	</div>
+</div><!--div_end-->
+</xsl:template>
+<xsl:template name="PageList">
+	<xsl:param name="Page"/><!--当前页码-->
+	<xsl:param name="m"/><!--一次最多显示几个页码-->
+	<xsl:param name="MaxRows"/><!--每页记录数-->
+	<xsl:param name="CountNum"/><!--总记录数-->
+	<xsl:param name="PageStr"/><!--链接参数-->
+	<xsl:param name="v"/><!--显示类型-->
+	<xsl:param name="pv"/><!--页码参数-->
+	<xsl:param name="target"/><!--链接目标框架-->
+	<xsl:param name="Forum_AllTopNum"/>
+	<xsl:variable name="pagecount">
+		<xsl:choose>
+			<xsl:when test="$CountNum mod $MaxRows=0">
+				<xsl:value-of select="$CountNum  div $MaxRows"/>
+			</xsl:when>
+			<xsl:otherwise><xsl:value-of select="floor($CountNum  div $MaxRows)+1"/></xsl:otherwise>
+		</xsl:choose>
+	</xsl:variable>
+	<xsl:if test="$v='1'">
+		<table class="tableborder5" cellpadding="0" cellspacing="1" style="width:auto;float:right;text-align:right;">
+			<form action="{$PageStr}" method="post" name="PageForm" target="{$target}">
+				<tr align="center">
+					<td class="tabletitle1" title="总数" style="text-align : right; ">
+						<xsl:text disable-output-escaping="yes" >&amp;nbsp;</xsl:text>
+						<xsl:value-of select="$Forum_AllTopNum + $CountNum"/>
+						<xsl:text disable-output-escaping="yes" >&amp;nbsp;</xsl:text>
+					</td>
+					<td class="tabletitle1" title="本页记录数">
+						<xsl:text disable-output-escaping="yes" >&amp;nbsp;</xsl:text>
+							<xsl:choose>
+									<xsl:when test="$Page='1'">
+										<xsl:choose>
+											<xsl:when test="$CountNum &lt; $MaxRows">
+												<xsl:value-of select="$Forum_AllTopNum + $CountNum"/>
+											</xsl:when>
+											<xsl:otherwise>
+												<xsl:value-of select="$Forum_AllTopNum + $MaxRows"/>
+											</xsl:otherwise>
+										</xsl:choose>
+									</xsl:when>
+									<xsl:otherwise>
+										<xsl:choose>
+											<xsl:when test="$pagecount = $Page">
+												<xsl:value-of select="$CountNum - ($MaxRows*($Page - 1))"/>
+											</xsl:when>
+											<xsl:otherwise>
+												<xsl:value-of select="$MaxRows"/>
+											</xsl:otherwise>
+										</xsl:choose>
+									</xsl:otherwise>
+							</xsl:choose>
+						<xsl:text disable-output-escaping="yes" >&amp;nbsp;</xsl:text>
+					</td>
+					<td class="tabletitle1">
+						<xsl:text disable-output-escaping="yes" >&amp;nbsp;</xsl:text>
+							<xsl:value-of select="$Page"/>/<xsl:value-of select="$pagecount"/>页
+						<xsl:text disable-output-escaping="yes" >&amp;nbsp;</xsl:text>
+					</td>
+				<xsl:if test="$Page='1'">
+					<td class="tablebody1">
+						<xsl:text disable-output-escaping="yes" >&amp;nbsp;</xsl:text>
+							<img src="images/pagelist/First.gif" border="0" alt=""/>
+						<xsl:text disable-output-escaping="yes" >&amp;nbsp;</xsl:text>
+					</td>
+				</xsl:if>
+				<xsl:if test="$Page!='1'">
+					<td class="tablebody1">
+						<xsl:text disable-output-escaping="yes" >&amp;nbsp;</xsl:text>
+							<a href="{$PageStr}&amp;{$pv}=1" target="{$target}"><img src="images/pagelist/First.gif" border="0" alt="首页"/></a>
+						<xsl:text disable-output-escaping="yes" >&amp;nbsp;</xsl:text>
+					</td>
+				</xsl:if>
+				<xsl:if test="$Page &gt; $m + 1">
+					<td class="tablebody1">
+						<xsl:text disable-output-escaping="yes" >&amp;nbsp;</xsl:text>
+							<a href="{$PageStr}&amp;{$pv}={$Page - $m}" target="{$target}"><img src="images/pagelist/Previous.gif" border="0" alt="上{$m}页"/></a>
+						<xsl:text disable-output-escaping="yes" >&amp;nbsp;</xsl:text>
+					</td>
+				</xsl:if>
+				<xsl:variable name="i">
+					<xsl:choose>
+						<xsl:when test="$Page &lt; floor($m div 2) + 1 ">1</xsl:when>
+						<xsl:otherwise>
+							<xsl:value-of select="$Page - floor($m div 2)"/>
+						</xsl:otherwise>
+					</xsl:choose>
+				</xsl:variable>
+				<xsl:variable name="Endpage">
+					<xsl:choose>
+						<xsl:when test="$i + $m -1 &lt; $pagecount "><xsl:value-of select="$i + $m -1 "/></xsl:when>
+						<xsl:otherwise><xsl:value-of select="$pagecount"/></xsl:otherwise>
+					</xsl:choose>
+				</xsl:variable>
+				<xsl:call-template name="showonepage">
+					<xsl:with-param name="i" select="$i"/>
+					<xsl:with-param name="endpage" select="$Endpage"/>
+					<xsl:with-param name="target" select="$target"/>
+					<xsl:with-param name="PageStr" select="$PageStr"/>
+					<xsl:with-param name="pv" select="$pv"/>
+					<xsl:with-param name="Page" select="$Page"/>
+				</xsl:call-template>
+				<xsl:if test="$pagecount &gt; $m + $Page">
+					<td class="tablebody1">
+						<xsl:text disable-output-escaping="yes" >&amp;nbsp;</xsl:text>
+						<a href="{$PageStr}&amp;{$pv}={$m + $Page}"  target="{$target}"><img src="images/pagelist/Next.gif" border="0" alt="下{$m}页"/></a>
+						<xsl:text disable-output-escaping="yes" >&amp;nbsp;</xsl:text>
+					</td>
+				</xsl:if>
+				<xsl:if test="$Page != $pagecount">
+					<td class="tablebody1">
+						<xsl:text disable-output-escaping="yes" >&amp;nbsp;</xsl:text>
+						<a href="{$PageStr}&amp;{$pv}={$pagecount}" target="{$target}"><img src="images/pagelist/Last.gif" border="0" alt="尾页"/></a>
+						<xsl:text disable-output-escaping="yes" >&amp;nbsp;</xsl:text>
+					</td>
+				</xsl:if>
+				<xsl:if test="$Page = $pagecount">
+					<td class="tablebody1">
+						<xsl:text disable-output-escaping="yes" >&amp;nbsp;</xsl:text>
+						<img src="images/pagelist/Last.gif" border="0" alt=""/>
+						<xsl:text disable-output-escaping="yes" >&amp;nbsp;</xsl:text>
+					</td>
+				</xsl:if>
+					<td class="tablebody1">
+						<input type="text" name="{$pv}" size="1" value="{$Page}" class="PageInput"/><input type="submit" value="GO" name="submit" class="PageInput"/>
+					</td>
+				</tr>
+			</form>
+		</table>
+	</xsl:if>
+</xsl:template>
+<xsl:template name="showonepage">
+		<xsl:param name="i"/>
+		<xsl:param name="endpage"/>
+		<xsl:param name="target"/>
+		<xsl:param name="PageStr"/>
+		<xsl:param name="pv"/>
+		<xsl:param name="Page"/>
+		<xsl:if test="$Page != $i">
+		<td class="tablebody1"><xsl:text disable-output-escaping="yes" >&amp;nbsp;</xsl:text><a href="{$PageStr}&amp;{$pv}={$i}" target="{$target}"><xsl:value-of select="$i"/></a><xsl:text disable-output-escaping="yes" >&amp;nbsp;</xsl:text></td>
+		</xsl:if>
+		<xsl:if test="$Page = $i">
+		<td class="tablebody2"><xsl:text disable-output-escaping="yes" >&amp;nbsp;</xsl:text><font class="normalTextSmall"><u><b><xsl:value-of select="$i"/></b></u></font><xsl:text disable-output-escaping="yes" >&amp;nbsp;</xsl:text></td>
+		</xsl:if>
+		<xsl:if test="$endpage &gt; $i">
+			<xsl:call-template name="showonepage">
+				<xsl:with-param name="i" select="$i+1"/>
+				<xsl:with-param name="endpage" select="$endpage"/>
+				<xsl:with-param name="target" select="$target"/>
+				<xsl:with-param name="PageStr" select="$PageStr"/>
+				<xsl:with-param name="pv" select="$pv"/>
+				<xsl:with-param name="Page" select="$Page"/>
+				</xsl:call-template>
+		</xsl:if>
+</xsl:template>
+</xsl:stylesheet>

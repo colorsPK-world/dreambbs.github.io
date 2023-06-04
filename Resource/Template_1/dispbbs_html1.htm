@@ -1,0 +1,91 @@
+<!--查看投票信息2007.3.25修改-->
+<style type="text/css">
+ol ul li { list-style:none;}
+</style>
+<style type="text/css">
+ol ul li { list-style:none;}
+</style>
+<table cellpadding="3" cellspacing="1" align="center" class="tableborder1" style="width:98%">
+<tr>
+<th height="24" colspan="2">{$title} - 投票结果</th>
+</tr>
+<tr>
+<td class="tablebody1" colspan="2">
+[<a href="{$tourl}">查看所有用户投票结果</a>][<a href="{$counttourl}">查看投票统计</a>]
+</td>
+</tr>
+{$voteinfo}
+</table>
+||
+<tr align="center">
+<td class="tablebody2"><b>用户</b>
+</td>
+<td class="tablebody2"><B>所选择项目</B>
+</td>
+</tr>
+||
+<tr>
+<td class="tablebody1" colspan="2">还没有人投票！
+</td>
+</tr>
+||
+<tr>
+<td class="tablebody1">
+<a href="dispuser.asp?id={$userid}" target=_blank>{$username}</a>
+</td>
+<td class="tablebody1">
+{$uservote}
+</td>
+</tr>
+||
+<tr>
+<td class="tablebody1" colspan="2">投票截止后才允许查看！
+</td>
+</tr>
+||
+<tr align="center">
+<td class="tablebody2"><b>用户</b>: <a href="dispuser.asp?id={$userid}" target=_blank>{$username}</a></td>
+<td class="tablebody2"><B>总得分</B>:<font class="redfont">{$votep}</font>
+</td>
+</tr>
+<tr>
+<td class="tablebody1" colspan="2">
+该用户投票情况如下:
+<ol>
+{$votechildinfo}
+</ol>
+</td>
+</tr>
+||
+<li>
+{$votetopic}
+{$childinfo}
+</li>
+||
+<ul>
+{$childitems}
+</ul>
+||
+<li>单选:{$childtitle}  -----得分:<font class="redfont">{$childep}</font></li>
+||
+<li>多选:{$childtitle}  -----得分:<font class="redfont">{$childep}</font></li>
+||
+<li>用户回答:<div class="info">{$childtitle1}</div></li>
+<li>答案:<div class="info">{$childtitle2}</div></li>
+||
+<tr>
+<td class="tablebody1" colspan="2">
+该投票情况如下:
+<ol>
+{$votechildinfo}
+</ol>
+</td>
+</tr>
+||
+<li>
+<div style="width:500px;clear:both;">
+<div style="float:right;" width="30%">选取人数： {$childnum} 票</div>
+<div style="float:left;" width="70%">{$childtopic}</div>
+<div style="clear:both;"></div>
+</div>
+</li>

@@ -1,0 +1,65 @@
+<!-- dispuser.asp||用户资料显示页面(论坛属性部分) -->
+<table cellspacing="1" cellpadding="0" align="center" class="tableborder1">
+<tr><th align="left" colspan="6">论坛属性</th></tr>
+<tr>
+<td class="tablebody1" width="15%" align="right">积分值：</td>
+<td class="tablebody1" width="35%" ><b>{$UserEP}</b></td>
+<td class="tablebody1" width="15%" align="right" >精华帖子：</td>
+<td class="tablebody1" width="35%"><b>{$UserBest}</b>篇</td>
+</tr>
+<tr> 
+<td class="tablebody1" align="right">魅力值：</td>
+<td class="tablebody1"><b>{$UserCP}</b></td>
+<td align="right" class="tablebody1">帖子总数：</td>
+<td class="tablebody1"><b>{$UserPost}</b> 篇</td>
+</tr>
+<tr> 
+<td class="tablebody1" align="right">论坛等级：</td>
+<td class="tablebody1"><b>{$UserClass}</b></td>
+<td align="right" class="tablebody1">被删主题：</td>
+<td class="tablebody1"><b><font color="{$color}">{$UserDel}</font></b> 篇
+</td>
+</tr>
+<tr> 
+<td class="tablebody1" align="right">威望值：</td>
+<td class="tablebody1"><b><font color="{$color}">{$UserPower}</font></b></td>
+<td align="right" class="tablebody1">被删除率：</td>
+<td class="tablebody1"><font color="{$color}"><b>{$UserDelPC}</b></font> 
+</td>
+</tr>
+<tr> 
+<td class="tablebody1" align="right">圈  子：</td>
+<td class="tablebody1">{$UserGroup}
+</td>
+<td class="tablebody1" align="right">登陆次数：</td>
+<td class="tablebody1"><b>{$UserLogins}</b> 
+</td>
+</tr>
+<tr> 
+<td class="tablebody1" align="right">注册日期：</td>
+<td class="tablebody1"><b>{$UserJoinDate}</b></td>
+<td class="tablebody1" align="right">上次登录：</td>
+<td class="tablebody1"><b>{$UserLastLogin}</b></td>
+</tr></table><br />
+<!-- dispuser.asp||用户资料显示页面(资产情况部分) -->
+<table cellspacing="1" cellpadding="0" align="center" class="tableborder1">
+<tr><th align="left" colspan="4">资产情况</th></tr>
+<tr> 
+<td class="tablebody1" width="15%" align="right">现金货币：</td>
+<td width="35%" class="tablebody1"><b>{$UserWealth}</b></td>
+<td width="50%" colspan="2" valign="top" rowspan="4" class="tablebody1">论坛职务：
+<hr size="1" width="100" align="left" />{$UserAdmin}<br>
+</td>
+</tr>
+<tr> 
+<td class="tablebody1" align="right">股票市值：</td>
+<td class="tablebody1"><b>{$UserStock}</b></td>
+</tr>
+<tr>
+<td class="tablebody1" align="right">银行存款：</td>
+<td class="tablebody1"><b>{$UserBank}</b></td>
+</tr>
+<tr>
+<td class="tablebody1" align="right">总 资 产：</td>
+<td class="tablebody1"><b>{$UserAssets}</b></td>
+</tr></table><br/>

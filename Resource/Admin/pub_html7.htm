@@ -1,0 +1,16 @@
+<!--顶部用户导航栏：客人菜单-->
+<div class="menu_popup" id="stylemenu">
+<div class="menuitems">
+{$syles}
+</div>
+</div>
+<div class="menudiv1"><a href="login.asp">登录</a> |</div>
+<div class="menudiv1"><a href="reg.asp">注册</a> |</div>
+<div class="menudiv1"><a href="query.asp?boardid={$boardid}">搜索</a> |</div>
+<div class="menudiv1"><a onmouseover="showmenu(event,'','stylemenu')" onmouseout="delayhidemenu()" class="ImgOnclick">风格</a> |</div>
+{$isboke}
+<div class="menudiv1"><a onmouseover="showmenu(event,'','Menu_BoardStats')" class="ImgOnclick">论坛状态</a> |</div>
+<div class="menudiv1"><a href="show.asp?boardid={$boardid}" onmouseover="showmenu(event,'','Menu_Show')" class="ImgOnclick">论坛展区</a> |</div>
+{$Plus_Tools} 
+{$plusmenu} 
+<div class="menudiv1"><a href="BoardPermission.asp?boardid={$boardid}&amp;action=Myinfo">我能做什么</a>&nbsp;</div>

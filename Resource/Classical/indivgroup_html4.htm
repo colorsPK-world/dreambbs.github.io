@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="gb2312"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" >
+<xsl:output method="xml" omit-xml-declaration = "yes" indent="yes" version="4.0"/>
+	<!--
+	Copyright (C) 2004,2005 AspSky.Net. All rights reserved.
+	Written by dvbbs.net Lao Mi
+	Web: http://www.aspsky.net/,http://www.dvbbs.net/
+	Email: eway@aspsky.net
+	-->
+<xsl:template match="/">
+<script language="JavaScript" src="Dv_plus/IndivGroup/js/IndivGroup_Main.js"></script>
+<script language="javascript" src="Dv_plus/IndivGroup/js/Dv_Main.js" type="text/javascript"></script>
+<script language="javascript" src="Dv_plus/IndivGroup/js/Dv_form.js" type="text/javascript"></script>
+<script type="text/javascript" src="Dv_plus/IndivGroup/Edit_Plus/FCKeditor/fckeditor.js"></script>
+<script type="text/javascript" src="dv_edit/main.js"></script>
+<link rel="STYLESHEET" type="text/css" href="images/post/edit.css" />
+<xsl:for-each select="/xml/postdata">
+	<FORM METHOD="POST" ACTION="{@action}" name="PostForm" onSubmit="return CheckPostForm(this);">
+	<input type="hidden" name="RootID" value="{@rootid}"/>
+	<input type="hidden" name="PostID" value="{@postid}"/>
+	<table cellpadding="2" cellspacing="1" class="tableborder1">
+		<tr><th colspan="2"><xsl:value-of select="@actionname" /></th></tr>
+	<tr class="tablebody1">
+		<td><b>用户名：</b></td>
+		<td><input type="text" name="PostUserName" value="{@postusername}"/></td>
+	</tr>
+	<tr class="tablebody1">
+		<td><b>标　题：</b></td>
+		<td><input type="text" name="Title" size="50" onkeyup="javascript:Dv_Form.CheckLength(this,250);" value="{@topic}"/></td>
+	</tr>
+	<tr class="tablebody1">
+		<td><b>文件上传：</b><input type="hidden" name="upfilerename" value=""/></td>
+		<td id="ad">
+			<iframe name="UPLOADFRAME" frameborder="0" width="80%" height="30" scrolling="no" src="IndivGroup_Upload.asp?groupid={@groupid}&amp;groupboardid={@boardid}"></iframe>
+		</td>
+	</tr>
+	<tr class="tablebody1">
+		<td><b>内　容：</b></td>
+		<td style="padding:0px;margin:0px;">
+		<span><textarea rows="4" name="PostContent" id="PostContent" style="display:none;width:100%;height:330px;margin:0;padding:0;border:none;"><xsl:value-of select="@content"/></textarea></span>
+<div><script language="javascript">
+	var dveditconfig={
+	textarea_id:'PostContent',
+	edit_height:'302px',
+	edit_mode:'design',
+	toolbar:['bold','italic','underline','fontsize','fontfamily','fontcolor','fontbgcolor','separator','link','image','media','separator','justifyleft','justifycenter','justifyright','separator','insertorderedlist','insertunorderedlist','outdent','indent']
+	}
+	var dvtextarea=null;
+	function dvloadarea(){
+		if ('function'==typeof DvEdit){
+			dvtextarea=new DvEdit(dveditconfig);
+		}else{setTimeout('dvloadarea()',0)}
+	}
+	dvloadarea();
+</script></div>
+		</td>
+	</tr>
+	<tr class="tablebody1">
+		<td><b>发帖小贴士：</b></td><td>① 标题尽可能简明扼要，内容尽可能说清楚事情，这样回复者才能明确并及时的回复</td>
+	</tr>
+	<tr class="tablebody1"><td></td><td><input type="submit" name="submit" value="提交信息"/></td></tr>
+	</table>
+	</FORM>
+</xsl:for-each>
+<SCRIPT language="JavaScript">
+/*window.onload = function()
+{
+
+	var oFCKeditor = new FCKeditor( 'PostContent','100%','350px','<xsl:value-of select="@editmode"/>' ) ;
+	oFCKeditor.BasePath	= "Dv_plus/IndivGroup/Edit_Plus/FCKeditor/" ;
+	oFCKeditor.Config['SkinPath'] = "skins/office2003/"
+	oFCKeditor.ReplaceTextarea() ;
+}*/
+//Dv_Form.Set_Select("Best","{@isbest}")
+</SCRIPT>
+<br/>
+</xsl:template>
+</xsl:stylesheet>

@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="zh-CN" lang="zh-CN" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>登录</title>
+<meta name="keywords" content="aspsky,dvbbs,动网,动网论坛,asp,论坛,插件" />
+<!--动网论坛是使用量最多、覆盖面最广的免费中文论坛，也是国内知名的技术讨论站点，希望我们辛苦的努力可以为您带来很多方便-->
+<meta name="MSSmartTagsPreventParsing" content="TRUE" />
+<meta http-equiv="MSThemeCompatible" content="Yes" />
+<script language="JavaScript" type="text/javascript">
+	var dvajax_request_type = "GET";
+</script>
+<script language="JavaScript" src="inc/ajax_log.js" type="text/javascript"></script>
+<script language="JavaScript" src="inc/dv_ajax.js" type="text/javascript"></script>
+<script language="javascript" src="inc/dv_wnd.js" type="text/javascript"></script>
+<script type="text/javascript" language="javascript"  src="inc/main82.js"></script>
+<link rel="SHORTCUT ICON" href="favicon.ico" />
+<link rel="stylesheet" type="text/css" id="css" href="skins/default.css" />
+<link id="css" href="skins/dv_wnd.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+<div class="win">
+<form method="post" action="login.asp?action=chk" onsubmit="checkLogin_win(this,event);">
+<ul class="tableborder heightd page_left3">
+  <h3 class="titlebig"> 用户登录</h3>
+  <li>
+	<p class="font14">用户名</p>
+	<input type="text" name="username" id="username"  tabindex="1" />
+  </li>
+  <li>
+	<p class="font14">密码</p>
+	<input type="password" name="password" id="pwd1"  tabindex="2" />
+  </li>{$getcode}<br style="clear:both" /> 
+  <li>
+	<p class="font14">Cookie 选项</p>
+	<select name="CookieDate" tabindex="10">
+		<option value="0">不保存</option>
+		<option value="1">保存一天</option>
+		<option value="2" selected="selected">保存一月</option>
+		<option value="3">保存一年</option>
+	</select>
+  </li>
+  <li>
+	<p class="font14">登录状态</p>
+	<input type="radio" class="checkbox" name="userhidden" value="2" tabindex="11" checked="checked">正常登录
+	<input type="radio" class="checkbox" name="userhidden" value="1" tabindex="12">隐身登录
+  </li>
+  <li>
+	<p></p>
+	<a href="lostpass.asp" style="font-size:14px;">忘记了您的密码？</a>
+  </li>
+  <li style="display:none" id="trh">
+	<p class="font14">登录提示</p>
+	<span id="tdh_win"></span>
+  </li>
+  <li>
+	<p></p><input type="hidden" name="comeurl" value="{$comeurl}"/>
+	<input type="hidden" name="winaction" id="winaction" value="winaction"/>
+	<input type="hidden" name="ajaxpostwin" id="ajaxpostwin" value="1"/>
+	<input class="input0" name="submit" type="submit" tabindex="13" value="立即登录" />	
+  </li>
+</ul>
+  </form>
+</div>
+</body>
+</html>

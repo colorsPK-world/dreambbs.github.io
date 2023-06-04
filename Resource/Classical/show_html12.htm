@@ -1,0 +1,60 @@
+<!--myfile.asp##添加文件页-->
+<div class="mainbox" style="margin-top:0">
+<div class="Contentbox">
+<div id="con_two_8" >
+	<table cellspacing="0" cellpadding="0">
+		<tr>
+			<td style="width:160px;" valign="top">
+				<div class="subOut"><a href="myfile.asp">我的文件</a></div>
+				<div class="subHover"><a href="myfile.asp?action=fadd">添加文件</a></div>
+				<div class="subOut"><a href="show.asp?username={$username}">个人展区</a></div>
+			</td>
+			<td style="background:#F1F7FB;padding:8px" valign="top">
+				<table class="tableborder1" cellspacing="1" cellpadding="0" align="center">
+				  <form action="?action=fsnew" method="post">
+					  <tr>
+						<th align="left" width="100%" colSpan="2" height="26">新增我个人文件</th>
+					  </tr>
+					  <tr>
+						<td class="tablebody2" align="right" width="15%" height="26">新增的文件：</td>
+						<td class="tablebody1" align="left" width="85%" height="26"><input size="80" value="http://" name="fileurl"> 
+						  （请填写完成的文件链接地址）</td>
+					  </tr>
+					  <tr>
+						<td class="tablebody2" align="right" width="15%" height="26">文件的说明：</td>
+						<td class="tablebody1" align="left" width="85%" height="26"><textarea name="F_Readme" rows="6" wrap="virtual" cols="80" value="value"></textarea> 
+						  （不得超过１２５个汉字或２５０个字符）</td>
+					  </tr>
+					  <tr>
+						<td class="tablebody2" align="right">文件的类型：</td>
+						<td class="tablebody1" valign="middle"><select size="1" name="filetype">
+							<option value="" selected="selected">文件类型</option>
+				{$filetypelist}
+						  </select></td>
+					  </tr>
+					  <tr>
+						<td class="tablebody2" valign="middle" align="right">文件允许删除：</td>
+						<td class="tablebody1" valign="middle"><input name="Fflag" type="radio" value="1" checked="checked" />是&nbsp; 
+						  <input name="Fflag" type="radio" value="2" />否</td>
+					  </tr>
+					  <tr>
+						<td class="tablebody1" width="100%" colspan="2" height="26">说明：
+						  <ul>
+							<li>若允许文件可删除，当清理时会自动清除；</li>
+							<li>文件说明不得超过１２５个汉字或２５０个字符；</li>
+							<li>请用ＨＴＴＰ：／／或ＦＴＰ：／／或ＨＴＴＰＳ：／／开头的完整链接地址．</li>
+						  </ul>
+						</td>
+					  </tr>
+					  <tr>
+						<th width="100%" colspan="2" height="26"><input name="Submit" type="submit" value="保存" />&nbsp;<input name="" type="reset" value="清除" /></th>
+					  </tr>
+					  </form>
+				  </table>
+		 </td>
+		</tr>
+		</table>
+		</div>
+		</div>
+		</div>
+		

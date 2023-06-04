@@ -1,0 +1,128 @@
+#mainlist{
+	width:99%;
+	text-align:center;
+	margin:0px;
+
+}
+#mainlist ul {
+	text-align: center;
+	padding-left: 0;
+	margin:auto;
+	width:100%;
+}
+#mainlist li {
+	list-style-type: none;
+	padding: 0.25em 1em;
+	border-left: 0px solid;
+	float:left;margin-left:20px!important;margin-left:0px;text-align:left;display:block;
+}
+#mainlist ul li.Set1 { 
+	width: 200px;
+	text-align: right;
+} 
+#mainlist ul li.Set2 {
+	width: 400px;
+	text-align: left;
+} 
+#mainlist ul li.Set3 { 
+	width: 80px;
+	text-align: left;
+}
+#mainlist ul li.Set4 { 
+	width: 200px;
+	text-align: left;
+} 
+#mainlist ul li.Set33 { 
+	width: 80px;
+	text-align: left;
+}
+#mainlist ul li.Set44 { 
+	width: 200px;
+	text-align: left;
+} 
+#mainlist ul li.Set55 { 
+	width: 200px;
+	text-align: left;
+} 
+#mainlist ul li.Set5 { 
+	width: 300px;
+	text-align: left;
+} 
+#mainlist ul li.Set6 { 
+	width: 50px;
+	text-align: left;
+} 
+#mainlist ul li.Set7 { 
+	width: 100px;
+	text-align: left;
+} 
+#mainlist ul li.Set8 { 
+	width: 120px;
+	text-align: left;
+} 
+#mainlist div.set0{
+	width:96%;
+}
+
+#mainlist div.Set1 { 
+	float:left;
+	width: 24%;
+	text-align: right;
+	height:26px;
+}
+#mainlist div.Set2 {
+	float:left;
+	padding-left:20px;
+	width: 70%;
+	text-align: left;
+	height:26px;
+} 
+/*---------------------------------- Post Form DIV ---------------------------------*/
+div.post1{
+	text-align: left;
+	width: 100%;
+}
+/*---------------------------------- Table ---------------------------------*/
+div.list_top{
+	color:#004A7B;
+	text-align:left;
+	padding:4px;
+	background-color:#DFDFDF;
+	border-bottom : 1px solid #B3B3B3;
+	width:98%;
+	float:left;
+}
+
+div.list_body{
+	width:98%;
+	color:#004A7B;
+	text-align:left;
+	padding:4px;
+	height:26px;
+	float:left;
+}
+.list1{
+	float:left;
+	width:32px;
+	text-align:center;
+}
+.list2{
+	float:left;
+	text-align:center;
+	width:220px;
+}
+.list3{
+	float:left;
+	text-align:center;
+	width:80px;
+}
+.list4{
+	float:left;
+	text-align:center;
+	width:120px;
+}
+.list5{
+	float:left;
+	text-align:center;
+	width:100px;
+}

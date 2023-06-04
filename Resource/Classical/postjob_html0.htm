@@ -1,0 +1,24 @@
+<!--report.asp##发送报告给版主页面-->
+<table class="tableborder1" cellspacing="1" cellpadding="3" align="center">
+  <form action="?t=6&action=send&boardid={$boardid}&id={$announceid}" method="post">
+    <tbody>
+      <tr>
+        <th align="center" colspan="2" height="25">发送报告给版主</th>
+      </tr>
+      <tr>
+        <td class="tablebody1"><b>报告发送给哪个版主：</b></td>
+        <td class="tablebody1"><select size="1" name="boardmaster">
+            {$boardmasterlist}
+          </select></td>
+      </tr>
+      <tr>
+        <td class="tablebody1"><b>消息内容：</b><br>
+          垃圾贴、广告贴、非法贴等。。。非必要情况下不要使用这项功能！</td>
+        <td class="tablebody1"><textarea name="content" rows="6" cols="55">版主，您好，由于如下原因，我向您报告这有问题的帖子：</textarea></td>
+      </tr>
+      <tr>
+        <td class="tablebody2" align="middle" colSpan="2"><input name="Submit" type="submit" value="发 送" />
+      </tr>
+    </tbody>
+  </table>
+  </form>

@@ -1,0 +1,326 @@
+<script language="javascript" src="images/emot/config.js"></script>
+<script language="javascript" src="inc/dv_dispbbs.js"></script>
+<script language="javascript" src="inc/star.js"></script>
+<div id="MagicFace" style="position:absolute;z-index : 99;visibility:hidden; "></div> 
+<table style="margin-bottom:-5px;" cellspacing="0" cellpadding="0">
+	<tr>
+	<td valign="bottom">
+		<ul class="menu2" onmouseover="this.className='menu1'" onmouseout="this.className='menu2'" onclick="location.href='post.asp?action=new&amp;boardid={$pub.boardid}&amp;stype=0'">&nbsp;  
+			<li class="list">
+			<a href="post.asp?action=new&amp;boardid={$pub.boardid}&amp;stype=0"><span><img src="images/post/new_post.gif" border="0" alt="" /></span>新的主题</a>
+			<a href="post.asp?action=vote&amp;boardid={$pub.boardid}&amp;stype=0"><span><img src="images/post/vote_post.gif" border="0" alt="" /></span>投票帖</a>
+			{$tenpay.begin}
+			<a href="post.asp?action=new&amp;boardid={$pub.boardid}&amp;stype=1"><span><img src="images/post/shop_post.gif" border="0" alt="" /></span>交易帖</a>
+			{$tenpay.end}
+			<a href="infolist.asp?t=smallpaper&amp;boardid={$pub.boardid}"><span><img src="images/post/survey_post.gif" border="0" alt="" /></span>小字报</a>
+			</li>
+			<div style="clear:both"></div>
+		</ul>
+		<div><a href="post.asp?action=re&amp;BoardID={$pub.boardid}&amp;replyID={$bbslist.announceid}&amp;ID={$page.topicid}&amp;star={$pub.currentpage}" title="回复该主题" class="post_reply"></a></div>
+	</td>
+	<td style="text-align:right;" valign="bottom">
+		<div>		
+			<div style="float:right;width:170px;">{$urlrewrite.open}
+				<a class="page" style="float:right;margin-right:0;" href="dispbbs.asp?boardid={$pub.boardid}&id={$page.topicid}&page={$page.boardpage}&move=next">下一主题 &gt;&gt;</a>
+				<a class="page" style="float:right;" href="dispbbs.asp?boardid={$pub.boardid}&id={$page.topicid}&page={$page.boardpage}&move=pre">&lt;&lt; 上一主题</a>{$urlrewrite.close}	
+			</div>
+			<div id="showpage_top" style="float:right;"></div>	
+		</div>
+	</td>
+	</tr>
+</table>
+<br style="clear:both"/>
+{$showvote.begin}
+<!--投票信息开始-->
+<script language="javascript">
+<!--
+var vote_i=0;
+function ShowVoteList(num,total){
+	++vote_i;
+	var s='';
+	s+='	<img src="{$pub.forum_picurl}bar/bar'+((vote_i % 10) + 1)+'.gif" width="'+Math.floor((num / total ) * 80)+'%" height="8" alt=""/>';
+	s+=' <b>'+num+'</b> (';
+	if(total>0){s+=(Math.floor((num / total )*1000)/10)+'%)';}
+	document.writeln(s);
+}	
+//-->
+</script>
+<table class="bbslist border" cellspacing="1" cellpadding="3">
+	<tr>
+	  <th>{$page.topic}</th>
+	</tr>
+	<tr>
+	  <td>
+		<form action="topicother.asp?t=4&amp;boardid={$pub.boardid}&amp;voteid={$showvote.voteid}&amp;id={$page.topicid}" method="post">
+		<table class="bbslist border" cellspacing="1" cellpadding="3" style="width:100%;table-layout: fixed;background:#fff url(images/bodybg.gif) repeat-x;">
+			<tr>
+				<td width="20%">
+				<b>选择项</b>
+				</td><td></td>
+			</tr>
+			{$showvote.list}
+			<tr>
+				<td colspan="2">
+				{$showvote.input}  [ 参与人数 <b>{$showvote.voters}</b> 人 截止时间：{$showvote.timeout} | <a href="javascript:openScript('viewinfo.asp?t=1&amp;boardid={$pub.boardid}&amp;id={$showvote.voteid}',650,600)">查看参与用户</a>]
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2">
+				您需要达到所设定的数值才能参与：文章 <b>{$showvote.uarticle}</b> 积分 <b>{$showvote.uep}</b> 魅力 <b>{$showvote.ucp}</b>  金钱 <b>{$showvote.uwealth}</b> 威望 <b>{$showvote.upower}</b>
+				</td>
+			</tr>
+		</table>
+		</form>
+	  </td>
+	</tr>
+</table>
+<!--投票信息结束-->
+{$showvote.end}
+<table class="topic border" cellspacing="0" cellpadding="0" style="border-bottom:none">
+	<tr>
+	  <th colspan="5"><span>{$bbslist.tyisbest}&nbsp;&nbsp;共有<b style="color:#ff6600">{$page.hits}</b>人关注过本帖{$page.topicadminlist}{$page.modelink}<a href="TopicOther.asp?t=5&amp;BoardID={$pub.boardid}&amp;id={$page.topicid}" target="_blank">打印</a>{$bbslist.url}<a style="cursor:hand;" onclick="copyToClipboard('url')">复制链接</a>{$logined.begin}<a href="favlist.asp?action=add&amp;BoardID={$pub.boardid}&amp;id={$page.topicid}" title="将本帖加入论坛收藏夹">收藏</a><a href="admin_postings.asp?action=修复&amp;BoardID={$pub.boardid}&amp;ID={$page.topicid}" title="修复帖子的回复数、更新时间。">修复</a><a href="TopicOther.asp?t=7&amp;BoardID={$pub.boardid}&amp;id={$page.topicid}" title="推荐本帖给好友">推荐</a>
+{$logined.end}</span><h1>主题：{$page.topic}</h1></th>
+</tr>
+</table>
+{$bbslist.begin}
+<a name="{$bbslist.announceid}"></a>
+<table class="bbslist border" cellspacing="0" cellpadding="0" style="word-break:break-all;table-layout:fixed;">
+	<tr>
+	<td class="infoleft leftcolor" style="border-bottom:1px solid #E4E7EC; background:#FAFDFF;" valign="middle">
+		<span class="username">{$user.usersex}<div>{$user.richname}</div></span></td>
+	<td class="usermenu">
+	<em><a href="javascript:void(0);" onClick="fontSize('m','textstyle_{$bbslist.floor}')" title="减小帖子内容字体">小</a><a href="javascript:void(0);" onClick="fontSize('b','textstyle_{$bbslist.floor}')" title="增大帖子内容字体">大</a>&nbsp;&nbsp;{$bbslist.floor}楼</em>{$userinfo.begin}
+	{$boke.begin} <a href="boke.asp?UserID={$user.userid}" title="访问{$user.username}的个人博客" target="_blank">博客</a>{$boke.end}{$user.link_qq} | 
+	<a href="dispuser.asp?id={$user.userid}" target="_blank" title="查看{$user.username}的个人资料">信息</a>
+	 | <a href="query.asp?stype=1&amp;nSearch=3&amp;keyword={$user.username}&amp;BoardID={$pub.boardid}&amp;SearchDate=ALL" target="_blank" title="搜索{$user.username}在{$pub.boardtype}的所有帖子">搜索</a> 
+	 | <a href="mailto:{$user.email}" title="点击这里发送电子邮件给{$user.username}">邮箱</a>
+	 | <a href="{$user.homepage}" target="_blank" title="访问{$user.username}的主页">主页</a>
+	 | <a href="http://service.51uc.com/user_info/show_user_info_base.shtml?UID={$user.uc}" title="{$user.username}的UC情况" target="_blank">UC</a>
+{$userinfo.end}</td>
+</tr>
+<tr>
+  <td rowspan="3" valign="top" class="infoleft leftcolor"><br />
+	<span>{$user.userface}</span><br />
+	{$userinfo.begin}
+	<span><img src="images/freund.gif" alt="" /> <a href="friendlist.asp?action=addF&amp;myFriend={$user.username}" target="_blank" title="把{$user.username}加入好友">加好友</a> <img src="images/mail.gif" /> <a href="javascript:;" onclick="DvWnd.open('给{$user.username}发送短信','messanger.asp?action=new&amp;touser={$user.username}',800,600,1,{bgc:'black',opa:0.5});" title="给{$user.username}发送一个短消息">发短信</a></span>
+	<span>{$user.titlepic}</span>
+	<span>{$user.usertitle}</span>
+	<span>{$user.medal}</span>
+	<br style="height:10px" />
+	<span>等级：{$user.userclass}</span>
+	<span>帖子：<b class="green">{$user.userpost}</b></span>
+	<span>积分：{$user.userep}</span>
+	<span>威望：{$user.userpower}</span>
+	<span>精华：{$user.userisbest}</span>
+	<span>注册：<em>{$user.joindate}</em></span>
+	{$userinfo.end}
+   </td>
+<td class="inforight" valign="top" style="line-height:120%"><b style="font-size:12px;line-height:15px;">{$bbslist.title}</b>&nbsp;&nbsp;<span class="font10" style="line-height:20px; "><img src="{$pub.forum_picurl}topicface/{$bbslist.topicface}" alt="发帖心情" /> Post By：{$bbslist.dateandtime} {$bbslist.ip}{$bbslist.authorid}   </a></span>
+<br /><br />
+{$bbslimit.begin}
+{$ad.first_body_top}
+<table cellspacing="0" cellpadding="0"><tr><td>{$bbslist.magicface}
+<div id="textstyle_{$bbslist.floor}" style="word-wrap:break-word;word-break:break-all;overflow:hidden;{$bbslist.bodystyle}">
+	{$ad.first_body_left}{$ad.first_body_right}
+	{$bbslist.body}
+	{$qcomic_plus.begin}
+		<script type="text/javascript" language="JavaScript" src="inc/qcomic.js"></script>
+		<div id="qcomic_view_{$qcomic_plus.qcomic_sid_phid}_before" style="clear:both; overflow:hidden;"></div>
+		<script type="text/javascript" language="JavaScript">
+			flashTagIns.setNew("http://p.qihoo.com/flash/pic_config.swf", '{$qcomic_plus.qcomic_owidth}', '{$qcomic_plus.qcomic_oheight}');
+			flashTagIns.setVersion("7,0,19,0");
+			flashTagIns.setId('qcomic_flash_{$qcomic_plus.qcomic_sid_phid}');
+			flashTagIns.allowScriptAccess = "always";
+			flashTagIns.allowFullScreen = "true";
+			flashTagIns.swLiveConnect = "true";
+			flashTagIns.flashVars = 'idx={$qcomic_plus.qcomic_sid_phid}&sid={$qcomic_plus.qcomic_sid}&amp;code={$qcomic_plus.qcomic_code}&amp;auto={$qcomic_plus.qcomic_auto}&amp;ver=dv_2';
+			flashTagIns.write(document);
+		</script>
+		<div id="qcomic_view_{$qcomic_plus.qcomic_sid_phid}_after" style="clear:both; overflow:hidden;"></div>
+	{$qcomic_plus.end}
+</div>
+</td></tr></table>
+{$bbslimit.end}<br /></td>
+</tr>
+<tr>
+  <td class="signed">
+  {$ad.first_body_bottom}
+{$user.usersign}
+  {$bbslist.bestinfo}
+{$bbslist.appraise}
+{$bbslist.usetools}
+{$bbslist.moneytype}
+</td>
+</tr>
+<tr>
+  <td class="usermenu2"><span class="imp">{$ad.bbslist_bottom}</span>
+&nbsp;{$canreply.begin} <span style="padding:5px;">{$bbslist.adminlist}<span> | <a href="#editform" onclick="reply({$bbslist.floor},'{$user.username}','{$bbslist.dateandtime}',dvtextarea);">引用</a> | <a href="post.asp?action=re&amp;BoardID={$pub.boardid}&amp;replyID={$bbslist.announceid}&amp;ID={$page.topicid}&amp;star={$pub.currentpage}" title="回复这个帖子">回复</a> {$canreply.end}{$canedit.begin}| <a href="post.asp?action=edit&amp;BoardID={$pub.boardid}&amp;replyID={$bbslist.announceid}&amp;ID={$page.topicid}&amp;star={$page.currentpage}" title="编辑这个帖子">编辑</a> {$canedit.end}{$logined.begin}| {$logined.end}<a href="#top"><img src="skins/Default/p_up.gif" alt="回到顶部" style="padding-bottom:10px;" /></a>
+</td>
+</tr>
+</table>
+{$bbslist.end}
+<div id="ajaxInsert"></div>
+<table cellspacing="0" cellpadding="0">
+	<tr>
+	<td valign="top" height="25">
+		<select name="BoardJumpList" id="BoardJumpList" onchange="if(this.options[this.selectedIndex].value!='')if (ISAPI_ReWrite==1)location='index_'+this.options[this.selectedIndex].value+'.html'; else location='index.asp?boardid='+this.options[this.selectedIndex].value;" ></select>
+		<script type="text/javascript" language="javascript">BoardJumpListSelect('{$pub.boardid}',"BoardJumpList","论坛跳转到....","",0);</script>
+	</td>
+	<td style="text-align:right;" valign="top">
+		<div>		
+			<div style="float:right;width:170px;">{$urlrewrite.open}
+				<a class="page" style="float:right;margin-right:0;" href="?boardid={$pub.boardid}&id={$page.topicid}&move=next">下一主题 &gt;&gt;</a>
+				<a class="page" style="float:right;" href="?boardid={$pub.boardid}&id={$page.topicid}&move=pre">&lt;&lt; 上一主题</a>{$urlrewrite.close}			
+			</div>
+			<div id="showpage" style="float:right;">{$urlrewrite.open}{$bbslist.showpage}{$urlrewrite.close}</div>	
+		</div>
+	</td>
+	</tr>
+</table>
+{$page.treemode}
+{$canreply.begin}
+<div id="ajaxMsg_1" style="display:none;" class="ajaxMsg"></div>
+<script language="javascript" src="dv_edit/main.js"></script>
+<script language="javascript" src="inc/dv_savepost.js"></script>
+<script language="javascript" src="inc/ajaxpost.js"></script>
+<script language="javascript">
+<!--
+var frmAD=null;
+function CheckIsUpload(frm,e){
+	frmAD=gid('ad')?((gid('ad')).contentWindow||window.frames['ad']):null;
+	if (frmAD&&frmAD.DvFileInput&&frmAD.DvFileInput.realcount>0){
+		gid('submit').disabled=true;
+		try{if(e.preventDefault){e.preventDefault();}else{e.returnValue=false;}}catch(er){}
+		frmAD.DvFileInput.send();
+		WaitForSubmit(frm);
+	}else{
+		FastReplySubmit(frm,e);
+	}
+}
+function WaitForSubmit(frm){
+	if (0==frmAD.DvFileInput.realcount){
+		gid('submit').disabled=false;
+		setTimeout(function(){gid('submit').click();},0);
+	}else{
+		setTimeout(function(){
+			WaitForSubmit(frm);
+		},1000);
+	}
+}
+function FastReplySubmit(frm,e){
+	gid('body').value=dvtextarea.save();
+	gid('submit').disabled=true;
+	var FastRE=new DvSavePost(frm,e,'fastre');
+	FastRE.chk_topic(gid('topic'));
+	FastRE.chk_content(gid('body'));
+	if(!FastRE.send()){
+		gid('submit').disabled=false;
+	}
+}
+function SwitchDiv(disp,id){
+	gid(id).style.display=disp?'':'none';
+}
+//-->
+</script>
+<a name="editform"></a>
+<form id="Dvform" name="Dvform" action="savepost.asp?action=sre&amp;method=fastreply&amp;BoardID={$pub.boardid}" onsubmit="CheckIsUpload(this,event);" method="post">
+<input type="hidden" id="followup" name="followup" value="{$page.announceid}" />
+<input type="hidden" id="RootID" name="RootID" value="{$page.topicid}" />
+<input type="hidden" id="star" name="star" value="{$page.currentpage}" />
+<input type="hidden" id="TotalUseTable" name="TotalUseTable" value="{$page.bbstable}" />
+<input type="hidden" id="UserName" name="UserName" value="{$pub.username}" />
+<input type="hidden" value="" name="upfilerename" />
+<input type="hidden" name="poststyle" value="ajax" />
+<br style="clear:both" />
+<table class="topic border" cellspacing="0" cellpadding="0" style="border-bottom:0px;">
+	<tr><th><span style="float:right">{$urlrewrite.open}<a href="index.asp?boardid={$pub.boardid}"><b>返回版面帖子列表</b></a>{$urlrewrite.close}</span><h1>{$page.topic}</h1></th></tr>
+</table>
+<table class="tablebox border" cellspacing="0" cellpadding="0">
+<tr id="title_input" style="display:none">
+	<td class="infoleft leftcolor" style="border-bottom:1px solid #E4E7EC; background:#FAFDFF;" valign="middle" align="center">
+    回复标题：
+	</td>
+	<td style="border-bottom:1px solid #E4E7EC;padding:5px;">
+    <input name="topic" id="topic" size="60"  value=""  /> <span id="topic_chk"></span>
+	</td>
+</tr>
+<tr id="upload_input" style="display:none">
+	<td class="infoleft leftcolor" style="border-bottom:1px solid #E4E7EC; background:#FAFDFF;" valign="middle" align="center">
+    上传附件：
+	</td>
+	<td style="border-bottom:1px solid #E4E7EC;padding:5px;background:#FAFDFF;">
+    <iframe id="ad" name="ad" align="left" frameborder="0" width="100%" height="20" scrolling="no" src="about:blank"></iframe>
+	</td>
+</tr>
+<tr>
+	<td class="infoleft leftcolor" valign="top" align="center" style="padding:10px;background:#FAFDFF;text-align:center">
+		{$page.postfacelist}
+		<br/>
+		{$pub.checkcode}
+	</td>
+	<td style="padding:0px;margin:0px;">
+	<span><textarea id="body" name="body" style="display:none;width:100%;height:240px;margin:0;padding:0;border:none;"></textarea></span>
+<div style="margin:0;"><SCRIPT LANGUAGE="JavaScript">
+		var dvtextarea=null;
+		var Dvbbs_Mode=parseInt('{$pub.editmode}');
+		var edit_mode_,toolbar_;
+		if(3==Dvbbs_Mode){Dvbbs_Mode=1;}
+		switch(Dvbbs_Mode){
+			case 1:edit_mode_='design';toolbar_=[{$tenpay.begin}'tenpay',{$tenpay.end}'<label style="float:left;padding-top:3px;"><input style="border:none" type="checkbox" onclick="SwitchDiv(this.checked,\'title_input\');try{gid(\'topic\').focus();}catch(e){}" />标题</label> <label style="float:left;padding-top:3px;"><input style="border:none" type="checkbox" onclick="gid(\'ad\').src=\'savefile.asp?boardid={$pub.boardid}\';SwitchDiv(this.checked,\'upload_input\')" /*checked="checked"*/ />上传</label>'];break;
+			case 2:edit_mode_='design';toolbar_=[{$tenpay.begin}'tenpay',{$tenpay.end}'<label style="float:left;padding-top:3px;"><input style="border:none" type="checkbox" onclick="SwitchDiv(this.checked,\'title_input\');try{gid(\'topic\').focus();}catch(e){}" />标题</label> <label style="float:left;padding-top:3px;"><input style="border:none" type="checkbox" onclick="gid(\'ad\').src=\'savefile.asp?boardid={$pub.boardid}\';SwitchDiv(this.checked,\'upload_input\')" /*checked="checked"*/ />上传</label>'];break;
+			default:edit_mode_='text';
+		}
+		var dveditconfig={
+			textarea_id:'body',
+			edit_height:'212px',
+			edit_mode:edit_mode_,
+			toolbar:toolbar_,
+			use_ubb:2==Dvbbs_Mode,
+			is_show_status:Dvbbs_Mode>0
+		};
+		function dvloadarea(){
+			if ('function'==typeof DvEdit){
+				dvtextarea=new DvEdit(dveditconfig);
+			}else{setTimeout('dvloadarea()',0)}
+		}
+		dvloadarea();
+		</SCRIPT>
+		</div>
+	</td>
+</tr>
+<tr>
+	<td class="infoleft leftcolor" valign="top" align="center">
+	</td>
+	<td>
+    <input type="submit" value="OK!发表回复" id="submit" name="submit" class="input0" style="margin:3px;margin-left:0px;" /> <b>签名</b>：<input type="radio" id="signflag_1" name="signflag" value="0" class="radio" />
+<label for="signflag_1">不显示</label>
+<input type="radio" id="signflag_2" name="signflag" value="1" class="radio" checked="checked" />
+<label for="signflag_2">显示</label> <span id="body_chk"></span> 
+	</td>
+</tr>
+</table>
+</form>
+{$canreply.end}
+<script language="javascript">
+var copytoclip=1;
+var url=gid("url");
+url.value=window.location.href;
+function copyToClipboard(theField,isalert) {
+	var tempval=gid(theField);	
+	if (navigator.appVersion.match(/\bMSIE\b/)){
+		tempval.select();
+		if (copytoclip==1){
+			therange=tempval.createTextRange();
+			therange.execCommand("Copy");
+			if(isalert!=false)alert("复制成功。现在您可以粘贴（Ctrl+v）到Blog 或 BBS中了。");
+		}
+		return;
+	}else{
+		alert("您使用的浏览器不支持此复制功能，请使用Ctrl+C或鼠标右键。");
+		tempval.select();
+	}
+}
+$page_up=document.getElementById("showpage_top");
+$page_bottom=document.getElementById("showpage");
+if ($page_up && $page_bottom) $page_up.innerHTML=$page_bottom.innerHTML;
+</script>

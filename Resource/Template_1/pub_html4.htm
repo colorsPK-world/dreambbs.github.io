@@ -1,0 +1,24 @@
+<div class="header">
+<table width="100%">
+<tr>
+	<td width="200" style="padding-top:20px"><a href="{$link}"><img style="border:0px" src="{$logo}" alt="" /></a></td>	
+	<td style="text-align:right;padding:0px;" valign="bottom">{$top_ads}</td>
+</tr>
+</table>
+<div class="menu">
+	<span>
+	<a href="dv_rss.asp?s=xml&boardid={$boardid}"><img src="images/rss.gif" alt="" style="margin-right:5px;" /></a>
+	<script type="text/javascript">
+		try{
+			if(self==top){
+				document.write('<a href="index.asp?action=frameon" target="_top" title="ÏÔÊ¾×ó²à°æÃæµ¼º½">×óÀ¸</a>');
+			}
+			else{
+				document.write('<a href="index.asp" target="_top" title="¹Ø±Õ×ó²à°æÃæµ¼º½">¹Ø±Õ×óÀ¸</a>');
+			}
+		}catch(e){alert(e);}
+	</script>	
+	</span>
+	{$menu}
+</div>
+</div>

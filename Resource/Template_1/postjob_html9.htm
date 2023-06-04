@@ -1,0 +1,38 @@
+<!--announcements.asp##发布或编辑公告页面-->
+<form action="{$action}" method="post">
+  <table class="tableborder1" cellspacing="1" cellpadding="6" align="center">
+      <tr>
+        <th align="center" colspan="2">{$dowhat}</th>
+      </tr>
+      <tr valign="middle">
+        <td class="tablebody1" align="left"><b>用户名</b></td>
+        <td class="tablebody1" align="left"><input name="username" type="text" disabled value="{$username}" size="20" /> 
+          <input name="username" type="hidden" value="{$username}" /></td>
+      </tr>
+       <tr valign="middle">
+        <td class="tablebody1" align="left"><b>版　面</b></td>
+        <td class="tablebody1" align="left"><select id="boardid" name="boardid"></select>
+{$readme}</td>
+      </tr>
+       <tr valign="middle">
+        <td class="tablebody1" align="left"><b>背景乐</b></td>
+        <td class="tablebody1" align="left"><input name="bgs" type="text" value="{$bgs}" size="60" />&nbsp;支持MID或WAV文件，此项非必填。</td>
+      </tr>
+        <tr valign="middle">
+        <td class="tablebody1" align="left"><b>标　题</b></td>
+        <td class="tablebody1" align="left"><input name="title" type="text" value="{$title}" size="60" /></td>
+      </tr>
+      <tr>
+        <td class="tablebody1" valign="top" width="30%" align="left"><b>内　容</b></td>
+        <td class="tablebody1" valign="middle" align="left"><textarea class="smallarea" name="Content" rows="8" wrap="virtual" cols="60">{$content}</textarea></td>
+      </tr>
+      <tr>
+        <td class="tablebody2" align="center" valign="middle" colspan="2"><input name="submit" type="submit" value="发 布" /></td>
+      </tr>
+  </table>
+</form>
+<script language="JavaScript" type="text/javascript">
+<!--
+BoardJumpListSelect('{$boardid}',"boardid","论坛首页","0",0);
+//-->
+</script>

@@ -1,0 +1,15 @@
+<table cellpadding="0" cellspacing="1" class="tableborder1" align="center">
+<tr><th colspan="2" height="20">论坛日志查看</th></tr>
+<form action="infolist.asp?t=even" method="post">
+<tr><td class="tablebody1" width="*">&nbsp;搜 索 范 围：<Select Name="Boardid"></Select>
+&nbsp;&nbsp;关 键 字：<Input Type="text" Name="keyword" value="{$keyword}" Size="28">
+&nbsp;说明:如输入关键字,则模糊检索操作人,操作对象,事件内容等字段.
+</td></tr>
+<tr><td class="tablebody2" width="100%" align="center"><input name="" type="submit" value="搜 索" />
+</td>
+</tr></form>
+</table>
+<script language="JavaScript" type="text/javascript">
+BoardJumpListSelect('{$boardid}',"Boardid","所有论坛","",0)
+</script>
+<br />

@@ -1,0 +1,55 @@
+<!--post.asp##Dvbbs多功能编辑器-->
+<script language="javascript" src="images/emot/config.js"></script>
+<script language="javascript" src="dv_edit/main.js"></script>
+<script language="javascript" src="inc/dv_savepost.js"></script>
+<span><textarea id="body" name="body" style="display:none;width:100%;height:330px;margin:0;padding:0;border:none;">{$content}</textarea></span>
+<div style="margin:0;"><script>
+var dvtextarea=null;
+var Dvbbs_Mode=parseInt('{$Dvbbs_Mode}');
+var edit_mode_,toolbar_;
+var plus_cc="{$Plus_CcVideo}";
+if(3==Dvbbs_Mode){Dvbbs_Mode=1;}
+switch(Dvbbs_Mode){
+	case 1:edit_mode_='design';toolbar_=[{$tenpay}'<div style="float:left;padding-top:5px;position:relative;color:red" onclick="specialform(this)">[插入特殊内容]</div>',plus_cc];break;
+	case 2:edit_mode_='design';toolbar_=[{$tenpay}'<div style="float:left;padding-top:5px;position:relative;color:red" onclick="specialform(this)">[插入特殊内容]</div>',plus_cc];break;
+	default:edit_mode_='text';
+}
+var dveditconfig={
+	textarea_id:'body',
+	edit_height:'302px',
+	edit_mode:edit_mode_,
+	toolbar:toolbar_,
+	use_ubb:2==Dvbbs_Mode,
+	is_show_status:Dvbbs_Mode>0
+};
+function dvloadarea(){
+	if ('function'==typeof DvEdit){
+		dvtextarea=new DvEdit(dveditconfig);
+	}else{setTimeout('dvloadarea()',0)}
+}
+dvloadarea();
+var dv_signal_click=null;
+function Dv_Signal_Do(token,param,value){
+	var s='';
+	if (param)
+	{
+		s='['+token+'='+param+']'+value+'[\/'+token+']';
+	}else{
+		s = "["+token+']'+value+'[\/'+token+']';
+	}
+	dvtextarea.insert(s);
+}
+function Dv_Signal(token,param_title,value_title){
+	var pn='',s='';
+	if(param_title){s+='<div style="width:200px;">'+param_title+'<br/><input type="text" name="dv_signal_param" style="width:200px;" id="dv_signal_param" /></div>'}
+	if(value_title){s+='<div style="width:200px;height:100px;">'+value_title+'<br/><textarea name="dv_signal_value" id="dv_signal_value" style="width:200px;height:100px;"></textarea></div>'};
+	s+='<div><input type="button" value=" 插入 " onclick="Dv_Signal_Do(\''+token+'\',gid(\'dv_signal_param\')?gid(\'dv_signal_param\').value:null,document.getElementById(\'dv_signal_value\').value)"></div>';
+	dvtextarea.t.close();
+	dvtextarea.t.open(dv_signal_click,s);
+}
+function specialform(o){
+	dv_signal_click=o;
+	specialformcontent='<div style="width:150px">'+specialformcontent+'</div>'
+	dvtextarea.t.open(o,specialformcontent);
+}
+</script></div>

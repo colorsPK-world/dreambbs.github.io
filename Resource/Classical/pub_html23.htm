@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+	<xsl:output method="xml" omit-xml-declaration = "yes" indent="yes" version="4.0"/>
+	<!--
+	Copyright (C) 2004,2005 AspSky.Net. All rights reserved.
+	Written by dvbbs.net Sunwin
+	-->
+	<xsl:template  match="BoardList">
+		<style type="text/css">
+			body { margin:0px; background:#EBF6FF url("images/others/left_bg.gif") repeat-x top left; }
+			hr { height:0px; border-top:1px solid #CAD9E7;}
+			a { color: #135294; text-decoration: underline; }
+			a:hover { color: #ff6600; text-decoration: underline; }
+			img { float:none; vertical-align:middle;}
+			.menutitle { cursor:pointer; margin: auto auto 1px auto; border:1px solid #84ABD3; background-image:url("images/others/menu_button_bg.gif"); color:#135294; width:160px; height:22px !important; height:19px; line-height:19px; padding:2px 0px 0px 10px !important; padding:5px 0px 0px 10px; text-align:left; font-size:12px;}
+			.submenu { margin-bottom: 0.5em; font-size:12px; width:156px; padding:0px; text-align:left; background:#EBF6FF; margin-top:3px; border:1px solid #fff; padding:4px; margin-left:5px; margin-right:5px; }
+			.left_menu { width:178px; text-align:center; }
+			.left_menu_top {white-space: nowrap;height:100px; width:170px; margin:4px auto 1px auto; padding:10px 0px 0px 2px;  text-align:left; clear:both; vertical-align:top;font-size:12px; text-align:center; line-height:20px;background:url("images/others/top_bg.gif") no-repeat;}
+			.left_menu_top img { float:none; vertical-align:top;border:none;margin:0px;}
+			/*.submenu{display:block;} 展开所有*/
+		</style>
+		<div class="left_menu_top">
+			<b style="font-size:12px;">
+				<xsl:value-of select="@forum_name"/>
+			</b>
+			<br />
+			<a href="index.asp" target="frmright"><img src="images/others/left_01.gif"/></a><a href="query.asp?stype=3&amp;pSearch=0&amp;nSearch=0" target="frmright"><img src="images/others/left_02.gif"/></a><a href="query.asp?stype=4&amp;pSearch=0&amp;nSearch=0" target="frmright"><img src="images/others/left_03.gif"/></a><a href="infolist.asp?t=toplist&amp;orders=1" target="frmright"><img src="images/others/left_04.gif"/></a><a href="infolist.asp?t=toplist&amp;orders=7" target="frmright"><img src="images/others/left_05.gif"/></a>
+			<hr style="width:90%" /><br/>
+		</div>
+				<div class="left_menu">
+					<div id="masterdiv">
+						
+		<xsl:for-each select="board[@parentid = 0]">
+			<xsl:variable name="bid" select="@boardid"/>
+				<div class="menutitle" onclick="SwitchMenu('sub_{position()}')">
+				<img src="images/others/menu_plus.gif" alt="" />
+				<a href="index.asp?boardid={@boardid}" target="frmright"><xsl:value-of select="@boardtype" disable-output-escaping="yes"/>(<xsl:value-of select="@child"/>)</a>
+				</div>
+				<span class="submenu" id="sub_{position()}">
+					<xsl:for-each select="//board[@parentid = $bid]">
+						<img src="images/others/menu_left_line.gif"/>
+						<a href="index.asp?boardid={@boardid}" target="frmright">
+							<xsl:value-of select="@boardtype" disable-output-escaping="yes"/>
+						</a>
+						<br/>
+					</xsl:for-each>
+				</span>
+		</xsl:for-each>
+					</div>
+				</div>
+	</xsl:template>
+</xsl:stylesheet>

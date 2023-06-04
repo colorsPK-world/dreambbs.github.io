@@ -1,0 +1,23 @@
+<!--announcements.asp##查看公告页面-->
+<table class="tableborder1" cellspacing="1" cellpadding="3" align="center">
+    <tr>
+      <th align="center">&gt;&gt; {$title} &lt;&lt;</th>
+    </tr>
+    <tr>
+      <td class="tablebody1" style="padding:5px;line-height:16px;width:100%;word-wrap:break-word" valign="top"><br />
+	  {$content}
+      </td>
+    </tr>
+    <tr>
+      <td class="tablebody2" align="center">
+        <table cellspacing="0" cellpadding="0" width="100%" border="0">
+            <tr>
+              <td class="tablebody2" align="left">&nbsp;&nbsp;&nbsp;<b>发布人</b>： 
+                {$username}&nbsp;|&nbsp;<b>背景音乐</b>：{$bgs}</td>
+              <td class="tablebody2" align="right"><b>发布时间</b>： 
+                {$addtime}&nbsp;&nbsp;&nbsp;</td>
+            </tr>
+        </table>
+      </td>
+    </tr>
+</table>

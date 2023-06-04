@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="gb2312"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" >
+<xsl:output method="xml" omit-xml-declaration = "yes" indent="yes" version="4.0"/>
+	<!--
+	个性圈子栏目列表页面
+	Copyright (C) 2004,2005 AspSky.Net. All rights reserved.
+	Written by dvbbs.net Lao Mi
+	Web: http://www.aspsky.net/,http://www.dvbbs.net/
+	Email: eway@aspsky.net
+	-->
+<xsl:template match="/">
+<xsl:for-each select="IndivGroup">
+	<div class="page_left rollboder" style="width:97%;margin:0 auto;line-height:30px">
+			<span style="float:right">
+			<xsl:if test="@powerflag='1' or @powerflag='2' or @powerflag='3'">			
+				管理选项:　<a href="IndivGroup_Manage.asp?managetype=board&amp;action=boardmanage&amp;groupid={@groupid}">添加栏目</a>| <a href="IndivGroup_Manage.asp?managetype=user&amp;action=user&amp;groupid={@groupid}">成员管理</a>| <a href="IndivGroup_Manage.asp?groupid={@groupid}">圈子管理</a>		
+			</xsl:if>
+			</span>		
+			管理员:
+			<xsl:for-each select="MasterList/Master">
+				<a href="dispuser.asp?id={@userid}"><xsl:value-of select="@username" /></a>
+			</xsl:for-each>
+			<br style="clear:both" />
+			
+	</div>
+	<br />
+	<div class="page_left border" style="width:97%;margin:0 auto">
+			<h3 class="titlebig">
+				<xsl:value-of select="@groupname" disable-output-escaping="yes" /> - 分栏目列表
+			</h3>
+		<xsl:choose>
+			<xsl:when test="BoardList/Board">
+				<xsl:call-template name="showGroupBoard" />
+			</xsl:when>
+			<xsl:otherwise>
+				<div style="height:25px;overflow :hidden;">本圈子目前没有栏目</div>
+			</xsl:otherwise>
+		</xsl:choose>
+	</div>
+</xsl:for-each>
+</xsl:template>
+<xsl:template name="showGroupBoard">
+<xsl:for-each select="BoardList/Board">
+	<xsl:variable name="Boardid" select="@id"/>
+	<table width="98%">
+	  <tr>
+		<td width="60">
+		<div class="today"><xsl:value-of select="concat(' ',@todaynum,' ')"/><p>今日帖</p></div>
+		</td>
+		<td>
+			<xsl:if test="@indeximg!=''">
+			<a href="IndivGroup_Index.asp?GroupID={@rootid}&amp;GroupBoardid={$Boardid}"><img src="{@indeximg}" alt="" class="boardlogo" /></a>
+			</xsl:if>
+			<strong><a href="IndivGroup_Index.asp?GroupID={@rootid}&amp;GroupBoardid={$Boardid}"><xsl:value-of select="@boardname" disable-output-escaping="yes"/></a></strong>				
+			<br />
+			<font face="Arial"><img alt="" src="Skins/Default/Forum_readme.gif" align="middle"/><xsl:value-of select="@boardinfo" disable-output-escaping="yes"/></font>
+			<br />
+			<span>最新：<a href="IndivGroup_Dispbbs.asp?GroupID={/IndivGroup/@groupid}&amp;GroupBoardid={@lastpost_7}&amp;ID={@lastpost_6}&amp;page=1"><xsl:value-of select="@lastpost_3" disable-output-escaping="yes" /></a>  <em>( Post:<xsl:value-of select="concat(' ',@postnum,' ')"/>   |  Topic:<xsl:value-of select="concat(' ',@topicnum,' ')"/> )</em></span>
+		</td>
+	</tr>
+	</table>
+</xsl:for-each>
+</xsl:template>
+</xsl:stylesheet>

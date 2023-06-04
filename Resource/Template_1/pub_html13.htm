@@ -1,0 +1,27 @@
+<!--论坛操作成功信息-->
+<br />
+<table cellpadding="3" cellspacing="1" align="center" class="tableborder1">
+<tr align="center">
+<th width="100%">论坛成功信息
+</td></th>
+</tr>
+<tr>
+<td width="100%" class="tablebody1">
+<b>操作成功：</b><br /><br />
+{$sucmsg}
+</td></tr>
+<tr align="center"><td width="100%" class="tablebody2" style="text-align : center; ">
+<a href="{$returnurl}"> &lt;&lt; 返回上一页</a> &nbsp;&nbsp;||&nbsp;&nbsp; <a href="javascript:wndClose();"> 关闭窗口&gt;&gt;</a>
+<script type="text/javascript">
+function wndClose(){
+	try{
+		parent.DvWnd.close();
+	}
+	catch(e){
+		window.close()
+	}
+}
+//-->
+</script>
+</td></tr>
+</table><br />

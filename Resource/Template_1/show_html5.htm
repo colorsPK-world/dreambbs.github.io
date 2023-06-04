@@ -1,0 +1,58 @@
+<!--show.asp##分页部分JS-->
+<script language="JavaScript" type="text/javascript">
+<!--
+	var Pcount={$Pcount};
+	var star={$star};
+	document.write ('<table cellpadding="0" cellspacing="3" border="0" width="100%" align="center" ><form method="post" action="?boardid={$boardid}&filetype={$filetype}&username={$username}&tab={$tab}">');
+	document.write ('<tr><td valign="middle" nowrap="nowrap">展区共有<b>{$pagelistnum}</b>幅作品，每页最多展示{$limitednum}个文件，共<b><font color=red>'+Pcount+'</font></b>页。');
+	document.write ('</td><td align="center">');
+	if (star!='1')
+	{
+		document.write ('<font face="Webdings">3</font><a href="?star='+((star*1)-1)+'&boardid={$boardid}&filetype={$filetype}&username={$username}&tab={$tab}" >上一页</A> ');
+	}
+	else
+	{
+		document.write ('<font face=Webdings>3</font><font color=#996633>上一页</font>');
+		
+	}
+	document.write (' <a href="?star='+((star*1)+1)+'&boardid={$boardid}&filetype={$filetype}&username={$username}&tab={$tab} ">下一页</a><font face="Webdings">4</font>');
+	document.write ('</td><td align="right">');
+	var vendpage;
+	if ((star*1)>4)
+	{
+		document.write (' <a href="?star=1&boardid={$boardid}&filetype={$filetype}&username={$username}&tab={$tab}">[1]</a> ...');
+	}
+	if ((Pcount*1)>(star*1)+3)
+	{
+		vendpage=(star*1)+3
+	}
+	else
+	{
+		vendpage=(Pcount*1)
+	}
+	
+	for (vv=star*1-3;vv <vendpage+1;vv++ )
+	{
+		
+		if (vv>0)
+		{
+			if (vv==star*1)
+			{
+				
+				document.write ('<font color=#996633>['+vv+']</font>');
+			}
+			else
+			{
+				document.write (' <a href="?star='+vv+'&boardid={$boardid}&filetype={$filetype}&username={$username}&tab={$tab}">['+vv+']</a>');
+			}		
+		}			
+	}
+	
+	if (((star*1)+3)<(Pcount*1))
+	{
+		document.write ('... <a href="?star='+Pcount+'&boardid={$boardid}&filetype={$filetype}&username={$username}&tab={$tab}">['+Pcount+']</a>');
+	}
+	document.write ('转到:<input type="text" name="star" size="3" maxlength="10 " value="'+star+'" /><input type="submit" value="Go"  id="button1" name="button1" />');
+	document.write ('</td></tr></form></table>');
+//-->
+</script>

@@ -1,0 +1,85 @@
+/*左边栏，固定宽度*/
+#pw_l{
+	float:left;margin-right:-250px;width:250px;
+}
+
+/*中间栏，自适应宽度*/
+#pw_m{
+	width:auto;margin:0 0 0 260px;overflow:hidden;
+}
+
+/*COPYRIGHT STYLE*/
+.pw_c{text-align:center;color:gray;margin-top:10px;}
+span.img{display:block;border:1px solid gray;padding:2px;margin:3px;}
+span.img img{width:100%;height:100%;border:0px;}
+span.img img{height:60px;}
+/*左栏*/
+.pw_a{
+	background:white;
+}
+/*左栏栏目标题*/
+.pw_a span.t{
+	display:block;
+	height:30px;line-height:30px;
+	margin-bottom:3px;
+	border:1px solid #c6d2e3;
+	padding-left:35px;
+	font-weight:bold;font-size:14px;color:#3579c5;
+	background:url("images/t1.gif") no-repeat;background-position: center left;background-position: 5px; 
+}
+.pw_a ul{}
+/*按钮样式*/
+ul.b li{
+	border:1px solid #c6d2e3;
+	width:80%;
+	margin:0 auto;
+	text-align:center;
+	margin-top:3px;
+	margin-bottom:3px;
+	background:url("images/buttonbg.gif") repeat-x;height:29px;line-height:29px;cursor:pointer;
+
+}
+
+.pw_tb0{ border:1px solid #c6d2e3;background:#dff6ff;width:95%;padding:5px;margin-bottom:10px;}
+
+.pw_tb1{ border:1px solid #c6d2e3;}
+
+.pw_par1{background:white;border:1px solid #c6d2e3;padding:5px;}
+
+/*嵌框架样式*/
+#pw_frame{width:98%;min-height:500px;overflow-x:hidden;}
+
+/*申请样式*/
+.pw_join0{
+	background:url("images/index_3.gif") no-repeat;
+	width:665px;height:245px;
+}
+.pw_readme{
+	float:right;width:480px;height:200px;margin:20px 20px 40px 0px;
+}
+.pw_readme li{
+	line-height:28px;height:28px;background:url("images/index_7.gif") no-repeat;
+	background-position: center left;background-position: 3px; text-indent:20px;color:#3579c5;
+}
+
+.pw_join1{
+	background:url("images/index4.gif") no-repeat;
+	width:665px;height:104px;
+}
+.pw_join2{
+	width:665px;
+}
+
+.gamebox { width:340px; overflow:hidden; height:210px; padding:0px; border:1px solid #A3D0E4; float:left; margin:0px 6px 6px 0px;}
+.gamebox ul { padding:0px; margin:10px 20px;}
+.gamebox ul li { line-height:20px; list-style:none; color:#666; margin-top:5px; }
+.gamebox ul li img { vertical-align:middle; }
+
+#usergames{}
+#usergames ul { padding:0px; margin:10px 20px;}
+#usergames ul li{float:left;width:33%;text-align:center;}
+#usergames span.img img{height:80px;}
+
+.gamebox1{ margin-bottom:10px;}
+.gamebox1 .p1{float:left;width:100px;}
+.gamebox1 .p2{float:left;}

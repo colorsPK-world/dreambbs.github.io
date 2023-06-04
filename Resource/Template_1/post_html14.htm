@@ -1,0 +1,23 @@
+<!--魔法表情部分，用于主题发表页面-->
+<!--Modify By Dv_Xiaoxian
+借助DV模拟Windows模态对话框(Thanks:HxyMan,XiaoJiao)
+同时修改各个模板的post_html6.htm，usermanager_html20.htm
+Date:2008.0.14-->
+<td width="15%">
+<input name="tmagicface" value="1" type="checkbox" 
+class="checkbox"/>魔法表情
+<input name="imagicface" value="1" type="hidden" 
+id="smagicface" />
+<br />
+&nbsp;金币：<font id="magicmoney" color="red">100</font>
+<br />
+&nbsp;点券：<font id="magicticket" color="red">10</font>
+</td>
+<td width="10%">
+<div id="lookmagicthis"><a href="javascript:;" onclick="DvWnd.open('浏览魔法表情','plus_tools_magiclist.asp?boardid={$pub.boardid}&s=0',500,350);">
+<img src="dv_plus/tools/magicface/gif/1.gif" border="0" 
+id="magicfacepic" alt="点击选择本帖使用魔法表情" /><font style="font-family: Webdings;">6</font>
+</a> 
+</div>
+</td>
+<!--魔法表情部分，用于主题发表页面END-->

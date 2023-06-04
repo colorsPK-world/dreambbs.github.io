@@ -1,0 +1,458 @@
+<?xml version="1.0" encoding="gb2312"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" >
+<xsl:output method="xml" omit-xml-declaration = "yes" indent="yes" version="4.0"/>
+<xsl:variable name="pagesize" select="50"/>
+<xsl:template match="/">
+<xsl:call-template name="readme" />
+<xsl:choose>
+		<xsl:when test="xml/param/@action=''"><xsl:call-template name="regpostlist" /></xsl:when>
+		<xsl:otherwise><xsl:choose>
+		<xsl:when test="xml/param/@action='reglist'"><xsl:call-template name="reglist" /></xsl:when>
+		<xsl:otherwise><xsl:choose>
+		<xsl:when test="xml/param/@action='setting'"><xsl:call-template name="setting" /></xsl:when>
+		<xsl:otherwise>
+		<xsl:choose>
+		<xsl:when test="xml/param/@action='settingsave'"><xsl:call-template name="suc" /></xsl:when>
+		<xsl:otherwise>
+		<xsl:call-template name="err" />
+		</xsl:otherwise>
+</xsl:choose></xsl:otherwise>
+</xsl:choose>
+		</xsl:otherwise>
+</xsl:choose>
+		</xsl:otherwise>
+</xsl:choose>
+</xsl:template>
+<xsl:template name="err">
+<br/>
+<div class="th" style="width:600px;"><div>参数错误!</div></div>
+<div class="mainbar3" style="line-height:28px;height:28px;width:600px;">
+	<a href="javascript:history.go(-1)">返回上一页</a> 
+</div>
+</xsl:template>
+<xsl:template name="suc">
+<br />
+<div class="th" style="width:600px;"><div>设置保存成功</div></div>
+<div class="mainbar3" style="line-height:28px;height:28px;width:600px;">
+	<a href="javascript:history.go(-1)">返回上一页</a> 
+</div>
+</xsl:template>
+<xsl:template name="readme">
+<div class="mainbox">
+	<ul class="tableborder heightd">
+		<h3>用户注册管理，论坛第一道防线</h3>
+		<ol style="margin-top:0px;margin-bottom:0px;list-style-position : inside;">
+			<li style="padding:0px 5px;">为有效限制防止和限制使用机器注册用户帐号滥发各种广告的现象，我们新增加了注册部分的扩展设置。</li>
+			<li style="padding:0px 5px;">通过对注册机注册帐号的状态的分析，我们初步开发了一些实用的简单有效的注册设置项，您可以根据您的需要进行设置。</li>
+			<li style="padding:0px 5px;">注册限制设置我们是可以做得好灵活的，目前我们只开发一部分，以后会根据需求再进一步完成。</li>
+			<li style="padding:0px 5px;">欢迎各位站长来动网官方论坛就用户注册设置程序提出您的宝贵意见。</li>
+		</ol>
+		<li style="text-align:right;">
+			<a href="userregmanager.asp">请求允许注册的IP列表</a> | <a href="userregmanager.asp?action=setting">修改注册设置</a> | <a href="userregmanager.asp?action=reglist">今日注册IP列表</a>
+		</li>
+	</ul>
+</div>
+</xsl:template>
+<xsl:template name="setting">
+<form action="userregmanager.asp?action=settingsave" method="post">
+<div class="mainbox"><!--div_start-->
+	<ul class="tableborder heightd">
+	<h3><xsl:text disable-output-escaping="yes" >&amp;nbsp;</xsl:text>注册限制设置</h3>
+	<div class="mainbar1" style="line-height:28px;text-align : left; text-indent:12px;height:28px;">
+		<b>说明:这是扩展注册设置,请根据自己需要设置.</b>
+	</div>
+	<div class="mainbar1" style="line-height : 28px;height : 28px;">
+		<div style="float:left;width:256px;">采用IP策略</div>
+		<div class="li1" style="float:left;text-indent:12px;line-height:28px;height : 28px;">
+			<input type="checkbox" value="1" name="checkip"  style="margin:4px;" ><xsl:choose>
+			<xsl:when test="xml/regsetting/checkip"><xsl:if test="xml/regsetting/checkip/@use=1"><xsl:attribute name="checked">checked</xsl:attribute></xsl:if></xsl:when>
+			<xsl:otherwise><xsl:attribute name="checked">checked</xsl:attribute></xsl:otherwise>
+			</xsl:choose>
+			</input>
+		</div>
+		<div style="float:left;text-indent:12px;line-height:28px;height : 28px;">如果不选择,所有和IP地址有关的设置都不起作用.</div>
+	</div>
+	<div class="mainbar1" style="line-height : 28px;height:150px !important;height:140px;">
+		<div style="float:left;width:256px;">允许注册IP(IP白名单)</div>
+		<div class="li1" style="float:left;text-indent:2px !important;text-indent:12px;line-height:28px;height:150px !important;height:140px;">
+			<textarea name="iplist1" cols="60" rows="8">
+				<xsl:for-each select="xml/regsetting/checkip/iplist1/ip">
+					<xsl:value-of select="." /> = <xsl:value-of select="@description" />
+					<xsl:value-of select="''" />
+				</xsl:for-each>
+			</textarea>
+		</div>
+		<div style="width:570px;float:left;text-indent:12px;line-height:28px;height:150px !important;height:140px;white-space:nomarl;">
+			填写可以注册的IP地址,格式是IP地址=说明,每个用换行分开,支持通配符,如192.168.*.* =内网IP 如不采用IP白名单,请留空.
+		</div>
+	</div>
+	<div class="mainbar1" style="line-height : 28px;height:150px !important;height:140px;"><!--dv1_start-->
+		<div style="float:left;width:256px;">禁止注册IP(ip黑名单)</div>
+		<div class="li1" style="float:left;text-indent:2px !important;text-indent:12px;line-height:28px;height:150px !important;height:140px;">
+			<textarea name="iplist2" cols="60" rows="8">
+				<xsl:for-each select="xml/regsetting/checkip/iplist2/ip">
+					<xsl:value-of select="." /> = <xsl:value-of select="@description" />
+					<xsl:value-of select="''" />
+				</xsl:for-each>
+			</textarea>
+		</div>
+		<div style="width:570px;float:left;text-indent:12px;line-height:28px;height:150px !important;height:140px;">
+			填写禁止注册的IP地址,格式是IP地址=说明,每个用换行分开.支持通配符,如192.168.*.* =内网IP 如不采用IP黑名单,请留空</div>
+		</div>
+		<div class="mainbar1" style="line-height : 28px;height : 56px;">
+			<div style="float:left;width:256px;">如IP受限制提交IP来源信息</div>
+			<div class="li1" style="float:left;text-indent:12px;line-height:28px;height : 56px;">
+				<input type="checkbox" value="1" name="postipinfo"  style="margin:4px;" >
+					<xsl:choose>
+						<xsl:when test="xml/regsetting/@postipinfo">
+							<xsl:if test="xml/regsetting/@postipinfo=1">
+								<xsl:attribute name="checked">checked</xsl:attribute>
+							</xsl:if>
+						</xsl:when>
+						<xsl:otherwise>
+							<xsl:attribute name="checked">checked</xsl:attribute>
+						</xsl:otherwise>
+					</xsl:choose>
+				</input>
+			</div>
+			<div style="float:left;text-indent:12px;line-height:28px;height : 56px;">
+				如果注册用户所在IP不在允许注册之列,可以引导注册者进入提交当前IP信息的页面,以便管理员可以增加该段IP地址的许可.
+			</div>
+		</div>
+		<div class="mainbar1" style="line-height : 28px;height : 28px;">
+			<div style="float:left;width:256px;">一个IP地址一天可以注册次数</div>
+			<div class="li1" style="float:left;text-indent:12px;line-height:28px;height : 28px;">
+				<input type="text" Size="4" name="checkregcount"  style="margin:4px;">
+					<xsl:choose>
+						<xsl:when test="xml/regsetting/@checkregcount">
+							<xsl:attribute name="value"><xsl:value-of select="xml/regsetting/@checkregcount" /></xsl:attribute>
+						</xsl:when>
+						<xsl:otherwise><xsl:attribute name="value">0</xsl:attribute></xsl:otherwise>
+					</xsl:choose>
+				</input>
+			</div>
+			<div style="float:left;text-indent:12px;line-height:28px;height:28px;">请填写数字否则会出错,如不想限制,请填写0.</div>
+		</div>
+		<div class="mainbar1" style="line-height : 28px;height : 28px;">
+			<div style="float:left;width:256px;">禁止纯数字ID注册</div>
+			<div class="li1" style="float:left;text-indent:12px;line-height:28px;height : 28px;">
+				<input type="checkbox" value="1" name="checknumeric"  style="margin:4px;">
+					<xsl:choose>
+						<xsl:when test="xml/regsetting/@checknumeric">
+							<xsl:if test="xml/regsetting/@checknumeric=1">
+								<xsl:attribute name="checked">checked</xsl:attribute>
+							</xsl:if>
+						</xsl:when>
+						<xsl:otherwise><xsl:attribute name="checked">checked</xsl:attribute></xsl:otherwise>
+					</xsl:choose>
+				</input>
+			</div>
+			<div style="float:left;text-indent:12px;line-height:28px;height : 28px;">是否允许采用纯数的用户名注册.</div>
+		</div>
+		<div class="mainbar1" style="line-height : 28px;height : 28px;">
+			<div style="float:left;width:256px;">要求输入当前时间</div>
+			<div class="li1" style="float:left;text-indent:12px;line-height:28px;height : 28px;">
+				<input type="checkbox" value="1" name="checktime"  style="margin:4px;">
+					<xsl:choose>
+						<xsl:when test="xml/regsetting/@checktime">
+							<xsl:if test="xml/regsetting/@checktime=1"><xsl:attribute name="checked">checked</xsl:attribute></xsl:if>
+						</xsl:when>
+						<xsl:otherwise><xsl:attribute name="checked">checked</xsl:attribute></xsl:otherwise>
+					</xsl:choose>
+				</input>
+			</div>
+			<div style="float:left;text-indent:12px;line-height:28px;height : 28px;">
+				如果启用,要求用户选择自己所在时区和输入他所在地的时间(以小时为单位).
+			</div>
+		</div>
+		<div class="mainbar1" style="line-height : 28px;height : 28px;">
+			<div style="float:left;width:256px;">采用动态的表单项目名称</div>
+			<div class="li1" style="float:left;text-indent:12px;line-height:28px;height : 28px;">
+				<input type="checkbox" value="1" name="usevarform"  style="margin:4px;">
+					<xsl:choose>
+						<xsl:when test="xml/regsetting/@usevarform">
+							<xsl:if test="xml/regsetting/@usevarform=1"><xsl:attribute name="checked">checked</xsl:attribute></xsl:if>
+						</xsl:when>
+						<xsl:otherwise><xsl:attribute name="checked">checked</xsl:attribute></xsl:otherwise>
+					</xsl:choose>
+				</input>
+			</div>
+			<div style="float:left;text-indent:12px;line-height:28px;height : 28px;">采用不定名的表单项目名称,增加机器人注册的难度.</div>
+		</div>
+		<div  style="line-height : 28px;height : 28px;"><input type="submit" name="submit" value="提 交" style="margin:2px;"/>
+	</div><!--dv1_end-->
+	</ul>
+</div><!--div_end-->
+</form>
+</xsl:template>
+<xsl:template name="reglist">
+	<xsl:variable name="CountNum" select="count(xml/reglist/ip)"/>
+		<xsl:variable name="pagecount">
+			<xsl:choose>
+				<xsl:when test="$CountNum mod $pagesize=0">
+					<xsl:value-of select="$CountNum  div $pagesize"/>
+				</xsl:when>
+				<xsl:otherwise><xsl:value-of select="floor($CountNum  div $pagesize)+1"/></xsl:otherwise>
+			</xsl:choose>
+		</xsl:variable>
+		<xsl:variable name="page">
+		<xsl:choose>
+				<xsl:when test="xml/param/@page &gt; $pagecount or (xml/param/@page) &lt; 1 "><xsl:value-of select="$pagecount" /></xsl:when>
+				<xsl:otherwise><xsl:value-of select="xml/param/@page" /></xsl:otherwise>
+		</xsl:choose>
+	</xsl:variable>
+<div class="mainbox">
+	<ul class="tableborder heightd" style="border-bottom:0px;">
+	<h3><xsl:text disable-output-escaping="yes" >&amp;nbsp;</xsl:text>今日注册的用户列表 </h3>
+	<div class="mainbar1" style="line-height:28px;text-align : left; text-indent:12px;height:28px;"><b>说明:显示24小时内注册的用户IP信息</b></div>
+	<div >
+		<div class="th" style="width:100%;text-align : center;line-height:25px;height : 25px;text-indent:0px;border-bottom:solid 1px #9cc3d9;"> 
+			<div style="float:left;width:128px;">I P</div>
+			<div class="li1" style="float:left;text-indent:12px;line-height:25px;height : 25px;">用户名</div>
+			<div class="li1" style="float:right;width:128px;line-height:25px;height : 25px;">注册时间</div> 
+			<div class="li1" style="float:right;width:256px;line-height:25px;height : 25px;">查询来源</div> 
+		</div>
+	</div>
+	<xsl:for-each select="xml/reglist/ip[position() &gt; ($pagesize * ($page - 1)) and position() &lt; ($pagesize * $page + 1)]">
+		<div class="mainbar1" style="line-height:28px;height:28px;">
+			<div style="float:left;width:128px;"><xsl:value-of select="." /></div>
+			<div class="li1" style="float:left;text-indent:12px;">
+				<a href="dispuser.asp?name={@username}" target="_blank"><xsl:value-of select="@username" /></a>
+			</div>
+			<div class="li1" style="float:right;width:128px;"><xsl:value-of select="@datetime" /></div> 
+			<div class="li1" style="text-align:center;float:right;width:256px;">
+				<a href="TopicOther.asp?t=1&amp;action=lookip&amp;ip={.}" target="_blank">本论坛查询</a> | <a href="http://www.123cha.com/ip/?q={.}" target="_blank">123cha查询</a>
+			</div>
+		</div>
+	</xsl:for-each>
+	</ul>
+</div>
+	<div class="mainbar0" style="line-height:28px;height : 28px;margin-top:2px;">
+		<div style="float:right;">
+			<xsl:call-template name="PageList">
+				<xsl:with-param name="Page" select="$page"/>
+				<xsl:with-param name="m" select="10"/>
+				<xsl:with-param name="MaxRows" select="$pagesize"/>
+				<xsl:with-param name="CountNum" select="$CountNum"/>
+				<xsl:with-param name="PageStr">?action=<xsl:value-of select="xml/param/@action" /></xsl:with-param>
+				<xsl:with-param name="v" select="1"/>
+				<xsl:with-param name="pv">page</xsl:with-param>
+				<xsl:with-param name="target"></xsl:with-param>
+				<xsl:with-param name="Forum_AllTopNum" select="0"/>
+			</xsl:call-template>
+		</div>
+	</div>
+</xsl:template>
+<xsl:template name="regpostlist">
+<xsl:variable name="CountNum" select="count(xml/regpost/ip)"/>
+<xsl:variable name="pagecount">
+<xsl:choose>
+<xsl:when test="$CountNum mod $pagesize=0">
+<xsl:value-of select="$CountNum  div $pagesize"/>
+</xsl:when>
+<xsl:otherwise><xsl:value-of select="floor($CountNum  div $pagesize)+1"/>
+</xsl:otherwise></xsl:choose>
+</xsl:variable>
+<xsl:variable name="page">
+<xsl:choose>
+		<xsl:when test="xml/param/@page &gt; $pagecount or (xml/param/@page) &lt; 1 "><xsl:value-of select="$pagecount" /></xsl:when>
+		<xsl:otherwise><xsl:value-of select="xml/param/@page" /></xsl:otherwise>
+</xsl:choose>
+</xsl:variable>
+<div class="mainbox"><!--start(owz)-->
+	<ul class="tableborder heightd">
+		<h3><xsl:text disable-output-escaping="yes" >&amp;nbsp;</xsl:text>允许注册请求列表 </h3>
+		<li><b>说明:本列表只保留最多最新的200个请求记录</b></li>
+	</ul>
+<!--<div class="th"><xsl:text disable-output-escaping="yes" >&amp;nbsp;</xsl:text>允许注册请求列表 </div>
+<div class="mainbar3" style="line-height:28px;text-align : left; text-indent:12px;height:28px;"><b>说明:本列表只保留最多最新的200个请求记录</b></div>-->
+<div class="mainbar2">
+	<div class="th" style="width:100%;text-align : center;line-height:25px;height : 25px;text-indent:0px;border:0px;"> 
+		<div style="float:left;text-indent:12px;">I P 和 用户提交的来源信息</div>
+		<div class="li1" style="float:right;width:256px;line-height:25px;height : 25px;">查询来源</div> 
+		<div class="li1" style="float:right;width:128px;line-height:25px;height : 25px;">时间</div> 
+	</div>
+</div>
+<xsl:for-each select="xml/regpost/ip[position() &gt; ($pagesize * ($page - 1)) and position() &lt; ($pagesize * $page + 1)]">
+<div class="mainbar3" style="line-height : 28px;height : 28px;">
+	<div style="float:left;text-indent:12px;"><xsl:value-of select="." /> = <xsl:value-of select="@description" /></div>
+	<div class="li1" style="float:right;width:256px;"><a href="TopicOther.asp?t=1&amp;action=lookip&amp;ip={.}" target="_blank">本论坛查询</a> | <a href="http://www.123cha.com/ip/?q={.}" target="_blank">123cha查询</a></div>
+	<div class="li1" style="float:right;width:128px;"><xsl:value-of select="@dateandtime" /></div>  
+</div>
+</xsl:for-each>
+</div><!--end(owz)-->
+<div class="mainbar0" style="line-height:28px;height : 28px;margin-top:2px;">
+	<div style="float:right;">
+		<xsl:call-template name="PageList">
+			<xsl:with-param name="Page" select="$page"/>
+			<xsl:with-param name="m" select="10"/>
+			<xsl:with-param name="MaxRows" select="$pagesize"/>
+			<xsl:with-param name="CountNum" select="$CountNum"/>
+			<xsl:with-param name="PageStr">?action=<xsl:value-of select="xml/param/@action" /></xsl:with-param>
+			<xsl:with-param name="v" select="1"/>
+			<xsl:with-param name="pv">page</xsl:with-param>
+			<xsl:with-param name="target"></xsl:with-param>
+			<xsl:with-param name="Forum_AllTopNum" select="0"/>
+		</xsl:call-template>
+	</div>
+</div>
+</xsl:template>
+<xsl:template name="PageList">
+<xsl:param name="Page"/><!--当前页码-->
+<xsl:param name="m"/><!--一次最多显示几个页码-->
+<xsl:param name="MaxRows"/><!--每页记录数-->
+<xsl:param name="CountNum"/><!--总记录数-->
+<xsl:param name="PageStr"/><!--链接参数-->
+<xsl:param name="v"/><!--显示类型-->
+<xsl:param name="pv"/><!--页码参数-->
+<xsl:param name="target"/><!--链接目标框架-->
+<xsl:param name="Forum_AllTopNum"/>
+<xsl:variable name="pagecount"><xsl:choose>
+<xsl:when test="$CountNum mod $MaxRows=0">
+<xsl:value-of select="$CountNum  div $MaxRows"/>
+</xsl:when>
+<xsl:otherwise><xsl:value-of select="floor($CountNum  div $MaxRows)+1"/>
+</xsl:otherwise></xsl:choose>
+</xsl:variable>
+<xsl:if test="$v='1'">
+<table class="tableborder5" cellpadding="0" cellspacing="1" style="width:auto;float:left;text-align:right;">
+<form action="{$PageStr}" method="post" name="PageForm" target="{$target}">
+	<tr align="center">
+		<td class="tabletitle1" title="总数" style="text-align:right; ">
+			<xsl:text disable-output-escaping="yes" >&amp;nbsp;</xsl:text>
+			<xsl:value-of select="$Forum_AllTopNum + $CountNum"/>
+			<xsl:text disable-output-escaping="yes" >&amp;nbsp;</xsl:text>
+		</td>
+		<td class="tabletitle1" title="本页记录数">
+			<xsl:text disable-output-escaping="yes" >&amp;nbsp;</xsl:text>
+			<xsl:choose>
+				<xsl:when test="$Page='1'">
+					<xsl:choose>
+						<xsl:when test="$CountNum &lt; $MaxRows">
+							<xsl:value-of select="$Forum_AllTopNum + $CountNum"/>
+						</xsl:when>
+						<xsl:otherwise>
+						<xsl:value-of select="$Forum_AllTopNum + $MaxRows"/>
+						</xsl:otherwise>
+					</xsl:choose>
+				</xsl:when>
+				<xsl:otherwise>
+					<xsl:choose>
+						<xsl:when test="$pagecount = $Page">
+							<xsl:value-of select="$CountNum - ($MaxRows*($Page - 1))"/>
+						</xsl:when>
+						<xsl:otherwise>
+							<xsl:value-of select="$MaxRows"/>
+						</xsl:otherwise>
+					</xsl:choose>
+				</xsl:otherwise>
+			</xsl:choose>
+			<xsl:text disable-output-escaping="yes" >&amp;nbsp;</xsl:text>
+		</td>
+		<td class="tabletitle1">
+			<xsl:text disable-output-escaping="yes" >&amp;nbsp;</xsl:text>
+			<xsl:value-of select="$Page"/>/<xsl:value-of select="$pagecount"/>页
+			<xsl:text disable-output-escaping="yes" >&amp;nbsp;</xsl:text>
+		</td>
+	<xsl:if test="$Page='1'">
+		<td class="tablebody1">
+			<xsl:text disable-output-escaping="yes" >&amp;nbsp;</xsl:text>
+			<img src="images/pagelist/First.gif" border="0" alt=""/>
+			<xsl:text disable-output-escaping="yes" >&amp;nbsp;</xsl:text>
+		</td>
+	</xsl:if>
+	<xsl:if test="$Page!='1'">
+		<td class="tablebody1">
+			<xsl:text disable-output-escaping="yes" >&amp;nbsp;</xsl:text>
+			<a href="{$PageStr}&amp;{$pv}=1" target="{$target}"><img src="images/pagelist/First.gif" border="0" alt="首页"/></a>
+			<xsl:text disable-output-escaping="yes" >&amp;nbsp;</xsl:text>
+		</td>
+	</xsl:if>
+	<xsl:if test="$Page &gt; $m + 1">
+		<td class="tablebody1">
+			<xsl:text disable-output-escaping="yes" >&amp;nbsp;</xsl:text>
+			<a href="{$PageStr}&amp;{$pv}={$Page - $m}" target="{$target}"><img src="images/pagelist/Previous.gif" border="0" alt="上{$m}页"/></a>
+			<xsl:text disable-output-escaping="yes" >&amp;nbsp;</xsl:text>
+		</td>
+	</xsl:if>
+	<xsl:variable name="i">
+		<xsl:choose>
+			<xsl:when test="$Page &lt; floor($m div 2) + 1 ">1</xsl:when>
+			<xsl:otherwise>
+				<xsl:value-of select="$Page - floor($m div 2)"/>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:variable>
+	<xsl:variable name="Endpage">
+		<xsl:choose>
+			<xsl:when test="$i + $m -1 &lt; $pagecount ">
+				<xsl:value-of select="$i + $m -1 "/>
+			</xsl:when>
+			<xsl:otherwise>
+					<xsl:value-of select="$pagecount"/>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:variable>
+	<xsl:call-template name="showonepage">
+		<xsl:with-param name="i" select="$i"/>
+		<xsl:with-param name="endpage" select="$Endpage"/>
+		<xsl:with-param name="target" select="$target"/>
+		<xsl:with-param name="PageStr" select="$PageStr"/>
+		<xsl:with-param name="pv" select="$pv"/>
+		<xsl:with-param name="Page" select="$Page"/>
+	</xsl:call-template>
+	<xsl:if test="$pagecount &gt; $m + $Page">
+		<td class="tablebody1">
+			<xsl:text disable-output-escaping="yes" >&amp;nbsp;</xsl:text>
+			<a href="{$PageStr}&amp;{$pv}={$m + $Page}"  target="{$target}"><img src="images/pagelist/Next.gif" border="0" alt="下{$m}页"/></a>
+			<xsl:text disable-output-escaping="yes" >&amp;nbsp;</xsl:text>
+		</td>
+	</xsl:if>
+	<xsl:if test="$Page != $pagecount">
+		<td class="tablebody1">
+			<xsl:text disable-output-escaping="yes" >&amp;nbsp;</xsl:text>
+			<a href="{$PageStr}&amp;{$pv}={$pagecount}" target="{$target}"><img src="images/pagelist/Last.gif" border="0" alt="尾页"/></a>
+			<xsl:text disable-output-escaping="yes" >&amp;nbsp;</xsl:text>
+		</td>
+	</xsl:if>
+	<xsl:if test="$Page = $pagecount">
+		<td class="tablebody1">
+			<xsl:text disable-output-escaping="yes" >&amp;nbsp;</xsl:text>
+			<img src="images/pagelist/Last.gif" border="0" alt=""/>
+			<xsl:text disable-output-escaping="yes" >&amp;nbsp;</xsl:text>
+		</td>
+	</xsl:if>
+		<td class="tablebody1">
+			<input type="text" name="{$pv}" size="1" value="{$Page}" class="PageInput"/>
+			<input type="submit" value="GO" name="submit" class="PageInput"/>
+		</td>
+	</tr>
+</form>
+</table>
+</xsl:if>
+</xsl:template>
+<xsl:template name="showonepage">
+		<xsl:param name="i"/>
+		<xsl:param name="endpage"/>
+		<xsl:param name="target"/>
+		<xsl:param name="PageStr"/>
+		<xsl:param name="pv"/>
+		<xsl:param name="Page"/>
+		<xsl:if test="$Page != $i">
+		<td class="tablebody1"><xsl:text disable-output-escaping="yes" >&amp;nbsp;</xsl:text><a href="{$PageStr}&amp;{$pv}={$i}" target="{$target}"><xsl:value-of select="$i"/></a><xsl:text disable-output-escaping="yes" >&amp;nbsp;</xsl:text></td>
+		</xsl:if>
+		<xsl:if test="$Page = $i">
+		<td class="tablebody2"><xsl:text disable-output-escaping="yes" >&amp;nbsp;</xsl:text><font class="normalTextSmall"><u><b><xsl:value-of select="$i"/></b></u></font><xsl:text disable-output-escaping="yes" >&amp;nbsp;</xsl:text></td>
+		</xsl:if>
+		<xsl:if test="$endpage &gt; $i">
+			<xsl:call-template name="showonepage">
+				<xsl:with-param name="i" select="$i+1"/>
+				<xsl:with-param name="endpage" select="$endpage"/>
+				<xsl:with-param name="target" select="$target"/>
+				<xsl:with-param name="PageStr" select="$PageStr"/>
+				<xsl:with-param name="pv" select="$pv"/>
+				<xsl:with-param name="Page" select="$Page"/>
+				</xsl:call-template>
+		</xsl:if>
+</xsl:template>
+</xsl:stylesheet>

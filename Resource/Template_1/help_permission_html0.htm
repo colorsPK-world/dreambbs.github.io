@@ -1,0 +1,250 @@
+<!--版面权限浏览，主体Js部分-->
+<script language="JavaScript" type="text/javascript">
+<!--
+var groupname=new Array();
+var GroupSetting=new Array();
+function showtoptable(orders)
+{
+	document.write ('<table class="tableborder1" cellspacing="1" cellpadding="0"  align="center">');
+	document.write ('<tr>');
+	document.write ('<th height="25" width="16%" id=tabletitlelink><a href="?boardid={$boardid}&orders=1&action={$action}">浏览权限<a></th>');
+	document.write ('<th height="23" width="16%" id=tabletitlelink><a href="?boardid={$boardid}&orders=2&action={$action}">发帖权限<a></th>');
+	document.write ('<th height="23" width="16%" id=tabletitlelink><a href="?boardid={$boardid}&orders=3&action={$action}">帖子管理权限<a></th>');
+	document.write ('<th height="23" width="16%" id=tabletitlelink><a href="?boardid={$boardid}&orders=4&action={$action}">其他权限<a></th>');
+	document.write ('<th height="23" width="16%" id=tabletitlelink><a href="?boardid={$boardid}&orders=5&action={$action}">管理权限<a></th>');
+	document.write ('<th height="23" width="16%" id=tabletitlelink><a href="?boardid={$boardid}&orders=6&action={$action}">短信权限<a></th>');
+	document.write ('</tr>');
+	document.write ('</table>');
+	switch (orders)
+	{
+		case 1:
+		document.write ('<table class="tableborder1" cellspacing="1" cellpadding="0"  align="center">');
+		document.write ('<tr  align="center">');
+		document.write ('<td colspan="5" class="tablebody1">浏览权限</td>');
+		document.write ('</tr>');
+		document.write ('<tr>');
+		document.write ('<td height="25" width="20%" class="tablebody2">用户组名('+groupname.length+')</td>');
+		document.write ('<td height="23" width="20%" class="tablebody2">可以浏览论坛</td>');
+		document.write ('<td height="23" width="20%" class="tablebody2">可以查看会员信息(包括其他会员的资料和会员列表)</td>');
+		document.write ('<td height="23" width="20%" class="tablebody2">可以查看其他人发布的主题</td>');
+		document.write ('<td height="23" width="20%" class="tablebody2">可以浏览精华帖子</td>');
+		document.write ('</tr>');
+		break;
+		case 2:
+		document.write ('<table class="tableborder1" cellspacing="1" cellpadding="3"  align="center">');
+		document.write ('<tr  align="center">');
+		document.write ('<td colspan=13 class="tablebody1">发帖权限</td>');
+		document.write ('</tr>');
+		document.write ('<tr>');
+		document.write ('<td height="25" width="16%" class="tablebody2">用户组名('+groupname.length+')</td>');
+		document.write ('<td height="23" width="7%"class="tablebody2">可以发布新主题</td>');
+		document.write ('<td height="23" width="7%"class="tablebody2">可以回复自己的主题</td>');
+		document.write ('<td height="23" width="7%"class="tablebody2">可以回复其他人的主题</td>');
+		document.write ('<td height="23" width="7%"class="tablebody2">参与评分所需金钱</td>');
+		document.write ('<td height="23" width="7%"class="tablebody2">可以上传附件</td>');
+		document.write ('<td height="23" width="7%"class="tablebody2">最多上传文件个数</td>');
+		document.write ('<td height="23" width="7%"class="tablebody2">上传文件大小限制</td>');
+		document.write ('<td height="23" width="7%"class="tablebody2">可以发布新投票</td>');
+		document.write ('<td height="23" width="7%"class="tablebody2">可以参与投票</td>');
+		document.write ('<td height="23" width="7%"class="tablebody2">可以发布小字报</td>');
+		document.write ('<td height="23" width="7%"class="tablebody2">发布小字报所需金钱</td>');
+		document.write ('</tr>');
+		break;
+		case 3:
+		document.write ('<table class=tableborder1 cellspacing=1 cellpadding=3  align="center">');
+		document.write ('<tr  align="center">');
+		document.write ('<td colspan="5" class="tablebody1">帖子管理权限</td>');
+		document.write ('</tr>');
+		document.write ('<tr>');
+		document.write ('<td height="25" width="20%" class="tablebody2">用户组名('+groupname.length+')</td>');
+		document.write ('<td height="23" width="20%" class="tablebody2">可以编辑自己的帖子</td>');
+		document.write ('<td height="23" width="20%" class="tablebody2">可以删除自己的帖子</td>');
+		document.write ('<td height="23" width="20%" class="tablebody2">可以移动自己的帖子到其他论坛</td>');
+		document.write ('<td height="23" width="20%" class="tablebody2">可以打开/关闭自己发布的主题</td>');
+		document.write ('</tr>');
+		break;
+		case 4:
+		document.write ('<table class="tableborder1" cellspacing="1" cellpadding="3"  align="center">');
+		document.write ('<tr  align="center">');
+		document.write ('<td colspan=8 class="tablebody1">其他权限</td>');
+		document.write ('</tr>');
+		document.write ('<tr>');
+		document.write ('<td height="25" width="12.5%" class="tablebody2">用户组名('+groupname.length+')</td>');
+		document.write ('<td height="23" width="12.5%" class="tablebody2">可以搜索论坛</td>');
+		document.write ('<td height="23" width="12.5%" class="tablebody2">可以使用\'发送本页给好友\'功能</td>');
+		document.write ('<td height="23" width="12.5%" class="tablebody2">可以修改个人资料</td>');
+		document.write ('<td height="23" width="12.5%" class="tablebody2">帖子中可以查看其他人头衔</td>');
+		document.write ('<td height="23" width="12.5%" class="tablebody2">帖子中可以查看其他人头像</td>');
+		document.write ('<td height="23" width="12.5%" class="tablebody2">可以浏览论坛事件</td>');
+		document.write ('</tr>');
+		break;
+		case 5:
+		document.write ('<table class="tableborder1" cellspacing="1" cellpadding="3"  align="center">');
+		document.write ('<tr  align="center">');
+		document.write ('<td colspan=18 class="tablebody1">管理权限</td>');
+		document.write ('</tr>');
+		document.write ('<tr>');
+		document.write ('<td height="25" width="10%" class="tablebody2">用户组名('+groupname.length+')</td>');
+		document.write ('<td height="23" width="5%" class="tablebody2">可以删除其他人帖子</td>');
+		document.write ('<td height="23" width="5%" class="tablebody2">可以移动其他人帖子</td>');
+		document.write ('<td height="23" width="5%" class="tablebody2">可以打开/关闭其他人帖子</td>');
+		document.write ('<td height="23" width="5%" class="tablebody2">可以固顶/解除固顶帖子</td>');
+		document.write ('<td height="23" width="5%" class="tablebody2">可以奖励/惩罚发帖用户</td>');
+		document.write ('<td height="23" width="5%" class="tablebody2">可以奖励/惩罚用户</td>');
+		document.write ('<td height="23" width="5%" class="tablebody2">可以编辑其他人帖子</td>');
+		document.write ('<td height="23" width="5%" class="tablebody2">可以加入/解除精华帖子</td>');
+		document.write ('<td height="23" width="5%" class="tablebody2">可以发布公告</td>');
+		document.write ('<td height="23" width="5%" class="tablebody2">可以管理公告</td>');
+		document.write ('<td height="23" width="5%" class="tablebody2">可以管理小字报</td>');
+		document.write ('<td height="23" width="5%" class="tablebody2">可以锁定/屏蔽/解除锁定用户</td>');
+		document.write ('<td height="23" width="5%" class="tablebody2">可以删除用户1－10天内所发帖子</td>');
+		document.write ('<td height="23" width="5%" class="tablebody2">可以查看来访IP及来源</td>');
+		document.write ('<td height="23" width="5%" class="tablebody2">可以限定IP来访</td>');
+		document.write ('<td height="23" width="5%" class="tablebody2">可以管理用户权限</td>');
+		document.write ('<td height="23" width="5%" class="tablebody2">可以批量删除帖子（前台）</td>');
+		document.write ('</tr>');
+		break;
+		case 6:
+		document.write ('<table class="tableborder1" cellspacing="1" cellpadding="3"  align="center">');
+		document.write ('<tr  align="center">');
+		document.write ('<td colspan="5" class="tablebody1">短信权限</td>');
+		document.write ('</tr>');
+		document.write ('<tr>');
+		document.write ('<td height="25" width="12.5%" class="tablebody2">用户组名('+groupname.length+')</td>');
+		document.write ('<td height="23" width="12.5%" class="tablebody2">可以发送短信</td>');
+		document.write ('<td height="23" width="12.5%" class="tablebody2">最多发送用户</td>');
+		document.write ('<td height="23" width="12.5%" class="tablebody2">短信内容大小限制</td>');
+		document.write ('<td height="23" width="12.5%" class="tablebody2">信箱大小限制</td>');
+		document.write ('</tr>');
+		break ;
+		case "":
+		document.write ('<table class="tableborder1" cellspacing="1" cellpadding="3"  align="center">');
+		document.write ('<tr  align="center">');
+		document.write ('<td colspan="5" class="tablebody1">其他权限</td>');
+		document.write ('</tr>');
+		document.write ('<tr>');
+		document.write ('<td height="25" width="20%" class="tablebody2">用户组名('+groupname.length+')</td>');
+		document.write ('<td height="23" width="20%" class="tablebody2">可以浏览论坛</td>');
+		document.write ('<td height="23" width="20%" class="tablebody2">可以查看会员信息(包括其他会员的资料和会员列表)</td>');
+		document.write ('<td height="23" width="20%" class="tablebody2">可以查看其他人发布的主题</td>');
+		document.write ('<td height="23" width="20%" class="tablebody2">可以浏览精华帖子</td>');
+		document.write ('</tr>');
+		baeak;
+	}
+	for (i=0;i<groupname.length;i++)
+	{
+	GroupSetting[i]=GroupSetting[i].split(",")
+	
+	switch (orders)
+	{	
+		case 1:
+		document.write ('<tr>');
+		document.write ('<td height="23"  class="tablebody1">'+groupname[i]+'</td>');
+		document.write ('<td height="23"  class="tablebody1"><b>'+YesOrNo(GroupSetting[i][0])+'</b></td>');
+		document.write ('<td height="23"  class="tablebody1"><b>'+YesOrNo(GroupSetting[i][1])+'</b></td>');
+		document.write ('<td height="23"  class="tablebody1"><b>'+YesOrNo(GroupSetting[i][2])+'</b></td>');
+		document.write ('<td height="23"  class="tablebody1"><b>'+YesOrNo(GroupSetting[i][41])+'</b></td>');
+		document.write ('</tr>');
+		break;
+		case 2:
+		document.write ('<tr>');
+		document.write ('<td height="23"  class="tablebody1">'+groupname[i]+'</td>');
+		document.write ('<td height="23"  class="tablebody1"><b>'+YesOrNo(GroupSetting[i][3])+'</b></td>');
+		document.write ('<td height="23"  class="tablebody1"><b>'+YesOrNo(GroupSetting[i][4])+'</b></td>');
+		document.write ('<td height="23"  class="tablebody1"><b>'+YesOrNo(GroupSetting[i][5])+'</b></td>');
+		document.write ('<td height="23"  class="tablebody1"><b>'+GroupSetting[i][47]+'</b></td>');
+		document.write ('<td height="23"  class="tablebody1"><b>'+YesOrNo(GroupSetting[i][7])+'</b></td>');
+		document.write ('<td height="23"  class="tablebody1"><b>'+GroupSetting[i][40]+'</b></td>');
+		document.write ('<td height="23"  class="tablebody1"><b>'+GroupSetting[i][44]+'</b> KB</td>');
+		document.write ('<td height="23"  class="tablebody1"><b>'+YesOrNo(GroupSetting[i][8])+'</b></td>');
+		document.write ('<td height="23"  class="tablebody1"><b>'+YesOrNo(GroupSetting[i][9])+'</b></td>');
+		document.write ('<td height="23"  class="tablebody1"><b>'+YesOrNo(GroupSetting[i][17])+'</b></td>');
+		document.write ('<td height="23"  class="tablebody1"><b>'+GroupSetting[i][46]+'</b></td>');
+		document.write ('</tr>');
+		
+		break;
+		case 3:
+		document.write ('<tr>');
+		document.write ('<td height="23"  class="tablebody1">'+groupname[i]+'</td>');
+		document.write ('<td height="23"  class="tablebody1"><b>'+YesOrNo(GroupSetting[i][10])+'</b></td>');
+		document.write ('<td height="23"  class="tablebody1"><b>'+YesOrNo(GroupSetting[i][11])+'</b></td>');
+		document.write ('<td height="23"  class="tablebody1"><b>'+YesOrNo(GroupSetting[i][12])+'</b></td>');
+		document.write ('<td height="23"  class="tablebody1"><b>'+YesOrNo(GroupSetting[i][13])+'</b></td>');
+		document.write ('</tr>');
+
+		break;
+		case 4:
+		document.write ('<tr>');
+		document.write ('<td height="23"  class="tablebody1">'+groupname[i]+'</td>');
+		document.write ('<td height="23"  class="tablebody1"><b>'+YesOrNo(GroupSetting[i][14])+'</b></td>');
+		document.write ('<td height="23"  class="tablebody1"><b>'+YesOrNo(GroupSetting[i][15])+'</b></td>');
+		document.write ('<td height="23"  class="tablebody1"><b>'+YesOrNo(GroupSetting[i][16])+'</b></td>');
+		document.write ('<td height="23"  class="tablebody1"><b>'+YesOrNo(GroupSetting[i][36])+'</td>');
+		document.write ('<td height="23"  class="tablebody1"><b>'+YesOrNo(GroupSetting[i][37])+'</b></td>');
+		document.write ('<td height="23"  class="tablebody1"><b>'+YesOrNo(GroupSetting[i][39])+'</b></td>');
+		document.write ('</tr>');
+
+		break;
+		case 5:
+		document.write ('<tr>');
+		document.write ('<td height="23"  class="tablebody1">'+groupname[i]+'</td>');
+		document.write ('<td height="23"  class="tablebody1"><b>'+YesOrNo(GroupSetting[i][18])+'</b></td>');
+		document.write ('<td height="23"  class="tablebody1"><b>'+YesOrNo(GroupSetting[i][19])+'</b></td>');
+		document.write ('<td height="23"  class="tablebody1"><b>'+YesOrNo(GroupSetting[i][20])+'</b></td>');
+		document.write ('<td height="23"  class="tablebody1"><b>'+YesOrNo(GroupSetting[i][21])+'</b></td>');
+		document.write ('<td height="23"  class="tablebody1"><b>'+YesOrNo(GroupSetting[i][22])+'</b></td>');
+		document.write ('<td height="23"  class="tablebody1"><b>'+YesOrNo(GroupSetting[i][43])+'</b></td>');
+		document.write ('<td height="23"  class="tablebody1"><b>'+YesOrNo(GroupSetting[i][23])+'</b></td>');
+		document.write ('<td height="23"  class="tablebody1"><b>'+YesOrNo(GroupSetting[i][24])+'</b></td>');
+		document.write ('<td height="23"  class="tablebody1"><b>'+YesOrNo(GroupSetting[i][25])+'</b></td>');
+		document.write ('<td height="23"  class="tablebody1"><b>'+YesOrNo(GroupSetting[i][26])+'</b></td>');
+		document.write ('<td height="23"  class="tablebody1"><b>'+YesOrNo(GroupSetting[i][27])+'</b></td>');
+		document.write ('<td height="23"  class="tablebody1"><b>'+YesOrNo(GroupSetting[i][28])+'</b></td>');
+		document.write ('<td height="23"  class="tablebody1"><b>'+YesOrNo(GroupSetting[i][29])+'</b></td>');
+		document.write ('<td height="23"  class="tablebody1"><b>'+YesOrNo(GroupSetting[i][30])+'</b></td>');
+		document.write ('<td height="23"  class="tablebody1"><b>'+YesOrNo(GroupSetting[i][31])+'</b></td>');
+		document.write ('<td height="23"  class="tablebody1"><b>'+YesOrNo(GroupSetting[i][42])+'</b></td>');
+		document.write ('<td height="23"  class="tablebody1"><b>'+YesOrNo(GroupSetting[i][45])+'</b></td>');
+		document.write ('</tr>');
+
+		break;
+		case 6:
+		document.write ('<tr>');
+		document.write ('<td height="23"  class="tablebody1">'+groupname[i]+'</td>');
+		document.write ('<td height="23"  class="tablebody1"><b>'+YesOrNo(GroupSetting[i][32])+'</b></td>');
+		document.write ('<td height="23"  class="tablebody1"><b>'+GroupSetting[i][33]+'</b></td>');
+		document.write ('<td height="23"  class="tablebody1"><b>'+GroupSetting[i][34]+'</b> byte</td>');
+		document.write ('<td height="23"  class="tablebody1"><b>'+GroupSetting[i][35]+'</b> KB</td>');
+		document.write ('</tr>');
+
+		break;
+		case "":
+		document.write ('<tr>');
+		document.write ('<td height="23"  class="tablebody1">'+groupname[i]+'</td>');
+		document.write ('<td height="23"  class="tablebody1"><b>'+YesOrNo(GroupSetting[i][0])+'</b></td>');
+		document.write ('<td height="23"  class="tablebody1"><b>'+YesOrNo(GroupSetting[i][1])+'</b></td>');
+		document.write ('<td height="23"  class="tablebody1"><b>'+YesOrNo(GroupSetting[i][2])+'</b></td>');
+		document.write ('<td height="23"  class="tablebody1"><b>'+YesOrNo(GroupSetting[i][41])+'</b></td>');
+		document.write ('</tr>');
+
+		break;
+	}
+	}
+	document.write ('</table>');
+	
+	
+}
+function YesOrNo(thiskey)
+{	if (thiskey=='1')
+	{
+		return('√')
+	}
+	else
+	{
+		return('<font color="{$alertcolor}">×</font>')
+	}
+	
+	
+}
+//-->
+</script>

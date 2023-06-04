@@ -1,0 +1,335 @@
+<script type="text/javascript" language="javascript"  src="inc/dv_index.js"></script>
+<!--论坛文字广告位-->
+<div class="mainbox">
+	<img src="images/forum_readme.gif" alt="" border="0" />{$bbsitem.readme}<br /><br />
+</div>
+{$ad.forumtextad}
+{$boardtab.begin}
+<div class="mainbox">	
+	<div id="Tab">
+		<div class="Menubox">
+		<ul>
+			{$bbsitem.begin}
+			<li id="two1" onclick="setTab('two',1,3,1)" class="hover">子版面</li>			
+			{$bbsitem.end}
+		   {$topicmode.begin}
+		   <li id="two2" onclick="setTab('two',2,3,1)" >本版专题</li>
+		   {$topicmode.end}
+		   {$rule.begin}
+		   <li id="two3" onclick="setTab('two',3,3,1)">本版版规</li>
+		   {$rule.end}
+		</ul>
+		</div>		
+		<div class="Contentbox">  
+			<!--论坛一级版面开始-->
+			{$bbsitem.begin}
+			<div id="con_two_1" >
+				<div class="bbs_column{$bbsitem.mode}">
+				<ul style="border:none;">		
+				{$bbsitem_1.begin}<!--版面列表模式-->
+				<table id="board_{$bbsitem.boardid}" style="display:;" cellpadding="0" cellspacing="0">
+				{$boarditem.begin}{$urlrewrite.open}
+				<tr class="bbsboxout">
+					<td>
+					<div style="margin-top:5px;height:35px;float:left;margin-right:5px;" align="center"><img src="{$pub.forum_picurl}{$boarditem.today}.gif" /></div>
+					<strong><a href="index.asp?boardid={$boarditem.boardid}" class="newlink">{$boarditem.boardtype}</a></strong><br />
+					<img src="images/forum_readme.gif" alt="" border="0" />{$boarditem.readme}<br />
+					<span>版主：{$boarditem.boardmaster}  | 最新：<a href="dispbbs.asp?boardid={$information.lastpost_7}&amp;replyID={$information.lastpost_1}&amp;ID={$information.lastpost_6}&amp;skin=1" class="blue">{$information.lastpost_3}</a>  |  主题：<em>{$information.topicnum}</em>   |  帖子：<em>{$information.postnum}</em></span></td>
+					<td width="1%" style="text-align:right"><a href="index.asp?boardid={$boarditem.boardid}">{$boarditem.indeximg}</a></td>
+				</tr>{$urlrewrite.close}		
+				{$boarditem.end}
+				</table>
+				{$bbsitem_1.end}
+				{$bbsitem_2.begin}<!--版面简洁模式-->
+				<table id="board_{$bbsitem.boardid}" style="display:;"  cellpadding="0" cellspacing="0">
+				<tr class="bbsboxout">
+				{$boarditem.begin}{$urlrewrite.open}
+					<td width="{$bbsitem.width}">
+					<div style="margin-top:5px;height:35px;float:left;margin-right:5px;" align="center"><img src="{$pub.forum_picurl}{$boarditem.today}.gif" /></div>
+					<strong><a href="index.asp?boardid={$boarditem.boardid}" class="newlink">{$boarditem.boardtype}</a></strong>
+					<span>版主：{$boarditem.boardmaster}<br />主题：<em>{$information.topicnum}</em>   |  帖子：<em>{$information.postnum}</em></span></td>
+				{$bbsitem.br}{$urlrewrite.close}
+				{$boarditem.end}	
+				</tr>			
+				</table>
+				{$bbsitem_2.end}
+				</ul>
+			</div>
+			</div>
+			{$bbsitem.end}
+			<!--论坛一级版面结束-->
+			<!--本版专题-->	
+			{$topicmode.begin}
+			<div id="con_two_2" style="display:none">
+				{$topicmode_li.begin}{$urlrewrite.open}
+				{$topicmode_li.img}<a href="index.asp?boardid={$pub.boardid}&amp;topicmode={$topicmode_li.i}">{$topicmode_li.title}</a>
+				{$topicmode_li.br}{$urlrewrite.close}
+				{$topicmode_li.end}
+			</div>
+			{$topicmode.end}
+			<!--专题结束-->
+			<!--显示版面版规开始-->
+			{$rule.begin}
+				<div id="con_two_3" style="display:none">
+					{$rule.rules}
+				</div>
+			{$rule.end}
+			<!--显示版面版规结束-->
+			<script type="text/javascript" language="JavaScript">
+			<!--
+			var n=3; // 标签卡个数
+			setTab('two',1,n,0);			
+			//-->
+			</script>
+		</div>
+	</div>
+</div>
+{$boardtab.end}
+{$showtopic.begin}<!--显示版面信息和帖子开始-->
+<div class="mainbox">
+	<div class="rollboder"><!--显示论坛公告和小字报开始-->
+	<ul>
+		<li class="rollleft">
+			<div class="rollTextMenus" id="rollTextMenus">
+				{$announcementsitem.begin}
+				<div id="rollTextMenu{$announcementsitem.i}" name="announcementsitem" style="display: none"><strong>　公告：</strong> <a href="javascript:;" onclick="DvWnd.open('公告：{$announcementsitem.title}','announcements.asp?action=showone&amp;boardid={$announcementsitem.boardid}&amp;id={$announcementsitem.id}',600,400,1,{bgc:'black',opa:0.5});" >{$announcementsitem.title}</a> ({$announcementsitem.addtime})</div>
+				{$announcementsitem.end}
+				{$smallpaper.begin}
+				<div id="rollTextMenu{$smallpaper.i}" name="announcementsitem" style="display: none">&nbsp;&nbsp;<strong>小字报：</strong> <a href="javascript:;" onclick="DvWnd.open('小字报：{$smallpaper.s_title}','viewinfo.asp?id={$smallpaper.s_id}&amp;boardid={$pub.boardid}',500,350);">{$smallpaper.s_title}</a> &nbsp;&nbsp;(<a href="dispuser.asp?name={$smallpaper.s_username}" target="_blank" title="查看发表人的个人资料">{$smallpaper.s_username}</a>&nbsp;&nbsp;<font color="#cccccc">By: {$smallpaper.s_addtime}</font>)</div>
+				{$smallpaper.end}
+			</div>
+		</li>
+		<li class="rollright" width="40"><a title="上一条" href="javascript:rollText(-1);"><img src="images/last.gif" alt="上一条" width="11" height="11" border="0" /></a> <a title="下一条" href="javascript:rollText(1);"><img src="images/next.gif" alt="下一条" width="11" height="11" border="0" /></a></li>
+		<li class="rollcenter" id="pageShow" width="30"></li>
+	</ul>
+	</div>
+	<script type="text/javascript" language="JavaScript">announcements();</script>
+	<!--显示论坛公告和小字报结束-->
+</div>
+<table style="margin-bottom:3px;" cellspacing="0" cellpadding="0">
+	<tr>
+	<td valign="bottom">
+	<span>
+		  <ul class="menu2" onmouseover="this.className='menu1'" onmouseout="this.className='menu2'" onclick="location.href='post.asp?action=new&amp;boardid={$pub.boardid}&amp;stype=0'" title="发表一个新帖子">&nbsp;
+		  <li class="list">
+			<a title="发表一个新帖子" href="post.asp?action=new&amp;boardid={$pub.boardid}&amp;stype=0" ><span><img src="images/post/new_post.gif" border="0" alt="" /></span>新的主题</a>
+			<a title="发起一个新投票" href="post.asp?action=vote&amp;boardid={$pub.boardid}&amp;stype=0"><span><img src="images/post/vote_post.gif" border="0" alt="" /></span>投票帖</a>
+			{$tenpay.begin}
+			<a title="发起一个用QQ财付通交易的交易帖！" href="post.asp?action=new&amp;boardid={$pub.boardid}&amp;stype=1" ><span><img src="images/post/shop_post.gif" border="0" alt="" /></span>交易帖</a>
+			{$tenpay.end}
+			<a title="发布一个小字报" href="infolist.asp?t=smallpaper&amp;boardid={$pub.boardid}"><span><img src="images/post/pk_post.gif" border="0" /></span>新小字报</a>
+		  </li>
+		  <div style="clear:both"></div>
+		  </ul>
+		  <div><a title="发起一个新投票" href="post.asp?action=vote&amp;boardid={$pub.boardid}&amp;stype=0" class="post_vote"></a></div>		  
+	</span>
+	</td>
+	<td style="text-align:right;" valign="bottom">
+		版主：{$bbsitem.boardmaster}<br />
+		[ <a href="index.asp?boardid={$pub.boardid}&amp;TopicMode={$page.TopicMode}&amp;List_Type=8,0,0&amp;page=" title="查看我在本版发表的主题">我的主题</a> |  <a href="index.asp?boardid={$pub.boardid}&amp;TopicMode={$page.TopicMode}&amp;List_Type=6,0,0&amp;page=" title="查看本版精华主题"><font color="#FF0000">精华主题</font></a> | <a href="index.asp?boardid={$pub.boardid}&amp;TopicMode={$page.TopicMode}&amp;List_Type=7,0,0&amp;page=" title="查看本版投票主题">投票主题</a> ]&nbsp;&nbsp;<a href="infolist.asp?t=even&amp;boardid={$pub.boardid}" title="查看本版事件">事件</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="BoardPermission.asp?boardid={$pub.boardid}" title="查看本版用户组权限">权限</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="admin_boardset.asp?boardid={$pub.boardid}">管理</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="AccessTopic.asp?boardid={$pub.boardid}" title="进入审核管理页面">审核</a>
+		<br />
+		<div id="showpage_top" style="float:right;margin-top:5px;"></div>
+	</td>
+	</tr>
+</table>	
+<form action="admin_batch.asp?boardid={$pub.boardid}" method="post" style="border:0;margin:0;padding:0;" name="batch">
+<div id="showpage_top" class="pages"></div>
+<div class="mainbox border">
+<table class="tableborder" cellspacing="0" cellpadding="0" style="margin-top:0px; ">
+<tr>{$urlrewrite.open}
+	<th style="text-align:center"><a href="index.asp?boardid={$pub.boardid}&amp;page={$page.page}&amp;action=batch" title="批量管理帖子">状态</a></th>
+	<th style="text-align:center">主题</th>
+	<th style="text-align:center"><a href="index.asp?boardid={$pub.boardid}&amp;List_Type=0,1,0" title="按发表时间排序">作者</a></th>
+	<th style="text-align:center"><a href="index.asp?boardid={$pub.boardid}&amp;List_Type=0,3,0" title="按回复人数排序">回复</a> / <a href="index.asp?boardid={$pub.boardid}&amp;List_Type=0,2,0" title="按阅读人数排序">人气</a></th>
+	<th style="text-align:center"><a href="index.asp?boardid={$pub.boardid}" title="按回复时间排序">最后更新</a></th>
+</tr>{$urlrewrite.close}
+{$page=1.begin}
+<!--显示固顶主题开始-->
+{$toptopic.begin}{$urlrewrite.open}
+<tr onmouseover="this.className='tron'" onmouseout="this.className='trout'">
+	<td class="list1"><a href="dispbbs.asp?boardid={$toptopic.boardid}&amp;Id={$toptopic.id}" target="_blank"><img src="{$pub.forum_picurl}/top{$toptopic.top}.gif" alt="在新窗口打开帖子" border="0" /></a></td>
+	<td class="list2">{$toptopic.tool}
+	<span id="followImg{$toptopic.id}">{$toptopic.listimg}</span>
+	{$toptopic.checkbox}<a href="dispbbs.asp?boardid={$toptopic.boardid}&amp;Id={$toptopic.id}" title="《{$toptopic.title2}》&#13;作者：{$toptopic.postusername_2}&#13;发表于：{$toptopic.dateandtime}&#13;最后发帖：{$toptopic.lastpostcontent}">{$toptopic.title}</a>&nbsp;{$toptopic.pagelist} &nbsp;{$toptopic.titleimg}</td>
+	<td class="list3">{$toptopic.postusername}<br /><a href="dispbbs.asp?boardid={$toptopic.boardid}&amp;Id={$toptopic.id}" class="font10">{$toptopic.dateandtime2}</a></td>
+	<td class="list4 font10"><span>{$toptopic.child}</span> / {$toptopic.hit}</td>
+	<td class="list5"><a href="dispbbs.asp?boardid={$toptopic.boardid}&amp;Id={$toptopic.id}&amp;page={$page.page}&amp;star={$toptopic.star}#{$toptopic.lastpostid}" class="font10">{$toptopic.lastposttime}</a><br />by：<a href="dispuser.asp?Name={$toptopic.lastpostuser}">{$toptopic.lastpostuser}</a></td>
+</tr>
+<tr>
+	<td colspan="5" id="follow{$toptopic.id}" style="display:none;text-align:left;"><div id="followTd{$toptopic.id}" style="padding:2px;"></div></td>
+</tr>{$urlrewrite.close}
+{$toptopic.end}
+<!--显示固顶主题结束-->
+<tr>
+	<td colspan="5" class="topline">-==普通主题==-</td>
+</tr>
+{$page=1.end}
+<!--显示普通主题开始-->
+{$topic.begin}{$urlrewrite.open}
+<tr onmouseover="this.className='tron'" onmouseout="this.className='trout'">
+	<td class="list1"><a href="dispbbs.asp?boardid={$topic.boardid}&amp;Id={$topic.id}" target="_blank"><img src="{$topic.folder}" alt="在新窗口打开帖子" border="0"/></a></td>
+	<td class="list2">{$topic.tool}
+	<span id="followImg{$topic.id}">{$topic.listimg}</span>
+	{$topic.checkbox}<a href="dispbbs.asp?boardid={$topic.boardid}&amp;Id={$topic.id}{$topic.page}" title="《{$topic.title2}》&#13;作者：{$topic.postusername_2}&#13;发表于：{$topic.dateandtime}&#13;最后发帖：{$topic.lastpostcontent}">{$topic.title}</a>&nbsp;{$topic.pagelist} &nbsp;{$topic.titleimg}	
+	</td>
+	<td class="list3">{$topic.postusername}<br /><a href="dispbbs.asp?boardid={$topic.boardid}&amp;Id={$topic.id}{$topic.page}" class="font10">{$topic.dateandtime2}</a></td>
+	<td class="list4 font10"><span>{$topic.child}</span> / {$topic.hit}</td>
+	<td class="list5"><a href="dispbbs.asp?boardid={$topic.boardid}&amp;Id={$topic.id}&amp;page={$page.page}&amp;star={$topic.star}#{$topic.lastpostid}" class="font10">{$topic.lastposttime}</a><br />by：<a href="dispuser.asp?Name={$topic.lastpostuser}">{$topic.lastpostuser}</a></td>
+</tr>
+<tr>
+	<td colspan="5" id="follow{$topic.id}" style="display:none;text-align:left;"><div id="followTd{$topic.id}" style="padding:2px;"></div></td>
+</tr>{$urlrewrite.close}
+{$topic.end}
+<!--显示普通主题结束-->
+{$action=batch.begin}
+<tr>
+	<td class="list1">批量</td>
+	<td colspan="4" class="list2">
+		<input type="checkbox" name="chkall" value="on" id="chkall" onclick="CheckAll(this.form);" class="checkbox" />&nbsp;<a><label for="chkall">全选/取消</label></a>&nbsp;&nbsp;&nbsp;
+		<input type="radio" class="checkbox" name="action" value="move" checked="checked" id="move"/>&nbsp;<label for="move" style="color:#0000FF"><b>批量移动</b></label> &gt;&gt; <select name="newboard" id="newboard"></select>
+		&nbsp;&nbsp;&nbsp;
+		{$topicmode.begin}
+		<input type="radio" class="checkbox" name="action" value="topicmode" id="topicmode"/>&nbsp;<label for="topicmode" style="color:#339900"><b>专题操作</b></label>  &gt;&gt;
+		<select name="mode">
+			<option>所属专题操作</option>
+			<option value="0" style="color:#FF0000;">取消所属专题</option>
+			<option>::移往以下专题::</option>
+			{$topicmode_li.begin}
+				<option style="background-color:#E1F0FF;" value="{$topicmode_li.i}">{$topicmode_li.title}</option>
+			{$topicmode_li.end}
+		</select>
+		{$topicmode.end}
+	</td>
+</tr>
+<tr>
+	<td class="list1">管理</td>
+	<td colspan="4" class="list2">
+		<input type="hidden" value="{pub.boardid}" name="boardid"/>
+		<input type="radio" name="action" class="checkbox" value="dele" id="dele"/>&nbsp;<label for="dele" style="color:#FF0000"><b>批量删除</b></label>&nbsp;&nbsp;&nbsp;<input type="radio" class="checkbox" name="action" value="isbest" id="isbest"/>&nbsp;<label for="isbest" style="color:#FF00CC"><b>批量精华</b></label>&nbsp;&nbsp;&nbsp;<input type="radio" class="checkbox" name="action" value="lock" id="lock"/>&nbsp;<label for="lock" style="color:#CC0000"><b>批量锁定</b></label>  <input type="submit" class="input0" name="Submit" value="执行" onclick="return clicksubmit(this.form);"/>
+		<script type="text/javascript" language="javascript">
+			function CheckAll(form)
+			  {
+			  for (var i=0;i<form.elements.length;i++)
+				{
+				var e = form.elements[i];
+				if (e.name == 'Announceid')
+				   e.checked = form.chkall.checked;
+				}
+			}
+			function clicksubmit(form)
+			{
+			if(confirm('您确定执行的操作吗?'))
+			{	this.document.batch.submit();
+				return true;
+			}else{
+				return false;
+			}
+			}
+			BoardJumpListSelect(0,"newboard","移动帖子请选择","",1);
+		</script>
+	</td>
+</tr>
+{$action=batch.end}
+</table>
+</div>
+</form>
+<div class="mainbox" style="overflow:hidden">
+<div id="showpage" style="float:right;height:25px;">
+	{$urlrewrite.open}{$topic.showpage}{$urlrewrite.close} <!--分页栏-->
+</div>
+<form method="post" action="index.asp?boardid={$pub.boardid}" onsubmit="if (ISAPI_ReWrite==1){this.action='index_{$pub.boardid}.html'}">
+	<select name="List_Type">
+		<option value="0" selected="selected">全部主题</option>
+		<option value="1">当天的主题</option>
+		<option value="2">本周内的主题</option>
+		<option value="3">本月内的主题</option>
+		<option value="4">半年内的主题</option>
+		<option value="5">一年内的主题</option>
+	</select>
+	<select name="List_Type">
+		<option value="0" selected="selected">按回复时间排序</option>
+		<option value="1">按发布时间排序</option>
+		<option value="2">按阅读人数排序</option>
+		<option value="3">按回复人数排序</option>
+	</select>
+	<select name="List_Type">
+		<option value="0" selected="selected">降序</option>
+		<option value="1">升序</option>
+	</select>
+	<input type="submit" value="确定" class="input0" style="padding-top:2px;height:20px;" />
+</form>
+</div>
+<div class="mainbox" style="overflow:hidden">
+<div style="float:right;height:25px;">
+	<select name="BoardJumpList" id="BoardJumpList" onchange="if(this.options[this.selectedIndex].value!='')if (ISAPI_ReWrite==1)location='index_'+this.options[this.selectedIndex].value+'.html'; else location='index.asp?boardid='+this.options[this.selectedIndex].value;"></select>
+	<script type="text/javascript" language="javascript">BoardJumpListSelect('{$pub.boardid}',"BoardJumpList","论坛跳转到....","",0);</script>
+</div>
+<form method="post" action="Query.asp">
+	<input name="boardid" type="hidden" value="{$pub.boardid}"/>
+	<input name="sType" type="hidden" value="2"/>
+	<input name="SearchDate" type="hidden" value="30"/>
+	<input name="pSearch" type="hidden" value="1"/>
+	<input name="nSearch" type="hidden" value="1"/>
+	<input name="isWeb" type="hidden" value="1"/>
+	<input type="text" name="keyword"/>
+	<input type="submit" name="submit" class="input0" value="站内搜索"/>
+	<input type="submit" name="submit" class="input0" value="网页搜索"/>
+</form>
+</div>
+<script language="javascript">
+$page_up=document.getElementById("showpage_top");
+$page_bottom=document.getElementById("showpage");
+if ($page_up && $page_bottom) $page_up.innerHTML=$page_bottom.innerHTML;
+//加载条件列表选项
+listType("{$page.listtype}");
+function listType(arr){
+	if (arr!="0,0,0")
+	{	
+		var list=arr.split(",");
+		var selectObj = document.getElementsByName("List_Type");
+		if (parseInt(list[0])<=5)
+			selectObj[0].options[list[0]].selected=true;
+		selectObj[1].options[list[1]].selected=true;
+		selectObj[2].options[list[2]].selected=true;
+	}
+}
+</script>
+<div class="mainbox">
+	<div class="Menubox">
+	<ul>
+	   <li id="too1" onclick="setTab('too',1,2)" class="hover">论坛图例说明</li>
+	   <li id="too2" onclick="setTab('too',2,2)" >与我同在</li>
+	</ul>
+	</div>
+	 <div class="Contentbox">  
+	   <div id="con_too_1" >
+			<div class="count">
+				<ul>
+				<li>帖子图例：<img src="{$page.mainpic_0}" alt="" /> 总置顶　　<img src="{$page.mainpic_1}" alt="" /> 区置顶　　<img src="{$page.mainpic_19}" alt="" /> 版置顶　　<img src="{$page.mainpic_2}" alt="" /> 普通主题　　<img src="{$page.mainpic_3}" alt="" /> 热门主题　　<img src="{$page.mainpic_4}" alt="" /> 锁定主题　　<img src="{$page.mainpic_5}" alt="" /> 精华帖　　<img src="{$page.mainpic_6}" alt="" /> 投票帖</li>
+				</ul>
+			</div>
+		</div>
+		<div id="con_too_2" style="display:none">
+			<div class="count">
+				<ul>
+				<li>论坛总在线<span id="allonline">{$pub.forum_online}</span> 人，其中 <b>{$bbsitem.boardtype}</b> 有<span id="useronline"></span>位会员与<span id="guestonline"></span>位客人在线，今日帖子：{$information.todaynum} [ <span id="showstr"><a href="online.asp?action=1&amp;boardid={$pub.boardid}" target="hiddenframe"><font id="ifOnlineStr">显示详细列表</font></a></span> | <a href="boardstat.asp?reaction=online">查看在线用户位置</a> ] </li>
+				<li>
+				<div style="line-height:18px;text-align:left;display:none;" id="onlinetr">在线数据加载中…</div>
+				<iframe style="border:0px;width:0px;height:0px;" src="{$page.online_asp}" name="hiddenframe"></iframe>
+				</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript" language="JavaScript">
+//底部与我同在和帖子图例说明切换
+var new_link = new NewsSpanBar();
+new_link.f=0;
+new_link.titleid = "bot_link";
+new_link.bodyid = "body_link";
+new_link.class_hiton = "link_on";
+new_link.class_hitno = "link";
+new_link.load();
+</script>
+{$showtopic.end}<!--显示版面信息和帖子结束-->

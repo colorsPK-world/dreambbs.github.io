@@ -1,0 +1,592 @@
+<?xml version="1.0" encoding="gb2312"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+xmlns="http://www.w3.org/1999/xhtml">
+<xsl:output method="xml" omit-xml-declaration = "yes" indent="yes" version="4.0"/>
+	<!--
+	Copyright (C) 2004,2005 AspSky.Net. All rights reserved.
+	Written by dvbbs.net Lao Mi
+	Web: http://www.aspsky.net/,http://www.dvbbs.net/
+	Email: eway@aspsky.net
+	-->
+	<!--语言字串部分-->
+	<xsl:variable name="str_0">论坛搜索</xsl:variable>
+	<xsl:variable name="str_1">搜索说明:</xsl:variable>
+	<xsl:variable name="str_2">关键字字符长度不能小于</xsl:variable>
+	<xsl:variable name="str_3">大于</xsl:variable>
+	<xsl:variable name="str_4">字节</xsl:variable>
+	<xsl:variable name="str_5">在这里看搜索被限的字符</xsl:variable>
+	<xsl:variable name="str_6">每次搜索时间间隔</xsl:variable>
+	<xsl:variable name="str_7">秒</xsl:variable>
+	<xsl:variable name="str_8">按 用户名 查询为精确查询，必须输入用户名的全称</xsl:variable>
+	<xsl:variable name="str_9">请输入关键字：</xsl:variable>
+	<xsl:variable name="str_10"></xsl:variable>
+	<xsl:variable name="str_11">同时搜一搜更多结果</xsl:variable>
+	<xsl:variable name="str_12">作者</xsl:variable>
+	<xsl:variable name="str_13">主题</xsl:variable>
+	<xsl:variable name="str_14">内容</xsl:variable>
+	<xsl:variable name="str_15"></xsl:variable>
+	<xsl:variable name="str_16"></xsl:variable>
+	<xsl:variable name="str_17"></xsl:variable>
+	<xsl:variable name="str_18"></xsl:variable>
+	<xsl:variable name="str_19"></xsl:variable>
+	<xsl:variable name="str_20"></xsl:variable>
+	<xsl:variable name="str_21"></xsl:variable>
+	<xsl:variable name="str_22"></xsl:variable>
+	<xsl:variable name="str_23"></xsl:variable>
+	<xsl:variable name="str_24"></xsl:variable>
+	<xsl:variable name="str_25"></xsl:variable>
+	<xsl:variable name="str_26">站内搜索</xsl:variable>
+	<xsl:variable name="str_27">选取所有版面</xsl:variable>
+	<xsl:variable name="str_28">状态</xsl:variable>
+	<xsl:variable name="str_29">标题或简要内容</xsl:variable>
+	<xsl:variable name="str_30">作 者</xsl:variable>
+	<xsl:variable name="str_31">发表时间</xsl:variable>
+	<xsl:variable name="str_32">版 面</xsl:variable>
+	<xsl:variable name="str_33">开新窗口浏览此主题</xsl:variable>
+	<xsl:variable name="str_34">回收站</xsl:variable>
+	<xsl:variable name="str_35">待审核中</xsl:variable>
+	<xsl:variable name="str_36">==帖子已经被删除,请进回收站查看==</xsl:variable>
+	<xsl:variable name="str_37">尚未通过审核</xsl:variable>
+	<xsl:variable name="str_38">错误的版面</xsl:variable>
+	<xsl:variable name="str_39">隐藏论坛</xsl:variable>
+	<xsl:variable name="str_40">隐藏论坛帖子,您无权限进入</xsl:variable>
+	<xsl:variable name="str_41">==认证版面的帖子,请进入后查看内容==</xsl:variable>
+	<xsl:variable name="str_42">没有找到符合条件的记录,请</xsl:variable>
+	<xsl:variable name="str_43">[重新搜索]</xsl:variable>
+	<xsl:variable name="str_44">切换到管理模式</xsl:variable>
+	<xsl:variable name="str_45">切换普通模式</xsl:variable>
+	<!--分页部分语言包-->
+	<xsl:variable name="pagestr_0">总数</xsl:variable>
+	<xsl:variable name="pagestr_1">本页数</xsl:variable>
+	<xsl:variable name="pagestr_2">页</xsl:variable>
+	<xsl:variable name="pagestr_3">首页</xsl:variable>
+	<xsl:variable name="pagestr_4">上</xsl:variable>
+	<xsl:variable name="pagestr_5">下</xsl:variable>
+	<xsl:variable name="pagestr_6">尾页</xsl:variable>
+	<!--帖子状态的语言字串-->
+	<xsl:variable name="topicstats_0">固顶的主题</xsl:variable>
+	<xsl:variable name="topicstats_1">区固顶的主题</xsl:variable>
+	<xsl:variable name="topicstats_2">总固顶的主题</xsl:variable>
+	<xsl:variable name="topicstats_3">精华帖子</xsl:variable>
+	<xsl:variable name="topicstats_4">已删的主题</xsl:variable>
+	<xsl:variable name="topicstats_5">投票帖子</xsl:variable>
+	<xsl:variable name="topicstats_6">打开的主题</xsl:variable>
+	<!--帖子管理部分-->
+	<xsl:variable name="manage_0">移动帖子请选择</xsl:variable>
+	<xsl:variable name="manage_1">全选/取消</xsl:variable>
+	<xsl:variable name="manage_2">批量删除</xsl:variable>
+	<xsl:variable name="manage_3">批量移动</xsl:variable>
+	<xsl:variable name="manage_4">批量精华</xsl:variable>
+	<xsl:variable name="manage_5">批量锁定</xsl:variable>
+	<xsl:variable name="manage_6"></xsl:variable>
+	<xsl:variable name="manage_7"></xsl:variable>
+	<xsl:variable name="manage_8"></xsl:variable>
+	
+	<!--语言字串部分结束-->
+	<xsl:variable name="myscript">
+		<![CDATA[<script language="javascript" type="text/javascript">
+			function CheckAll(form)
+			{
+			for (var i=0;i<form.elements.length;i++)
+			  {
+			  var e = form.elements[i];
+			  if (e.name == 'announceid')
+				 e.checked = form.chkall.checked;
+			  }
+			}
+			function clicksubmit(form)
+			{
+			if(confirm('您确定执行的操作吗?'))
+			{	document.getElementById('batch').click();
+				return true;
+			}else{
+				return false;
+			}
+			}
+			</script>
+		]]>
+	</xsl:variable>
+	<xsl:variable name="myscript1">
+		<![CDATA[<script language="javascript" type="text/javascript">
+			function ONSearch(act,showobj,val,KeyWord,SelSearch){
+				if (val.checked==true){
+					var ToUrl="query.asp?action=isWeb&s="+showobj;
+					ToUrl += "&"+act+"="+val.value+"&SelSearch="+SelSearch+"&keyword="+KeyWord;
+					var HFrame = document.getElementById("hiddenquery")
+					if (HFrame){
+						HFrame.src=ToUrl;
+					}
+				}else
+				{
+					var ShowObj = document.getElementById(showobj);
+					if (ShowObj){
+						ShowObj.style.display='none';
+					}
+				}
+				ShowQuery()
+			}
+			function ShowQuery(){
+				var ObjName;
+				var s
+				s = 1
+				for(var i=1;i<=2;i++) {
+					ObjName = "SearchMain"+i;
+					var Obj = document.getElementById(ObjName);
+					if (Obj){
+						if (Obj.style.display=='')
+						s += 1
+					}
+				};
+				var wideth = 100 / s;
+				for(var i=1;i<=2;i++) {
+					ObjName = "SearchMain"+i;
+					var Obj = document.getElementById(ObjName);
+					if (Obj){
+						if (Obj.style.display==''){
+						Obj.style.width=parseFloat(wideth) + "%";}
+					}
+				};
+			}
+			function SetQuerySize(isWeb,KeyWord,SelSearch){
+				var s = 1;
+				if (isWeb==0){
+					s = 2;
+					var ToUrl="query.asp?action=isWeb&s=SearchMain2&SelSearch="+SelSearch+"&t=1&keyword="+KeyWord;
+					var HFrame = document.getElementById("hiddenquery")
+					if (HFrame){
+						HFrame.src=ToUrl;
+					}
+					var wideth = 100 / s;
+					for(var i=1;i<=2;i++) {
+						ObjName = "SearchMain"+i;
+						var Obj = document.getElementById(ObjName);
+						if (Obj){
+							Obj.style.width=parseFloat(wideth) + "%";
+							//alert(Obj.style.width);
+						}
+					};
+				}
+				if(isWeb==2){
+					s = 2;
+					var ToUrl="query.asp?action=isWeb&s=SearchMain2&SelSearch="+SelSearch+"&t=1&keyword="+KeyWord;
+					var HFrame = document.getElementById("hiddenquery")
+					if (HFrame){
+						HFrame.src=ToUrl;
+					}
+					document.getElementById("SearchMain1").style.display='none';
+					document.getElementById("SearchMain1").style.width="0";
+					document.getElementById("SearchMain2").style.width="100%";
+					document.getElementById("iSearch").style.height="1280";
+				}
+			}
+			function _switch(t,tt){
+				if (t==1 && tt==0){
+					alert("本论坛没有开启全文检索功能！");document.getElementById("topic").checked=true;return;
+				}
+				else{
+					if (t==1)
+						document.getElementById("sTableSelect").style.display='';
+					else
+						document.getElementById("sTableSelect").style.display='none';
+				}
+			}
+			</script>
+		]]>
+	</xsl:variable>
+	<xsl:variable name="myscript2">
+		<![CDATA[
+			<script language="javascript" type="text/javascript">
+			function _switch(t,tt){
+				if (t==1 && tt==0){
+					alert("本论坛没有开启全文检索功能！");document.getElementById("topic").checked=true;return;
+				}
+				else{
+					if (t==1)
+						document.getElementById("sTableSelect").style.display='';
+					else
+						document.getElementById("sTableSelect").style.display='none';
+				}
+			}
+			</script>
+		]]>
+	</xsl:variable>
+	<xsl:template match="/">
+		<xsl:choose>
+			<xsl:when test="xml/posttable">
+				<xsl:call-template name="queryform"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:choose>
+					<xsl:when test="count(xml/row) or xml/@sType='5'"><xsl:call-template name="queryresult"/></xsl:when>
+					<xsl:otherwise><xsl:call-template name="emptyresult"/></xsl:otherwise>
+				</xsl:choose>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:template>
+	<xsl:template name="emptyresult">
+		<div>
+			<xsl:value-of select="$str_42"/>
+			<xsl:text disable-output-escaping="yes" >&amp;nbsp;</xsl:text>
+			<a href="Query.asp?boardid={xml/@boardid}"><xsl:value-of select="$str_43"/></a>
+		</div>
+	</xsl:template>
+	<xsl:template name="queryresult">
+		<xsl:variable name="ps" select="((xml/@page)-1)*(xml/@pagesize)"></xsl:variable>
+		<xsl:variable name="pend" select="(xml/@page)*(xml/@pagesize)+1"></xsl:variable>
+		<xsl:if test="/xml/@action='manage'">
+			<xsl:value-of select="$myscript" disable-output-escaping="yes"/>
+		</xsl:if>
+		<!--new-->
+		<xsl:value-of select="$myscript1" disable-output-escaping="yes"/>
+		<table cellPadding="0" cellSpacing="0" class="tableborder1" align="center" >
+			<form  method="post" action="?">	
+				<tr>
+					<td class="tablebody1" valign="middle" colspan="2">
+						<input type="text" size="20" name="keyword" value="{xml/@keyword}"/>
+						<xsl:text disable-output-escaping="yes" >&amp;nbsp;&amp;nbsp;&amp;nbsp;</xsl:text>
+						<select name="boardid" id="boardid"></select>
+						<xsl:text disable-output-escaping="yes" >&amp;nbsp;&amp;nbsp;</xsl:text>
+						<xsl:choose>
+							<xsl:when test="/xml/@sType=1">
+								<input type="radio" name="sType" value="1" checked="checked" onclick="_switch(0,{xml/@sqlsearch});"/>
+							</xsl:when>
+							<xsl:otherwise>
+								<input type="radio" name="sType" value="1" onclick="_switch(0,{xml/@sqlsearch});"/>
+							</xsl:otherwise>
+						</xsl:choose>
+						<xsl:text disable-output-escaping="yes" >&amp;nbsp;</xsl:text>
+						<xsl:value-of select="$str_12"/>
+						<xsl:text disable-output-escaping="yes" >&amp;nbsp;&amp;nbsp;</xsl:text>
+						<xsl:choose>
+							<xsl:when test="/xml/@sType=2">
+								<input type="radio" name="sType" id="topic" value="2" checked="checked" onclick="_switch(0,{xml/@sqlsearch});"/>
+							</xsl:when>
+							<xsl:otherwise>
+								<input type="radio" name="sType" id="topic" value="2" onclick="_switch(0,{xml/@sqlsearch});"/>
+							</xsl:otherwise>
+						</xsl:choose>
+						<xsl:text disable-output-escaping="yes" >&amp;nbsp;</xsl:text>
+						<xsl:value-of select="$str_13"/>
+						<xsl:text disable-output-escaping="yes" >&amp;nbsp;&amp;nbsp;</xsl:text>
+						<xsl:choose>
+							<xsl:when test="/xml/@sType=7">
+								<input type="radio" name="sType" value="7" checked="checked" onclick="_switch(1,{xml/@sqlsearch});"/>
+							</xsl:when>
+							<xsl:otherwise>
+								<input type="radio" name="sType" value="7" onclick="_switch(1,{xml/@sqlsearch});"/>
+							</xsl:otherwise>
+						</xsl:choose>
+						<xsl:text disable-output-escaping="yes" >&amp;nbsp;</xsl:text>
+						<xsl:value-of select="$str_14"/>
+						<xsl:text disable-output-escaping="yes" >&amp;nbsp;&amp;nbsp;&amp;nbsp;</xsl:text>
+						<xsl:if test="xml/@sqlsearch='1'">
+							<select name="stable" id="sTableSelect">
+								<xsl:if test="/xml/@sType != 7">
+									<xsl:attribute name="style">display:none;</xsl:attribute>
+								</xsl:if>
+								<option value="{xml/TableList/posttable}" selected="selected">选择数据表</option>
+								<xsl:for-each select="xml/TableList/posttable">
+									<option value="{.}"><xsl:value-of select="@type" /></option>
+								</xsl:for-each>
+							</select>
+						</xsl:if>
+						<xsl:text disable-output-escaping="yes" >&amp;nbsp;&amp;nbsp;&amp;nbsp;</xsl:text>
+						<input type="submit" value="{$str_26}" name="submit"/>
+					</td>
+				</tr>
+			</form>
+			<tr><td class="tablebody1" height="8"></td></tr>
+		</table>
+		<table cellpadding="0" cellspacing="1" align="center" class="tableborder1" ID="iSearch">
+			<tr>
+				<td width="50%" id="SearchMain1" class="tablebody1" valign="top">
+					<div style="margin:0px;float:left;background-color: #eeeeee; width:100%;border-bottom:solid 1px #cccccc;height:24px;line-height:24px;">
+						<xsl:text disable-output-escaping="yes" >&amp;nbsp;&amp;nbsp;</xsl:text>本次搜索共找到约 <font color="{$alertcolor}"><xsl:value-of select="/xml/@pagecount"/></font> 条相关帖子记录
+						<xsl:if test="/xml/@Master=1">
+							<xsl:choose>
+								<xsl:when test="xml/@action!='manage'">
+									<a href="Query.asp?{xml/@PageStr}&amp;page={xml/@page}&amp;action=manage" title="切换到帖子管理状态">[管理]</a>
+								</xsl:when>
+								<xsl:otherwise>
+									<a href="Query.asp?{xml/@PageStr}&amp;page={xml/@page}" title="切换回正常查询状态">[正常]</a>
+								</xsl:otherwise>
+							</xsl:choose>
+						</xsl:if>
+					</div>
+					<div style="margin-left:8px;">
+						<br /><br />
+						<xsl:choose>
+							<xsl:when test="/xml/@sType=1 or /xml/@sType=2 or /xml/@sType=3 or /xml/@sType=5 or /xml/@sType=7">
+								<font color="{$alertcolor}"><xsl:value-of select="/xml/@keyword"/></font> 相关搜索：
+								<xsl:choose>
+									<xsl:when test="/xml/@sType=2 or /xml/@sType=7">
+										<a href="?stype=2&amp;keyword={/xml/@keyword}&amp;BoardID={/xml/@boardid}&amp;isWeb={/xml/@isWeb}&amp;action={/xml/@action}">主题</a>
+										<xsl:for-each select="xml/TableList/posttable">
+											<xsl:text disable-output-escaping="yes" >&amp;nbsp;&amp;nbsp;</xsl:text>
+												<a href="?stype=7&amp;keyword={/xml/@keyword}&amp;BoardID={/xml/@boardid}&amp;isWeb={/xml/@isWeb}&amp;action={/xml/@action}&amp;stable={.}" title="点击按内容搜索该库"><xsl:value-of select="@type"/></a>
+										</xsl:for-each>
+									</xsl:when>
+								</xsl:choose>
+								<xsl:choose>
+									<xsl:when test="/xml/@sType=1">
+										<a href="?stype=1&amp;keyword={/xml/@keyword}&amp;BoardID={/xml/@boardid}&amp;isWeb={/xml/@isWeb}&amp;action={/xml/@action}&amp;nSearch=1" title="点击搜索该用户的主题">主题</a>
+										<xsl:for-each select="xml/TableList/posttable">
+											<xsl:text disable-output-escaping="yes" >&amp;nbsp;&amp;nbsp;</xsl:text>
+											<a href="?stype=1&amp;keyword={/xml/@keyword}&amp;BoardID={/xml/@boardid}&amp;isWeb={/xml/@isWeb}&amp;action={/xml/@action}&amp;stable={.}&amp;nSearch=2" title="点击在该库内搜索该用户发布的信息"><xsl:value-of select="@type"/></a>
+										</xsl:for-each>
+									</xsl:when>
+								</xsl:choose>
+								<xsl:choose>
+									<xsl:when test="/xml/@sType=3">
+										<xsl:for-each select="xml/TableList/posttable">
+											<xsl:text disable-output-escaping="yes" >&amp;nbsp;&amp;nbsp;</xsl:text>
+												<a href="?stype=3&amp;keyword={/xml/@keyword}&amp;BoardID={/xml/@boardid}&amp;isWeb={/xml/@isWeb}&amp;action={/xml/@action}&amp;stable={.}" title="点击在该库内最新帖子"><xsl:value-of select="@type"/></a>
+										</xsl:for-each>
+									</xsl:when>
+									<xsl:when test="/xml/@sType=5">
+										<xsl:for-each select="xml/TableList/posttable">
+											<xsl:text disable-output-escaping="yes" >&amp;nbsp;&amp;nbsp;</xsl:text>
+											<a href="?stype=5&amp;s={/xml/@s}&amp;pSearch=0&amp;nSearch=0&amp;stable={.}" title="点击在该库内最新帖子"><xsl:value-of select="@type"/></a>
+										</xsl:for-each>
+									</xsl:when>
+								</xsl:choose>
+								<br /><br />
+							</xsl:when>
+						</xsl:choose>
+						<xsl:for-each select="xml/posttable">
+							<xsl:text disable-output-escaping="yes" >&amp;nbsp;&amp;nbsp;</xsl:text>
+							<xsl:value-of select="@type"/>
+						</xsl:for-each>
+						<form action="Query.asp?action=batch" method="post" name="batch" id="batch">
+						<style>
+						.search li {border-bottom:1px #B3B3B3 dashed;list-style:none;padding:10px 0;width:98%;line-height:150%;float:left}
+						.search li span {float:left;display:block;font-size:14px;margin:5px}
+						</style>
+						<ul class="search">
+							<xsl:for-each select="xml/row">
+								<xsl:variable name="boardid" select="@boardid"></xsl:variable>
+								<li>
+									<span>
+										<xsl:choose>
+											<xsl:when test="/xml/@action='manage'">
+												<input type="checkbox" name="announceid" value="{@rootid}_{@announceid}"/>
+											</xsl:when>
+											<xsl:otherwise>
+												<xsl:value-of select="@querynum"/>.
+											</xsl:otherwise>
+										</xsl:choose>
+									</span>
+										<!--Sta主题-->
+										<xsl:choose>
+											<xsl:when test="/xml/BoardList/board[@boardid=$boardid]/@hidden=0 or /xml/@loginhidden=1">
+												<xsl:choose>
+													<xsl:when test="@boardid='444' or @boardid='777'">
+														<xsl:text disable-output-escaping="yes" >
+															&amp;nbsp;&amp;nbsp;
+														</xsl:text>
+														<xsl:choose>
+															<xsl:when test="@boardid='444'">
+																<xsl:value-of select="$str_36"/>
+															</xsl:when>
+															<xsl:otherwise>
+																<xsl:value-of select="$str_37"/>
+															</xsl:otherwise>
+														</xsl:choose>
+													</xsl:when>
+													<xsl:otherwise>
+														<a href="dispbbs.asp?BoardID={@boardid}&amp;ID={@rootid}&amp;replyID={@announceid}&amp;skin=1" target="_blank" title="{@topic}">
+															<font style="font-size : 15px;">
+															<xsl:choose>
+																<xsl:when test="/xml/BoardList/board[@boardid=$boardid]/@checkout=1">
+																	<xsl:value-of select="$str_41"/>
+																</xsl:when>
+																<xsl:otherwise>
+																	<xsl:choose>
+																		<xsl:when test="@topic!=''">
+																			<xsl:value-of select="@topic"/>
+																		</xsl:when>
+																		<xsl:otherwise>
+																			Re:<xsl:value-of select="substring(@body,0,30)"/>....
+																		</xsl:otherwise>
+																	</xsl:choose>
+																</xsl:otherwise>
+															</xsl:choose>
+															</font>
+														</a>
+													</xsl:otherwise>
+												</xsl:choose>
+											</xsl:when>
+											<xsl:otherwise>
+												<xsl:value-of select="$str_40"/>
+											</xsl:otherwise>
+										</xsl:choose>
+										<!--End主题-->
+										<br />
+										<!--Sta版面-->
+										<xsl:if test="/xml/@sType=7">
+											<xsl:value-of select="substring(@body,0,100)"/>....<br />
+										</xsl:if>
+										<font color="green">
+											<xsl:choose>
+												<xsl:when test="@hidename=1 or @signflag=2">
+													作者：<xsl:if test="/xml/@Master=1"><a href="dispuser.asp?id={@postuserid}" target="_blank"><font color="green"><xsl:value-of select="@username"/></font></a></xsl:if>[匿名]
+												</xsl:when>
+												<xsl:otherwise>
+													作者：<a href="dispuser.asp?id={@postuserid}" target="_blank"><font color="green"><xsl:value-of select="@username"/></font></a>
+												</xsl:otherwise>
+											</xsl:choose>
+											<xsl:if test="/xml/@isMoreInfo=1">
+												<xsl:text disable-output-escaping="yes" >&amp;nbsp;&amp;nbsp;</xsl:text>
+												浏览：<xsl:value-of select="@hits"/>
+												<xsl:text disable-output-escaping="yes" >&amp;nbsp;&amp;nbsp;</xsl:text>
+												回复：<xsl:value-of select="@child"/>
+											</xsl:if>
+											<xsl:text disable-output-escaping="yes" >&amp;nbsp;&amp;nbsp;</xsl:text>→
+											<xsl:text disable-output-escaping="yes" >&amp;nbsp;&amp;nbsp;</xsl:text>
+											<xsl:choose>
+												<xsl:when test="@boardid='444' or @boardid='777'">
+													<xsl:choose>
+														<xsl:when test="@boardid='444'"><xsl:value-of select="$str_34"/></xsl:when>
+														<xsl:otherwise>
+															<xsl:value-of select="$str_35"/>
+														</xsl:otherwise>
+													</xsl:choose>
+												</xsl:when>
+												<xsl:otherwise>
+													<xsl:call-template name="getboardtype">
+														<xsl:with-param name="boardid" select="@boardid"/>
+													</xsl:call-template>
+												</xsl:otherwise>
+											</xsl:choose>
+										</font>
+										<font color="gray">
+											<xsl:value-of select="translate(@dateandtime,'T',' ')"/>
+											<xsl:text disable-output-escaping="yes" >&amp;nbsp;&amp;nbsp;</xsl:text>
+											<xsl:choose>
+												<xsl:when test="@isbest &gt; 0">[精华]</xsl:when>
+												<xsl:otherwise>
+												<xsl:choose>
+													<xsl:when test="@locktopic &gt; 0">[锁定]</xsl:when>
+													<xsl:otherwise>
+														<xsl:choose>
+															<xsl:when test="@isvote='1'">[投票]</xsl:when>
+															<xsl:otherwise>
+															</xsl:otherwise>
+														</xsl:choose>
+													</xsl:otherwise>
+												</xsl:choose>
+												</xsl:otherwise>
+											</xsl:choose>
+										</font>
+										<!--End版面-->
+									</li>
+							</xsl:for-each>
+							</ul>
+							<xsl:if test="/xml/@action='manage'">
+								<xsl:text disable-output-escaping="yes" >&amp;nbsp;&amp;nbsp;</xsl:text>
+								<select name="newboard" id="newboard"></select>
+								<script type="text/javascript" language="javascript">
+									BoardJumpListSelect(0,"newboard","<xsl:value-of select="$manage_0"/>","",1);
+								</script>
+								<xsl:text disable-output-escaping="yes" >&amp;nbsp;&amp;nbsp;</xsl:text>
+								<input type="checkbox" name="chkall" value="on" onclick="CheckAll(this.form);"/><xsl:value-of select="$manage_1"/>
+								<xsl:text disable-output-escaping="yes" >&amp;nbsp;&amp;nbsp;</xsl:text>
+								<input type="radio" name="maction" value="dele" /><xsl:value-of select="$manage_2"/>
+								<xsl:text disable-output-escaping="yes" >&amp;nbsp;&amp;nbsp;</xsl:text>
+								<input type="radio" name="maction" value="move" /><xsl:value-of select="$manage_3"/>
+								<xsl:text disable-output-escaping="yes" >&amp;nbsp;&amp;nbsp;</xsl:text>
+								<input type="radio" name="maction" value="isbest" /><xsl:value-of select="$manage_4"/>
+								<xsl:text disable-output-escaping="yes" >&amp;nbsp;&amp;nbsp;</xsl:text>
+								<input type="radio" name="maction" value="lock"  checked="checked" /><xsl:value-of select="$manage_5"/>
+								<xsl:text disable-output-escaping="yes" >&amp;nbsp;&amp;nbsp;</xsl:text>
+								<input type="submit" name="submit" value="执行" onclick="clicksubmit(this.form);"/>
+							</xsl:if>
+						</form>
+						<div style="float:left;width:100%;overflow:hidden">
+						<xsl:choose>
+							<xsl:when test="not(xml/row)">该帖子表没有搜索到符合的记录<br /></xsl:when>
+							<xsl:otherwise>
+								<br />
+								<script language="JavaScript" src="inc/Pagination.js"></script>
+								<script language="JavaScript" type="text/javascript">
+								PageList(<xsl:value-of select="/xml/@page"/>,10,20,<xsl:value-of select="/xml/@pagecount"/>,'<xsl:value-of select="/xml/@PageStr"/>&amp;action=<xsl:value-of select="xml/@action"/>',2)
+								</script>
+							</xsl:otherwise>
+						</xsl:choose>
+						</div>
+					</div>
+				</td>
+				<td width="50%" ID="SearchMain2" class="tablebody1" style="display:none;border-left: 3px solid #dedede;" height="100%" valign="top"></td>
+			</tr>
+		</table>
+		<iframe style="border:0px;width:0px;height:0px;" src="" name="hiddenquery" id="hiddenquery"></iframe>
+		<script language = "JavaScript" type="text/javascript">SetQuerySize(<xsl:value-of select="xml/@isWeb"/>,"<xsl:value-of select="xml/@keyword"/>","<xsl:value-of select="xml/@SelSearch"/>");</script>
+		<script language = "JavaScript" type="text/javascript">BoardJumpListSelect(<xsl:value-of select="xml/@boardid"/>,"boardid","<xsl:value-of select="$str_27"/>","0",0);</script>
+	<!--end-->
+	</xsl:template>
+	<!--搜索表单-->
+	<xsl:template name="queryform">
+	<xsl:value-of select="$myscript2" disable-output-escaping="yes"/>
+	<form action="query.asp" method="post">
+	<table cellpadding="0" cellspacing="1" align="center" class="tableborder1">
+		<tr>
+			<th colspan="2" height="24"><xsl:value-of select="$str_0"/></th>
+		</tr>
+		<tr>
+			<td class="tablebody1" colspan="2" align="left" valign="middle">
+				<table cellpadding="0" cellspacing="0" align="center" style="width:100%">
+					<tr>
+						<td width="5%"></td>
+						<td class="tablebody1" valign="middle">
+							<br /><input type="text" size="40" name="keyword"/><xsl:text disable-output-escaping="yes" >&amp;nbsp;&amp;nbsp;&amp;nbsp;</xsl:text><select name="boardid" id="boardid"></select>
+							<xsl:text disable-output-escaping="yes" >&amp;nbsp;&amp;nbsp;&amp;nbsp;</xsl:text>
+							<xsl:if test="xml/@sqlsearch='1'">
+								<select name="stable" id="sTableSelect" style="display:none;">
+									<option value="{xml/posttable}" selected="selected">选择数据表</option>
+									<xsl:for-each select="xml/posttable">
+										<option value="{.}"><xsl:value-of select="@type" /></option>
+									</xsl:for-each>
+								</select>
+							</xsl:if>						
+							<input type="radio" name="sType" value="1" onclick="_switch(0,{xml/@sqlsearch});"/><xsl:text disable-output-escaping="yes" >&amp;nbsp;</xsl:text><xsl:value-of select="$str_12"/><xsl:text disable-output-escaping="yes" >&amp;nbsp;&amp;nbsp;</xsl:text>
+							<input type="radio" name="sType" id="topic" value="2" checked="checked" onclick="_switch(0,{xml/@sqlsearch});"/><xsl:text disable-output-escaping="yes" >&amp;nbsp;</xsl:text><xsl:value-of select="$str_13"/><xsl:text disable-output-escaping="yes" >&amp;nbsp;&amp;nbsp;</xsl:text>
+							<input type="radio" name="sType" value="7" onclick="_switch(1,{xml/@sqlsearch});"/><xsl:text disable-output-escaping="yes" >&amp;nbsp;</xsl:text><xsl:value-of select="$str_14"/><xsl:text disable-output-escaping="yes" >&amp;nbsp;&amp;nbsp;</xsl:text>
+							<input type="submit" value="{$str_26}" name="submit"/>
+						</td>
+					</tr>
+					<tr>
+						<td width="5%"></td>
+						<td><br />
+							<b><xsl:value-of select="$str_1"/></b><br />
+							<li><xsl:value-of select="$str_2"/><xsl:text disable-output-escaping="yes" >&amp;nbsp;</xsl:text><b><xsl:value-of select="xml/@keywordminlen"/></b><xsl:text disable-output-escaping="yes" >&amp;nbsp;</xsl:text><xsl:value-of select="$str_3"/><xsl:text disable-output-escaping="yes" >&amp;nbsp;</xsl:text><b><xsl:value-of select="xml/@keywordmaxlen"/></b><xsl:text disable-output-escaping="yes" >&amp;nbsp;</xsl:text><xsl:value-of select="$str_4"/></li><br />
+							<li><xsl:value-of select="$str_6"/><xsl:text disable-output-escaping="yes" >&amp;nbsp;</xsl:text><b><xsl:value-of select="xml/@timelimited"/></b><xsl:text disable-output-escaping="yes" >&amp;nbsp;</xsl:text><xsl:value-of select="$str_7"/></li>
+							<li><xsl:value-of select="$str_8"/></li><br /><br />
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+	</table>
+	</form>
+	<script language = "JavaScript" type="text/javascript">BoardJumpListSelect(<xsl:value-of select="xml/@boardid"/>,"boardid","<xsl:value-of select="$str_27"/>","0",0);</script>
+	</xsl:template>
+	
+	<xsl:template name="getboardtype">
+	<xsl:param name="boardid"/>
+	<xsl:choose>
+		<xsl:when test="/xml/BoardList/board[@boardid=$boardid]/@boardtype">
+		<xsl:choose>
+			<xsl:when test="/xml/BoardList/board[@boardid=$boardid]/@hidden=0 or /xml/@loginhidden=1">
+			<a href="index.asp?boardid={@boardid}" target="_blank"><font color="green"><xsl:value-of select="/xml/BoardList/board[@boardid=$boardid]/@boardtype" disable-output-escaping="yes"/></font></a>
+			</xsl:when>
+			<xsl:otherwise>
+			<xsl:value-of select="$str_30"/>
+			</xsl:otherwise>
+			</xsl:choose>
+		</xsl:when>
+		<xsl:otherwise>
+		<xsl:value-of select="$str_38"/>
+		</xsl:otherwise>
+	</xsl:choose>
+	</xsl:template>
+</xsl:stylesheet>

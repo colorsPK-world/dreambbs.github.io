@@ -1,0 +1,12 @@
+<!--show.asp##模板合集部分-->
+浏览<font color="{$alertcolor}" >{$username}</font>的个人展览||
+</tr>
+<tr>||
+<a href="dispbbs.asp?Boardid={$boardid}&ID={$announceid}&replyID={$replyid}&skin=1" target="_blank" title="浏览相关帖子">查看相关讨论...</a>||
+<img src="{$imgurl}" alt="" width="100" height="100" style='border: 1 solid #000000' />||
+<img src="skins/default/filetype/info.gif" alt="" border="0" /><br />
+<img src="skins/default/filetype/{$refiletype}.gif" alt="" border="0" />
+<a href={$fileurl}  target="_blank" title="点击欣赏">{$typename}</a>||
+<img src="skins/default/filetype/info.gif" alt="" border="0" /><br />
+<img src="skins/default/filetype/{$refiletype}.gif" alt="" border="0" />
+<a href="viewfile.asp?BoardID={$boardid}&ID={$fid}" target="_blank" title="点击欣赏">{$typename}</a>

@@ -1,0 +1,18 @@
+<!--公共MENU菜单-->
+<!--用户控制面板-->
+<div class="submenu submunu_popup" style="z-index:10999;" id="Menu_MemberTools" onmouseout="hidemenu1()">
+<a href="javascript:;" onclick="DvWnd.open('发送短信','messanger.asp?action=new',800,600,1,{bgc:'black',opa:0.5});" title="发送论坛短信息">发短信</a>{$UserTicket}<br /><a href="BoardPermission.asp?boardid={$boardid}&action=Myinfo">我能做什么</a><br /><a href="query.asp?stype=5&s=2&pSearch=0&nSearch=0">我发表的主题</a><br /><a href="query.asp?stype=5&s=1&pSearch=0&nSearch=0">我参与的主题</a><br /><a href="mymodify.asp">基本资料修改</a><br /><a href="modifyadd.asp?t=1">用户密码修改</a><br /><a href="modifyadd.asp">联系资料修改</a><br /><a href="usersms.asp">用户短信服务</a><br /><a href="friendlist.asp">编辑好友列表</a><br /><a href="favlist.asp">用户收藏管理</a><br /><a href="myfile.asp">个人文件管理</a>
+</div>
+||<!--论坛状态-->
+<div class="submenu submunu_popup" id="Menu_BoardStats" onmouseout="hidemenu1()">
+<a href="boardstat.asp?boardid={$boardid}" >今日帖数图例</a>
+<br /><a href="boardstat.asp?action=lasttopicnum&boardid={$boardid}">主题数图例</a>
+<br /><a href="boardstat.asp?action=lastbbsnum&boardid={$boardid}">总帖数图例</a>
+<br /><a href="boardstat.asp?reaction=online&boardid={$boardid}">在线图例</a>
+<br /><a href="boardstat.asp?reaction=onlineinfo&boardid={$boardid}">在线情况</a>
+<br /><a href="boardstat.asp?reaction=onlineUserinfo&boardid={$boardid}">用户组在线图例</a>
+</div>
+||<!--论坛展区-->
+<div class="submenu submunu_popup" id="Menu_Show" onmouseout="hidemenu1()">
+<a href="show.asp?filetype=0&boardid={$boardid}">文件集浏览</a><br /><a href="show.asp?filetype=1&boardid={$boardid}">图片集浏览</a><br /><a href="show.asp?filetype=2&boardid={$boardid}">Flash浏览</a><br /><a href="show.asp?filetype=3&boardid={$boardid}">音乐集浏览</a><br /><a href="show.asp?filetype=4&boardid={$boardid}">电影集浏览</a>
+</div>

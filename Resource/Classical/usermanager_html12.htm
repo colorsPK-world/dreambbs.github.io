@@ -1,0 +1,165 @@
+<!--usersms.asp##短信管理部分-->
+<div class="mainbox" style="margin-top:0">
+<div class="Contentbox">
+<div id="con_two_5" >
+	<table cellspacing="0" cellpadding="0">
+		<tr>
+			<td style="width:160px;" valign="top">
+				<div id="sub_1" class="subHover" onclick="setDiv(1,5);">
+					<a href="usersms.asp?action=inbox">收信箱</a>
+				</div>
+				<div id="sub_2" class="subOut" onclick="setDiv(2,5);">
+					<a href="usersms.asp?action=outbox">发信箱</a>
+				</div>
+				<div id="sub_3" class="subOut" onclick="setDiv(3,5);">
+					<a href="usersms.asp?action=issend">已发送邮件</a>
+				</div>
+				<div id="sub_4" class="subOut" onclick="setDiv(4,5);">
+					<a href="usersms.asp?action=recycle">废件箱</a>
+				</div>
+				<div class="subOut">
+					<a href="friendlist.asp">地址簿</a>
+				</div>
+				<div class="subOut">
+					<a title="发送论坛短信息" href="javascript:;" onclick="DvWnd.open('发送短信','messanger.asp?action=new&amp;sh=520&amp;sw=500',800,520,1,{bgc:'black',opa:0.5});">撰写短信</a>
+				</div>
+			</td>
+			<td style="background:#F1F7FB;padding:8px" valign="top">
+				<table cellpadding="3" cellspacing="0" width="98%" style="background:#F4FCEE;">
+					<tr>
+						<td width="100" align="right">您的邮箱容量：</td>
+						<td width="*">
+							<img src="Skins/Default/bar/bar3.gif" width="0" height="16" id="Sms_bar" align="absmiddle" />
+						</td>
+						<td width="150" id="Sms_txt">100%</td>
+					</tr>
+				</table>				
+				<script language="javascript">					
+					 var url = window.document.location.href;
+					 var vl=url.substr(url.indexOf('=')+1);
+					 var ii=1,tl="收件箱";
+					 switch(vl)
+					 {
+						case "inbox":
+							ii=1;
+							tl="收件箱";
+							break;
+						case "outbox":
+							ii=2;
+							tl="发件箱";
+							break;
+						case "issend":
+							ii=3;
+							tl="已发送";
+							break;
+						case "recycle":
+							ii=4;
+							tl="废件箱";
+							break;
+					 }
+					for(i=1;i<=4;i++){
+						document.getElementById("sub_"+i).className=i==ii?"subHover":"subOut";
+					}
+					document.write('<div id="dvbase_'+ii+'"><table cellpadding="0" cellspacing="0" width="98%"><tr><th>'+tl+'</th></tr></table>');//start
+				</script>
+					<table cellpadding="0" cellspacing="1" align="center" class="tableborder1">
+						<form action="messanger.asp" method="post" name="inbox">
+						<tr>
+						<script language="JavaScript" type="text/javascript">
+							<!--
+							function dvbbs_usersms_smsbox_top(smstype){
+							document.write ('<th valign="middle" width="30" height="25">已读</th>');
+							document.write ('<th valign="middle" width="100">');
+							if (smstype=='inbox' || smstype=='recycle')
+							{
+								document.write ('发件人');
+							}else{
+								document.write ('收件人');
+							}
+							document.write ('</th>');
+							document.write ('<th valign="middle" width="300">主题</th>');
+							document.write ('<th valign="middle" width="150">日期</th>');
+							document.write ('<th valign="middle" width="50">大小</th>');
+							document.write ('<th valign="middle" width="30">操作</th>');
+							document.write ('</tr>');
+							}
+
+							function dvbbs_usersms_smsbox_emp(boxname){
+							document.write ('<tr>');
+							document.write ('<td class="tablebody1" align="center" valign="middle" colspan="6">您的'+boxname+'中没有任何内容。</td>');
+							document.write ('</tr>');
+							}
+
+							function dvbbs_usersms_smsbox_loop(flag,sms_type,sender,incept,title,sendtime,clength,id,readaction){
+							var tablebody,newstyle;
+							if (flag==0)
+							{
+								tablebody="tablebody2";
+								newstyle="font-weight:bold";
+							}else{
+								tablebody="tablebody1";
+								newstyle="font-weight:normal";
+							}
+							document.write ('<tr>');
+							document.write ('<td class="'+tablebody+'" align="center" valign="middle">');
+							switch (sms_type)
+							{
+								case 'inbox':
+									if (flag==0)
+									{
+									document.write ('<img src="{$Sms_news}" border="0" alt="新短信"/>');
+									}else{
+									document.write ('<img src="{$Sms_olds}" border="0" alt="旧短信" />');
+									}
+									break;
+								case 'outbox':
+									document.write ('<img src="{$Sms_issend_2}" border="0" alt="已发送，且对方已查阅！" />');
+									break;
+								case 'issend':
+									document.write ('<img src="{$Sms_issend_1}" border="0" alt="已发送，对方未查阅！" />');
+									break;
+
+								case 'recycle':
+									if (flag==0)
+									{
+									document.write ('<img src="{$Sms_news}" border="0"  alt="新短信" />');
+									}else{
+									document.write ('<img src="{$Sms_olds}" border="0" alt="旧短信" />');
+									}
+									break;
+							}
+
+							document.write ('</td>');
+							document.write ('<td class='+tablebody+' align="center" valign="middle" style="'+newstyle+'">');
+							if (sms_type=='inbox' || sms_type=='recycle')
+							{
+							document.write ('<a href="dispuser.asp?name='+sender+'" target="_blank">'+sender+'</a>');
+							}else
+							{
+							document.write ('<a href="dispuser.asp?name='+incept+'" target="_blank">'+incept+'</a>');}
+							document.write ('</td>');
+							document.write ('<td class="'+tablebody+'" align="left" style="'+newstyle+'"><a href="javascript:;" title="阅读论坛短信息" onclick="DvWnd.open(\'发送短信\',\'messanger.asp?action='+readaction+'&id='+id+'&sender='+sender+'\',800,520,1,{bgc:\'black\',opa:0.5});">'+title+'</a>	</td>');
+							document.write ('<td class='+tablebody+' style="'+newstyle+'">'+sendtime+'</td>');
+							document.write ('<td class='+tablebody+' style="'+newstyle+'">'+clength+'Byte</td>');
+							document.write ('<td align=center valign=middle width=30 class='+tablebody+'><input type=checkbox class=chkbox name=id value='+id+'></td>');
+							document.write ('</tr>');
+							}
+
+							function dvbbs_usersms_smsbox_footer(boxname){
+							document.write ('<tr>');
+							document.write ('<td align="right" valign="middle" colspan="6" class="tablebody2">节省每一分空间，请及时删除无用信息&nbsp;<input type="checkbox" class="chkbox" name="chkall" value="on" onclick="CheckAll(this.form)">选中所有显示记录&nbsp;<input type=submit name=action onclick="{if(confirm(\'确定删除选定的纪录吗?\')){return true;}return false;}" value="删除'+boxname+'" />&nbsp;<input type="submit" name="action" onclick="{if(confirm(\'确定清除'+boxname+'所有的纪录吗?\')){this.document.inbox.submit();return true;}return false;}" value="清空'+boxname+'" /></td>');
+							document.write ('</tr>');
+							document.write ('</form></table></div><!--end--></td></tr></table></div></div></div>');
+							}
+
+							function CheckAll(form)  
+							  {  
+							  for (var i=0;i<form.elements.length;i++)  
+								{  
+								var e = form.elements[i];  
+								if (e.name != 'chkall')  
+								   e.checked = form.chkall.checked;  
+								}  
+							  }
+							//-->
+						</script>

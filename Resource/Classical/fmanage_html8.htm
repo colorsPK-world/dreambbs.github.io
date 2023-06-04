@@ -1,0 +1,53 @@
+<tr>
+<td class="tablebody2" height="24" align="left"><b>用户操作</b>：
+<script language="JavaScript" type="text/javascript">
+<!--
+document.write ('金币数 <select name="GiveMoney" size="1">');
+for (i=-50;i<51 ;i++ )
+{
+	document.write ('<option value="'+i+'" ');
+	if (i==0)
+	{
+		document.write ('selected="selected"');
+	}
+	document.write ('>'+i+'</option>');
+}
+document.write ('</select>');
+document.write ('  金钱');
+document.write ('	<select name="doWealth" size=1>');
+for (i=-50;i<51 ;i++ )
+{
+	document.write ('<option value="'+i+'" ');
+	if (i==0)
+	{
+		document.write ('selected="selected"');
+	}
+	document.write ('>'+i+'</option>');
+}
+document.write ('	</select>&nbsp;魅力');
+document.write ('	<select name="douserCP" size=1>');
+for (i=-50;i<51 ;i++ )
+{
+	document.write ('<option value="'+i+'" ');
+	if (i==0)
+	{
+		document.write ('selected="selected"');
+	}
+	document.write ('>'+i+'</option>');
+}
+document.write ('	</select>&nbsp;积分');
+document.write ('	<select name="douserEP" size=1>');
+for (i=-50;i<51 ;i++ )
+{
+	document.write ('<option value="'+i+'" ');
+	if (i==0)
+	{
+		document.write ('selected="selected"');
+	}
+	document.write ('>'+i+'</option>');
+}
+document.write ('</select>');
+//-->
+</script>
+{$UserTodyInfo}
+</td></tr>

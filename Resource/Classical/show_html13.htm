@@ -1,0 +1,57 @@
+<!--fileshow.asp##显示主体页面-->
+<table class="tableborder1" cellspacing="1" cellpadding="3" align="center">
+    <tr>
+      <th align="middle" height="25">论坛文件展示</th>
+    </tr>
+    <tr>
+      <td class="tablebody1" align="middle" height="*">感谢会员：<a href="dispuser.asp?id={$f_userid}">{$f_username}</a>提供
+        <hr width="80%" size="1" />
+        <br />
+        {$showfile}<br />
+        <table cellspacing="0" cellpadding="0" width="100%" border="0">
+            <tr>
+              <td align="left" width="*">{$edit}</td>
+              <td align="right" width="20">{$csend}</td>
+            </tr>
+        </table>
+      </td>
+    </tr>
+    <tr>
+      <td class="tableBorder2" valign="top" align="center" height="150">
+        <table class="tableborder2" cellspacing="1" cellpadding="3" width="100%" align="center">
+            <tr>
+              <td class="tablebody1" align="right" width="20%">作者：</td>
+              <td class="tablebody1" width="80%"><a href="dispuser.asp?id={$f_userid}">{$f_username}</a></td>
+            </tr>
+            <tr>
+              <td class="tablebody2" align="right" width="20%">类别：</td>
+              <td width="80%">{$f_typename}</td>
+            </tr>
+            <tr>
+              <td class="tablebody1" align="right" width="20%">大小：</td>
+              <td class="tablebody1" width="80%">{$f_filesize}　Byte</td>
+            </tr>
+            <tr>
+              <td class="tablebody2" align="right" width="20%">浏览：</td>
+              <td width="80%"><font color="#ff0000">{$f_viewnum}</font>　次</td>
+            </tr>
+            <tr>
+              <td class="tablebody1" align="right" width="20%">下载：</td>
+              <td class="tablebody1" width="80%">{$f_downnum}　次</td>
+            </tr>
+            <tr>
+              <td class="tablebody1" align="right" width="20%">创建时间：</td>
+              <td class="tablebody1" width="80%">{$f_addtime}</td>
+            </tr>
+            <tr>
+              <td class="tablebody2" align="right" width="20%">相关帖子：</td>
+              <td width="80%">{$golist}</td>
+            </tr>
+            <tr>
+              <td class="tablebody1" align="right" width="20%" height="20">说明：</td>
+              <td class="tablebody1" width="80%">{$f_readme}</td>
+            </tr>
+        </table>
+      </td>
+    </tr>
+</table>

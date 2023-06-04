@@ -1,0 +1,46 @@
+<!--myfile.asp##主体显示分页-->
+<table cellspacing="0" cellpadding="0">
+<tr>
+	<td valign="middle" colspan="2">
+		页次：<b>{$CurrentPage}</b>/<b>{$Pcount}</b>页&nbsp;个人上传管理文件共<b><font color="{$redcolor}">{$totalrec}</font></b>个&nbsp;每页<b>{$PageNum}</b>个
+	</td>
+	<td valign="middle" colspan="5"align="right">分页：
+		<script language="JavaScript" type="text/javascript">
+		<!--
+		var CurrentPage={$CurrentPage};
+		var Pcount={$Pcount};
+		var Endpage=0;
+		if (CurrentPage > 4){
+			document.write ('<a href="?star=1&{$SearchStr}">[1]</a> ...');
+		}
+		if (Pcount>CurrentPage+3)
+		{
+			Endpage=CurrentPage+3
+		}
+		else{
+			Endpage=Pcount
+		}
+		for (var i=CurrentPage-3;i<=Endpage;i++)
+		{
+			if (i>=1){
+				if (i == CurrentPage)
+				{
+					document.write (' <font color="{$redcolor}">['+i+']</font>');
+					}
+				else{
+					document.write ('<a href="?star='+i+'&{$SearchStr}">['+i+']</a>');
+				}
+			}
+		}
+		if (CurrentPage+3 < Pcount){ 
+			document.write ('... <a href="?star='+Pcount+'&{$SearchStr}">['+Pcount+']</a>');
+		}
+		if (Endpage == 0){ 
+			document.write ('...');
+		}
+		//-->
+		</script>
+	</td>
+</tr>
+</table>
+<!--end-->

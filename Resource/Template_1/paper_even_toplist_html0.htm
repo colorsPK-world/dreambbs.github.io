@@ -1,0 +1,16 @@
+<!--小字报整页面-->
+<!--小字报顶部状态栏-->
+<form action="?t=paper&action=delpaper" method=post name=paper>
+<input name="boardid" type="hidden" value="{$boardid}" />
+<table class="tableborder1" cellspacing="1" cellpadding="3" align="center">
+<tr align="center">
+<th width="15%" height=25>用户</th>
+<th width="50%">标题</th>
+<th width="20%">发布时间</th>
+<th width="15%" id="tabletitlelink">人气</th>
+</tr>
+{$paperloop}
+{$manageinfo}
+{$pagelist}
+</table>
+</form>

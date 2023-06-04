@@ -1,0 +1,277 @@
+<!--post.asp##发帖、回帖、投票、编辑整体页面 更新时间2007-3月20日，注意要和post.asp一起更新-->
+<center>
+<script language = "JavaScript" src="inc/dv_setvote.js" type="text/javascript"></script>
+<script language = "JavaScript" src="inc/ajaxpost.js" type="text/javascript"></script>
+<script language="javascript">
+<!--
+var frmAD=null;
+function CheckIsUpload(frm,e){
+	frmAD=gid('ad')?((gid('ad')).contentWindow||window.frames['ad']):null;
+	if (frmAD&&frmAD.DvFileInput&&frmAD.DvFileInput.realcount>0){
+		gid('submit').disabled=true;
+		try{if(e.preventDefault){e.preventDefault();}else{e.returnValue=false;}}catch(er){}
+		frmAD.DvFileInput.send();
+		WaitForSubmit(frm);
+	}else{
+		PostSubmit(frm,e);
+	}
+}
+function WaitForSubmit(frm){
+	if (0==frmAD.DvFileInput.realcount){
+		gid('submit').disabled=false;
+		setTimeout(function(){gid('submit').click();},0);
+	}else{
+		setTimeout(function(){
+			WaitForSubmit(frm);
+		},1000);
+	}
+}
+function PostSubmit(frm,e){
+	var Post=new DvSavePost(frm,e,'{$ispostnew}'=='1'?'full':'fastre',{$maxtitlelength},{$maxconlength});
+	gid('submit').disabled=true;
+	if ('function'==typeof checkPay){Post.isok=checkPay()}
+	gid('body').value=dvtextarea.save();
+	Post.chk_topic(gid('topic'));
+	Post.chk_flash();
+	Post.chk_content(gid('body'));
+	if (frm.topicmode&&frm.selecttmode){Post.chk_topicmode(frm.topicmode,frm.selecttmode);}
+	if(!(Post.send())){gid('submit').disabled=false;}
+}
+//-->
+</script>
+<form action="{$toaction}" method="post" name="Dvform" id="Dvform" onsubmit="CheckIsUpload(this,event)">
+<input name="upfilerename" type="hidden" value="" />
+<input type="hidden" name="dvbbs" value="{$Forum_sn}" />
+<input type="hidden" name="star" value="{$star}" />
+<input type="hidden" name="page" value="{$page}" />
+<input type="hidden" name="poststyle" value="{$poststyle}" />
+<input type="hidden" name="TotalUseTable" value="{$totalusetable}" />
+{$rehiddeninput}
+{$edithiddeninput}
+<table cellpadding="1" cellspacing="1" align="center" class="tableborder1" style="text-align:left;text-indent:10px;">
+<tr><th align="left" colspan="2" style="padding-top:0px;">&nbsp;&nbsp;{$actionname}{$auditinfo}
+</th></tr>
+<tr><td width="20%" class="tablebody2"><b>用户名：</b></td>
+<td width="80%" class="tablebody2" style="text-indent:0;" ><input name="username" value="{$membername}" class="FormClass"/>
+&nbsp;&nbsp;<font color="{$alertcolor}"><b>*</b></font><a href="reg.asp">您没有注册？</a>
+</td></tr>
+<tr><td width="20%" class="tablebody1"><b>密码：</b></td>
+<td width="80%" class="tablebody1" style="text-indent:0;"><input name="passwd" type="password" value="{$memberword}" class="FormClass" /><font color="{$alertcolor}">&nbsp;&nbsp;<b>*</b></font><a href="lostpass.asp">忘记论坛密码？</a>
+{$reinfo1}
+</td></tr>
+{$getcode}
+<tr><td width="20%" class="tablebody2"><b>主题标题：</b>
+<select name="font" onchange="DoTitle(this.options[this.selectedIndex].value)">
+<option selected="selected" value="">选择话题</option>
+{$topictype}
+</select></td>
+<td width="80%" class="tablebody2" style="text-indent:0;">
+<input name="topic" id="topic" size="45" class="FormClass" value="{$topic}" />
+{$topicstatsinfo}{$topicmode}<span id="mode_chk"></span>
+&nbsp;<font color="{$alertcolor}"><b>*</b></font>不得超过 {$topiclimited} 个汉字<span id="topic_chk"></span>
+</td></tr>
+{$MoneyPostInfo}
+{$voteinfo}
+<tr><td width="20%" valign="top" class="tablebody1"><b>当前心情</b><br />
+  <ul><li>将放在帖子的前面</li><br /><li>部分图片由<a href="http://www.qq.com/" target="_blank">QQ授权提供</a></li></ul></td>
+<td width="70%" class="tablebody1" style="text-indent:0;">
+<table border="0" align="left" cellpadding="2" cellspacing="1">
+<tr>
+<td width="75%">
+<table border="0" cellpadding="2" cellspacing="1" align="left">
+<tr>
+<td id="ShowBack" width="1" class="tablebody2" valign="middle">
+<img style="cursor: pointer;" onclick="show_post_face(-1);" src="Images/post/Previous.gif" alt="上一页" id="ShowBack" />
+</td>
+<td class="tablebody1" width="100%" id="ShowFace">发帖表情</td>
+<td id="ShowNext" width="1" class="tablebody2" align="right" valign="middle"><img style="cursor: pointer;" onclick="show_post_face(1);" src="Images/post/Next.gif" alt="下一页"></td>
+</tr>
+</table>
+</td>
+{$tools_magicface}
+</tr>
+</table>
+</td></tr>
+<script language = "JavaScript" type="text/javascript">
+<!--
+var PostType={$PostType};
+var Forum_PostFace='{$Forum_PostFace}';
+var Forum_PostFace=Forum_PostFace.split("\|\|\|");
+var retitle='{$retitle}';
+var Forum_Emot='{$Forum_Emot}';
+Forum_Emot=Forum_Emot.split("<><><>");
+var Emot_PageSize=15; //心情一行个数
+if (document.Dvform.topicximoo){
+	document.Dvform.topicximoo.options[{$TopModeSelect}].selected=true;
+}
+function DoTitle(addTitle) { 
+	var revisedTitle; 
+	var currentTitle = document.Dvform.topic.value; 
+	revisedTitle = addTitle+currentTitle; 
+	document.Dvform.topic.value=revisedTitle; 
+	document.Dvform.topic.focus();
+	return;
+}
+function titleColor(i) { 
+	var color = new Array("#000000","#000000","red","blue","green");
+	if (i<=color.length){		
+		document.Dvform.topic.style.color = color[i];
+	}
+}
+function showtitle(){
+	if (document.Dvform.reishow.checked == true){
+		if (document.Dvform.topic.value==''){
+			document.Dvform.topic.value=retitle;
+		}
+		document.getElementById("advance").innerText="不采用";
+	}
+	else{
+		if (document.Dvform.topic.value==retitle){
+			document.Dvform.topic.value='';
+		}
+		document.getElementById("advance").innerText="采用";
+	}
+}
+function lookmagic()
+{
+	var obj=document.getElementById("magicframe");
+	var buttonElement = document.getElementById("magicfacepic");
+	if (obj.style.visibility=="hidden")
+	{
+		obj.style.top = (getOffsetTop(buttonElement) + buttonElement.offsetHeight)+"px";
+		obj.style.left = (getOffsetLeft(buttonElement)-410)+"px";
+		obj.style.visibility="visible";
+		document.getElementById("magic_frame").width="410px";
+		document.getElementById("magic_frame").height= "268px";
+		document.getElementById("magic_frame").src = "plus_tools_magiclist.asp?boardid="+boardid+"&s=0";
+	}else {
+		obj.style.visibility="hidden";
+	}
+}
+function closemagic()
+{
+	var cm=document.getElementById("magicframe");
+	if (cm.style.visibility=="visible")
+	{
+		cm.style.visibility = "hidden";
+	}
+}
+//-->
+</script>
+{$isalipay}
+{$uploadinfo}
+<tr><td width="20%" valign="top" style="padding:10px" class="tablebody1"><b>内容</b><br />
+<script language = "JavaScript" type="text/javascript">
+<!--
+function iif(str,str1,str2){
+	if (str==1){str=str1}else{str=str2}
+	return(str)
+}
+function giif(str,str1,str2){
+	if (str==1 || str==2){str=str1}else{str=str2}
+	return(str)
+} 
+var specialformcontent='';
+	specialformcontent+=('<li><b>特殊内容</b></li>')
+	specialformcontent+=("<li>" + iif({$ireplyview},"<a href='javascript:Dv_Signal(\"replyview\",\"\",\"该部分内容回复后可见\")' title='使用语法：[replyview]该部分内容回复后可见[/replyview]'>回复帖</a>","回复帖：不可用")+'</li>')
+	specialformcontent+=("<li>" + iif({$imoney},"<a href='javascript:Dv_Signal(\"Money\",\"可浏览该部分内容需要金钱数\",\"内容\");' title='使用语法：[money=可浏览该部分内容需要金钱数]内容[/money]'>金钱帖</a>","金钱帖：不可用")+'</li>')
+	specialformcontent+=("<li>" + iif({$ipoint},"<a href='javascript:Dv_Signal(\"Point\",\"可浏览该部分内容需要积分数\",\"内容\")' title='使用语法：[point=可浏览该部分内容需要积分数]内容[/point]'>积分帖</a>","积分帖：不可用")+'</li>')
+	specialformcontent+=("<li>" + iif({$iusercp},"<a href='javascript:Dv_Signal(\"UserCP\",\"可浏览该部分内容需要魅力数\",\"内容\")' title='使用语法：[usercp=可浏览该部分内容需要魅力数]内容[/usercp]'>魅力帖</a>","魅力帖：不可用")+'</li>')
+	specialformcontent+=("<li>" + iif({$ipower},"<a href='javascript:Dv_Signal(\"Power\",\"可浏览该部分内容需要威望数\",\"内容\")' title='使用语法：[power=可浏览该部分内容需要威望数]内容[/power]'>威望帖</a>","威望帖：不可用")+'</li>')
+	specialformcontent+=("<li>" + iif({$iarticle},"<a href='javascript:Dv_Signal(\"Post\",\"可浏览该部分内容需要文章数\",\"内容\")' title='使用语法：[post=可浏览该部分内容需要文章数]内容[/post]'>文章帖</a>","文章帖：不可用")+'</li>')
+	specialformcontent+=("<li>" + iif({$iusemoney},"<a href='javascript:Dv_Signal(\"UseMoney\",\"浏览该部分内容需要消耗的金钱数\",\"内容\")' title='使用语法：[usemoney=浏览该部分内容需要消耗的金钱数]内容[/usemoney]'>出售帖</a>","出售帖：不可用")+'</li>')
+	specialformcontent+=("<li>" + iif({$iuseusername},"<a href='javascript:Dv_Signal(\"UserName\",\"指定浏览该部分内容的会员名字<br/>（多个的用英文逗号间开）\",\"内容\")' title='使用语法：[username=指定浏览该部分内容的会员名字]内容[/username]（多个的用英文逗号间开）'>定员帖</a>","定员帖：不可用")+'</li>')
+	document.write ('<li>HTML标签：' + iif({$ihtml},'<font color="red">可用</font>','<font color="#CCCCCC">不可用</font>'))
+	document.write ('<li>UBB标签：' + iif({$iubb},'<font color="red">可用</font>','<font color="#CCCCCC">不可用</font>'))
+	document.write ('<li>贴图标签：'+ iif({$iimg},'<font color="red">可用</font>','<font color="#CCCCCC">不可用</font>'))
+	document.write ('<li>Flash标签： ' + iif({$iflash},'<font color="red">可用</font>','<font color="#CCCCCC">不可用</font>'))
+	document.write ('<li>多媒体标签： ' + iif({$imidea},'<font color="red">可用</font>','<font color="#CCCCCC">不可用</font>'))
+	document.write ('<li>表情字符转换：' + iif({$iemot},'<font color="red">可用</font>','<font color="#CCCCCC">不可用</font>'))
+	document.write ('<li>上传图片：' + giif({$iupload},'<font color="red">可用</font>','<font color="#CCCCCC">不可用</font>'))
+	document.write ('<li>每天允许发帖数：<font color="red">{$AffordPost}</font> ');
+	document.write ('<li>今天已发帖数：<font color="red">{$UserToday}</font> 篇');
+	document.write ('<li>最多：' + Math.floor((Math.floor({$bodylimited})/1024)) + 'KB<br /><br />')
+//-->
+</script>
+<script language = "JavaScript" type="text/javascript">
+<!--
+var ShowFacePage=0;
+function show_post_face(n){
+	var CountLength=Forum_PostFace.length-2;
+	var j=1;
+	var page_size=18;//每页个数
+	var br=9;	//换行个数
+	var post_face='';
+	var SelectFace ='{$SelectFace}';
+	var thispage=ShowFacePage + n;
+	document.getElementById("ShowBack").style.display="";
+	document.getElementById("ShowNext").style.display="";
+	if (thispage==1){
+	document.getElementById("ShowBack").style.display="none";
+	}
+	for (i=thispage*page_size-page_size+1;i<=thispage*page_size;i++)
+	{
+		post_face=post_face+'<input style="border:none;" type="radio" value="'+Forum_PostFace[i]+'" name="Expression" ';
+		if (i==1&& SelectFace==''){post_face=post_face+'checked="checked"'; }
+		if(Forum_PostFace[i]==SelectFace){post_face=post_face+'checked="checked"';}
+		post_face=post_face+' /><img src="'+Forum_PostFace[0]+Forum_PostFace[i]+'" alt=""/>&nbsp;&nbsp;';
+		if (j==br){
+			j=1
+			post_face=post_face+'<br />';
+		}
+		else{
+			j++
+		}
+		if (i>=CountLength){
+		document.getElementById("ShowNext").style.display="none";
+		break;
+		}
+	}
+	if (document.getElementById("ShowFace"))
+	{
+	document.getElementById("ShowFace").innerHTML=post_face;
+	ShowFacePage=thispage;
+	}
+}
+show_post_face(1);
+function gopreview(){
+	var frm=gid('preview');
+	if (frm){
+		frm.Dvtitle.value=document.Dvform.topic.value;
+		frm.theBody.value=dvtextarea.get();
+		frm.submit();
+	}
+}
+//-->
+</script>
+</td>
+<td width="80%" class="tablebody1" style="padding:0px;margin:0px;border:0px;" valign="top">
+	{$getubb}
+</td>
+</tr>
+<tr  class="tablebody1" style="border:0">
+	<td><b>高级设置：</b></td>
+	<td>
+	签名：<input type="radio" id="signflag_1" name="signflag" value="0"  {$checksign0} class="radio"/><label for="signflag_1">不显示</label>
+	<input type="radio" id="signflag_2" name="signflag" value="1" {$checksign1} class="radio"/><label for="signflag_2">显示</label>
+	<input type="radio" id="signflag_3" name="signflag" value="2" {$checksign2} class="radio"/><label for="signflag_3">匿名&nbsp;&nbsp;</label>
+	回帖通知：<input type="radio" id="emailflag_1" name="emailflag" value="0" {$checkbox2} class="radio"/><label for="emailflag_1" style=" cursor:hand">不通知</label>
+	 <input type="radio" id="emailflag_2" name="emailflag" value="1" {$checkbox3} class="radio"/><label for="emailflag_2" style=" cursor:hand">邮件通知</label>
+	 <input type="radio" id="emailflag_3" name="emailflag" value="2" {$checkbox4} class="radio"/><label for="emailflag_3" style=" cursor:hand">短信通知</label>
+	 <input type="radio" id="emailflag_4" name="emailflag" value="3" {$checkbox5} class="radio"/><label for="emailflag_4" style=" cursor:hand">邮件和短信通知</label>
+	{$useraction}
+	<br/><span id="body_chk"></span><span id="ajaxMsg_1" class="ajaxMsg" style="display:none;"></span>
+	</td>
+</tr>
+<tr>
+  <td valign="middle" colspan="2" class="tablebody2" style="text-align : center; ">
+<input class="input0" type="submit" value="       发 表 （编辑框内按CTRL+ENTER快捷发帖）       " id="submit" name="submit" />&nbsp;<input class="input0" type="button" value="预 览" name="Button" onclick="gopreview()" />
+</td>
+</tr>
+</table></form>
+<form action="preview.asp?boardid={$boardid}" method="post" name="preview" target="preview_page" id="preview">
+<input type="hidden" name="Dvtitle" value="" /><input type="hidden" name="theBody" value="" />
+</form>
+{$MagicIframe}
+{$retopicloop}
+</center>

@@ -1,0 +1,457 @@
+<script language="JavaScript" type="text/javascript">
+	var dvajax_request_type = "GET";
+</script>
+<script language="JavaScript" src="inc/dv_ajax.js" type="text/javascript"></script>
+<script language="JavaScript" src="inc/Mymodify.js" type="text/javascript"></script>
+<script>
+<!--
+//setInterval('formcheck2()',300);
+//document.getEmelentById("{$username}").focus();
+function formcheck2()
+{
+	var bt=document.getElementById("bt_save");
+	var f=document.theForm;
+	if(f.codestr)
+	{
+		if(f.{$psw}.value!="" && f.{$pswc}.value!="" && f.{$username}.value!="" && f.codestr.value!="" && f.e_mail.value !="" && f.checkbox.checked==true)
+		{
+			bt.disabled=false;
+		}
+		else
+		{
+			bt.disabled="disabled";
+		}
+	}
+	else
+	{
+		if(f.{$psw}.value!="" && f.{$pswc}.value!="" && f.{$username}.value!="" && f.e_mail.value !="" && f.checkbox.checked==true)
+		{
+			bt.disabled=false;
+		}
+		else
+		{
+			bt.disabled="disabled";
+		}
+	}
+}
+function formcheck(){
+	if (RegCheck.pass(document.theForm.{$psw}.value,'{$psw}',0)==false){
+		return false;
+	}
+	if (RegCheck.pass(document.theForm.{$pswc}.value,'{$pswc}',1)==false){
+		return false;
+	}
+	if (RegCheck.Value(document.theForm.{$username}.value,'{$username}')==false){
+		return false;
+	}
+	if (document.theForm.codestr)
+	{
+		if (RegCheck.Value(document.theForm.codestr.value,'codestr')==false){
+			return false;
+		}
+	}/*
+	if (RegCheck.Value(document.theForm.{$psw}.value,'{$psw}')==false){
+		return false;
+	}
+	if (RegCheck.Value(document.theForm.{$pswc}.value,'{$pswc}')==false){
+		return false;
+	}*/
+	if (RegCheck.Value(document.theForm.e_mail.value,'e_mail')==false){
+		return false;
+	}
+	return true;
+}
+function gopreview1()
+{
+	document.preview.username.value=document.theForm.{$username}.value;
+	document.preview.email.value=document.theForm.e_mail.value;
+	var popupWin = window.open('', 'preview_page', 'scrollbars=yes,width=500,height=300');
+	document.preview.submit()
+}
+function tipColor(id,tp)
+{
+	var t=document.getElementById(id);
+	if (tp==1)
+	{
+		t.className="forminfo1";
+	}
+	else
+	{
+		t.className="forminfo";
+	}
+}
+//-->
+</script>
+<style>
+.tableborder td{border:none}
+</style>
+<div class="mainbox">
+<div class="page_right" style="margin:0px 0px 0px 0px; width:270px;">
+	<div class="leftcolor" style=" background:#F4FCEE;"><br />
+	<span class="font14 username">已经是本站会员？</span>
+	<span class="username">请点此登录！</span>
+	<span><input class="input0" type="button" onclick="javascript:window.location='login.asp'" value=" 立即转到登录页面 "/></span><br /><br />
+	</div>
+</div>
+<ul class="tableborder heightd page_left2" style="width:auto">
+	<form action="reg.asp?action=save" method="post" name="theForm" id="theForm" onsubmit="return formcheck();">
+	  <h3 class="titlebig">用户注册(基本信息)</h3>
+	  <li>
+		<p class="font14">用户名</p>
+		<input name="{$username}" id="{$username}" type="text" size="30" maxlength="{$NameMaxLength}" onblur="dv_ajaxcheck('checkusername','{$username}');tipColor('isok_{$username}',0);"  tabindex="1" style="float:left" onfocus="tipColor('isok_{$username}',1);"/>
+		<span id="isok_{$username}" class="forminfo">&nbsp;&nbsp;注册用户名长度限制为{$NameLimLength}－{$NameMaxLength}字节</span>
+	  </li>
+	  {$getcode}
+	  <li>
+		<p class="font14">性别</p>
+		<input name="sex" type="radio" value="1"  tabindex="2" checked="checked" class="checkbox" />
+		<img src="images/boy.gif">男孩 &nbsp;&nbsp;&nbsp;&nbsp;
+		<input name="sex" type="radio" value="0" class="checkbox"  tabindex="2"/>
+		<img src="images/girl.gif">女孩
+	  </li>
+	  <script language="JavaScript" type="text/javascript">
+		<!--
+		var Forum_Setting23={$Forum_Setting23};
+		if (Forum_Setting23!=1)
+		{
+			document.write ('<li>');
+			document.write ('<p class="font14">论坛密码</p>');
+			document.write ('<input type="password" style="float:left" maxLength="16" size="30"  tabindex="3" name="{$psw}" onkeyup="RegCheck.pass(this.value,\'{$psw}\',0);" onblur="tipColor(\'isok_{$psw}\',0);" onfocus="tipColor(\'isok_{$psw}\',1)" />');
+			//document.write ('</li>');
+			//document.write('<li>');
+			//document.write('<p class="font14">密码安全性检测</p>');
+			document.write('<style type="text/css">table span{color:#333;line-height:12px;}.pse01{background-color:#EBEBEB;border-right:solid 1px #BEBEBE;border-bottom:solid 1px #BEBEBE;}.pse02{background-color:#FF4545;border-right:solid 1px #BB2B2B;border-bottom:solid 1px #BB2B2B;}.pse03{background-color:#FFD35E;border-right:solid 1px #E9AE10;border-bottom:solid 1px #E9AE10;}.pse04{background-color:#95EB81;border-right:solid 1px #3BBC1B;border-bottom:solid 1px #3BBC1B;}</style>');
+			document.write('<table cellpadding="0" cellspacing="0" border="0" style="width:120px; height:12px;line-height:12px;margin:0 0 0 5px;padding:0px;float:left"><tr><td id="idSM1" width="33%" class="pse01" align="center"><span style="font-size:1px">&nbsp;</span><span id="idSMT1" style="display:none;">弱</span></td><td id="idSM2" width="34%" class="pse01" align="center" style="border-left:solid 1px #fff"><span style="font-size:1px">&nbsp;</span><span id="idSMT0" style="display:inline;font-weight:normal;color:#666"></span><span id="idSMT2" style="display:none;">中</span></td><td id="idSM3" width="33%" class="pse01" align="center" style="border-left:solid 1px #fff"><span style="font-size:1px">&nbsp;</span><span id="idSMT3" style="display:none;">强</span></td></tr></table><span id="isok_{$psw}"></span>');
+			document.write ('</li>');
+			document.write ('<li><p class="font14">请再输一遍确认</p>');
+			document.write ('<input type="password" style="float:left" maxLength="16"  tabindex="4" size="30" name="{$pswc}" onblur="RegCheck.pass(this.value,\'{$pswc}\',1);tipColor(\'isok_{$pswc}\',0);" onfocus="tipColor(\'isok_{$pswc}\',1)"/><span id="isok_{$pswc}" class="forminfo">&nbsp;&nbsp;论坛密码确认(至少6位)</span>');
+			document.write ('</li>');
+		}
+		 //-->
+	  </script>
+	  <li>
+		<p class="font14">E-Mail</p>
+		<input name="e_mail" id="e_mail" type="text" size="30" maxlength="50"  tabindex="5" onblur="dv_ajaxcheck('checke_mail','e_mail');tipColor('isok_e_mail',0);" style="float:left;" onfocus="tipColor('isok_e_mail',1);"/>
+		<span id="isok_e_mail" class="forminfo">&nbsp;&nbsp;请输入有效的E-Mail，这将使您能用到论坛中的所有功能</span>
+	  </li>
+	  {$regask}
+	  {$difference}
+	   <li style="clear:both;">
+		<p class="font14">高级选项</p>
+		<input name="advshow" type="checkbox" id="advcheck" onclick="showadv()" value="1" class="radio"/><span id="advance">显示高级用户设置选项</span>
+	  </li>
+	  <li id="adv" name="adv" style="display:none;clear:both;overflow:hidden;">
+	   <table cellspacing="0" style="width:100%;">
+		 <tr>
+			<th colspan="2" class="titlebig">
+				填写详细资料
+			</th>
+		 </tr>
+		 <tr><td style="background-color:#F3F8FC">
+			<p class="font14">密码问题</p>
+		 </td><td style="background-color:#F3F8FC">
+			<input name="question" type="text" size="30" style="float:left;" tabindex="7" onmousedown="tipColor('isok_question',1);"/><div id="isok_question" class="forminfo">忘记密码的提示问题(非必填，主要是忘记密码时方便取回密码)</div>
+		</td></tr>
+		 <tr><td style="background-color:#F3F8FC">
+			<p class="font14">密码答案</p>
+		 </td><td style="background-color:#F3F8FC">
+				<input name="answer" type="text" size="30" style="float:left;"  tabindex="8" onmousedown="tipColor('isok_answer',1);"/><div id="isok_answer" class="forminfo">在此输入上面问题的答案(非必填，主要是忘记密码时方便取回密码)</div>
+		 </td></tr>
+		 <tr>
+			<td class="tb">
+				头像</td>
+			<td style="width:785px;">
+				<select name="face" style="font-family:arial" size="1" onchange="document.images['face'].src=options[selectedIndex].value; parent.document.theForm.myface.value=options[selectedIndex].value">
+				{$Face_select}
+				</select>
+				<img src='{$FaceDefault}' alt="" id="face" />
+				<a href="javascript:;" onclick="openScript('smiley.asp?t=1',650,400)" title="头像预览列表">
+					[<font color="{$color}">头像预览</font>]
+				</a>&nbsp;选择的头像将出现在您的资料和发表的帖子中，您也可以选择下面的自定义头像
+			</td>
+		 </tr>
+		 <tr>
+		 <script language="JavaScript" type="text/javascript">
+				<!--
+					var Forum_Setting54={$Forum_Setting54};
+					var Forum_Setting7={$Forum_Setting7};
+					var Forum_Setting32={$Forum_Setting32};
+					if (Forum_Setting54==0)
+					{
+						document.write ('<td>');
+						document.write ('<p class="font14">自定义头像</p><!--如果图像位置中有连接图片将以自定义的为主--></td>');
+					}
+					else
+					{
+						document.write ('<td>');
+						document.write ('<p class="font14">用户头像</p><!--您暂时没有自定义头像的权限--></td>');
+					}
+					if (Forum_Setting7==1)
+					{
+						document.write ('<td><iframe name="ad" frameborder="0" width="300" height="40" scrolling="no" src="reg_upload.asp"></iframe><br />');
+					}
+					else{document.write('<td>');}
+					document.write('图像位置：<input type="text" name="myface" size="30" maxlength="100">&nbsp;完整Url地址<br />');
+					document.write ('<span style="color:#000;">宽&nbsp;&nbsp;&nbsp;&nbsp;度：</span>');
+					document.write ('<input type="text" name="width" size="3" maxlength="3" value="{$FaceMaxWidth}" />');
+					document.write ('0---{$ForumFaceMax}的整数<span style="color:#000;">&nbsp;&nbsp;高&nbsp;&nbsp;&nbsp;&nbsp;度：</span>');
+					document.write ('<input type="text" name="height" size="3" maxlength="3" value="{$FaceMaxHeight}">');
+					document.write ('0---{$ForumFaceMax}的整数<br />');
+					document.write ('</td>');
+				//-->
+				</script>
+		 </td></tr>
+		 <tr>
+			<td class="tb">
+				个人网址</td>
+			<td>
+				<input name="homepage" type="text" size="44" maxlength="80" />
+			</td>
+		 </tr>
+		 <tr>
+			<td class="tb">QQ号码</td>
+			<td>
+				<input name="OICQ" type="text" size="44" maxlength="20" />填写您的QQ号码，方便与他人的联系
+			</td>
+		 </tr>
+		 <tr>
+			<td class="tb">
+				ICQ号码</td>
+			<td>
+				<input name="ICQ" type="text" size="44" maxlength="20" />填写您的ICQ地址，方便与他人的联系
+			</td>
+		 </tr>
+		 <tr>
+			<td class="tb">
+				MSN</td>
+			<td>
+				<input name="msn" type="text" size="44" maxlength="70" />填写您的MSN地址，方便与他人的联系
+			</td>
+		 </tr>
+		 <tr>
+			<td class="tb">
+				Aim</td>
+			<td>
+				<input name="aim" type="text" size="44" maxlength="70" />填写您的Aim地址，方便与他人的联系
+			</td>
+		 </tr>
+		 <tr>
+			<td class="tb">
+				Yahoo</td>
+			<td>
+				<input name="yahoo" type="text" size="44" maxlength="70" />填写您的Yahoo地址，方便与他人的联系
+			</td>
+		 </tr>
+		 <tr>
+			<td class="tb">
+				UC</td>
+			<td>
+				<input maxlength="70" size="44" name="uc"/>填写您的UC号码，方便与他人的联系
+			</td>
+		 </tr>
+		 <tr>
+			<th colspan="2" class="titlebig">
+				基本设置选项
+			</th>
+		 </tr>
+		 <tr>
+			<td class="tb">
+				Cookie的保留时间</td>
+			<td>
+				<input name="usercookies" type="radio" value="1" checked="checked" class="radio"/>1天
+				<input name="usercookies" type="radio" value="2" class="radio"/>1个月
+				<input name="usercookies" type="radio" value="3" class="radio"/>1年
+				<input name="usercookies" type="radio" value="0" class="radio"/>不保留&nbsp;&nbsp;&nbsp;&nbsp;登录论坛信息保留时间，在这个时间内重复登录论坛不需要重新登录
+			</td>
+		 </tr>
+		 <tr>
+			<td class="tb">
+				您的基本资料</td>
+			<td>
+				<input name="setuserinfo" type="radio" value="1" checked="checked" class="radio"/>
+				开放  <input name="setuserinfo" type="radio" value="0" class="radio"/>
+				不开放 &nbsp;&nbsp;开放后别人可以看到您的性别、Email、QQ等信息
+			</td>
+		 </tr>
+		 <tr>
+			<td class="tb">
+				您的真实资料</td>
+			<td>
+				<input name="setusertrue" type="radio" value="1" class="radio"/>开放
+				<input name="setusertrue" type="radio" value="0" checked="checked" class="radio"/>不开放&nbsp;&nbsp;&nbsp;&nbsp;开放后别人可以看到您的真实姓名、联系方式等信息
+			</td>
+		 </tr>
+		 <tr>
+			<td class="tb">
+				回复提示</td>
+			<td>
+				<input name="showRe" type="radio" value="1" class="radio"/>
+				提示我
+				<input name="showRe" type="radio" value="0" checked="checked" class="radio"/>
+				不提示&nbsp;&nbsp;&nbsp;&nbsp;当您发表的帖子有人回复时，使用论坛信息通知您。
+			</td>
+		 </tr>
+		 <tr>
+			<th colspan="2" class="titlebig">
+				个人真实信息（以下内容建议填写）
+			</th>
+		 </th>
+		 <tr>
+			<td class="tb">
+				真实姓名</td>
+			<td>
+				<input type="text" name="realname" size="18" />
+			</td>
+		 </tr>
+		 <tr>
+			<td class="tb">
+				国　　家</td>
+			<td>
+				<input name="country" type="text" size="18" />
+			</td>
+		 </tr>
+		 <tr>
+			<td class="tb">
+				联系电话</td>
+			<td>
+				<input name="userphone" type="text" size="18" />
+			</td>
+		 </tr>
+		 <tr>
+			<td class="tb">
+				通信地址</td>
+			<td>
+				<input name="address" type="text" size="18" />
+			</td>
+		 </tr>
+		 <tr>
+			<td class="tb">
+				省　　份</td>
+			<td>
+				<input name="province" type="text" size="18" />
+				<select name="selectp" onchange="selectcityarea('selectp','selectc','theForm');theForm.province.value=this.value;">
+					<option value="0" selected="selected">请选择....</option>
+				</select>
+			</td>
+		 </tr>
+		 <tr>
+			<td class="tb">
+				城　　市</td>
+			<td>
+					<input type="text" name="city" size="18" />
+					<select name="selectc" onchange="theForm.city.value=this.value;">
+						<option value="0" selected="selected">请选择....</option>
+					</select>
+			</td>
+		 </tr>
+		 <tr>
+			<td class="tb">
+				生　　肖</td>
+			<td>
+					<select size="1" name="shengxiao">
+						{$user_shengxiao}
+					</select>
+			</td>
+		 </tr>
+		 <tr>
+			<td class="tb">
+				血　　型</td>
+			<td>
+					<select size="1" name="blood">
+						{$user_blood}
+					</select>
+			</td>
+		 </tr>
+		 <tr>
+			<td class="tb">
+				信　　仰</td>
+			<td>
+					<select size="1" name="belief">
+					{$user_belief}
+					</select>
+			</td>
+		 </tr>
+		 <tr>
+			<td class="tb">
+				职　　业</td>
+			<td>
+					<select name="occupation">
+						{$user_occupation}
+					</select>
+			</td>
+		 </tr>
+		 <tr>
+			<td class="tb">
+				婚姻状况</td>
+			<td>
+					<select size="1" name="marital">
+						{$user_marital}
+					</select>
+			</td>
+		 </tr>
+		 <tr>
+			<td class="tb">
+				最高学历</td>
+			<td>
+					<select size="1" name="education">
+						{$user_education}
+					</select>
+			</td>
+		 </tr>
+		 <tr>
+			<td class="tb">
+				毕业院校</td>
+			<td>
+					<input name="college" type="text" size="18" />
+			</td>
+		 </tr>
+		 <tr>
+			<td class="tb">
+				性　格</td>
+			<td>
+				<div style="float:left;">{$user_character}</div>
+			</td>
+		 </tr>
+		 <tr>
+			<td class="tb">
+				个人简介</td>
+			<td>
+				<textarea name="personal" rows="6" cols="90%" ></textarea>
+			</td>
+		 </tr>
+	   </table>
+	  </li>
+		<li style="height:40px;text-align:center">
+			<input type="checkbox" name="checkbox" checked="checked" class="checkbox" value="checkbox" tabindex="10" /> <a href="reg.asp">同意并接受注册协议</a>
+			<input type="hidden" name="{$hidden}" value="{$hidden}" />
+			<input type="hidden" name="checkreg" id="checkreg" value="0" />
+			<input class="input0" id="bt_save" name="Submit" type="submit"  tabindex="11" value=" 提   交 " />&nbsp;
+			<input class="input0" type="reset" tabindex="12" value=" 重   置 "/>
+		</li>
+	</form>
+</ul>
+</div>
+<form action="reg.asp?t=1" method="post" name="preview" target="preview_page" id="preview">
+	<input name="username" type="hidden" value="" /><input name="email" type="hidden" value="" />
+</form>
+<script language="javascript" type="text/javascript">
+<!--
+	function checkPwd()
+	{
+	}
+	first("selectp","selectc","theForm",0,0);
+	function showadv()
+	{
+		if (document.theForm.advshow.checked == true)
+		{
+			document.getElementById("adv").style.display = "inline";
+			document.getElementById("advance").innerHTML="关闭高级用户设置选项";
+		}
+		else
+		{
+			document.getElementById("adv").style.display = "none";
+			document.getElementById("advance").innerHTML="显示高级用户设置选项";
+		}
+	}
+//-->
+</script>

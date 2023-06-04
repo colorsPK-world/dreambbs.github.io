@@ -1,0 +1,180 @@
+<!--friendlist.asp##编辑好友列表-->
+<div class="mainbox" style="margin-top:0">
+<div class="Contentbox">
+<div id="con_two_6">
+	<table width="98%" cellspacing="0" cellpadding="0" >
+		<tr>
+			<td style="width:160px;" valign="top">
+				<div class="subHover">好友列表</div>
+			</td>
+			<td style="background:#F1F7FB;padding:8px" valign="top">
+				<div id="dvbase_1">
+					<div id="addfriend" style="display:none">
+						<table cellpadding="0" cellspacing="1" align="center" class="tableborder1" style="width:98%">
+							<form action="Friendlist.asp" method="post" name="messager" id="messager">
+							<tr>
+								<th colspan=2>
+									<input name="action" type="hidden" value="saveF" />加入好友--请完整输入下列信息
+								</th>
+							</tr>
+							<tr>
+								<td class="tablebody1" valign="middle" width="70"><b>好友：</b></td>
+								<td class="tablebody1" valign="middle">
+									<input type=text name="myFriend" size=50 value="">&nbsp;
+									<select name="Fav_id">
+										<option selected="selected">请选择....</option>
+										{$Fav_Select}
+									</select>
+									使用逗号（,）分开，一次最多添位5位用户
+								</td>
+							</tr>
+							<tr>
+								<td valign="middle" colspan="2" align="center" class="tablebody2">
+									<input name="Submit" type="submit" value="保存" />&nbsp;
+									<input type="reset" name="Clear" value="清除">
+								</td>
+							</tr>
+							</form>
+						</table>
+					</div>
+					<div id="editfav" style="display:none">
+						<br />
+						<table cellpadding="0" cellspacing="1" align="center" class="tableborder1" style="width:98%">
+							<form action="Friendlist.asp" method="post" >
+							<tr><th colspan="2"><input name="action" type="hidden" value="editfav" />修改组名</th></tr>
+							<tr>
+								<td valign="middle" colspan="2" align="center" class="tablebody1">
+									说明：可以进行添加或修改组别名称，<font color="{$redcolor}">不能减少分组</font>，若修改了分隔排序，请在好友列表中进行相应的批量移动！
+								</td>
+							</tr>
+							<tr>
+								<td class="tablebody1" valign="middle" width="70"><b>分组名称：</b></td>
+								<td class="tablebody1" valign="middle">
+									<input name="fav_name" type="text" value="{$fav_name}" size="50" />&nbsp;使用逗号（,）分开，(每个组名不能超过5个字符)
+								</td>
+							</tr>
+							<tr>
+								<td valign="middle" colspan="2" align="center" class="tablebody2">
+									<input name="Submit" type="submit" value="保存" />&nbsp;
+									<input name="Clear" type="reset" value="清除" />
+								</td>
+							</tr>
+							</form>
+						</table>
+						<br />
+					</div>
+					<span id="show"></span>
+					<table cellpadding="0" cellspacing="1" align="center" class="tableborder1" style="width:98%">
+					<form action="friendlist.asp" method="post" name="inbox" id="inbox">
+						<tr>
+							<th width="15%" style="text-align:center;">组　别</th>
+							<th width="15%" style="text-align:center;">姓 名</th>
+							<th width="15%" style="text-align:center;">邮 件</th>
+							<th width="10%" style="text-align:center;">主 页</th>
+							<th width="10%" style="text-align:center;">腾讯QQ</th>
+							<th width="25%" style="text-align:center;">发短信</th>
+							<th width="10%" style="text-align:center;">操 作</th>
+						</tr>
+						{$Friend_list}
+						<tr>
+							<td align="right" valign="middle" colspan="7" class="tablebody2">
+								<input name="chkall" type="checkbox" class="chkbox" onclick="CheckAll(this.form)" value="on" />选中所有显示记录&nbsp;
+								<select name="Fav_id">
+									<option selected="selected">批量移动到...</option>
+									{$Fav_Select}
+								</select>
+								<input name="action" type="submit" onclick="{if(confirm('确定移动选定的纪录吗?')){this.document.inbox.submit();return true;}return false;}" value="移动" />&nbsp;
+								<input name="action" type="button" onclick="showsub('editfav')" value="修改分类" />&nbsp;
+								<input name="action" type="button" onclick="showsub('addfriend')" value="添加好友" />&nbsp;
+								<input name="action" type="submit" onclick="{if(confirm('确定删除选定的纪录吗?')){this.document.inbox.submit();return true;}return false;}" value="删除" />&nbsp;
+								<input name="action" type="submit" onclick="{if(confirm('确定清除所有的纪录吗?')){this.document.inbox.submit();return true;}return false;}" value="清空好友" />
+							</td>
+						</tr>
+					</form>
+					</table>
+					<br />
+					<table cellpadding="0" cellspacing="1" align="center" style="width:98%">
+						<tr>
+							<td>
+								<table border="0" cellspacing="1" cellpadding="0" class="tableborder1" style="width:100%" >
+									<tr><th height="20">功能信息</th></tr>
+									<tr>
+										<td class="tablebody1">
+											１论坛限制创建10个分组；
+											<br />２目前您共有分组{$Fav_total}个；
+											<br />３每个组名不能超过5个中文字符；
+											<br />４默认前三个分组不能删除；
+											<br />５第三个默认组为黑名单，拒收所有来自黑名单的论坛短信。
+										</td>
+									</tr>
+									<tr>
+										<form method="post" action="?action=creat">
+										<td class="tablebody2">
+											<input name="FavName" type="text" size="14" maxlength="14" />
+											<input type="submit" value="创建新组" name="B1">
+										</td>
+										</form>
+									</tr>
+									<tr>
+										<form method="post" action="?action=saveF">
+										<td class="tablebody2">
+											<input name="myFriend" type="text" size="14" maxlength="20" />
+											<input name="B1" type="submit" value="添加成员" />
+										</td>
+										</form>
+									</tr>
+									<tr>
+										<form method="post" action="?action=search">
+										<td class="tablebody2">
+											<input name="SearchInfo" type="text" size="14" maxlength="20" />
+											<input type="submit" value="查找成员" name="B1">
+										</td>
+										</form>
+									</tr>
+								</table>						
+							</td>
+							<td valign="top">
+								<table border="0" cellspacing="1" cellpadding="0" class="tableborder1" style="width:100%" >
+									<tr>
+										<th width="20" height="20" align="center"></th>
+										<th width="*">组名</th>
+										<th width="50">操作</th>
+									</tr>
+									{$FavName_List}
+								</table>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</td>
+		</tr>
+	</table>	
+	<script language="JavaScript" type="text/javascript">
+	<!--
+	function CheckAll(form)  
+	{  
+	  for (var i=0;i<form.elements.length;i++)  
+		{  
+		var e = form.elements[i];  
+		if (e.name != 'chkall')  
+		   e.checked = form.chkall.checked;  
+		}  
+	}
+	function showsub(ss)
+	{
+		ss=document.getElementById(ss)
+		if (ss.style.display=="none") 
+		{
+			ss.style.display="";
+		}
+		else
+		{
+			ss.style.display="none";
+		}
+	}
+	document.getElementById("show").innerHTML=document.getElementById("Fiend_act").innerHTML;
+	//-->
+	</script>
+</div>
+</div>
+</div>

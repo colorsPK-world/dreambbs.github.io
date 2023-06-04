@@ -1,0 +1,50 @@
+<!--前台管理部分页面-->
+<!--帖子管理选项-->
+<form action="admin_postings.asp?action={$reaction}" method="post" name="frmAnnounce" id="frmAnnounce">
+<table cellspacing="1" cellpadding="3" align="center" class="tableborder1">
+<tr>
+<th height="20">论坛帖子管理中心－您要进行的操作是 <b>{$action}</b></th>
+</tr>
+<tr>
+<td class="tablebody1" height="24" align="left"><b>
+操作理由</b>：
+<select name="title" size="1">
+<option value="">自定义</option>
+{$topicquestion}
+</select>
+<input name="content" type="text" size="60" />  *</td>
+</tr>
+{$ManageInfo}
+<input name="ID" type="hidden" value="{$id}" />
+<input name="replyID" type="hidden" value="{$replyid}" />
+<input name="boardID" type="hidden" value="{$boardid}" />
+<script language="JavaScript" type="text/javascript">
+<!--
+var fileconfirm='{$fileconfirm}';
+if (fileconfirm=='1'){
+document.write ('<tr>');
+document.write ('<td height="24" class="tablebody1" align="left">');
+document.write ('<b>附件操作</b>：<input type="radio" name="delupfile" value="0" checked="checked" />保留附件　　<input type="radio" name="delupfile" value="1" />删除附件');
+document.write ('（删除清理的附件将不能恢复！）</td>');
+document.write ('</tr>');
+}
+//-->
+</script>
+<tr>
+<td height="24" class="tablebody2" align="left">
+<b>短信通知</b>：<input name="msg" type="text" size="70" />&nbsp;<input type="checkbox" name="ismsg" value="1" />
+使用</td>
+</tr>
+<tr>
+<td height="24" class="tablebody1" align="left">
+<b>管理说明</b>：<br />
+①请慎重使用版主的管理职能，版主所有操作将被记录<br />
+②如果选择了短信通知，则会将删贴原因发送给用户，您也可以在短信中附上简短说明
+</td>
+</tr>
+<tr>
+<td height="24" class="tablebody2" style="text-align:center">
+<input name="submit" type="submit" value="确认操作" /></td>
+</tr>
+</table>
+</form>

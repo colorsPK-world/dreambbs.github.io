@@ -1,0 +1,27 @@
+<!--用户排行整页面-->
+<table cellpadding="6" cellspacing="1" align="center" class="tableborder1">
+<form method="post" action="infolist.asp?t=toplist">
+<tr>
+<td colspan="4" valign="top" width="350" class="tabletitle2">&nbsp;>> <b>{$ordername}</b> <<
+<br />
+&nbsp;总注册用户数： {$usernum} 人 &nbsp; 发帖总数： {$postnum} 篇</td>
+<td colspan="4" align="right" class="tabletitle2">
+{$isusersearch}
+<select name="orders" onchange='javascript:submit()'>
+{$myselect1}
+{$myselect2}
+{$myselect3}
+</select>
+</td>
+</tr></form>
+<tr>
+<th>用户名</th>
+<th style="text-align:center;">腾讯QQ</th>
+<th style="text-align:center;">主页</th>
+<th style="text-align:center;">短消息</th>
+<th style="text-align:center;">注册时间</th>
+<th style="text-align:center;">等级状态</th>
+<th style="text-align:center;">发帖总数</th>
+<th style="text-align:center;">财产</th></tr>
+{$toplistloop}
+{$pagelist}

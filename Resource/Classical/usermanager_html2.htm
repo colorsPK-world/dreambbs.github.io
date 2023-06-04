@@ -1,0 +1,12 @@
+<!--usermanager.asp##控制面板短信列部分{$msglist}-->
+<tr>
+	<td valign="middle" class="{$tablebody}">{$msg_pic}</td>
+	<td valign="middle" class="{$tablebody}">
+		<a href=dispuser.asp?name={$msg_name} target=_blank>{$msg_name}</a>
+	</td>
+	<td align="left" class="{$tablebody}">
+		<a href=usersms.asp?action=read&id={$msg_id}&sender={$msg_name} >{$msg_topic}</a>
+	</td>
+	<td class="{$tablebody}">{$msg_time}</td>
+	<td class="{$tablebody}">{$msg_size}Byte</td>
+</tr>

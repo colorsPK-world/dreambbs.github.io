@@ -1,0 +1,31 @@
+<!--魔法表情部分，用于资料浏览页面-->
+<div id="MagicFace" style="position:absolute;z-index:110;visibility:hidden;"></div>
+<div>
+<a href="javascript:DispMagicEmot({$magicfaceid},350,500)">
+点击查看魔法头像</a>
+</div>
+<script language="JavaScript" type="text/javascript">
+<!--
+function MM_showHideLayers() { //v6.0
+  var i,p,v,obj,args=MM_showHideLayers.arguments;
+  obj=document.getElementById("MagicFace");
+  for (i=0; i<(args.length-2); i+=3) if (obj) { v=args[i+2];
+    if (obj.style) { obj=obj.style; v=(v=='show')?'visible':(v=='hide')?'hidden':v; }
+    obj.visibility=v; }
+}
+function DispMagicEmot(MagicID,H,W){
+	MagicFaceUrl = "Dv_plus/tools/magicface/swf/" + MagicID + ".swf";
+	var obj = document.getElementById("MagicFace");
+	if (obj){
+		obj.innerHTML = '<OBJECT codeBase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=4,0,2,0" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="' + W + '" height="' + H + '"><PARAM NAME=movie VALUE="'+ MagicFaceUrl +'"><param name=menu value=false><PARAM NAME=quality VALUE=high><PARAM NAME=play VALUE=false><param name="wmode" value="transparent"><embed src="' + MagicFaceUrl +'" quality="high" pluginspage="http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash" type="application/x-shockwave-flash" width="' + W + '" height="' + H + '"></embed>';
+		obj.style.top = (document.body.scrollTop+((document.body.clientHeight-300)/2))+"px";
+		obj.style.left = (document.body.scrollLeft+((document.body.clientWidth-480)/2))+"px";
+		obj.style.visibility = "visible";
+		//MagicID += Math.random();
+		setTimeout("MM_showHideLayers('MagicFace','','hidden')",5000);
+		//NowMeID = MagicID;
+	}
+}
+DispMagicEmot({$magicfaceid},350,500);
+//-->
+</script>

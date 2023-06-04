@@ -1,0 +1,58 @@
+<!--myfile.asp##个人文件集主体部分-->
+<div class="mainbox" style="margin-top:0">
+<div class="Contentbox">
+<div id="con_two_8" ><!--start-->
+	<table cellspacing="0" cellpadding="0">
+		<tr>
+			<td style="width:160px;" valign="top">
+				<div class="subHover"><a href="myfile.asp">我的文件</a></div>
+				<div class="subOut"><a href="myfile.asp?action=fadd">添加文件</a></div>
+				<div class="subOut"><a href="show.asp?username={$username}">个人展区</a></div>
+			</td>
+			<td style="background:#F1F7FB;padding:8px" valign="top">
+				<div id="dvbase_1">
+					<table width="98%" class="tableborder2" cellSpacing="1" cellPadding="0" align="center">
+					  <form action="myfile.asp" method="get">
+					  <tr>
+						<td><a href="?action=fadd">〔新增文件库〕</a>，<a href="show.asp?username={$username}">〔个人展区〕</a></td>
+						<td align="right" width="200"><select onchange="javascript:submit()" name="Stype">
+							<option value="all" selected>查看文件类型</option>
+							<option value="0">文件集</option>
+							<option value="1">图片集</option>
+							<option value="2">FLASH集</option>
+							<option value="3">音乐集</option>
+							<option value="4">电影集</option>
+							<option value="5">所有文件</option>
+						  </select></td>
+					  </tr>
+					  </FORM>
+					</table>
+					<table width="98%" class="tableborder1" cellSpacing="1" cellPadding="0" align="center">
+						<form name="myfile" action="myfile.asp?action=fdel" method="post">
+							<tr>
+							  <th align="left" colSpan="7" height="25">-=&gt; 最新上传文件</th>
+							</tr>
+							<tr>
+							  <td width="30" align="center" valign="middle" class="tabletitle2"><b>属性</b></td>
+							  <td  width="*" align="center" valign="middle" class="tabletitle2"><b>文件说明</b></td>
+							  <td class="tabletitle2" valign="middle" align="center" width="60"><b>大小</b></td>
+							  <td class="tabletitle2" valign="middle" align="center" width="60"><b>下载/浏览</b></td>
+							  <td class="tabletitle2" valign="middle" align="center" width="120"><b>日期</b></td>
+							  <td class="tabletitle2" valign="middle" align="center" width="60"><b>类型</b></td>
+							  <td class="tabletitle2" valign="middle" align="center" width="120"><b>操作</b></td>
+							</tr>
+							{$Filelist}
+							<tr>
+							  <td class="tablebody2" align="right" colspan="7">请选择可以删除的文件，<input name="chkall" type="checkbox" class="chkbox" onclick="CheckAll(this.form)" value="on" />全选 
+								<input name="Submit" type="submit" onclick="{if(confirm('您确定执行的操作吗?')){this.document.myfile.submit();return true;}return false;}" value="执行" /></td>
+							</tr>
+						</form>
+					</table>
+					{$ShowPage}
+				</div>
+			</td>
+		</tr>
+	</table>
+</div>
+</div>
+</div>

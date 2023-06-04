@@ -1,0 +1,36 @@
+.dvedittoolbar{border-bottom:1px #C6D2E3 solid;text-align:left;text-indent:0;cursor:pointer;background-color:#f9fbfd;height:26px;min-height:24px; padding:2px;margin:0px;}
+.dvedittoolbar a{text-decoration: none;}
+.dveditstatusbar {border-top:1px #C6D2E3 solid;text-indent:0;text-align:left;cursor:pointer;background-color:#f9fbfd;padding:2px;margin:0px;border-bottom:none;font-size:12px;font-family:verdana;}
+.dveditwnd {text-align:left;text-indent:0;background-color:#f9fbfd;border:1px #C6D2E3 solid;padding:5px;font-size:12px;font-family:verdana;filter:progid:DXImageTransform.Microsoft.Alpha(style=0,opacity=80);opacity:0.8;}
+.dveditwnd div {color:black;padding:4px;text-decoration: none;font-size:12px;font-family:verdana;margin:0px;}
+.dveditwnd div a{color:black;padding:4px;text-decoration: none;}
+.dveditwnd div a:hover{padding:2px;background:yellow;border:1px solid orange;}
+.dveditwnd input{font-size:12px;font-family:verdana;}
+.dveditborder {border:1px #C6D2E3 solid;}
+.dveditbgborder {border:1px #f9fbfd solid;}
+.dveditico {border:1px solid #f9fbfd;float:left;width:20px;height:20px;padding:0px;background-image:url(images/toolbar.gif);background-repeat:no-repeat;margin-top:2px;margin-left:2px;}
+.dvediticobold {background-position:0 0;width:20px;height:20px;}
+.dvediticoitalic {background-position:-22px 0;}
+.dvediticounderline {background-position:-44px 0;}
+.dvediticofontsize {background-position:-66px 0;}
+.dvediticofontfamily {background-position:-88px 0;}
+.dvediticofontcolor {background-position:-110px 0;}
+.dvediticofontbgcolor {background-position:-132px 0;}
+.dvediticoemot {background-position:-154px 0;}
+.dvediticolink {background-position:-176px 0;}
+.dvediticojustifyleft {background-position:-198px 0;}
+.dvediticojustifycenter {background-position:-220px 0;}
+.dvediticojustifyright {background-position:-242px 0;}
+.dvediticoinsertorderedlist {background-position:-264px 0;}
+.dvediticoinsertunorderedlist {background-position:-286px 0;}
+.dvediticooutdent {background-position:-308px 0;}
+.dvediticoindent {background-position:-330px 0;}
+.dvediticoimage {background-position:-349px 0;}
+.dvediticomedia {background-position:-369px 0;}
+.dvediticotenpay {width:50px;background-position:-388px 0;}
+.dvediticoinserttable {background-position:-435px 0;}
+.dvediticounlink {background-position:-458px 0;}
+.dvediticodiv {float:left;padding-left:2px; font-size:12px; font-family:verdana; color:#C6D2E3;}
+.dvediticoinsertquote {background-position:-482px 0;}
+.dvediticoinsertcode {background-position:-505px 0;}
+.dvediticocleancode {background-position:-529px 0;}

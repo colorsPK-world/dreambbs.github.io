@@ -1,0 +1,38 @@
+<!--用户排行循环部分-->
+<tr>
+<td class="tablebody1">&nbsp;<a href="dispuser.asp?id={$userid}" target="_blank">{$username}</a></td>
+<td align="center" class="tablebody1">
+<script language="JavaScript" type="text/javascript">
+<!--
+var oicq='{$oicq}';
+var homepage='{$homepage}';
+if (oicq!='')
+{
+	document.write ('<a target="_blank" href="http://wpa.qq.com/msgrd?V=1&Uin={$oicq}&Site={$site}&Menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=1:{$oicq}:8" alt="点击这里给{$oicq}发消息" /></a>');
+}
+else{
+	document.write ('没有');
+}
+//-->
+</script>
+</td>
+<td align="center" class="tablebody2">
+<script language="JavaScript" type="text/javascript">
+<!--
+if (homepage!='')
+{
+	document.write ('<a href="{$homepage}" target="_blank"><img border="0" src="{$homepagepic}" alt="" /></a>');
+}
+else{
+	document.write ('没有');
+}
+//-->
+</script>
+</td>
+<td align="center" class="tablebody1"><a href="javascript:;" onclick="DvWnd.open('给{$username}发送短信','messanger.asp?action=new&amp;touser={$username}',800,600,1,{bgc:'black',opa:0.5});" title="给{$username}发送短信"><img src="{$msgpic}" border="0" alt=""></a></td>
+<td align="center" class="tablebody2">{$adddate}</td>
+<td align="center" class="tablebody1">{$userclass}<br>
+</td>
+<td align="center" class="tablebody2">{$article}</td>
+<td align="center" class="tablebody1">{$wealth}</td>
+</tr>

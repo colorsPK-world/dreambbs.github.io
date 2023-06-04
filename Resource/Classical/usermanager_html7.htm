@@ -1,0 +1,24 @@
+<!--mymodify.asp##基本资料修改-自定义头像部分 2005-1-27-->
+<table cellpadding="0" cellspacing="0">
+	<tr>
+		<td width="*">论坛头像选择 
+			<select name="face" style="font-family:arial" size="1" onChange="document.images['face'].src=options[selectedIndex].value; parent.document.theForm.myface.value=options[selectedIndex].value"> 
+			{$Face_select}
+			</select>
+			<a href="#" onclick="openScript('smiley.asp?t=1',650,400)" title="头像预览列表">[<font color="{$color}">头像预览</font>]</a>
+		</td>
+		<td width="180" rowspan="2" valign="top" align="center">
+			<img id="face" src="{$user_Face}" width="{$user_FaceWidth}" height="{$user_FaceHeight}" />
+		</td>
+	</tr>
+	<tr>
+		<td width="*">
+			||<iframe src="reg_upload.asp" name="ad" style="width:auto:min-width:300px;" height="26" scrolling="no" frameborder="0" id="ad"></iframe>||
+			<br />自定义头像地址：<input name="myface" type="text" value="{$user_Face}" size="30" maxlength="100" /> 
+			<br /><font color="red">您现在的发帖数为[{$mypostnum}]篇，如果小于[{$facepostnum}]篇则以上地址无效！</font>
+			<br />宽&nbsp;&nbsp;&nbsp;&nbsp;度：<input name="width" type="text" value="{$user_FaceWidth}" size="3" maxlength="3" />0---{$forum_Mwidth}的整数
+			<br />高&nbsp;&nbsp;&nbsp;&nbsp;度：<input name="height" type="text" value="{$user_FaceHeight}" size="3" maxlength="3" />0---{$forum_Mheight}的整数
+			<br />
+		</td>
+	</tr>
+</table>

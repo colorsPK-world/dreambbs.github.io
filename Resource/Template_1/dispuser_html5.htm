@@ -1,0 +1,39 @@
+<!-- dispuser.asp||用户资料显示页面(快捷管理选项部分) -->
+<table class=tableborder1 cellspacing=1 cellpadding=0 align=center>
+<tr><th height="25" align=left colspan=2>快捷管理选项</th></tr>
+<tr><td class=tablebody1 height=25 colspan=2>
+<B>用户管理选项</B>：『
+<a href="admin_lockuser.asp?action=lock_1&name={$UserName}" title=锁定该用户不允许登录和发言>锁定</a> | 
+<a href="admin_lockuser.asp?action=lock_2&name={$UserName}" title=屏蔽该用户在论坛的发言>屏蔽</a> | 
+<a href="admin_lockuser.asp?action=lock_3&name={$UserName}" title=解除该用户在论坛的锁定和屏蔽>解除</a> | 
+<a href="admin_lockuser.asp?action=power&name={$UserName}" title=对用户进行分值奖励>奖励</a> | 
+<a href="admin_lockuser.asp?action=getpermission&name={$UserName}&userid={$UserID}">编辑该用户论坛权限</a>』
+</td></tr>
+<tr>
+<form method="post" action="admin_lockuser.asp?action=DelTopic">
+<td class="tablebody1" valign="middle" width="50%">
+<b>帖子管理选项</b>：删除该用户&nbsp;
+<input name="SetUserID" type="hidden" value="{$UserID}" />
+<input name="name" type="hidden" value="{$UserName}" />
+<select name="delTopicDate" size="1">
+<option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option>
+</select>&nbsp;天内的主题&nbsp;<input name="submit" type="submit" value="执行" />
+</td>
+</form>
+<form method="post" action="admin_lockuser.asp?action=DelUserReply">
+<td class="tablebody1" width="50%">删除该用户&nbsp;
+<input name="SetUserID" type="hidden" value="{$UserID}" />
+<input name="name" type="hidden" value="{$UserName}" />
+<select name="delTopicDate" size="1"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option>
+</select>&nbsp;天内的回复在 
+<select size="1" name="delbbs">
+{$UseTable}
+</select>
+中&nbsp;<input name="submit" type="submit" value="执行" />
+</td>
+</form></tr>
+<tr><td class="tablebody1" valign="middle" height="25" colspan="2">
+<B>用户最后来访IP</B>：
+<a href="TopicOther.asp?t=1&action=lookip&ip={$UserIP}">{$UserIP}</a>&nbsp;&nbsp;点击IP查看用户来源及操作
+</td></tr>
+</table>

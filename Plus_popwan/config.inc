@@ -1,0 +1,3 @@
+<%
+Const RecommendID = "0"
+%>

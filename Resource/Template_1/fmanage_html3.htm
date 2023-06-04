@@ -1,0 +1,66 @@
+<!--固顶操作选项-->
+<form action="admin_postings.asp?action={$reaction}" method="post" name="frmAnnounce" id="frmAnnounce">
+<input name="istopaction" type="hidden" value="1" />
+<input name="boardID" type="hidden" value="{$boardid}" />
+<input name="ID" type="hidden" value="{$id}" />
+<input name="title" type="hidden" value="{$title}" />
+<input name="content" type="hidden" value="{$msgcontent}" />
+<input name="doWealth" type="hidden" value="{$doWealth}" />
+<input name="dousercp" type="hidden" value="{$dousercp}" />
+<input name="douserep" type="hidden" value="{$douserep}" />
+<input name="msg" type="hidden" value="{$msg}" />
+<input name="ismsg" type="hidden" value="{$ismsg}" />
+<table style="wIDth:70%" cellspacing="1" cellpadding="3" align="center" class="tableborder1">
+<tr>
+<th height="20" colspan="2">固顶帖子选项</th>
+</tr>
+<tr>
+<td height="24" class="tablebody1" colspan="2">
+<b>说明</b>：在这里，有权限的用户可进行总固顶、区域固顶和固顶操作，选择总固顶复选框可将帖子总固顶，默认为在当前版面进行固顶操作，CTRL可多选版面进行固顶操作，对总固顶和区域固顶操作前，请确保您有总固顶以及其它版面固顶操作的权限<br />
+<b>优先原则</b>：选择了总固顶，则选择的区域固顶和固顶版面无效，多选版面进行区域固顶，则帖子为区域固顶，单选版面固顶，则帖子为固顶。<br />编辑固顶的时候如果想取消请按 CTRL 点击相应版面取消后提交表单。
+<br />
+<b>权限</b>：总固顶 <b>{$alltop}</b>  区域固顶 <b>{$areatop}</b>  版面固顶 <b>{$boardtop}</b>
+</td>
+</tr>
+<tr>
+<td height="24" class="tablebody1" width="50%">
+<input name="alltop" type="checkbox" value="1" onclick="frmAnnounce.movealltop.checked=false;" {$checkbox1} /> 总固顶帖子
+<input name="movealltop" type="checkbox" onclick="ChkSelected(frmAnnounce.getboard,this);" value="1" /> 取消所有固顶选择
+<br /><br />
+区域固顶和固顶帖子版面，请按 CTRL 键多选或取消<br />
+<select name="getboard" size="20" style="width:100%" multiple="multiple">
+{$boardselected}
+</select>
+</td>
+<td height="24" class="tablebody1" width="50%" valign="top">
+<b><a href="dispbbs.asp?boardid={$boardid}&id={$id}">{$topic}</a></b>
+<br /><br />
+{$content}
+</td>
+</tr>
+<tr>
+<td height="24" class="tablebody2" style="text-align:center" colspan="2">
+<input name="submit" type="submit" value="确认操作" /></td>
+</tr>
+</table>
+</form>
+<script language="JavaScript" type="text/javascript">
+<!--
+//SELECT表单选取
+function ChkSelected(Obj,ChkObj)
+{
+	if (Obj)
+	{
+		for (var i=0;i<Obj.length;i++){
+			if (ChkObj.checked){
+				Obj.options[i].selected=false;
+				frmAnnounce.alltop.checked=false;
+			}
+			else{
+				//Obj.options[i].selected=true;
+			}
+		}
+	}
+}
+//-->
+</script>

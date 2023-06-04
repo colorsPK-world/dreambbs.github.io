@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="gb2312"?>
+<xml>
+	<!--
+	Copyright (C) 2004,2005 AspSky.Net. All rights reserved.
+	Written by dvbbs.net Lao Mi
+	Web: http://www.aspsky.net/,http://www.dvbbs.net/
+	Email: eway@aspsky.net
+	-->
+	<time_difference value="-12">(GMT-12.00)国际日期变更线西</time_difference >
+	<time_difference value="-11">(GMT-11.00)中途岛，萨摩亚群岛</time_difference >
+	<time_difference value="-10">(GMT-10.00)夏威夷</time_difference >
+	<time_difference value="-9">(GMT-9.00)阿拉斯加</time_difference >
+	<time_difference value="-8">(GMT-8.00)太平洋时间（美国和加拿大）；蒂华纳</time_difference >
+	<time_difference value="-7">(GMT-7.00)奇瓦瓦，拉巴斯，马扎特兰</time_difference >
+	<time_difference value="-7">(GMT-7.00)山地时间（美国和加拿大）</time_difference >
+	<time_difference value="-7">(GMT-7.00)亚利桑那</time_difference >
+	<time_difference value="-6">(GMT-6.00)瓜达拉哈拉，墨西哥城，蒙特雷</time_difference >
+	<time_difference value="-6">(GMT-6.00)萨斯喀彻温</time_difference >
+	<time_difference value="-6">(GMT-6.00)中部时间（美国和加拿大）</time_difference >
+	<time_difference value="-6">(GMT-6.00)中美洲</time_difference >
+	<time_difference value="-5">(GMT-5.00)波哥大，利马，基多</time_difference >
+	<time_difference value="-5">(GMT-5.00)东部时间（美国和加拿大）</time_difference >
+	<time_difference value="-5">(GMT-5.00)印第安那州（东部）</time_difference >
+	<time_difference value="-4">(GMT-4.00)大西洋时间（加拿大）</time_difference >
+	<time_difference value="-4">(GMT-4.00)加拉加斯，拉巴斯</time_difference >
+	<time_difference value="-4">(GMT-4.00)圣地亚哥</time_difference >
+	<time_difference value="-3">(GMT-3.00)纽芬兰</time_difference >
+	<time_difference value="-3">(GMT-3.00)巴西利亚</time_difference >
+	<time_difference value="-3">(GMT-3.00)布宜诺斯艾利斯，乔治敦</time_difference >
+	<time_difference value="-3">(GMT-3.00)格陵兰</time_difference >
+	<time_difference value="-2">(GMT-2.00)中大西洋</time_difference >
+	<time_difference value="-1">(GMT-1.00)佛得角群岛</time_difference >
+	<time_difference value="-1">(GMT-1.00)亚速尔群岛</time_difference >
+	<time_difference value="0">(GMT)格林威治标准时间，都柏林，爱丁堡，伦敦，里斯本</time_difference>
+	<time_difference value="0">(GMT)卡萨布兰卡，蒙罗维亚</time_difference >
+	<time_difference value="1">(GMT+1.00)阿姆斯特丹，柏林，伯尔尼，罗马，斯德哥尔摩，维也纳</time_difference >
+	<time_difference value="1">(GMT+1.00)贝尔格莱德，布拉迪斯拉发，布达佩斯，卢布尔雅那，布拉格</time_difference >
+	<time_difference value="1">(GMT+1.00)布鲁塞尔，哥本哈根，马德里，巴黎</time_difference >
+	<time_difference value="1">(GMT+1.00)萨拉热窝，斯科普里，华沙，萨格勒布</time_difference >
+	<time_difference value="1">(GMT+1.00)中非西部</time_difference >
+	<time_difference value="2">(GMT+2.00)布加勒斯特</time_difference >
+	<time_difference value="2">(GMT+2.00)哈拉雷，比勒陀利亚</time_difference >
+	<time_difference value="2">(GMT+2.00)赫尔辛基，基辅，里加，索非亚，塔林，维尔纽斯</time_difference >
+	<time_difference value="2">(GMT+2.00)开罗</time_difference >
+	<time_difference value="2">(GMT+2.00)雅典，贝鲁特，伊斯坦布尔，明斯克</time_difference >
+	<time_difference value="2">(GMT+2.00)耶路撒冷</time_difference >
+	<time_difference value="3">(GMT+3.00)巴格达</time_difference >
+	<time_difference value="3">(GMT+3.00)科威特，利雅得</time_difference >
+	<time_difference value="3">(GMT+3.00)莫斯科，圣彼得堡，伏尔加格勒</time_difference >
+	<time_difference value="3">(GMT+3.00)内罗毕</time_difference >
+	<time_difference value="3">(GMT+3.00)德黑兰</time_difference >
+	<time_difference value="4">(GMT+4.00)阿布扎比，马斯喀特</time_difference >
+	<time_difference value="4">(GMT+4.00)巴库，第比利斯，埃里温</time_difference >
+	<time_difference value="4.5">(GMT+4.30)喀布尔</time_difference >
+	<time_difference value="5">(GMT+5.00)叶卡捷琳堡</time_difference >
+	<time_difference value="5">(GMT+5.00)伊斯兰堡，卡拉奇，塔什干</time_difference >
+	<time_difference value="5.5">(GMT+5.30)马德拉斯，加尔各答，孟买，新德里</time_difference >
+	<time_difference value="5.75">(GMT+5.45)加德满都</time_difference >
+	<time_difference value="6">(GMT+6.00)阿拉木图，新西伯利亚</time_difference >
+	<time_difference value="6">(GMT+6.00)阿斯塔纳，达卡</time_difference >
+	<time_difference value="6">(GMT+6.00)斯里哈亚华登尼普拉</time_difference >
+	<time_difference value="6">(GMT+6.30)仰光</time_difference >
+	<time_difference value="7">(GMT+7.00)克拉斯诺亚尔斯克</time_difference >
+	<time_difference value="7">(GMT+7.00)曼谷，河内，雅加达</time_difference >
+	<time_difference value="8">(GMT+8.00)北京，重庆，香港特别行政区，乌鲁木齐，台北</time_difference >
+	<time_difference value="8">(GMT+8.00)吉隆坡，新加坡</time_difference >
+	<time_difference value="8">(GMT+8.00)珀斯</time_difference >
+	<time_difference value="8">(GMT+8.00)伊尔库茨克，乌兰巴图</time_difference >
+	<time_difference value="9">(GMT+9.00)大坂，东京，札幌</time_difference >
+	<time_difference value="9">(GMT+9.00)汉城</time_difference >
+	<time_difference value="9">(GMT+9.00)雅库茨克</time_difference >
+	<time_difference value="9.5">(GMT+9.30)阿德莱德</time_difference >
+	<time_difference value="9.5">(GMT+9.30)达尔文</time_difference >
+	<time_difference value="10">(GMT+10.00)布里斯班</time_difference >
+	<time_difference value="10">(GMT+10.00)符拉迪沃斯托克（海参崴）</time_difference >
+	<time_difference value="10">(GMT+10.00)关岛，莫尔兹比港</time_difference >
+	<time_difference value="10">(GMT+10.00)霍巴特</time_difference >
+	<time_difference value="10">(GMT+10.00)堪塔拉，墨尔本，悉尼</time_difference >
+	<time_difference value="11">(GMT+11.00)马加丹，索罗门群岛，新喀里多尼亚</time_difference >
+	<time_difference value="12">(GMT+12.00)奥克兰，惠灵顿</time_difference >
+	<time_difference value="12">(GMT+12.00)斐济，堪察加半岛，马绍尔群岛</time_difference >
+	<time_difference value="13">(GMT+13.00)努库阿洛法</time_difference >
+</xml>

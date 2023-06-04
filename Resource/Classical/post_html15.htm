@@ -1,0 +1,210 @@
+<tr><td width="20%" class="tablebody2"><b>财付通帐号：</b><li>也可填写有效Email地址或QQ帐号</li><li>如果您在财付通网站设置了“防骚扰”，则使用“交易”按钮发布的交易无效
+</li></td>
+<td width="80%" class="tablebody2">
+<input name="alipay_seller" value="{$paytomail}" class="FormClass" size="30" onblur="checkAlipaySeller(this);" />
+&nbsp;&nbsp;<span id="alipay_seller_errinfo"></span>
+<br/><br/>未注册财付通请在买家交易后查收激活邮件
+</td></tr>
+<tr><td width="20%" class="tablebody1"><b>商品名称：</b><li><a href="https://www.tenpay.com/zft/qa/qa_zj.shtml" target="_blank"><font color="blue">财付通交易帮助</font></a></li></td>
+<td width="80%" class="tablebody1"><input name="alipay_subject" class="FormClass" size="45" onblur="checkAlipaySubject(this);"/>&nbsp;&nbsp;<span id="alipay_subject_errinfo"></span>&nbsp;&nbsp;价格&nbsp;<input name="alipay_price" class="FormClass" size="5" value="0" onblur="checkAlipayPrice(this);"/>&nbsp;元&nbsp;&nbsp;<span id="alipay_price_errinfo"></span>
+</td></tr>
+<tr><td width="20%" class="tablebody1"><b>邮费承担方：</b></td>
+<td width="80%" class="tablebody1">
+			<input type="radio" id="ialipay_transport" name="ialipay_transport" value="3" class="radio" onclick="document.getElementById('alipay_mail_1').disabled=true; document.getElementById('alipay_express_1').disabled=true;alipay_transport.value=3;" /> 
+			虚拟物品不需邮递&nbsp;&nbsp;
+			<input type="radio" id="ialipay_transport" name="ialipay_transport" checked="checked" value="1" class="radio" onclick="document.getElementById('alipay_mail_1').disabled=true; document.getElementById('alipay_express_1').disabled=true;alipay_transport.value=1;" /> 
+			卖家承担运费&nbsp;&nbsp;
+			<input type="radio" class="radio" id="ialipay_transport" name="ialipay_transport" value="2" onclick="document.getElementById('alipay_mail_1').disabled=false; document.getElementById('alipay_express_1').disabled=false;alipay_transport.value=2;" /> 
+			买家承担运费<br />
+			<input type="hidden" value="1" id="alipay_transport" />
+			平邮&nbsp;
+			<input type="text" id="alipay_mail_1" name="alipay_mail" style="width:45px" size="25" disabled="disabled" onblur="checkAlipayTransport(this);" /> 
+			元 &nbsp;&nbsp;
+			快递&nbsp;
+			<input type="text" id="alipay_express_1" name="alipay_express" style="width:45px" size="25" disabled="disabled" onblur="checkAlipayTransport(this);" /> 
+			元 (不填为平邮)
+			<span id="alipay_transport_errinfo"></span>
+</td></tr>
+<tr><td width="20%" class="tablebody1"><b>演示地址：</b></td>
+<td width="80%" class="tablebody1"><input name="alipay_demo" class="FormClass" size="45" value="http://" onblur="checkAlipayDemo(this);" />
+&nbsp;&nbsp;商品说明请填写于信息内容中<span id="alipay_demo_errinfo"></span>
+</td></tr>
+<tr><td width="20%" class="tablebody1"><b>联系方式：</b></td>
+<td width="80%" class="tablebody1">Email:&nbsp;<input type="text" name="alipay_ww" size="8" onblur="checkAlipayWw(this);"/>&nbsp;&nbsp;腾讯QQ&nbsp;<input type="text" name="alipay_qq" size="9" onblur="checkAlipayQq(this);"/>&nbsp;&nbsp;让买家在线联系您<span id="alipay_link_errinfo"></span>
+</td></tr>
+<script language="JavaScript" type="text/javascript">
+var CheckAlipayEmailStr = /^[_a-zA-Z0-9\-]+(\.[_a-zA-Z0-9\-]*)*@[a-zA-Z0-9\-]+([\.][a-zA-Z0-9\-]+)+$/;
+var CheckAlipayQQStr = /^[1-9][0-9]*$/;
+var CheckAlipayPrice = /^(0|[1-9][0-9]*)(\.[0-9]{1,2})*$/;
+//财付通帐号验证
+function checkAlipaySeller(theform){
+	if (theform.value != '') {
+		if (theform.value.length > 4 && theform.value.length < 66){
+			if (CheckAlipayEmailStr.test(theform.value) || CheckAlipayQQStr.test(theform.value)){
+				document.getElementById("alipay_seller_errinfo").innerHTML='<img src="Skins/Default/note_ok.gif"/>符合要求!';
+				return true;
+			}else{
+				document.getElementById("alipay_seller_errinfo").innerHTML='<img src="Skins/Default/note_error.gif"/>财富通帐号必须是标准的Email地址或QQ号码!';
+			}
+		}else{
+			if (theform.value.value.length < 5){
+				document.getElementById("alipay_seller_errinfo").innerHTML='<img src="Skins/Default/note_error.gif"/>财富通帐号不能小于5个字符.';
+			}
+			if (theform.value.value.length > 65){
+				document.getElementById("alipay_seller_errinfo").innerHTML='<img src="Skins/Default/note_error.gif"/>财富通帐号长度不能超过65个字符.';
+			}
+		}
+	}else{
+		document.getElementById("alipay_seller_errinfo").innerHTML='<img src="Skins/Default/note_error.gif"/>请输入财富通帐号.';
+	}
+	return false;
+}
+//商品名称验证
+function checkAlipaySubject(theform){
+	var CheckAlipaySubject = /^[^<>\'\"%\s]+$/;
+	if (theform.value != '' || theform.value == 0){
+		if (theform.value.length < 33){
+			if (CheckAlipaySubject.test(theform.value)){
+				document.getElementById("alipay_subject_errinfo").innerHTML='<img src="Skins/Default/note_ok.gif"/>符合要求!';
+				return true;
+			}else{
+				document.getElementById("alipay_subject_errinfo").innerHTML='<img src="Skins/Default/note_error.gif"/>商品名称不能包含“<>\'\"%”等特殊字符.';
+			}
+		}else{
+			document.getElementById("alipay_subject_errinfo").innerHTML='<img src="Skins/Default/note_error.gif"/>商品名称长度不能超过32个字符.';
+		}
+	}else{
+		document.getElementById("alipay_subject_errinfo").innerHTML='<img src="Skins/Default/note_error.gif"/>请输入商品名称.';
+	}
+	return false;
+}
+//商品价格验证
+function checkAlipayPrice(theform){
+	if (theform.value != ''){
+		if (CheckAlipayPrice.test(theform.value)){
+			document.getElementById("alipay_price_errinfo").innerHTML='<img src="Skins/Default/note_ok.gif"/>符合要求!';
+			return true;
+		}else{
+			document.getElementById("alipay_price_errinfo").innerHTML='<img src="Skins/Default/note_error.gif"/>商品价格必须是数字或符合“数字.数字”格式(例如：1.23，123.32).';
+		}
+	}else{
+		document.getElementById("alipay_price_errinfo").innerHTML='<img src="Skins/Default/note_error.gif"/>请输入商品价格.';
+	}
+	return false;
+}
+//运费价格验证
+function checkAlipayTransport(theform){
+	if (document.getElementById("alipay_transport").value==2){
+		if (theform.value != ''){
+			if (CheckAlipayPrice.test(theform.value)){
+				document.getElementById("alipay_transport_errinfo").innerHTML='<img src="Skins/Default/note_ok.gif"/>符合要求!';
+				return true;
+			}else{
+				document.getElementById("alipay_transport_errinfo").innerHTML='<img src="Skins/Default/note_error.gif"/>运费价格必须是数字或符合“数字.数字”格式(例如：1.23，123.32).';
+				return false;
+			}
+		}
+	}
+}
+//演示地址验证
+function checkAlipayDemo(theform){
+	var CheckAlipayDemo = /^[^<>\'\"]+$/;
+	if (theform.value != ''){
+		if (theform.value.length < 256){
+			if (CheckAlipayDemo.test(theform.value)){
+				document.getElementById("alipay_demo_errinfo").innerHTML='<img src="Skins/Default/note_ok.gif"/>符合要求!';
+				return true;
+			}else{
+				document.getElementById("alipay_demo_errinfo").innerHTML='<img src="Skins/Default/note_error.gif"/>演示地址不能包含“<>\'\"%”等特殊字符.';
+			}
+		}else{
+			document.getElementById("alipay_demo_errinfo").innerHTML='<img src="Skins/Default/note_error.gif"/>演示地址不能超过255个字符.';
+		}
+		return false;
+	}
+}
+//Email联系方式验证码
+function checkAlipayWw(theform){
+	if (theform.value != ''){
+		if (CheckAlipayEmailStr.test(theform.value)){
+			document.getElementById("alipay_link_errinfo").innerHTML='<img src="Skins/Default/note_ok.gif"/>符合要求!';
+			return true;
+		}else{
+			document.getElementById("alipay_link_errinfo").innerHTML='<img src="Skins/Default/note_error.gif"/>联系方式(Email)格式不正确.';
+			return false;
+		}
+	}
+}
+//QQ联系方式验证码
+function checkAlipayQq(theform){
+	if (theform.value != ''){
+		if (CheckAlipayQQStr.test(theform.value)){
+			document.getElementById("alipay_link_errinfo").innerHTML='<img src="Skins/Default/note_ok.gif"/>符合要求!';
+			return true;
+		}else{
+			document.getElementById("alipay_link_errinfo").innerHTML='<img src="Skins/Default/note_error.gif"/>联系方式(QQ)不正确，必须是纯数字.';
+			return false;
+		}
+	}
+}
+function checkPay(){
+	var ischeck=true;
+	if (document.Dvform.alipay_seller!=null){
+		if (document.Dvform.alipay_seller.value==''){
+			document.getElementById("alipay_seller_errinfo").innerHTML=" <font color=\"#FF0000\">←请输入财付通帐号</font>";
+			document.Dvform.alipay_seller.focus();
+			ischeck=false;
+		}else{
+			if (!checkAlipaySeller(document.Dvform.alipay_seller)){
+				document.Dvform.alipay_seller.focus();
+				ischeck=false;
+			}
+		}
+	}
+	if (document.Dvform.alipay_subject!=null){
+		if (document.Dvform.alipay_subject.value==''){
+			document.getElementById("alipay_subject_errinfo").innerHTML=" <font color=\"#FF0000\">←请输入商品名称</font>";
+			document.Dvform.alipay_subject.focus();
+			ischeck=false;
+		}else{
+			if (!checkAlipaySubject(document.Dvform.alipay_subject)){
+				document.Dvform.alipay_subject.focus();
+				ischeck=false;
+			}
+		}
+	}
+	if (document.Dvform.alipay_price!=null){
+		if (document.Dvform.alipay_price.value==''){
+			document.getElementById("alipay_price_errinfo").innerHTML=" <font color=\"#FF0000\">←请输入商品价格</font>";
+			document.Dvform.alipay_price.focus();
+			ischeck=false;
+		}else{
+			if (!checkAlipayPrice(document.Dvform.alipay_price)){
+				document.Dvform.alipay_price.focus();
+				ischeck=false;
+			}
+		}
+	}
+	if (document.Dvform.alipay_transport!=null && document.Dvform.alipay_mail!=null && document.Dvform.alipay_express!=null){
+		if (document.Dvform.alipay_transport.value==2){
+			if (document.Dvform.alipay_mail.value=='' && document.Dvform.alipay_express.value=='')
+			{
+				document.getElementById("alipay_transport_errinfo").innerHTML=" <font color=\"#FF0000\">←请输入运费</font>";
+				document.Dvform.alipay_mail.focus();
+				ischeck=false;
+			}else{
+				if (!checkAlipayTransport(document.Dvform.alipay_mail)){
+					document.Dvform.alipay_mail.focus();
+					ischeck=false;
+				}else{
+					if (!checkAlipayTransport(document.Dvform.alipay_express)){
+						document.Dvform.alipay_express.focus();
+						ischeck=false;
+					}
+				}
+			}
+		}
+	}
+	return ischeck;
+}
+</script>

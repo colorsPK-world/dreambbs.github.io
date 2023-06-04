@@ -1,0 +1,6 @@
+<bgsound src="skins/default/mail.wav" border=0 align="absmiddle">||<script language="javaScript" type="text/javascript">openScript("messanger.asp?action=read&id={$smsid}&sender={$sender}",500,400)</script>||<a href="usersms.asp?action=inbox">我的收件箱</a> (<a href="javascript:openScript('messanger.asp?action=read&id={$smsid}&sender={$sender}',500,400)"><font class=redfont>{$newmsgnum}</font></a>)||<a href="usersms.asp?action=inbox">我的收件箱</a> (<font color="gray">0</font>)||&nbsp;&nbsp;<a onmouseover="showmenu(event,'','regroup')" style="cursor:hand">切换用户身份</a>
+<div class="menu_popup" id="regroup">
+<div class="menuitems">
+{$UserGroupList}
+</div>
+</div>

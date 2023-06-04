@@ -1,0 +1,319 @@
+/*
+博客首页CSS定义
+*/
+/*--------------------------------ALL PAGE--------------------------------------*/
+div.pageall{
+	width:780px;
+	margin:20px 0px 20px 0px;
+	background-color:#fff;
+}
+hr.dashed {
+	clear:both;
+	border-top: 1px #d9d9d9 dashed;
+	border-bottom : 0px;
+	height: 0px;
+}
+div.pagerow {
+	clear:both;
+	width:100%;
+	margin:0px;
+}
+div.classinfo{
+	text-align:left;
+	padding:5px 0px 5px 5px;
+	background-color:#EBEBEB;
+	border-top:3px solid #999999;
+	border-bottom:2px solid #C2C2C2;
+}
+/*--------------------------------  font style --------------------------------------*/
+
+ 
+/*-------------------------------- top 公告和新闻 --------------------------------------*/
+#TopNotice {
+	float:left;
+	width:29%;
+	height:160px;
+	margin:0px;
+	border:1px solid #fff;
+	background-color:#fff;
+}
+div.noticeicon {
+	float:left;
+	margin:2px 0px 2px 0px;
+	padding:0px 0px 0px 0px;
+	text-align:right;
+}
+div.noticetitle {
+	float:right;
+	margin:2px 0px 2px 0px;
+	padding:4px 0px 0px 4px;
+	width:192px;
+	color:#fff;
+	font-weight:bolder;
+	text-align:left;
+	background: #2a79ba url("../images/notice_right.gif") no-repeat right;
+}
+#TopNews {
+	float:right;
+	width:70%;
+	height:160px;
+	margin:0px;
+	border:1px solid #fff;
+	background-color:#fff;
+}
+div.newsicon {
+	float:left;
+	margin:2px 0px 2px 1px;
+	padding:0px 0px 0px 0px;
+	text-align:left;
+}
+div.newstitle {
+	float:right;
+	margin:2px 1px 2px 0px;
+	padding:4px 0px 0px 5px;
+	width:507px;
+	color:#000;
+	font-weight:bolder;
+	text-align:left;
+	background:#dfdfdf url('../images/news_right.gif') no-repeat right;
+}
+div.newsmsg {
+	padding: 3px 3px 3px 10px;
+	word-break:break-all;
+	float:right;
+	text-align:left;
+	color:#004a7b;
+}
+/*-------------------------------- 搜索 --------------------------------------*/
+div.search{
+	background:#dfdfdf url("../images/search_left.gif") no-repeat left;
+	float:left;
+	width:548px;
+	height:24px;
+	padding:5px 3px 2px 3px;
+	text-align:right;
+}
+div.searchright{
+	float:right;
+	width:220px;
+	padding:3px;
+	text-align:left;
+	background:#dfdfdf url('../images/search_right.gif') no-repeat right center;
+}
+
+/*-------------------------------- 子栏目 --------------------------------------*/
+div.pagerow li.part{
+	list-style:none;
+	float:left;
+	width:256px;
+}
+div.border0{
+	margin:0px 0px 0px 0px;
+	padding: 0px;
+	background-color:#fff;
+}
+div.border1{
+	margin:0px 0px 0px 0px;
+	padding: 2px;
+	background-color:#fff;
+	border:1px solid #bbbbbb;
+}
+div.toptitle1{
+	color:#91BE06;
+	border-top:3px solid #91BE06;
+	border-bottom:2px solid #DFDFDF;
+	background-color:#fff;
+}
+div.toptitle2{
+	color:#FF6600;
+	border-top:3px solid #FF6600;
+	border-bottom:2px solid #DFDFDF;
+	background-color:#fff;
+}
+div.toptitle3{
+	color:#56b1f5;
+	border-top:3px solid #56B1F5;
+	border-bottom:2px solid #DFDFDF;
+}
+
+div.toptitle1,div.toptitle2,div.toptitle3{
+	padding:5px 0px 0px 5px;
+	height:20px;
+
+	font-weight:bold;
+	text-align:left;
+	background-color:#fff;
+}
+
+div.msg{
+	margin:0px;
+	text-align:left;
+	padding: 3px 2px 2px 5px;
+	background-color:#f9f9f9;
+	word-wrap: break-word; word-break: break-all;
+}
+div.msg li {
+	text-align:left;
+	line-height:20px;
+	font-size:12px;
+	color:#2a79ba;
+	list-style-type:circle;
+}
+li.list{
+	text-align:left;
+	float:left;
+}
+span.list_left{
+	width:68%;
+	float:left;
+	text-align:left;
+	word-break:break-all;
+}
+span.list_left_a{
+	width:98%;
+	float:left;
+	text-align:left;
+	word-break:break-all;
+}
+
+span.list_right{
+	width:30%;
+	float:left;
+	text-align:left;
+	word-break:break-all;
+}
+/*---------------底部列表左右部分 ---------------------------------------*/
+div.partleft{
+	width:68%;
+	float:left;
+}
+
+div.partright{
+	width:32%;
+	float:right;
+}
+/*---------------分类 目录 ---------------------------------------*/
+#bokeclass {
+	clear:both;
+	padding:4px;
+	background-color:#fff;
+	border:1px solid #bbbbbb;
+}
+#bokeclass div.title1 {
+	margin:0px;
+	padding:3px 0px 0px 10px;
+	height:20px;
+
+	color:#666666;
+	font-weight:bolder;
+	text-align:left;
+	background-color:#fff;
+	border-left:2px solid #fff;
+	border-bottom:4px solid #DFDFDF;
+}
+#bokeclass div.msg {
+	text-align:left;
+	background-color:#EBEBEB;
+}
+
+/*------------------------------- 博客图片 ---------------------------------------*/
+#photolist {
+	margin:0px;
+	padding:2px;
+	height:150px;
+	background-color:#fff;
+	border:1px solid #bbbbbb;
+}
+#photolist div.title {
+	margin:0px;
+	padding:3px 0px 0px 5px;
+	height:20px;
+	font-weight:bolder;
+	color:#000;
+	text-align:left;
+	background-color:#EEEEEE;
+	border-bottom:4px solid #D1D1D1;
+}
+div.showphotos{
+	width:100%;
+	clear:both;
+}
+div.photo{
+	padding:2px;
+	border:1px solid #bbbbbb;
+}
+div.showphotos li {
+	margin:6px 2.5px 0px 3px;
+	list-style:none;
+	float:left;
+	border:1px dashed #e5e5e5;
+}
+/*------------------------------- 博客相册 ---------------------------------------*/
+
+
+/*------------------------------- 博客列表 ---------------------------------------*/
+td.t_left{
+	text-align:right;
+	margin:0px;
+	padding:0px;
+}
+td.t_right{
+	margin:0px;
+	padding:0px;
+}
+td.t_title{
+	color:white;
+	font-weight:bolder;
+	text-align:center;
+	background-color:#3C8AFF;
+}
+td.t_title2{
+	color:white;
+	font-weight:bolder;
+	text-align:center;
+	background-color:#3C8AFF;
+	border-top:2px solid #D1D1D1;
+}
+td.td1{
+	background-color: #e9e9e9;
+	text-align:center;
+}
+td.td2{
+	background-color: white;
+	text-align:left;
+}
+td.t_title1{
+	color:white;
+	font-weight:bolder;
+	text-align:center;
+	background-color:#91BE06;
+}
+
+td.t_body1{
+	color:#666666;
+	padding:3px 0px 0px 2px;
+	border-bottom:1px dashed #C0C0C0;
+}
+td.t_body1 a:link,td.t_body1 a:visited,td.t_body1 a:active{
+	color:#666666;
+}
+td.t_body1 a:hover{
+	color:#EA8C00;
+}
+
+/*------------------------------- 博客文章列表 ---------------------------------------*/
+div.cat_title{
+	text-align:left;
+	font-size:14px;
+	margin:0px;
+}
+div.cat_note{
+	float:right;
+	color:#666666;
+	font-size:9px;
+}
+div.cat_end{
+	margin-left:20px;
+	text-align:left;
+	color:#008000;
+}

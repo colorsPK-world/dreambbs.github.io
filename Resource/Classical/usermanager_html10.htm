@@ -1,0 +1,62 @@
+<!--modifyadd.asp##联系资料修改主体部分-->
+<div class="mainbox" style="margin-top:0">
+<div class="Contentbox">
+<div id="con_two_4" >
+	<table style="width:98%;margin:0px auto;" cellspacing="0" cellpadding="0" class="mainbar1">
+		<tr>
+			<td style="width:160px;" valign="top">
+				<div class="subHover">联系资料修改</div>
+			</td>
+			<td style="background:#F1F7FB;padding:8px" valign="top">
+				<form action="modifyadd.asp?action=updat&username={$user_id}" method="post" name="theForm" id="theForm">
+					<table cellpadding="3" >
+						<tr>
+							<td width="20%" class="font14" align="right">论坛密码：</td>
+						  <td width="80%"><input name="password" type="password" size="30" maxlength="30" />
+							<small>您的联系资料是论坛管理员和你联系的重要数据，请输入您的论坛密码</small></td>
+						</tr>
+						<tr>
+							<td align="right" class="font14" >主页地址：</td>
+							<td><input name="homepage" type="text" value="{$user_homepage}" size="30" maxlength="100" /> <small>如果您有主页，请输入主页地址。此项可选</small></td>
+						</tr>
+						<tr>
+							<td align="right" class="font14" >Email地址：</td>
+							<td><input name="Email" type="text" value="{$user_email}" size="30" maxlength="50" /> <small>请输入有效的邮件地址，这将保证您在论坛中的私人资料。</small></td>
+						</tr>
+						<tr>
+							<td align="right" class="font14" >QQ号码：</td>
+							<td><input name="Oicq" type="text" value="{$user_oicq}" size="30" maxlength="20" /> <small>如果您有 QQ，请输入号码。此项可选</small></td>
+						</tr>
+						<tr>
+							<td align="right" class="font14" >ICQ 号码：</td>
+							<td><input name="Icq" type="text" value="{$user_icq}" size="30" maxlength="20" /> <small>如果您有 ICQ，请输入号码。此项可选</small></td>
+						</tr>
+						<tr>
+							<td align="right" class="font14" >MSN 号码：</td>
+							<td><input name="Msn" type="text" value="{$user_Msn}" size="30" maxlength="50" /> <small>如果您有 MSN，请输入。此项可选</small></td>
+						</tr>
+						<tr>
+							<td align="right" class="font14" >Yahoo号码：</td>
+							<td><input name="Yahoo" type="text" value="{$user_Yahoo}" size="30" maxlength="20" /> <small>如果您有 Yahoo，请输入号码。此项可选</small></td>
+						</tr>
+						<tr>
+							<td align="right" class="font14" >UserAim号码：</td>
+							<td><input name="UserAim" type="text" value="{$user_Aim}" size="30" maxlength="20" /> <small>如果您有 UserAim，请输入号码。此项可选</small></td>
+						</tr>
+						<tr>
+							<td align="right" class="font14" >UC号码：</td>
+							<td><input name="UC" type="text" value="{$user_UC}" size="30" maxlength="20" /> <small>如果您有 UC，请输入号码。此项可选</small></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td>
+								<input name="Submit" type="submit" value="更  新" /> &nbsp; <input name="Submit2" type="reset" value="清  除" />						</td>
+						</tr>
+				  </table>
+				</form>
+			</td>
+		</tr>
+	</table>
+</div>
+</div>
+</div>

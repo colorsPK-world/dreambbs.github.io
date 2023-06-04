@@ -1,0 +1,53 @@
+<!--post.asp##投票信息-->
+<tr><td width="20%" class="tablebody1" valign="top">
+<li>
+选取投票类型: <select name="votetype" id="votetype" onchange="votetypeset(this,'{$votelimited}');">
+<option value="0" selected="selected">单选投票</option>
+<option value="1">多选投票</option>
+<option value="2">问卷调查</option>
+</select>
+</li>
+<li>
+投票结果浏览限制: 
+<select name="lockvote">
+<option value="0" selected="selected">允许浏览</option>
+<option value="1">投票截止后</option>
+</select>
+</li>
+<li>
+设置截止时间: {$posttimesel}
+</li>
+<li>
+每行一个投票项目，最多<b> {$votelimited} </b>个;
+</li>
+<li>
+投票项目内容不能为空。
+</li>
+</td><td width="80%" class="tablebody1" valign="top">
+<div id="voteset_div" name="vode_set">
+<fieldset>
+<legend><b><font color="red"><span id="voteset_legend">投票设置</span></font></b></legend>
+<li>
+<input type="button" name="saveas" value="保存" onclick="SaveDBtoText('vote');"/>*保存将复盖前一次所保存的内容;
+</li><li>
+<input type="button" name="putfrom" value="还原" onclick="PutDBFromText('vote');"/>*还原前请确认选取投票的类型为保存时所选的类型;
+</li>
+<div id="voteset_add"></div>
+<div id="voteset_function">
+<ol id="votetitles"></ol>
+</div>
+</fieldset>
+</div>
+<textarea name="vote" id="vote" style="width:0px;height:0px;border:0px"></textarea>
+</td></tr>
+<tr><td width="20%" class="tablebody1"><b>参与投票限制 </b> </td>
+<td width="80%" class="tablebody1">
+需要文章：<input type="text" name="uarticle" size="5" value="0" />&nbsp;
+金钱：<input type="text" name="uwealth" size="5" value="0" />&nbsp;
+积分：<input type="text" name="uep" size="5" value="0" />&nbsp;
+魅力：<input type="text" name="ucp" size="5" value="0" />&nbsp;
+威望：<input type="text" name="upower" size="5" value="0" />
+</td></tr>
+<script language="JavaScript" type="text/javascript">
+votetypeset(document.getElementById("votetype"),'{$votelimited}');
+</script>

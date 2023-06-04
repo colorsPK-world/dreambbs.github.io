@@ -1,0 +1,13 @@
+<!--提交IP信息-->
+<br />
+<table cellpadding="3" cellspacing="1" align="center" class="tableborder1">
+<form action="reg.asp?action=postipinfo" method="post">
+<tr><th align="center">请提交您的IP信息</td></th>
+</tr>
+<tr><td class="tablebody1" align="left"><input type="hidden" name="{$hidden}" value="{$hidden}" />
+由于您的IP地址 {$ip}  尚未被允许注册,请把您的所在地告知管理员,以便管理员增加您的IP的注册许可<br />
+您的IP {$ip} 来自<input type="text" name="comfrom" value="" />
+</td></tr>
+<tr><td align="center" class="tablebody2"><input type="submit" value="提 交" name="submit" /></td></tr>
+</form>
+</table>

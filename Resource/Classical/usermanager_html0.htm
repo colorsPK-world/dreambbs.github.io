@@ -1,0 +1,38 @@
+<!--控制面板导航条公共部分-->
+<script language="javascript">
+function setTab(cursel,page)
+{
+	window.location.href=page;
+	document.getElementById('two'+cursel).className="hover";	
+}
+function setDiv(id,n)
+{
+	 for(i=1;i<=n;i++){
+	  var menu=document.getElementById("sub_"+i);
+	  var con=document.getElementById("dvbase_"+i);
+	  if(menu){
+		 menu.className=i==id?"subHover":"subOut";	
+	  }
+	  if(con){
+	  con.style.display=i==id?"block":"none";}
+	 }
+}
+</script>
+<style type="text/css">
+	#two3 a,#two6 a{color:#666;}
+</style>
+<div class="mainbox">
+<div class="Menubox">
+	<ul>
+	   <li style="width:160px; border:0px; padding:0px;">&nbsp;</li>
+	   <li id="two1" onclick="setTab(1,'usermanager.asp');">我的控制面板</li>
+	   <li id="two2" onclick="setTab(2,'mymodify.asp')" >资料修改</li>
+	   <li id="two3"><a href="modifyadd.asp?t=1" style="text-decoration:none">密码修改</a></li> 
+	   <li id="two4" onclick="setTab(4,'modifyadd.asp')">联系资料</li> 
+	   <li id="two5" onclick="setTab(5,'usersms.asp')">短信服务</li> 
+	   <li id="two6"><a href="friendlist.asp" style="text-decoration:none">我的好友</a></li>  
+	   <li id="two7" onclick="setTab(7,'favlist.asp')">我的收藏</li> 
+	   <li id="two8" onclick="setTab(8,'myfile.asp')">我的文件</li>  
+	</ul>
+</div>
+</div>

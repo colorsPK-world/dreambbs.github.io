@@ -1,0 +1,79 @@
+<!--魔法头像部分，在基本资料修改-->
+<tr>
+	<td valign="top" class="font14" align="right">
+		魔法头像：
+	</td>   
+	<td>
+		<table cellspacing="0" cellpadding="0" align="center" width="100%" border="0">
+			<tr>
+				<td width="100">
+					<input name="tmagicface" type="checkbox" class="chkbox" value="1" {$isselect} />魔法头像
+					<input name="imagicface" type="hidden" id="smagicface" value="{$firstmagicface}" />
+					<br />
+					&nbsp;金币：<font id="magicmoney" color="red">{$magicmoney}</font>
+					<br>
+					&nbsp;点券：<font id="magicticket" color="red">{$magicticket}</font>
+				</td>
+				<td>
+					<!--Z-INDEX：999999，Modify By Dv_Xiaoxian，Date:2008.0.14
+					借助DV模拟Windows模态对话框(Thanks:HxyMan,XiaoJiao)
+					-->
+					<div id="MagicFace" style="POSITION:absolute;Z-INDEX: 999999;visibility:hidden;"></div>
+          <div id="lookmagicthis">
+          	<a href="javascript:;" onclick="DvWnd.open('浏览魔法表情','plus_tools_magiclist.asp?boardid={$pub.boardid}&s=0',500,350);">
+             <img src="dv_plus/tools/magicface/gif/{$firstmagicface}.gif" border="0" id="magicfacepic" alt="点击选择本帖使用魔法表情" /><font style="font-family: Webdings;">6</font>
+            </a> 
+          </div>
+					<script language="JavaScript" type="text/javascript">
+						<!--
+						function lookmagic()
+						{
+							var obj=document.getElementById("magicframe");
+							var buttonElement = document.getElementById("magicfacepic");
+							if (obj.style.visibility=="hidden"||obj.style.display=="none")
+							{
+								obj.style.top = (getOffsetTop(buttonElement) + buttonElement.offsetHeight)+"px";
+								obj.style.left = (getOffsetLeft(buttonElement))+"px";
+								obj.style.visibility="visible";
+								obj.style.display="inline";
+							}else {
+								obj.style.visibility="hidden";
+								obj.style.display="none";
+							}
+						}
+						function closemagic()
+						{
+							var cm=document.getElementById("magicframe");
+							if (cm.style.visibility=="visible"||cm.style.display=="inline")
+							{
+								cm.style.visibility = "hidden";
+								cm.style.display="none";
+							}
+						}
+						//Colour pallete top offset
+						function getOffsetTop(elm) {
+							var mOffsetTop = elm.offsetTop;
+							var mOffsetParent = elm.offsetParent;
+							while(mOffsetParent){
+								mOffsetTop += mOffsetParent.offsetTop;
+								mOffsetParent = mOffsetParent.offsetParent;
+							}
+							return mOffsetTop;
+						}
+						//Colour pallete left offset
+						function getOffsetLeft(elm) {
+							var mOffsetLeft = elm.offsetLeft;
+							var mOffsetParent = elm.offsetParent;
+							while(mOffsetParent) {
+								mOffsetLeft += mOffsetParent.offsetLeft;
+								mOffsetParent = mOffsetParent.offsetParent;
+							}
+							return mOffsetLeft;
+						}
+						-->
+					</script>
+				</td>
+			</tr>
+		</table>
+	</td>
+</tr>

@@ -1,0 +1,85 @@
+<tr>
+<td class="tablebody2" height="24" align="left">
+<script language="JavaScript" type="text/javascript">
+<!--
+var seldisable='{$seldisable}';
+var doWealth={$doWealth};
+var dousercp={$dousercp};
+var douserep={$douserep};
+document.write ('<b>用户操作</b>：');
+document.write ('&nbsp;&nbsp;金钱 <select name="doWealth" size="1" '+seldisable+'>');
+for (i=-50;i<51 ;i++ )
+{
+	document.write ('<option value="'+i+'" ');
+	if (doWealth==i)
+	{
+		document.write (' selected="selected"');
+	}
+	document.write ('>'+i+'</option>');
+}
+document.write ('</select>&nbsp;魅力');
+document.write (' <select name="douserCP" size="1" '+seldisable+'>');
+for (i=-50;i<51 ;i++ )
+{
+	document.write ('<option value="'+i+'" ');
+	if (dousercp==i)
+	{
+		document.write (' selected="selected"');
+	}
+	document.write ('>'+i+'</option>');
+}
+document.write ('</select>&nbsp;积分');
+document.write (' <select name="douserEP" size="1" '+seldisable+'>');
+for (i=-50;i<51 ;i++ )
+{
+	document.write ('<option value="'+i+'" ');
+	if (douserep==i)
+	{
+		document.write (' selected="selected"');
+	}
+	document.write ('>'+i+'</option>');
+}
+document.write ('</select>');
+function nocent()
+{
+	if(document.frmAnnounce.doWealth.disabled==true)
+	{
+		document.frmAnnounce.doWealth.disabled=false;
+		document.frmAnnounce.douserCP.disabled=false;
+		document.frmAnnounce.douserEP.disabled=false;
+		if (document.frmAnnounce.decrease){
+			document.frmAnnounce.decrease.disabled=false;
+		}
+	}
+	else
+	{
+		document.frmAnnounce.doWealth.disabled=true;
+		document.frmAnnounce.douserCP.disabled=true;
+		document.frmAnnounce.douserEP.disabled=true;
+		if (document.frmAnnounce.decrease){
+			document.frmAnnounce.decrease.disabled=true;
+		}
+	}
+}
+//-->
+</script>
+&nbsp;<input type="checkbox" name="checkbox" value="checkbox" onclick="nocent();" {$seldisable} />不对用户进行分值操作
+<script language="JavaScript" type="text/javascript">
+	var decrease='{$decrease}';
+	if (0<decrease){
+		switch(decrease){
+			case '1':
+				document.write('<select name="decrease" size="1">');
+				document.write('<option value="0" selected="selected">所有人增加“被删帖”数目</option>');
+				document.write('<option value="1">楼主不增加“被删帖”数目</option>');
+				document.write('<option value="2">跟帖不增加“被删帖”数目</option>');
+				document.write('<option value="3">所有人不增加“被删帖”数目</option>');
+				document.write('</select>');
+				break;
+			case '2':
+				document.write('<input type="checkbox" name="decrease" value="2" />不增加“被删帖”数目');
+				break;
+		}
+	}
+</script>
+</td></tr>

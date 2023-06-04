@@ -1,0 +1,74 @@
+<!--modifyadd.asp##用户密码修改主体部分-->
+<script language="javascript">
+<!--
+	function check_pwd(theForm)
+	{
+		if(theForm.psw2.value!=theForm.psw.value)
+		{
+			document.getElementById('dv_pwd').innerHTML='<font style="color:#ff0000;">两次密码不一样，请重新输入</font>'
+			return false;
+		}
+		return true;
+	}
+//-->
+</script>
+<div class="mainbox" style="margin-top:0">
+<div class="Contentbox">
+<div id="con_two_3">
+	<table width="98%" cellspacing="0" cellpadding="0" >
+		<tr>
+			<td style="width:160px;" valign="top">
+				<div class="subHover">密码修改</div>
+			</td>
+			<td style="background:#F1F7FB;padding:8px" valign="top">
+				<form action="modifyadd.asp?t=1&action=updat&username={$user_id}" method="post" name="theForm" id="theForm" onsubmit="return check_pwd(this);">
+					<table cellpadding="3" >
+						<tr>
+							<td width="11%" class="font14">旧密码确认：</td>
+							<td width="89%">
+								<input name="oldpsw" type="password" onchange="checktext(this.value)" size="30" />
+								<span id="ThisText"><font color="{$color}">*修改时请输入旧密码确认！</font></span>							</td>
+						</tr>
+						<tr>
+							<td class="font14">新密码确认：</td>
+							<td> <input name="psw" type="password" size="30" maxlength="13" />
+							<small>*如要修改请直接输入新密码进入更新</small></td>
+						</tr>
+						<tr>
+							<td class="font14">确认密码：</td>
+							<td><input name="psw2" type="password" size="30" maxlength="13" />
+							<small><span id="dv_pwd">*请再次输入新密码</span></small></td>
+						</tr>
+						<tr>
+							<td class="font14">密码问题：</td>
+							<td> <input name="quesion" type="text" value="{$user_quesion}" size="30" /><input name="oldquesion" type="hidden" value="{$user_quesion}" /><small>请填写做为密码答案依据</small></td>
+						</tr>
+						<tr>
+							<td class="font14">问题答案：</td>
+							<td>
+								<input name="answer" type="text" value="{$user_answer}" size="30" /><input type="hidden" name="oldanswer" value="{$user_answer}" /><small>请认真填写以便您日后取回密码答案采用了MD5加密，只供取回密码使用，如要修改可直接填写。</small>							</td>
+						</tr>
+						<tr>
+							<td></td>
+							<td>
+								<input type="Submit" value="更 新" name="Submit"> &nbsp; <input type="reset" name="Submit2" value="清 除" />							</td>
+						</tr>
+					</table>
+				</form>
+			</td>
+		</tr>
+	</table>
+	<script language="JavaScript" type="text/javascript">
+		<!--
+		function checktext(str){
+			if (str=="")
+			{
+			document.getElementById("ThisText").innerHTML="*修改时请输入旧密码确认！"
+			}
+			else{document.getElementById("ThisText").innerHTML=""}
+		}
+		//-->
+	</script>
+</div>
+</div>
+</div>

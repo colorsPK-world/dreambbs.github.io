@@ -1,0 +1,23 @@
+<!--操作错误提示部分-->
+<div  class="mainbox">	
+	<div class="tableborder heightd">
+		<h3 style="margin-bottom:0;padding:0">您在&quot;<font color="{$color}">{$action}</font>&quot;的时候发生错误,下面是错误的详细信息</h3>
+		<ul style="margin:0;padding:0">
+		{$ErrString}
+		<li>请仔细阅读论坛帮助文件，确保您有相应的操作权限。</li>
+		<li class="tablebody2" style="line-height:25px;height:25px;padding:0">&nbsp;&nbsp;&nbsp;<a href="javascript:history.go(-1)">&lt;&lt; 返回上一页</a> &nbsp;&nbsp;||&nbsp;&nbsp; <a href="javascript:wndClose();"> 关闭窗口&gt;&gt;</a>
+		<script type="text/javascript">
+		function wndClose(){
+			try{
+				parent.DvWnd.close();
+			}
+			catch(e){
+				window.close()
+			}
+		}
+		//-->
+		</script>
+		</li>
+		</ul>
+	</div>
+</div>

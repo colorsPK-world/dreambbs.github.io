@@ -1,0 +1,473 @@
+<?xml version="1.0" encoding="gb2312"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" >
+<xsl:output method="xml" omit-xml-declaration = "yes" indent="yes" version="4.0"/>
+	<!--
+	Copyright (C) 2004,2005 AspSky.Net. All rights reserved.
+	Written by dvbbs.net Lao Mi
+	Web: http://www.aspsky.net/,http://www.dvbbs.net/
+	Email: eway@aspsky.net
+	-->
+<xsl:variable name="myscript"><![CDATA[
+<script type="text/javascript" language="javascript">
+function CheckAll(form)  {
+  for (var i=0;i<form.elements.length;i++)    {
+    var e = form.elements[i];
+    if (e.name != 'chkall')       e.checked = form.chkall.checked; 
+   }
+  }
+function planwidth(iwidth){
+	if (iwidth>100){
+	iwidth=100;
+	}
+	var obj = document.getElementById("planbartext3");
+	obj.innerHTML=iwidth+'%';
+	iwidth=iwidth * 5
+	var obj = document.getElementById("planbar1");
+	obj.style.width=iwidth+'px';
+};
+function plantext(text){
+var obj = document.getElementById("planbartext2");
+obj.innerHTML=text;
+}
+</script>
+	]]></xsl:variable>
+<xsl:template match="/">
+<style type="text/css">
+#planbarmain{
+margin : 0 auto;
+border-bottom: #6595d6 1px solid;
+border-left: #6595d6 1px solid;
+border-right: #6595d6 1px solid;
+width : 98%;
+height:30px;
+line-height:30px;
+}
+#planbartext1{
+float:left;
+width : 50px;
+margin-top:1px;
+margin-left:0px;
+margin-right:0px;
+border-bottom: #000000 1px solid;
+border-left:1px solid #E1E7FF;
+background-color : #6595d6;
+color : #fff; 
+font-size : 12px; 
+font-weight : bold;
+height:28px;
+line-height:28px;
+}
+.planbar{
+float:left;
+width : 502px;
+border-top: #5E7FC1 1px solid;
+border-bottom: #5E7FC1 1px solid;
+border-left: #5E7FC1 1px solid;
+border-right: #5E7FC1 1px solid;
+height:12px;
+line-height:12px;
+text-align : left;
+font-size : 0px;
+margin-top:8px;
+margin-left:4px; 
+}
+#planbar1{
+margin-top:1px;
+margin-left:1px;
+background:#ffffff url("skins/default/bar/bar3.gif") repeat-X;
+height:10px;
+line-height:10px;
+width:0px;
+float:left;
+}
+#planbartext3{
+float:left;
+margin-left:5px;
+}
+.bar {
+line-height:24px;
+border-bottom: #5E7FC1 1px solid;
+border-left: #5E7FC1 1px solid;
+border-right: #5E7FC1 1px solid;
+margin : 0 auto;
+width : 98%; 
+min-width :560px;
+background-color : #fff; 
+}
+</style>
+<xsl:choose>
+		<xsl:when test="xml/param/@action='manage'">
+		<xsl:call-template name="manageresult" />
+		</xsl:when>
+		<xsl:otherwise>
+		<xsl:choose>
+		<xsl:when test="xml/param/@action='view'"><xsl:call-template name="view" /></xsl:when>
+		<xsl:otherwise>
+		<xsl:choose>
+		<xsl:when test="xml/param/@action='delpic'">
+		<xsl:call-template name="delpic" />
+		</xsl:when>
+		<xsl:otherwise><xsl:choose>
+		<xsl:when test="xml/param/@action='alldel'"><xsl:call-template name="alldel" /></xsl:when>
+		<xsl:otherwise><xsl:call-template name="readme" />
+		<xsl:call-template name="result" /></xsl:otherwise>
+</xsl:choose>
+		</xsl:otherwise>
+</xsl:choose>
+		</xsl:otherwise>
+</xsl:choose>
+		</xsl:otherwise>
+</xsl:choose>
+</xsl:template>
+<xsl:template name="alldel">
+<div class="mainbox">
+	<ul class="tableborder heightd">
+		<h3>清空回收站操作说明</h3>
+		<ol style="margin-top:0px;margin-bottom:0px;list-style-position : inside;">
+			<li style="padding:5px;">由于本操作可能会消耗比较大的资源，适宜在论坛访问人数比较少的时间执行。</li>
+			<li style="padding:5px;">
+				由于回收站中可能保存很多废贴，一次性删除消耗服务器的资源比较多，因此，我们采取了分批删除的方法。
+			</li>
+			<li style="padding:5px;">程序会根据时间的先后，删除回收站中最老的若干个主题。</li>
+			<li style="padding:5px;">
+				每次删除的记录不宜设置过大，建议设置为500或以下。您可以反复运行本页面，直到回收站完全被清空。
+			</li>
+			<li style="padding:5px;">为了避免操作错误带来不必要的损失，建议您在操作之前备份数据库。</li>
+			<li style="padding:5px;">
+				由于此操作会大量改变数据库的内容，建议Access数据库用户在执行完本操作之后，对数据库进行修复压缩。
+			</li>
+			<li style="padding:5px;"> <a href="recycle.asp" style="color:red;">返回回收站管理首页</a></li>
+		</ol>		
+		<form action="recycle.asp?action=alldel" method="post" class="formMgr">
+			<h3>请设置好后提交</h3>
+			<div style="text-align : left;line-height:22px;height:22px;text-indent:10px;">
+				每次删除回收站中最多<input type="text" name="maxcount" value="{xml/param/@maxcount}" size="5"/> 
+				个主题  <input name="dv_submit" id="dv_submit" type="submit" value="开 始" />
+			</div>
+		</form>
+		<hr class="mainbar1"/>
+		<div id="planbarmain" style="border:0px;margin-top:15px;">
+			<div id="planbartext1">进度</div>
+			<div class="planbar"><div id="planbar1"></div></div>
+			<div id="planbartext3">0%</div>
+		</div>
+		<div style="text-align : left;text-indent:24px; height:22px;line-height:22px;" id="planbartext2"></div>
+		<xsl:value-of select="$myscript" disable-output-escaping="yes" />
+	</ul>
+</div>
+</xsl:template>
+<xsl:template name="delpic">
+<div class="mainbox">
+	<ul class="tableborder heightd">
+		<h3>删除操作完成并记录在案</h3>
+		<div style="text-indent:24px;line-height:28px;height : 28px;">
+			<a href="javascript:window.close()"> 关闭窗口 </a> 
+		</div>
+	</ul>
+</div>
+</xsl:template>
+<xsl:template name="view">
+<div class="mainbox">
+	<ul class="tableborder heightd">
+	<h3>回收站查看帖子</h3>
+	<div style="text-align :left;text-indent:24px;line-height:28px;height:28px;border-bottom:solid 1px #9cc3d9;">
+		<xsl:choose>
+				<xsl:when test="xml/row/@parentid =0"><xsl:if test="xml/param/@master=1"><a href="recycle.asp?action=delpic&amp;id={xml/row/@rootid}">彻底删除整个主题</a> |</xsl:if> <a href="recycle.asp?action=manage&amp;id={xml/row/@rootid}_">还原整个主题</a> </xsl:when>
+				<xsl:otherwise>
+				<xsl:choose>
+				<xsl:when test="xml/param/@boardid != 444"><a href="dispbbs.asp?boardid={xml/row/@locktopic}&amp;id={xml/row/@rootid}" target="_blank" >查看相关主题(论坛)</a> | <xsl:if test="xml/param/@master=1"><a href="recycle.asp?action=delpic&amp;id={xml/row/@rootid}&amp;replyid={xml/row/@announceid}">彻底删除单贴</a> | </xsl:if><a href="recycle.asp?action=manage&amp;id={xml/row/@rootid}_{xml/row/@announceid}">还原单贴</a> | <a href="recycle.asp?action=manage&amp;id={xml/row/@rootid}_">还原整个主题</a></xsl:when>
+				<xsl:otherwise><a href="?action=view&amp;id={xml/row/@rootid}" target="_blank" >查看相关主题(回收站)</a> | <xsl:if test="xml/param/@master=1"><a href="recycle.asp?action=delpic&amp;id={xml/row/@rootid}">彻底删除整个主题</a> | <a href="recycle.asp?action=delpic&amp;id={xml/row/@rootid}&amp;replyid={xml/row/@announceid}">彻底删除单贴</a> | </xsl:if><a href="recycle.asp?action=manage&amp;id={xml/row/@rootid}_">和主题一起还原</a> </xsl:otherwise>
+		</xsl:choose>	
+				</xsl:otherwise>
+		</xsl:choose>
+		| <a href="javascript:window.close()"> 关闭窗口 </a> 
+	</div>
+
+	<div style="line-height:25px;text-indent:10px;word-wrap : break-word ;word-break : break-all ;">
+		<fieldset style="border : 1px dotted #ccc;text-align : left;line-height:22px;text-align : left;padding:10px;margin:10px;">
+			<legend> <b><xsl:value-of select="xml/row/@topic" /></b></legend>
+			<div style="text-align : center;">----作者：<a href="dispuser.asp?id={xml/row/@postuserid}" target="_blank" ><xsl:value-of select="xml/row/@username" /></a> 发表时间：<xsl:value-of select="xml/row/@dateandtime" />  类型：<xsl:choose>
+				<xsl:when test="xml/row/@parentid=0">主题</xsl:when>
+				<xsl:otherwise>跟贴</xsl:otherwise>
+				</xsl:choose>
+			</div>
+			<div><xsl:value-of select="xml/row/@body" /></div>
+		</fieldset>
+	</div>
+	</ul>
+</div>
+</xsl:template>
+<xsl:template name="manageresult">
+<div class="mainbox">
+	<ul class="tableborder heightd">
+		<h3>管理报告</h3>
+		<ol style="margin-top:0px;margin-bottom:0px;list-style-position : inside;">
+			<xsl:for-each select="xml/result">
+				<xsl:sort select="@boardid" order="descending" data-type="number"/>
+				<li style="padding:5px;">
+					<div> 
+						<xsl:if test="not(@boardid)">
+							<xsl:attribute name="style">color:red;</xsl:attribute>
+						</xsl:if>
+						帖子编号：<xsl:value-of select="@rootid" />，
+						跟贴编号：<xsl:value-of select="@announceid" />，
+						操作状态：<xsl:value-of select="@stats" />
+						还原主题：<xsl:value-of select="@topic" />  
+						跟贴：<xsl:value-of select="@child" /> 
+					</div>
+				</li>
+			</xsl:for-each>
+		</ol>
+		<li><a href="javascript:window.close()"> 关闭窗口 </a> </li>
+	</ul>
+</div>
+</xsl:template>
+<xsl:template name="readme">
+<div class="mainbox">
+	<ul class="tableborder heightd">
+		<form action="recycle.asp" method="post" class="formMgr">
+			<h3>检索条件</h3>
+			<div  style="text-align : left;line-height:25px;height:25px;text-indent:10px;">检索论坛板面：
+				<select name="bid" id="bid"></select>数据表：
+				<select name="tableid" id="tableid">
+					<option value="0">
+						<xsl:if test="xml/param/@tableid=0">
+							<xsl:attribute name="selected">selected</xsl:attribute>
+						</xsl:if>主题表
+					</option>
+					<xsl:for-each select="xml/posttable">
+					<option value="{@id}">
+						<xsl:if test="/xml/param/@tableid = @id">
+							<xsl:attribute name="selected">selected</xsl:attribute>
+						</xsl:if>
+						<xsl:value-of select="@tabletype" />
+					</option>
+					</xsl:for-each>
+				</select>
+				关键字：<input type="text" name="keyword" value="{xml/param/@keyword}" /><input type="submit" value="搜 索" />
+			</div>
+		</form>
+	</ul>
+</div>
+<div class="mainbox">
+	<ul class="tableborder heightd">
+		<h3>回收站管理操作说明</h3>
+		<ol style="margin-top:0px;margin-bottom:0px;list-style-position : inside;">
+			<li style="padding:5px;">本页面只有管理人员可以进入，其中只有等级为管理员的才可以在本页面删除帖子。</li>
+			<li style="padding:5px;">您可以根据条件检索指定论坛版面被删除的主题或回复帖子。可根据关键字检索。模糊匹配标题，精确匹配发帖用户名。</li>
+			<li style="padding:5px;">可对列出的数据进行还原或删除操作。<font color="red">特别注意：</font>本页面的所有<font color="red">删除</font>操作，均<font color="red">不可恢复</font>，请慎重操作。</li>
+			<li style="padding:5px;">如果对主题进行删除或还原操作，会影响此主题中所有的回复帖。如果仅针对某帖子操作，会因其所属主题状况而受到影响，如您要还原某帖子，如果该贴的主题还未被还原，则您此操作会失败。因此，您应尽可能只对主题进行还原操作。</li>
+			<li style="padding:5px;">基于安全的理由，本页面在没有登录到后台的情况下，不能进行清空回收站的操作。</li>
+			<li style="padding:5px;">本页面的所有操作均会记录到日志，请慎重。</li>
+			<xsl:if test="/xml/param/@admin"><li style="padding:5px;">检测到您已经登录了后台，您可以 <a href="?action=alldel" style="color:red;">进入清空回收站的页面</a> 。</li></xsl:if>
+		</ol>
+	</ul>
+</div>
+<script language="JavaScript">
+BoardJumpListSelect('<xsl:value-of select="xml/param/@bid" />',"bid","所有论坛","0",0)
+</script>
+</xsl:template>
+<xsl:template name="result">
+<div class="mainbox"><!--div_start-->
+	<ul class="tableborder heightd">
+		<h3>检索结果</h3>
+		<div style="text-indent:24px;">
+			<xsl:choose>
+					<xsl:when test="xml/param/@count=0">没有找到匹配的记录，您可以更改检索条件再试。</xsl:when>
+					<xsl:otherwise>找到 <b><font color="red"><xsl:value-of select="xml/param/@count" /></font></b>  条匹配记录。</xsl:otherwise>
+			</xsl:choose>
+		</div>
+	</ul>
+	<div class="mainbar2">
+		<div class="th" style="width:100%;text-align : center;line-height:25px;height : 25px;text-indent:0px;border:0px;"> 
+			<div style="float:left;width:32px;">操作</div>
+			<div class="li1" style="width:32px;float:left;line-height:25px;height : 25px;">类型</div>
+			<div class="li1" style="float:left;text-indent:12px;line-height:25px;height : 25px;">标题或内容提要(请点击标题查看)</div>
+			<div class="li1" style="float:right;width:120px;line-height:25px;height : 25px;">发表时间</div>
+			<div class="li1" style="float:right;width:90px;line-height:25px;height : 25px;">作 者</div> 
+			<div class="li1" style="float:right;width:60px;line-height:25px;height : 25px;">数据表</div> 
+			<div class="li1" style="float:right;width:60px;line-height:25px;height : 25px;">可还原</div> 
+			<div class="li1" style="float:right;width:120px;line-height:25px;height : 25px;">原 版 面</div> 
+		</div>
+	</div>
+	<form name="recycle" action="recycle.asp?action=manage" method="post" target="_blank">
+		<xsl:for-each select="xml/datarows/row">
+			<div class="mainbar3" style="line-height : 28px;height : 28px;">
+				<div style="float:left;width:32px;text-align:center;vertical-align:middle;padding-top:5px;"><input type="checkbox" name="id" value="{@id}_{@replyid}" /></div>
+				<div class="li1" style="width:32px;float:left;line-height:28px;height : 28px;">
+					<xsl:choose>
+						<xsl:when test="/xml/param/@tableid=0">主题</xsl:when>
+						<xsl:otherwise>
+							<xsl:choose>
+								<xsl:when test="@parentid=0">主题</xsl:when>
+								<xsl:otherwise>跟贴</xsl:otherwise>
+						</xsl:choose>
+						</xsl:otherwise>
+					</xsl:choose>
+				</div>
+				<div class="li1" style="float:left;text-indent:12px;overflow :hidden;">
+					<a href="?action=view&amp;id={@id}&amp;replyid={@replyid}" target="_blank" >
+					<xsl:value-of select="substring(concat(@topic,' ',@body),0,30)" /> </a>
+				</div>
+				<div class="li1" style="float:right;width:120px;"><xsl:value-of select="@dateandtime" /></div>
+				<div class="li1" style="float:right;width:90px;">
+					<a href="dispuser.asp?id={@userid}" target="_blank" ><xsl:value-of select="@username" /></a>
+				</div>
+				<div class="li1" style="float:right;width:60px;">
+					<xsl:choose>
+						<xsl:when test="/xml/param/@tableid=0"><xsl:value-of select="@posttable" /></xsl:when>
+						<xsl:otherwise><xsl:value-of select="/xml/param/@posttable" /></xsl:otherwise>
+					</xsl:choose>
+				</div>
+				<div class="li1" style="float:right;width:60px;line-height:28px;height : 28px;">
+					<xsl:choose>
+						<xsl:when test="/xml/param/@tableid=0">可还原</xsl:when>
+						<xsl:otherwise>
+							<xsl:choose>
+								<xsl:when test="@parentid=0">可还原</xsl:when>
+								<xsl:otherwise>需要检测</xsl:otherwise>
+						</xsl:choose>
+						</xsl:otherwise>
+					</xsl:choose>
+				</div>
+				<div class="li1" style="float:right;width:120px;line-height:28px;height : 28px;overflow :hidden;">
+					<xsl:variable name="bid" select="@bid"/>
+					<xsl:value-of select="/xml/BoardList/board[@boardid= $bid]/@boardtype"  disable-output-escaping="yes"/>
+				</div> 
+			</div>
+		</xsl:for-each>
+		<div class="mainbar2" style="line-height:28px;height : 28px;text-align :left;">
+			<div style="float:left;width:32px;text-align :center;">
+				<input type="checkbox" name="chkall" value="on" onclick="CheckAll(this.form);" style="margin:4px;"/>
+			</div>
+			<div style="float:left;">选中所有显示帖子 </div>
+			<div style="float:left;">
+				<input type="submit" name="action" value="还 原" style="margin:3px;" onclick="if(confirm('确定还原选定的纪录吗?')==false)return false;"/>
+			</div>
+		</div>
+	</form>
+	<xsl:value-of select="$myscript" disable-output-escaping="yes" />
+	<div class="mainbar0" style="line-height:28px;height : 28px;margin-top:2px;">
+		<div style="float:right;">
+			<xsl:call-template name="PageList">
+				<xsl:with-param name="Page" select="xml/param/@page"/>
+				<xsl:with-param name="m" select="10"/>
+				<xsl:with-param name="MaxRows" select="xml/param/@pagesize"/>
+				<xsl:with-param name="CountNum" select="xml/param/@count"/>
+				<xsl:with-param name="PageStr">?bid=<xsl:value-of select="xml/param/@bid" />&amp;tableid=<xsl:value-of select="xml/param/@tableid" />&amp;keyword=<xsl:value-of select="xml/param/@keyword" /></xsl:with-param>
+				<xsl:with-param name="v" select="1"/>
+				<xsl:with-param name="pv">page</xsl:with-param>
+				<xsl:with-param name="target"></xsl:with-param>
+				<xsl:with-param name="Forum_AllTopNum" select="0"/>
+			</xsl:call-template>
+		</div>
+	</div>
+</div><!--div_end-->
+</xsl:template>
+<xsl:template name="PageList">
+<xsl:param name="Page"/><!--当前页码-->
+<xsl:param name="m"/><!--一次最多显示几个页码-->
+<xsl:param name="MaxRows"/><!--每页记录数-->
+<xsl:param name="CountNum"/><!--总记录数-->
+<xsl:param name="PageStr"/><!--链接参数-->
+<xsl:param name="v"/><!--显示类型-->
+<xsl:param name="pv"/><!--页码参数-->
+<xsl:param name="target"/><!--链接目标框架-->
+<xsl:param name="Forum_AllTopNum"/>
+<xsl:variable name="pagecount"><xsl:choose>
+<xsl:when test="$CountNum mod $MaxRows=0">
+<xsl:value-of select="$CountNum  div $MaxRows"/>
+</xsl:when>
+<xsl:otherwise><xsl:value-of select="floor($CountNum  div $MaxRows)+1"/>
+</xsl:otherwise></xsl:choose>
+</xsl:variable>
+<xsl:if test="$v='1'">
+<table class="tableborder5" cellpadding="0" cellspacing="1" style="width:auto;text-align:right;float:left;">
+<form action="{$PageStr}" method="post" name="PageForm" target="{$target}">
+<tr align="center">
+<td class="tabletitle1" title="总数" style="text-align : right; "><xsl:text disable-output-escaping="yes" >&amp;nbsp;</xsl:text><xsl:value-of select="$Forum_AllTopNum + $CountNum"/><xsl:text disable-output-escaping="yes" >&amp;nbsp;</xsl:text></td>
+<td class="tabletitle1" title="本页记录数"><xsl:text disable-output-escaping="yes" >&amp;nbsp;</xsl:text>
+<xsl:choose>
+			<xsl:when test="$Page='1'">
+				<xsl:choose>
+				<xsl:when test="$CountNum &lt; $MaxRows">
+					<xsl:value-of select="$Forum_AllTopNum + $CountNum"/>
+				</xsl:when>
+				<xsl:otherwise>
+				<xsl:value-of select="$Forum_AllTopNum + $MaxRows"/>
+				</xsl:otherwise>
+				</xsl:choose>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:choose>
+				<xsl:when test="$pagecount = $Page">
+					<xsl:value-of select="$CountNum - ($MaxRows*($Page - 1))"/>
+				</xsl:when>
+				<xsl:otherwise>
+					<xsl:value-of select="$MaxRows"/>
+				</xsl:otherwise>
+				</xsl:choose>
+			</xsl:otherwise>
+</xsl:choose>
+<xsl:text disable-output-escaping="yes" >&amp;nbsp;</xsl:text>
+</td>
+<td class="tabletitle1"><xsl:text disable-output-escaping="yes" >&amp;nbsp;</xsl:text><xsl:value-of select="$Page"/>/<xsl:value-of select="$pagecount"/>页<xsl:text disable-output-escaping="yes" >&amp;nbsp;</xsl:text></td>
+<xsl:if test="$Page='1'">
+<td class="tablebody1"><xsl:text disable-output-escaping="yes" >&amp;nbsp;</xsl:text><img src="images/pagelist/First.gif" border="0" alt=""/><xsl:text disable-output-escaping="yes" >&amp;nbsp;</xsl:text></td>
+</xsl:if>
+<xsl:if test="$Page!='1'">
+<td class="tablebody1"><xsl:text disable-output-escaping="yes" >&amp;nbsp;</xsl:text><a href="{$PageStr}&amp;{$pv}=1" target="{$target}"><img src="images/pagelist/First.gif" border="0" alt="首页"/></a><xsl:text disable-output-escaping="yes" >&amp;nbsp;</xsl:text></td>
+</xsl:if>
+<xsl:if test="$Page &gt; $m + 1">
+<td class="tablebody1"><xsl:text disable-output-escaping="yes" >&amp;nbsp;</xsl:text><a href="{$PageStr}&amp;{$pv}={$Page - $m}" target="{$target}"><img src="images/pagelist/Previous.gif" border="0" alt="上{$m}页"/></a><xsl:text disable-output-escaping="yes" >&amp;nbsp;</xsl:text></td>
+</xsl:if>
+<xsl:variable name="i"><xsl:choose><xsl:when test="$Page &lt; floor($m div 2) + 1 ">1</xsl:when><xsl:otherwise><xsl:value-of select="$Page - floor($m div 2)"/></xsl:otherwise></xsl:choose></xsl:variable>
+<xsl:variable name="Endpage"><xsl:choose><xsl:when test="$i + $m -1 &lt; $pagecount "><xsl:value-of select="$i + $m -1 "/></xsl:when><xsl:otherwise><xsl:value-of select="$pagecount"/></xsl:otherwise></xsl:choose></xsl:variable>
+<xsl:call-template name="showonepage">
+	<xsl:with-param name="i" select="$i"/>
+	<xsl:with-param name="endpage" select="$Endpage"/>
+	<xsl:with-param name="target" select="$target"/>
+	<xsl:with-param name="PageStr" select="$PageStr"/>
+	<xsl:with-param name="pv" select="$pv"/>
+	<xsl:with-param name="Page" select="$Page"/>
+</xsl:call-template>
+<xsl:if test="$pagecount &gt; $m + $Page">
+<td class="tablebody1"><xsl:text disable-output-escaping="yes" >&amp;nbsp;</xsl:text><a href="{$PageStr}&amp;{$pv}={$m + $Page}"  target="{$target}"><img src="images/pagelist/Next.gif" border="0" alt="下{$m}页"/></a><xsl:text disable-output-escaping="yes" >&amp;nbsp;</xsl:text></td>
+</xsl:if>
+<xsl:if test="$Page != $pagecount">
+<td class="tablebody1"><xsl:text disable-output-escaping="yes" >&amp;nbsp;</xsl:text><a href="{$PageStr}&amp;{$pv}={$pagecount}" target="{$target}"><img src="images/pagelist/Last.gif" border="0" alt="尾页"/></a><xsl:text disable-output-escaping="yes" >&amp;nbsp;</xsl:text></td>
+</xsl:if>
+<xsl:if test="$Page = $pagecount">
+<td class="tablebody1"><xsl:text disable-output-escaping="yes" >&amp;nbsp;</xsl:text><img src="images/pagelist/Last.gif" border="0" alt=""/><xsl:text disable-output-escaping="yes" >&amp;nbsp;</xsl:text></td>
+</xsl:if>
+<td class="tablebody1"><input type="text" name="{$pv}" size="1" value="{$Page}" class="PageInput"/><input type="submit" value="GO" name="submit" class="PageInput"/></td>
+</tr>
+</form>
+</table>
+</xsl:if>
+</xsl:template>
+<xsl:template name="showonepage">
+		<xsl:param name="i"/>
+		<xsl:param name="endpage"/>
+		<xsl:param name="target"/>
+		<xsl:param name="PageStr"/>
+		<xsl:param name="pv"/>
+		<xsl:param name="Page"/>
+		<xsl:if test="$Page != $i">
+		<td class="tablebody1"><xsl:text disable-output-escaping="yes" >&amp;nbsp;</xsl:text><a href="{$PageStr}&amp;{$pv}={$i}" target="{$target}"><xsl:value-of select="$i"/></a><xsl:text disable-output-escaping="yes" >&amp;nbsp;</xsl:text></td>
+		</xsl:if>
+		<xsl:if test="$Page = $i">
+		<td class="tablebody2"><xsl:text disable-output-escaping="yes" >&amp;nbsp;</xsl:text><font class="normalTextSmall"><u><b><xsl:value-of select="$i"/></b></u></font><xsl:text disable-output-escaping="yes" >&amp;nbsp;</xsl:text></td>
+		</xsl:if>
+		<xsl:if test="$endpage &gt; $i">
+			<xsl:call-template name="showonepage">
+				<xsl:with-param name="i" select="$i+1"/>
+				<xsl:with-param name="endpage" select="$endpage"/>
+				<xsl:with-param name="target" select="$target"/>
+				<xsl:with-param name="PageStr" select="$PageStr"/>
+				<xsl:with-param name="pv" select="$pv"/>
+				<xsl:with-param name="Page" select="$Page"/>
+				</xsl:call-template>
+		</xsl:if>
+</xsl:template>
+</xsl:stylesheet>

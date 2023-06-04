@@ -1,0 +1,8 @@
+<!--announcements.asp##管理公告页面{$newslist}-->
+      <tr valign="middle">
+        <td height="25" align="center" class="tablebody2">{$id}</td>
+        <td class="tablebody1"><a href="?action=EditAnnInfo&amp;boardid={$boardid}&amp;id={$id}">{$title}</a></td>
+        <td align="center" class="tablebody2" ><a href="dispuser.asp?name={$username}">{$username}</a></td>
+        <td class="tablebody1" align="center" >{$addtime}</td>
+        <td class="tablebody2" align="center" ><input name="id" type="checkbox" value="{$id}" /></td>
+      </tr>

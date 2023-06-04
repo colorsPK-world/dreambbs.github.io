@@ -1,0 +1,17 @@
+<table class="tableborder1" cellpadding="0" cellspacing="1">
+<tr><th><b>您在"<font color="{$color}">{$action}</font>"的时候发生错误,共有{$ErrCount}项,下面是错误的详细信息</b></th></tr>
+<tr>
+	<td class="tablebody1">
+	<ul style="line-height:150%">
+		<li>{$ErrString}</li>
+		<li>请仔细阅读论坛帮助文件，确保您有相应的操作权限。</li>
+	</ul>
+	</td>
+</tr>
+<tr>
+	<td class="tablebody2" align="center">
+	<input type="button" name="back" class="input0" onclick="javascript:history.go(-1)" value="&lt;&lt; 返回上一页" />&nbsp;&nbsp;
+	<input type="button" name="close" class="input0" onclick="javascript:window.close()" value="关闭本页 &gt;&gt;" />
+	</td>
+</tr>
+</table>

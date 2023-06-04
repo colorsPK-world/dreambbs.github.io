@@ -1,0 +1,58 @@
+<!--post.asp##上传文件部分-->
+<tr><td width="20%" valign="top" class="tablebody2"><b>文件上传</b> <a onmouseover="showmenu(event,'{$uploadlist}')" style="cursor:pointer" title="查看可上传的文件类型" >类型</a>
+</td><td width="80%" class="tablebody2" style="text-indent:0;">
+<!--<iframe name="ad" frameborder="0" width="100%" height="25" scrolling="no" src="post_upload.asp?boardid={$boardid}"></iframe>-->
+<iframe id="ad" name="ad" align="left" frameborder="0" width="100%" height="20" scrolling="no" src="savefile.asp?boardid={$boardid}"></iframe>
+</td></tr>
+||||
+<tr>
+	<td width="20%" valign="top" class="tablebody2">
+		<b>组图上传</b>  <a id="h" href="javascript:;" onclick="h();">关闭</a>
+		<br /><br />
+		&nbsp;&nbsp;&nbsp;图片批量上传 图片全屏展示
+	</td>
+	<td width="80%" class="tablebody2">
+		<script language="JavaScript" type="text/javascript">
+		var qihoo_image_openp = 1;
+		function setImageInfo(phid, phidstatus) {
+			//alert(phid +"...."+ phidstatus);
+			document.getElementById("phid").value = phid;
+			document.getElementById("phidstatus").value = phidstatus;
+		}
+		function h() {
+			if(document.getElementById("upload_swf").style.display==''){
+				document.getElementById("upload_swf").style.display='none';
+				document.getElementById("h").innerText="展开";
+			}
+			else{
+				document.getElementById("upload_swf").style.display='';
+				document.getElementById("h").innerText="关闭";
+			}
+		}
+		function qcomic_postsubmit(phid) {
+			setImageInfo(phid, 0);
+			//var retval = document.Dvform.onsubmit();
+			//if (retval==true) gid('submit').click();
+			gid('submit').click();
+		}
+		</script>
+		<div id="upload_swf" style="display:">
+		<script src="inc/qcomic.js" type="text/javascript"></script>
+		<script language="javascript" type="text/javascript">
+		//<![CDATA[
+		flashTagIns.setNew("http://p.qihoo.com/flash/upload.swf", {$iwidth}, {$iheight});
+		flashTagIns.setVersion("7,0,19,0");
+		flashTagIns.setId('qcomic_upload');
+		flashTagIns.allowScriptAccess = "always";
+		flashTagIns.swLiveConnect = "true";
+		flashTagIns.wmode = "window";
+		flashTagIns.flashVars = 'sid={$sid}&code={$code}&ver=dv_2';
+		flashTagIns.write(document);
+		window.qcomic_upload = document.Dvform.qcomic_upload;
+		//]]>
+		</script>
+		</div>
+		<input type="hidden" name="phid" id="phid" value="{$phid}" />
+		<input type="hidden" name="phidstatus" id="phidstatus" value="0" />
+	</td>
+</tr>

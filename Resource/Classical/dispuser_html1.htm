@@ -1,0 +1,60 @@
+<!-- dispuser.asp||用户资料显示页面(基本资料部分) -->
+<table cellspacing="1" cellpadding="0" align="center"  style="table-layout:fixed;word-break:break-all" class="tableborder1">
+<col width="20%"><col width="*" /><col width="40%" > 
+<tr><th colspan="2" align="left">基本资料</th>
+	<td rowspan="12" align="center" class="tablebody1" width="40%" valign="top">{$UserPhoto}</td>
+</tr>   
+<tr> 
+	<td class="tablebody1" align="right">性 别：</td>
+	<td class="tablebody1">{$UserSex}</td>
+</tr>
+<tr> 
+	<td class="tablebody2" align="right">出 生：</td>
+	<td class="tablebody2">{$UserBirthday}</td>
+</tr>
+<tr> 
+	<td class="tablebody1" align="right">星 座：</td>
+	<td class="tablebody1">{$Pic_Star}</td>
+</tr>
+<tr> 
+	<td class="tablebody2" align="right">Ｅｍａｉｌ：</td>
+	<td class="tablebody2"><a href="mailto:{$UserEmail}">{$UserEmail}</a></td>
+</tr>
+<tr> 
+	<td class="tablebody1" align="right">腾讯ＱＱ：</td>
+	<td class="tablebody1">{$UserOicq}</td>
+</tr>
+<tr> 
+	<td class="tablebody2" align="right">ＩＣＱ：</td>
+	<td class="tablebody2">{$UserIcq}</td>
+</tr>
+<tr> 
+	<td class="tablebody1" align="right">ＭＳＮ：</td>
+	<td class="tablebody1">{$UserMsn}</td>
+</tr>
+<tr> 
+	<td class="tablebody2" align="right">ＡＩＭ：</td>
+	<td class="tablebody2">{$UserAIM}</td>
+</tr>
+<tr> 
+	<td class="tablebody1" align="right">ＹＡＨＯＯ：</td>
+	<td class=tablebody1>{$UserYahoo}</td>
+</tr>
+<tr> 
+	<td class="tablebody2" align="right">ＵＣ：</td>
+	<td class="tablebody2">{$UserUC}</td>
+</tr>
+<tr> 
+	<td class="tablebody1" align="right">主 页：</td>
+	<td class="tablebody1"><a href="{$UserHomePage}" target=_blank>{$UserHomePage}</a></td>
+</tr>
+<tr> 
+	<td class="tablebody2" align="right" valign="top"></td>
+	<td class="tablebody2"></td>
+	<td class="tablebody1" align="center">
+		<b><a href="javascript:;" onclick="openScript('plus_Tools_InfoSetting.asp?action=0&amp;ToUserID={$UserID}',500,400)">使用道具</a> | <b><a href="javascript:;" onclick="DvWnd.open('给{$UserName}发送短信','messanger.asp?action=new&amp;touser={$UserName}',800,600,1,{bgc:'black',opa:0.5});">给他留言</a> | 
+		<a href="friendlist.asp?action=addF&myFriend={$UserName}" target="_blank">加为好友</a></b>
+		</b>
+	</td>
+</tr>
+</table><br />

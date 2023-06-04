@@ -1,0 +1,17 @@
+<!--announcements.asp##管理公告页面-->
+<form action="?action=delann&boardid={$boardid}" method="post">
+  <table class="tableborder1" cellspacing="1" cellpadding="3" align="center">
+      <tr>
+        <th width="5%">ID</th>
+        <th width="55%">标题</th>
+        <th width="15%">作者</th>
+        <th width="20%">日期</th>
+        <th width="5%" height="25">操作</th>
+      </tr>
+      {$newslist}
+      <tr>
+        <td class="tablebody2" align="right" colspan="5">请选择要删除的公告，<input name="chkall" type="checkbox" onclick="CheckAll(this.form)" value="on" />全选 
+          <input name="Submit" type="submit" onclick="{if(confirm('您确定执行的操作吗?')){return true;}return false;}" value="执行" /></td>
+      </tr>
+  </table>
+</form>

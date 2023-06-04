@@ -1,0 +1,234 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<meta HTTP-EQUIV=Expires CONTENT=0>
+<style>
+body{
+font-size: 9pt; font-family:Arial; 
+background-color:#f9fbfd;
+}
+td,select,div,span,button { font-size: 9pt; font-family:Arial; }
+BUTTON {width:5em; border-width: 1pt; }
+input { border: 1pt solid black; font-size: 9pt; padding:1pt 3pt;}
+.title {font-weight:bold}
+a:link { color: #0000BB }
+a:visited { color: #0000BB }
+</style>
+<title>发起一个财付通交易</title>
+<script language="JavaScript">
+var s_alipay_email = "@";
+var s_alipay_name = "";
+var s_alipay_money = "";
+var s_alipay_transport = "";
+var s_alipay_mail = "";
+var s_alipay_express = "";
+var s_alipay_message = "";
+var s_alipay_ww = "";
+var s_alipay_qq = "";
+var s_alipay_demo = "";
+function GetEditID(){
+	var str=location.href;
+	var pos=str.lastIndexOf("?");
+	if (-1!=pos){
+		return str.substr(str.lastIndexOf("?")+1,str.length);
+	}
+	else{
+		return 0;
+	}
+}
+GetEditID();
+// 本窗口返回值
+function ReturnValue(){
+	s_alipay_email = alipay_email.value;
+	s_alipay_name = alipay_name.value;
+	s_alipay_money = alipay_money.value;
+	s_alipay_transport = alipay_transport.value;
+	s_alipay_mail = alipay_mail.value;
+	s_alipay_express = alipay_express.value;
+	s_alipay_message = alipay_message.value;
+	s_alipay_ww = alipay_ww.value;
+	s_alipay_qq = alipay_qq.value;
+	s_alipay_demo = alipay_demo.value;
+
+	var sHTML = '[payto]';
+	sHTML=sHTML+'(seller)'+s_alipay_email+'(/seller)';
+	sHTML=sHTML+'(subject)'+s_alipay_name+'(/subject)';
+	sHTML=sHTML+'(body)'+s_alipay_message+'(/body)';
+	sHTML=sHTML+'(price)'+s_alipay_money+'(/price)';
+	sHTML=sHTML+'(transport)'+s_alipay_transport+'(/transport)';
+	sHTML=sHTML+'(ordinary_fee)'+s_alipay_mail+'(/ordinary_fee)';
+	sHTML=sHTML+'(express_fee)'+s_alipay_express+'(/express_fee)';
+	//sHTML=sHTML+'(key)'+alipay_key.value+'(/key)';
+	if (s_alipay_ww!=""){
+		sHTML=sHTML+'(ww)'+s_alipay_ww+'(/ww)';
+	}
+	if (s_alipay_qq!=""){
+		sHTML=sHTML+'(qq)'+s_alipay_qq+'(/qq)';
+	}
+	if (s_alipay_demo!="" && s_alipay_demo!="http://"){
+		sHTML=sHTML+'(demo)'+s_alipay_demo+'(/demo)';
+	}
+	sHTML=sHTML+'[/payto]';
+
+	var o=parent.dv___[parseInt(GetEditID())];
+	o.insert(sHTML);
+	o.t.close();
+
+	//window.returnValue = sHTML;
+	//window.close();
+}
+// 点确定时执行
+function ok(){
+	alipay_money.value = ToInt(alipay_money.value);
+	alipay_mail.value = ToInt(alipay_mail.value);
+	alipay_express.value = ToInt(alipay_express.value);
+	alipay_qq.value = ToInt(alipay_qq.value);
+	ReturnValue();
+}
+// 转为数字型，并无前导0，不能转则返回""
+function ToInt(str){
+	str=BaseTrim(str);
+	if (str!=""){
+		var sTemp=parseFloat(str);
+		if (isNaN(sTemp)){
+			str="";
+		}else{
+			str=sTemp;
+		}
+	}
+	return str;
+}
+// 去空格，left,right,all可选
+function BaseTrim(str){
+	  lIdx=0;rIdx=str.length;
+	  if (BaseTrim.arguments.length==2)
+	    act=BaseTrim.arguments[1].toLowerCase()
+	  else
+	    act="all"
+      for(var i=0;i<str.length;i++){
+	  	thelStr=str.substring(lIdx,lIdx+1)
+		therStr=str.substring(rIdx,rIdx-1)
+        if ((act=="all" || act=="left") && thelStr==" "){
+			lIdx++
+        }
+        if ((act=="all" || act=="right") && therStr==" "){
+			rIdx--
+        }
+      }
+	  str=str.slice(lIdx,rIdx)
+      return str
+}
+</script>
+<BODY bgColor=menu>
+<table border=0 cellpadding=0 cellspacing=0 align=center width="97%">
+<tr>
+<td>
+	<fieldset>
+	<legend>商品信息</legend>
+	<table border=0 cellpadding=2 cellspacing=0 width="100%">
+		<tr><td colspan=5 height=5></td></tr>
+		<tr>
+			<td width=5></td>
+			<td width=70 align=right>财付通帐号</td>
+			<td width=5></td>
+			<td width="*"><input type=text ID="alipay_email" style="width:170px" size=25 value="@"></td>
+			<td width=5></td>
+		</tr>
+		<tr>
+			<td width=5></td>
+			<td width=70 align=right>商品名称</td>
+			<td width=5></td>
+			<td width="*"><input type=text ID="alipay_name" style="width:170px" size=25></td>
+			<td width=5></td>
+		</tr>
+		<tr>
+			<td width=5></td>
+			<td width=70 align=right>商品价格</td>
+			<td width=5></td>
+			<td width="*"><input type=text ID="alipay_money" style="width:45px" size=25 value="0"> 元</td>
+			<td width=5></td>
+		</tr>
+		<tr>
+			<td width=5></td>
+			<td width=70 align=right valign="top">邮费承担方</td>
+			<td width=5></td>
+			<td width="*">
+			<input type=radio ID="ialipay_transport" name="ialipay_transport" value="3" onclick="document.getElementById('alipay_mail').disabled=true; document.getElementById('alipay_express').disabled=true;alipay_transport.value=3;"> 虚拟物品不需邮递<BR>
+			<input type=radio ID="ialipay_transport" name="ialipay_transport" checked value="1" onclick="document.getElementById('alipay_mail').disabled=true; document.getElementById('alipay_express').disabled=true;alipay_transport.value=1;"> 卖家承担运费<BR>
+			<input type=radio ID="ialipay_transport" name="ialipay_transport" value="2" onclick="document.getElementById('alipay_mail').disabled=false; document.getElementById('alipay_express').disabled=false;alipay_transport.value=2;"> 买家承担运费<BR>
+			<input type="hidden" value="1" ID="alipay_transport">
+			<input type=text ID="alipay_mail" name="alipay_mail" style="width:45px" size=25 disabled> 元平邮 (不填为平邮)<BR>
+			<input type=text ID="alipay_express" name="alipay_express" style="width:45px" size=25 disabled> 元快递 (不填为平邮)
+			</td>
+			<td width=5></td>
+		</tr>
+		<tr>
+			<td width=5></td>
+			<td width=70 align=right valign=top>商品说明</td>
+			<td width=5></td>
+			<td width="*"><textarea rows="5" ID="alipay_message" style="width: 170px; word-break: break-all" tabindex="4"></textarea></td>
+			<td width=5></td>
+		</tr>
+		<tr><td colspan=5 height=5></td></tr>
+	</table>
+	</fieldset>
+	</td>
+</tr>
+<tr><td height=5></td></tr>
+<tr>
+	<td>
+	<fieldset>
+	<legend>其它信息</legend>
+	<table border=0 cellpadding=2 cellspacing=0 width="100%">
+		<tr><td colspan=5 height=5></td></tr>
+		<tr>
+			<td width=5></td>
+			<td width=70 align=right valign=top>演示地址</td>
+			<td width=5></td>
+			<td width="*"><input type=text ID="alipay_demo" style="width:170px" size=25 value="http://"></td>
+			<td width=5></td>
+		</tr>
+		<tr>
+			<td width=5></td>
+			<td width=70 align=right valign=top>Email</td>
+			<td width=5></td>
+			<td width="*"><input type=text ID="alipay_ww" style="width:80px" size=25> Email</td>
+			<td width=5></td>
+		</tr>
+		<tr>
+			<td width=5></td>
+			<td width=70 align=right valign=top>腾讯QQ</td>
+			<td width=5></td>
+			<td width="*"><input type=text ID="alipay_qq" style="width:80px" size=25> QQ号码</td>
+			<td width=5></td>
+		</tr>
+		<tr><td colspan=5 height=5></td></tr>
+	</table>
+	</fieldset>
+	</td>
+</tr>
+<tr><td height=5 ></td></tr>
+<tr>
+<td align=center ><input type=submit value='  确定  ' id=Ok onclick="ok()">&nbsp;&nbsp;
+<input type=button value='  取消  ' onclick="window.close();"></td>
+</tr>
+<tr><td height=5></td></tr>
+<tr>
+	<td>
+	<fieldset>
+	<legend>关于财付通</legend>
+	<table border=0 cellpadding=2 cellspacing=0 width="100%">
+		<tr><td height=3></td></tr>
+		<tr><td>
+		&nbsp;&nbsp;<a href="https://www.tenpay.com/" target=_blank>财付通交易</a> 安全、快速、免手续费！<BR>
+		&nbsp;&nbsp;流程：发起交易 → 用户付款 → 卖家确认并发货 → 买家收货并确认 → 完成<BR>
+		&nbsp;&nbsp;<a href="https://www.tenpay.com/zft/qa/qa_zj.shtml" target=_blank>点此查看更详细财付通交易帮助</a>
+		</td></tr>
+		<tr><td height=3></td></tr>
+	</table>
+	</fieldset>
+	</td>
+</tr>
+</table>
+</body>
+</html>

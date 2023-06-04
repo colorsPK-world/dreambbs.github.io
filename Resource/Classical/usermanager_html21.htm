@@ -1,0 +1,68 @@
+<table border="0" cellpadding="3" cellspacing="1" Style="width:{$width}" class="tableborder1">
+    <tr>
+      <th height="23" colspan="2">申请升级到VIP用户组</th>
+    </tr>
+    <tr>
+      <td width="40%" class="tablebody1" valign="top">
+	  <center><b>VIP用户组说明</b></center><br><br>
+<!-- 用户基本信息 -->
+<div id="UserInfo">用户基本信息</div>
+	  </td>
+      <td width="60%" class="tablebody1" valign="top">
+		<table border="0" cellpadding="3" cellspacing="1" Style="width:100%;" class="tableborder2">
+		<form action="?action=UpVipUser" method="post" name="TheForm" id="TheForm">
+		<tr>
+		  <td height="23" colspan="2" class="tablebody2">
+		  <b>支付说明：</b>选取相应的VIP组，按提示的限制，填写相应的金币数或点券数。
+		  <div id="viptips" style="display:none">
+		  <b>用户组<font class="Redfont" id="GroupTitle"></font>支付要求：</b>
+		 <ol><li>支付<font class="Redfont" id="VMondy">0</font>个金币或<font class="Redfont" id="VTicket">0</font>张点券可获取<font class="Redfont" id="VDays">0</font>天的使用权限。
+		  <li>最低支付<font class="Redfont" id="LVMondy">0</font>个金币或<font class="Redfont" id="LVTicket">0</font>张点券可获取<font class="Redfont" id="LVDays">0</font>天的使用权限。
+		  </ol></div>
+		  </td>
+		</tr>
+		<tr>
+			<td width="40%" class="tablebody1" align="right">选择加入的VIP组：</td>
+			<td width="60%" class="tablebody1">
+			<select name="vipgroupid" onchange="GetGroupInfo(this.selectedIndex);"></SELECT>
+			</td>
+		</tr>
+		<tr>
+			<td class="tablebody2" align="right">有效期限：</td>
+			<td class="tablebody2"><font id="Days" class="Redfont">0</font>天</td>
+		</tr>
+		<tr>
+			<td class="tablebody1" align="right">支付金币：</td>
+			<td class="tablebody1"><input name="vipmoney" type="text" onkeyup="CheckNumer(this.value,this,1);" value="0" /></td>
+		</tr>
+		<tr>
+			<td class="tablebody2" align="right">支付点券：</td>
+			<td class="tablebody2"><input name="vipticket" type="text" onkeyup="CheckNumer(this.value,this,1);" value="0" /></td>
+		</tr>
+		<tr>
+			<td class="tablebody1" align="right">支付方式：</td>
+			<td class="tablebody1">
+			<input name="Btype" type="radio" value="0" />金币支付&nbsp;&nbsp;
+			<input name="Btype" type="radio" onclick="alert(this.value)" value="1" checked="checked" />点券支付
+			</td>
+		</tr>
+		<tr>
+			<td class="tablebody2" align="right">换算天数：</td>
+			<td class="tablebody2"><button onclick="countdays();">计算</button>共获取<font class="Redfont" id="GETVDays">0</font>天有效时期</td>
+		</tr>
+		<tr>
+			<td class="tablebody1" align="right">金币与点券转换：</td>
+			<td class="tablebody1">
+<a href="UserPay.asp?action=UserCenter" target="_blank"><font class="Redfont">兑换论坛金币</font></a> 
+| <a href="UserPay.asp" target="_blank"><font class="Redfont">购买论坛点券</font></a>
+</td>
+		</tr>
+		<tr>
+			<td class="tablebody2" align="center" colspan="2"><input name="" type="submit" value="确认提交" /></td>
+		</tr>
+		</form>
+		</table>
+	  </td>
+    </tr>
+</table>
+<script language = "JavaScript" src = "inc/vip_UpUser.js" type="text/javascript"></script>

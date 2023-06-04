@@ -1,0 +1,13 @@
+<!--printpage.asp##帖子可打印页面-->
+<table width="{$tablewidth}" align="center" border="0" style="table-layout:fixed;word-break:break-all">
+    <tr>
+      <td align="center" valign="top"><b>以文本方式查看主题</b><br />
+        <br />
+      -&nbsp;&nbsp;<b>{$forumname}</b>&nbsp;&nbsp;({$forumurl}index.asp)<br />
+        --&nbsp;&nbsp;<b>{$boardtype}</b>&nbsp;&nbsp;({$forumurl}list.asp?boardid={$boardid})<br />
+        ----&nbsp;&nbsp;<b>{$topic}</b>&nbsp;&nbsp;({$forumurl}dispbbs.asp?boardid={$boardid}&amp;id={$announceid})<br />
+        <hr />
+      </td>
+    </tr>
+    {$bbslist}
+</table>

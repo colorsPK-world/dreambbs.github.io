@@ -1,0 +1,53 @@
+<!--post.asp##合集部分,更新时间2008-3月14日-->
+&nbsp;&nbsp;<input type="checkbox" name="reishow" id="reishow" value=""  onclick="showtitle();" class="checkbox"/>
+标题<span id="advance">采用</span>“回复：XXX....”
+||
+<select name="topicximoo" onchange="titleColor(this.options[this.selectedIndex].value)"><option value="0">标题醒目</option><option value="1">HTML支持</option><option value="2">红色醒目</option><option value="3">蓝色醒目</option><option value="4">绿色醒目</option></select>
+||
+<select name="votetimeout" size="1"><option value="0">过期时间</option><option value="0">永不过期</option><option value="1">一天</option><option value="3">三天</option><option value="7">一周</option><option value="15">半月</option>
+<option value="30">一月</option><option value="90">三月</option><option value="180">半年</option></select>
+||
+<br />&nbsp;&nbsp;选项：<input type="checkbox" name="locktopic" value="yes" class="checkbox"/>帖子锁定&nbsp;&nbsp;<input type="checkbox" name="istop" value="yes" class="checkbox"/>帖子固顶&nbsp;&nbsp;<input type="checkbox" name="istopall" value="yes" class="checkbox"/>帖子总固顶
+||<select name="topicmode" size="1"><option value="0">选择所属专题</option>{$TopicMode}</select>
+||
+<tr><td width="20%" class="tablebody2"><b>验证码</b></td>
+<td width="80%" class="tablebody2">
+<script language="JavaScript" type="text/javascript">
+	var dvajax_request_type = "GET";
+</script>
+<script language="JavaScript" src="inc/dv_ajax.js" type="text/javascript"></script>
+{$codestr}
+</td></tr>
+||
+<tr><td width="20%" class="tablebody1"><b>论坛金币帖设置：</b></td>
+<td width="80%" class="tablebody1">
+<select name="GetPostType" onchange="ChkPostMoney(options[selectedIndex].value)">
+<option value="">选择帖子类型</option>
+<option value="0">悬赏金币帖</option>
+<option value="1">获赠金币帖</option>
+<option value="2">论坛交易帖设置</option>
+</select>
+<span id="showmoney" name="showmoney" style="display:block;">
+金币数量：<input name="ToMoney" size="4" value=""/>
+</span>
+<div id="Buy_setting" style="display:none">
+购买数量限制：<input name="Buy_Orders" size="4" value="-1"/>(设置为“-1”则不限制)<BR>
+VIP用户浏览选项：不需要购买<INPUT TYPE="radio" NAME="Buy_VIPType" value="0" checked="checked" class="radio"/>，需要购买<input type="radio" name="Buy_VIPType" value="1" class="radio"/><br />
+可购买用户名单限制：<input name="Buy_UserList" size="30" value="" />(每个用户名用英文逗号“,”分隔符分开，注意区分大小写)
+</div>
+<div id="PostMoneyInfo" class="Redfont"></div>
+
+</td></tr>
+||
+<tr><td width="20%" class="tablebody1"><b>我要赠送作者金币：</b></td>
+<td width="80%" class="tablebody1">
+<input type="radio" name="GetPostType" value="0" checked="checked" class="radio"/>否
+<input type="radio" name="GetPostType" value="1" class="radio"/>是
+&nbsp;&nbsp;赠送金币数量：<input name="ToMoney" size="4" value="0"/>
+</td></tr>
+||
+<!--Z-INDEX：999999，Modify By Dv_Xiaoxian，Date:2008.0.14-->
+<div id="MagicFace" style="POSITION:absolute;Z-INDEX: 999999;visibility:hidden;"></div>
+<div id="magicframe" style="visibility:hidden; position: absolute;">
+<iframe id="magic_frame" class="magicframe" src="" frameborder="0" scrolling="no" width="0px" height="0px"></iframe>
+</div>

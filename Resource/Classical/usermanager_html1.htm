@@ -1,0 +1,80 @@
+<!--usermanager.asp##控制面板主体部分-->
+<div class="mainbox" style="margin-top:0">
+<div class="Contentbox">
+<div id="con_two_1">
+	<table width="98%" cellspacing="0" cellpadding="0" >
+		<tr>
+		   <td width="250" valign="top">
+				<table class="tableborder1" cellspacing="1" cellpadding="0" style="width:100%;padding:0px;">
+					<tr><th>我的头像 [<a href="dispuser.asp?name={$username}" target="_blank">预览资料</a>]</th></tr>
+					<tr>
+						<td class="tablebody1" align="center">{$user_Face}</td>
+					</tr>
+					<tr><th>基本信息</th></tr>
+					<tr>
+						<td class="tablebody1">
+						用户头衔：{$user_Title}<br />
+						用户等级：{$user_Group}<br />
+						用户金钱：{$user_Wealth}<br />
+						用户积分：{$user_EP}<br />
+						用户魅力：{$user_CP}<br />
+						用户金币：{$user_Money}<br />
+						用户点券：{$user_Ticket}<br />
+						精华帖数：{$user_IsBest}<br />
+						帖数总数：{$user_Article}<br />
+						注册时间：{$user_AddDate}<br />
+						登陆次数：{$user_Logins}<br />
+						{$UserTicket}<br />
+						<a href="Query.asp?stype=1&nSearch=3&keyword={$username}&SearchDate=all" target="_blank">我的新贴</a> | <a href="Query.asp?stype=4&nSearch=0&pSearch=0&keyword={$username}" target="_blank">我的热贴</a> | <a href="Query.asp?stype=6&nSearch=0&pSearch=0&keyword={$username}" target="_blank">我的精华</a> | <a href="show.asp?username={$username}" target="_blank">我的展区</a>
+						</td>
+					</tr>
+					<tr><th height="25">好友在线</th></tr>
+					<tr><td class="tablebody1" style="padding:10px" align="left">{$friend_Info}</td></tr>
+					<tr><td height="25" class="tablebody2">＊点击图标给好友发送短讯！</td></tr>
+				</table>
+		   </td>
+		   <td style="background:#F1F7FB;padding:8px" valign="top">
+				<!--基本信息start-->
+					<table cellpadding="8" cellspacing="0">											
+						<tr>
+							
+							<td align="center" valign="top">
+								<table cellspacing="1" class="tableborder1">
+									<tr class="tablebody1" align="center">
+										<td>目前您有<font color="{$color}"><b> [{$msg_newincept}] </b></font>条的新短消息。,<a href="usersms.asp?action=inbox"><font color="{$color}">收件箱</font></a>中共有 <b>[{$msg_incept}]</b> 条信息，<a href='usersms.asp?action=issend'><font color="{$color}">发件箱</font></a>中共有 <b>[{$msg_send}]</b> 条信息对方未查阅。</td>
+									</tr>
+								</table>
+								<br />
+								<table cellspacing="1" cellpadding="0" class="tableborder1">
+									<tr><th colspan="5" height="25" align="left">最新收到的短讯</th></tr>
+									<tr class="tablebody1">
+										<td valign="middle" width="30" class="tabletitle2"><b>状态</b></td>
+										<td valign="middle" width="100" class="tabletitle2"><b>发件人</b></td>
+										<td  valign="middle" width="*"  class="tabletitle2"><b>主题</b></td>
+										<td valign="middle" width="120" class="tabletitle2"><b>日期</b></td>
+										<td  valign="middle" width="60" class="tabletitle2"><b>大小</b></td>
+									</tr>
+								{$msglist}
+								</table>
+								<br />
+								<table cellspacing="1" cellpadding="0" class="tableborder1">
+									<tr><th colspan="5" height="25" align="left">最新上传文件</th></tr>
+									<tr class="tablebody1">
+										<td  valign="middle" width="30" class="tabletitle2"><b>属性</b></td>
+										<td valign="middle" width="100" class="tabletitle2"><b>大小</b></td>
+										<td align="center" valign="middle" width="*" class="tabletitle2"><b>文件</b></td>
+										<td align="center" valign="middle" width="120" class="tabletitle2"><b>日期</b></td>
+										<td align="center" valign="middle" width="60" class="tabletitle2"><b>类型</b></td>
+									</tr>
+									{$filelist}
+								</table>
+							</td>
+						</tr>
+					</table>
+				<!--基本信息end-->
+			</td>
+		</tr>
+	</table>
+</div>
+</div>
+</div>

@@ -1,0 +1,79 @@
+<!--展开帖子列表，分割成几个部分-->
+{$loadtopicreplyloop}||<div style="width:100%;height:20">{$nbsplength}<img src="{$pic_nofollow}" alt=""><a href="dispbbs.asp?boardID={$boardid}&ID={$looprootid}&replyID={$announceid}&star={$star}&skin=1#{$announceid}" title="{$atitle}">{$title}</a> -- <a href="dispuser.asp?id={$userid}">{$username}</a></div>||parent.document.getElementById("followTd{$rootid}").innerHTML=tmpstr;||
+<script language="JavaScript" type="text/javascript">
+var parentfollow=parent.document.getElementById("follow{$rootid}")
+var parentfollowTd=parent.document.getElementById("followTd{$rootid}")
+var parentfollowImg=parent.document.getElementById("followImg{$rootid}")
+if(parentfollow)
+{
+	parentfollow.style.display="";
+}
+parentfollowTd.style.display="";
+parentfollowImg.innerHTML='<a href="loadtree1.asp?boardid={$boardid}&rootid={$rootid}&action=0" target="hiddenframe"  title="关闭帖子列表" ><img src="Skins/Default/nofollow.gif" border="0" ></a>';
+parentfollowTd.innerHTML='<div style="width:240px;margin-left:18px;border:1px solid black;background-color:lightyellow;color:black;padding:2px">正在读取关于本主题的跟帖，请稍侯……</div>'
+//分页代码,参数：页码,记录总数，每页显示数,页数
+function showpage(page,RecordCount,PageSize,PageCount)
+{
+	var Tmpstr='<div style="width:100%;height:20;">　　　&nbsp;&nbsp;页次：'+page+' / '+PageCount+'页 每页最多'+PageSize+'个  共 '+RecordCount+' 个  分页：'
+	if (page=='1')
+	{
+		Tmpstr+='<font face=webdings color="{$alertcolor}">9</font>';
+	}else{
+		Tmpstr+='<a href="loadtree1.asp?boardid={$boardid}&rootid={$rootid}&action=1&star=1" title="第一页" target="hiddenframe"><font face=webdings>9</font></a>';
+	}
+	var p;
+	if ((page-1)%10==0) 
+	{
+		p=(page-1) /10
+	}
+	else
+	{
+		p=(((page-1)-(page-1)%10)/10)
+	}
+	if (p*10 > 0)
+	{
+		Tmpstr+='<a href="loadtree1.asp?boardid={$boardid}&rootid={$rootid}&action=1&star='+p*10+'" title="上十页" target="hiddenframe" ><font face=webdings>7</font></a> ';
+	}
+	Tmpstr+='<b>';
+	for (var i=p*10+1;i<p*10+11;i++)
+	{
+		if (i==page)
+		{
+			Tmpstr+=' <font color="{$alertcolor}">'+i+'</font> ';
+		}
+		else
+		{
+			Tmpstr+=' <a href="loadtree1.asp?boardid={$boardid}&rootid={$rootid}&action=1&star='+i+'" target="hiddenframe">'+i+'</a> ';
+		}
+		if (i==PageCount) break;
+	}
+	Tmpstr+='</b>';
+	if (i<PageCount)
+	{
+		Tmpstr+='<a href="loadtree1.asp?boardid={$boardid}&rootid={$rootid}&action=1&star='+i+'" title="下十页" target="hiddenframe"><font face=webdings>8</font></a>   ';
+	}
+	if (page==PageCount)
+	{
+		Tmpstr+='<Font face=webdings color="{$alertcolor}">:</font>';
+	}
+	else
+	{
+		Tmpstr+='<a href="loadtree1.asp?boardid={$boardid}&rootid={$rootid}&action=1&star='+PageCount+'" title="最尾页" target="hiddenframe"><font face=webdings>:</font></a>  ';
+	}
+	Tmpstr+='</div>';
+	return(Tmpstr)
+}
+</script>
+||
+<script language="javascript">
+//控制列表关闭的代码
+var parentfollow=parent.document.getElementById("follow{$rootid}")
+var parentfollowTd=parent.document.getElementById("followTd{$rootid}")
+var parentfollowImg=parent.document.getElementById("followImg{$rootid}")
+if(parentfollow)
+{
+	parentfollow.style.display="none";	
+}
+parentfollowTd.style.display="none";
+parentfollowImg.innerHTML='<a href="loadtree1.asp?boardid={$boardid}&rootid={$rootid}&action=1" target="hiddenframe"  title="展开帖子列表" ><img src="Skins/Default/plus.gif" border="0" ></a>';
+</script>

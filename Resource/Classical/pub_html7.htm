@@ -1,0 +1,18 @@
+<!--没有登陆-->
+<ul>
+	欢迎您：游客！请先 <a href="login.asp" style="font-weight:bold">登录</a> 或 <a href="reg.asp?action=apply" style="font-weight:bold">注册</a>
+	<li class="m_li_top" style="display:inline;" onmouseover="showmenu1('stylemenu',0);">
+		<a href="javascript:;" class="ImgOnclick">风格</a>
+		<div class="submenu submunu_popup" id="stylemenu" onmouseout="hidemenu1()">
+			{$syles}
+		</div>
+	</li>
+	|&nbsp;
+	<li class="m_li_top" style="display:inline;" onmouseover="showmenu1('Menu_Show',0);">
+		<a href="show.asp?boardid={$boardid}" class="ImgOnclick">展区</a>
+		{$menu_show}
+	</li>
+	|&nbsp;
+	<a href="Query.asp">搜索</a>
+	{$plusmenu}
+</ul>

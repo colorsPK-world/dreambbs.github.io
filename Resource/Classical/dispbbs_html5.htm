@@ -1,0 +1,47 @@
+<!-- ajax 回复帖子 自动更新模板 By Dv.唧唧.Net  2007-10-17 15:49 (C) 2007 http://bbs.dvbbs.net Msg: Post Suc-->
+<!-- 注意，这行不能删除，否则无法正确显示 ajax.SystemMsg:Post Suc -->
+<a name="{$replyID}"></a>
+<table class="bbslist border" cellspacing="0" cellpadding="0" style="word-break:break-all;table-layout:fixed;">
+	<tr>
+		<td class="infoleft leftcolor" style="border-bottom:1px solid #BDD0EE; background:#FAFDFF;" valign="middle">
+			<span class="username"><img src="Skins/Default/{$sexPic}" alt="" /><div style="float:left;width :105px;filter:glow(color='{$nameglow}',strength='2');">{$namestyleA}{$postUserName}{$namestyleB}</div></span>
+		</td>
+		<td class="usermenu">
+			<em>{$floor}楼</em>
+			<a href="userspace.asp?sid={$postUserId}">个性首页</a>
+			{$Boke}
+			{$QQ}
+			| <a href="dispuser.asp?id={$postUserId}" target="_blank" title="查看{$postUserName}的个人资料">信息</a>
+			| <a href="query.asp?stype=1&amp;nSearch=3&amp;keyword={$postUserName}&amp;BoardID={$boardID}&amp;SearchDate=ALL" target="_blank" title="搜索{$postUserName}在{$boardid}的所有帖子">搜索</a> 
+			{$UserEmail}
+			{$homepage}
+		</td>
+	</tr>
+	<tr>
+		<td rowspan="3" valign="top" class="infoleft leftcolor"><br />
+			<span><img src="{$UserFace}" alt="" width="{$UserFaceW}" height="{$UserFaceH}" /></span><br />			
+			<span><img src="images/freund.gif" alt="" /> <a href="friendlist.asp?action=addF&amp;myFriend={$postUserName}" target="_blank" title="把{$postUserName}加入好友">加好友</a> <img src="images/mail.gif" alt="" /> <a href="javascript:;" onclick="DvWnd.open('给{$postUserName}发送短信','messanger.asp?action=new&amp;touser={$postUserName}',800,600,1,{bgc:'black',opa:0.5});" title="给{$postUserName}发送一个短消息">发短信</a></span>
+			<span><img style="margin:5px 0px 5px 0px;" src="skins/Default/star/{$TitlePic}" /></span>
+			<span>{$UserTitle}</span>
+			<br style="height:10px" />
+			<span>等级：{$postUserGroup}</span>
+			<span>帖子：<b class="green">{$postUserPost}</b></span>
+			<span>积分：{$postUserScore}</span>
+			<span>威望：{$UserPower}</span>
+			<span>精华：{$UserBest}</span>
+			<span>注册：<em>{$postUserReg}</em></span>
+		</td>
+		<td class="inforight" valign="top" ><b style="font-size:12px;line-height:15px;">{$topic}</b>&nbsp;&nbsp;
+			<img src="skins/Default/topicface/{$Expression}" alt="发贴心情" /><span class="font10" style="line-height:20px; ">Post By：{$postTime}</span><br /><br />			
+			<div id="textstyle_{$floor}" style="font-size:14px;line-height:150%;word-wrap:break-word;word-break:keep-all;overflow:hidden;">{$Content}</div>
+		</td>
+	</tr>
+	<tr>
+		<td class="signed"></td>
+	</tr>
+	<tr>
+		<td class="usermenu2"><a href="post.asp?action=edit&amp;BoardID={$boardID}&amp;replyID={$replyID}&amp;ID={$topicId}&amp;star={$star}" title="编辑这个帖子">编辑</a> <a href="#top"><img src="skins/Default/p_up.gif" alt="回到顶部" /></a>
+		</td>
+	</tr>
+</table>
+<!--ajax.SystemMsg:Post Suc -->

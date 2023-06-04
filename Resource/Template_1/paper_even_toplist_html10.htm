@@ -1,0 +1,37 @@
+<!--smallpaper.asp 发布小字报页面-->
+<form action="infolist.asp?t=smallpaper&action=savepaper" method="post">
+  <table class="tableborder1" cellspacing="1" cellpadding="6" align="center">
+      <tr>
+        <th colspan="2">请详细填写以下信息</th>
+      </tr>
+      <tr>
+        <td class="tablebody1" valign="middle"><b>用户名</b></td>
+        <td class="tablebody1" valign="middle"><input value="{$username}" name="username" size="20">
+          &nbsp; <a href="reg.asp">没有注册？</a></td>
+      </tr>
+      <tr>
+        <td class="tablebody1" valign="middle"><b>密 码</b></td>
+        <td class="tablebody1" valign="middle"><input type="password" value="{$password}" name="password" size="20"> 
+          &nbsp; <a href="lostpass.asp">忘记密码？</a></td>
+      </tr>
+      <tr>
+        <td class="tablebody1" valign="middle"><b>标 题</b>(最多80字)</td>
+        <td class="tablebody1" valign="middle"><input name="title" type="text" size="60" /></td>
+      </tr>
+      <tr>
+        <td class="tablebody1" valign="top" width="30%"><b>内 容</b><br>
+          在本版发布小字报您将付<font color="{$redcolor}"><b>{$paymoney}</b></font>元费用<br>
+          <font color="{$redcolor}"><b>48</b></font>小时内发表的小字报将随机抽取<font color="{$redcolor}"><b>5</b></font>条滚动显示于论坛上<br>
+          <ul>
+            <li>HTML标签：{$ispass1}
+            <li>UBB 标签：{$ispass2}
+            <li>内容不得超过500字</li>
+          </ul>
+        </td>
+        <td class="tablebody1" valign="middle"><textarea class="smallarea" name="Content" rows="8" wrap="virtual" cols="60"></textarea><input type="hidden" value="{$boardid}" name="boardid"></td>
+      </tr>
+      <tr>
+        <td class="tablebody2" colspan="2" align="center" valign="middle"><input type="submit" value="发 布" name="submit">&nbsp;&nbsp;<input type="reset" value="重 填" /></td>
+      </tr>
+  </table>
+</form>

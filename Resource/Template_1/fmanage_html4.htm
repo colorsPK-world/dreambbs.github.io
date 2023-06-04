@@ -1,0 +1,23 @@
+<form action="admin_postings.asp?action={$reaction}" method="post" name="frmAnnounce" id="frmAnnounce">
+<input name="boardID" type="hidden" value="{$boardid}" />
+<input name="ID" type="hidden" value="{$id}" />
+<input name="title" type="hidden" value="{$title}" />
+<input name="doWealth" type="hidden" value="{$doWealth}" />
+<input name="dousercp" type="hidden" value="{$dousercp}" />
+<input name="douserep" type="hidden" value="{$douserep}" />
+<input name="msg" type="hidden" value="{$msg}" />
+<input name="ismsg" type="hidden" value="{$ismsg}" />
+<table style="width:97%" cellspacing="1" cellpadding="3" align="center" class="tableborder1">
+<tr><th height="24" colspan="2">专题管理操作选项</th></tr>
+<tr><td height="24" class="tablebody1">选取所属专题栏目：
+</td><td class="tablebody1">
+<select name="mode" size="1">
+<option>所属专题操作</option><option value="0">取消所属专题</option>
+<option class="BrightClass">::移往以下专题::</option>
+{$TopicMode}</select>
+</td></tr>
+<tr>
+<td height="24" class="tablebody2" style="text-align:center" colspan="2">
+<input name="submit" type="submit" value="确认操作" /></td>
+</tr>
+</table></form>

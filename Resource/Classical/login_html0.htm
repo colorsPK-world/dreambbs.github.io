@@ -1,0 +1,55 @@
+<script language="JavaScript" type="text/javascript">
+	var dvajax_request_type = "GET";
+</script>
+<script language="JavaScript" src="inc/ajax_log.js" type="text/javascript"></script>
+<script language="JavaScript" src="inc/dv_ajax.js" type="text/javascript"></script>
+<p id="tips" style="position:absolute;border: 1px solid #CFBA67;padding:0px 3px;color:#f30;display:none;line-height:24px; margin-left:26px; background:#FFFFE6 url(images/icon_warning.gif) no-repeat; text-indent:20px;"></p>
+<div class="mainbox">
+<div class="page_right" style="margin:0px 0px 0px 0px; width:270px; border:0px;">
+		<div class="leftcolor" style=" background:#F4FCEE;"><br />
+		<span class="font14 username">还不是本站用户？</span>
+		<span class="username">那还等什么？赶紧注册吧！</span>
+		<span><button onmousemove="this.className='button_on';" onmouseout="this.className='button'" onclick="window.location.href='reg.asp?action=apply';"> 立即注册成为本站会员 </button></span><br /><br />
+		</div>
+	</div>
+<ul class="tableborder heightd page_left2">
+  <h3 class="titlebig"> 用户登录</h3>
+<form method="post" action="login.asp?action=chk" onsubmit="return checkLogin(this);">
+  <li>
+	<p class="font14">用户名</p>
+	<input type="text" name="username" id="username"  tabindex="1" />
+  </li>
+  <li>
+	<p class="font14">密码</p>
+	<input type="password" name="password" id="pwd1"  tabindex="2" />
+  </li>{$getcode}<br style="clear:both" /> 
+  <li>
+	<p class="font14">Cookie 选项</p>
+	<select name="CookieDate" tabindex="10">
+		<option value="0">不保存</option>
+		<option value="1">保存一天</option>
+		<option value="2" selected="selected">保存一月</option>
+		<option value="3">保存一年</option>
+	</select>
+  </li>
+  <li>
+	<p class="font14">登录状态</p>
+	<input type="radio" class="checkbox" name="userhidden" value="2" tabindex="11" checked="checked">正常登录
+	<input type="radio" class="checkbox" name="userhidden" value="1" tabindex="12">隐身登录
+  </li>
+  <li>
+	<p></p>
+	<a href="lostpass.asp" style="font-size:14px;">忘记了您的密码？</a>
+  </li>
+  <li style="display:none" id="trh">
+	<p class="font14">登录提示</p>
+	<span id="tdh"></span>
+  </li>
+  <li>
+	<p></p><input type="hidden" name="comeurl" value="{$comeurl}"/>		
+	<input class="input0" name="submit" type="submit" tabindex="13" value="立即登录" />	
+  </li>
+  </form>
+  <li></li>
+</ul>
+</div>

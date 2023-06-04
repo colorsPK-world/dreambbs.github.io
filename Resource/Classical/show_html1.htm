@@ -1,0 +1,9 @@
+<!--show.asp##展区内容循环部分-->
+<td width="25%" height="200" align="center" class="tablebody1">
+<table cellpadding="2" cellspacing="1" class="tableborder1" style="width:100%;height=100%;word-break:break-all;" >
+<tr><td width="100%" height="140" align="center" style="text-align:center" valign="top" class="tablebody1">
+{$useraction}
+<br /><a href="fileshow.asp?boardid={$boardid}&id={$fid}"  target="_blank" title="点击浏览文件">{$showfile}</a><br />
+</td></tr><tr><td class="tablebody2">作者: <a href="dispuser.asp?name={$username}">{$username}</a>
+<br />属性: <a href="show.asp?filetype={$filetype}">{$typename} [<font color="{$alertcolor}">{$typenum}</font>]</a><br />说明:{$filereadme}<br />{$golist}</td></tr></table></td>
+{$tableinfo}

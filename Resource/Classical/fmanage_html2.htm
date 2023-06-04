@@ -1,0 +1,41 @@
+<!--复制帖子选项-->
+<table cellpadding="3" cellspacing="1" align="center" class="tableborder1" >
+<form action="admin_postings.asp" method="post">
+<tr>
+<th valign="middle" colspan="2">
+<input name="action" type="hidden" value="copy" />
+<input name="checked" type="hidden" value="yes" />
+<input name="boardID" type="hidden" value="{$boardid}" />
+<input name="replyID" type="hidden" value="{$replyID}" />
+<input name="ID" type="hidden" value="{$ID}" />
+<input name="title" type="hidden" value="{$title}" />
+<input name="content" type="hidden" value="{$content}" />
+<input name="doWealth" type="hidden" value="{$doWealth}" />
+<input name="dousercp" type="hidden" value="{$dousercp}" />
+<input name="douserep" type="hidden" value="{$douserep}" />
+<input name="msg" type="hidden" value="{$msg}" />
+<input name="ismsg" type="hidden" value="{$ismsg}" />
+复制帖子</th></tr>
+<tr>
+<td class="tablebody1" valign="middle">
+<b>操作说明</b></td>
+<td class="tablebody1" valign="middle">
+该帖子将复制到别的论坛，成为新的帖子，所以如该帖子无主题请指定该帖子的主题，原帖子将保留在原来论坛
+</td>
+</tr>
+<tr>
+<td class="tablebody1" valign="middle">
+<b>帖子主题</b></td>
+<td class="tablebody1" valign="middle">
+<input name="topic" type="text" value="{$topic}" size="50" />&nbsp;<input name="isdispmove" type="checkbox" value="yes"> 移动后的主题是否显示操作者名称
+</td>
+</tr>
+<tr>
+<td class="tablebody1" valign="top"><b>移动到：</b></td>
+<td class="tablebody1" valign="top">
+{$BoardJumpList}
+&nbsp;注意：相同论坛间不能进行复制操作，注明不能移动的论坛为分类论坛
+</td>
+</tr>
+<tr>
+<td class="tablebody2" valign="middle" colspan="2" style="text-align:center"><input name="submit" type="submit" value="提 交" /></td></tr></form></table>

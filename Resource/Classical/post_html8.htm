@@ -1,0 +1,13 @@
+<!--post.asp##发帖成功页面-->
+<script language = "JavaScript"  type="text/javascript">
+setTimeout('location.href=\'{$tourl}\';',3000);
+</script>
+<table cellpadding="3" cellspacing="1" align="center" class="tableborder1">
+<tr align="center">
+  <th width="100%">状态：{$stats}</td></th>
+</tr><tr><td width="100%" class="tablebody1">
+本页面将在3秒后自动返回{$PostRetrunName}，<b>您可以选择以下操作：</b><br /><ul>
+<li><a href="index.asp">返回首页</a></li>
+<li><a href="index.asp?boardid={$boardid}&amp;page={$page}">{$boardname}</a></li>
+<li><a href="{$returnurl}">{$PostRetrunName}</a></li>
+</ul></td></tr></table>

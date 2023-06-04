@@ -1,0 +1,33 @@
+<!--sendpage.asp##发送本帖给朋友-->
+<table class="tableborder1" cellspacing="1" cellpadding="3" align="center">
+  <form action="{$forumurl}TopicOther.asp?t=7&action=sendmail&amp;boardid={$boardid}&amp;id={$announceid}" method="post">
+      <tr>
+        <th align="center" colspan="2">发送本帖给朋友</th>
+      </tr>
+      <tr>
+        <td class="tablebody1" align="center" colspan="2"><b>通过邮件发送本帖子给您的朋友。</b>　下列所有项必填，并请输入正确的邮件地址！<br>
+          您可以添加一些自己的信息在下面的内容框内。至于这个帖子的主题和 
+          URL 您可以不必写，因为本程序会在发送的 Email 
+          中自动添加的！</td>
+      </tr>
+      <tr>
+        <td class="tablebody1"><b>您的姓名：</b></td>
+        <td class="tablebody1"><input name="postname" type="text" size="40" /></td>
+      </tr>
+      <tr>
+        <td class="tablebody1"><b>您朋友的名字：</b></td>
+        <td class="tablebody1"><input name="incept" type="text" size="40" /></td>
+      </tr>
+      <tr>
+        <td class="tablebody1"><b>您朋友的 Email：</b></td>
+        <td class="tablebody1"><input name="mail" type="text" size="40" /></td>
+      </tr>
+      <tr>
+        <td class="tablebody1"><b>消息内容：</b></td>
+        <td class="tablebody1"><textarea name="content" rows="6" cols="55">我想您对 "{$bbsname}" 的这个帖子内容会感兴趣的！请去看看！</textarea></td>
+      </tr>
+      <tr>
+        <td class="tablebody2" align="middle" colSpan="2"><input name="Submit" type="submit" value="发 送" /></td>
+      </tr>
+  </table>
+  </form>

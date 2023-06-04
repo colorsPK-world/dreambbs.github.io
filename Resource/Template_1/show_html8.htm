@@ -1,0 +1,13 @@
+<!--myfile.asp##个人文件集列表部分-->
+<tr>
+  <td class="tablebody2" valign="middle" align="center">
+	<img src="skins/Default/filetype/{$F_FileType}.gif" alt="" width="16" height="16" border="0" />
+  </td>
+  <td class="tablebody1" valign="middle" align="left">
+	<a href="fileshow.asp?boardid={$boardid}&amp;id={$F_ID}" target="_blank">{$readme}</a></td>
+  <td class="tablebody2" valign="middle" align="right">{$F_FileSize}<b>B</b></td>
+  <td class="tablebody1" valign="middle" align="middle">{$F_DownNum}/{$F_ViewNum}</td>
+  <td class="tablebody2" valign="middle" align="left">{$F_AddTime}</td>
+  <td class="tablebody1" valign="middle"" align="center">{$F_typename}</td>
+  <td class="tablebody2" valign="middle"" align="center">{$useradmin}</td>
+</tr>

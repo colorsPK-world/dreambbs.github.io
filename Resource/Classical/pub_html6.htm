@@ -1,0 +1,41 @@
+<!--已经登陆-->
+<ul>
+	欢迎您： <b>{$username}</b>&nbsp;&nbsp;
+	<li class="m_li_top" style="display:inline;">{$hiddeninfo}</li>	|&nbsp;
+	&nbsp;
+	<li class="m_li_top" style="display:inline;z-index:20000;" onmouseover="showmenu1('Menu_MemberTools',0);">
+		<a class="imgonclick" href="usermanager.asp">控制面板</a>
+			{$menu_membertools}
+	</li> |&nbsp;
+	<li class="m_li_top" style="display:inline;"><a href="Query.asp">搜索</a></li>&nbsp;&nbsp;|&nbsp;
+	<li class="m_li_top" style="display:inline;" onmouseover="showmenu1('stylemenu',0);">
+		<a href="javascript:;" class="ImgOnclick">风格</a>
+		<div class="submenu submunu_popup" id="stylemenu" onmouseout="hidemenu1()">
+			{$syles}
+		</div>
+	</li> |&nbsp;
+	<li class="m_li_top" style="display:inline;" onmouseover="showmenu1('Menu_Show',0);">
+		<a href="show.asp?boardid={$boardid}" class="ImgOnclick">展区</a>
+			{$menu_show}
+	</li> |&nbsp;
+	<li class="m_li_top" style="display:inline;" onmouseover="showmenu1('Plus_Show',0);">
+		<a href="javascript:;" class="ImgOnclick">插件</a>
+		<div class="submenu submunu_popup" id="Plus_Show" onmouseout="hidemenu1()">
+			{$Plus_Tools}
+			{$isboke}
+		</div>
+	</li> |&nbsp;
+	<li class="m_li_top" style="display:inline;" onmouseover="showmenu1('read',0);">
+		<a href="javascript:;" class="ImgOnclick">查阅</a>
+		<div class="submenu submunu_popup" id="read" onmouseout="hidemenu1()">
+			<a href="query.asp?stype=3&pSearch=0&nSearch=0" class="newlink">查看新帖</a><br />
+			<a href="query.asp?stype=4&pSearch=0&nSearch=0" class="newlink">热门话题</a><br />
+			<a href="infolist.asp?t=toplist&orders=1" class="newlink">发帖排行</a><br />
+			<a href="infolist.asp?t=toplist&orders=7" class="newlink">用户列表</a>
+		</div>
+	</li>
+	{$plusmenu}
+	|&nbsp;
+	{$manageinfo}
+	<li class="m_li_top" style="display:inline;"><a href="logout.asp">退出</a></li>
+</ul>

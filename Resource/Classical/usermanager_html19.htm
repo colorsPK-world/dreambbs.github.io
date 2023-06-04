@@ -1,0 +1,29 @@
+<!--smiley.asp##用户头像列表部分-->
+<table cellpadding="6" cellspacing="1" class="tableborder1" align="center" style="table-layout:fixed;word-break:break-all;width:100%;" >
+<tr>
+<th align="center">
+{$FaceBar}
+</th></tr>
+<tr><td class="tablebody1"><table width="100%"><tr>
+||
+<td align="center" height="50">
+<img src="{$Forum_facepath}{$Forum_userface_n}" alt="" style="CURSOR: hand" onclick="insertface('{$Forum_facepath}{$Forum_userface_n}',this.width,this.height)" />
+<br />{$Forum_userface_n}</td>
+||
+</tr><tr>
+||</table>
+</td>
+</tr>
+<tr><td class="tablebody2" style="text-align:center;"> <button onclick="window.close();"> 关闭</button> </td></tr>
+</table>
+<script language="javascript">
+function insertface(userface,width,height){
+	self.opener.theForm.myface.value=userface;
+	self.opener.theForm.width.value=width;
+	self.opener.theForm.height.value=height;
+	self.opener.document.images['face'].src=userface;
+	self.opener.document.images['face'].width=width;
+	self.opener.document.images['face'].height=height;
+	self.opener.theForm.face.value=userface;
+}
+</script>
